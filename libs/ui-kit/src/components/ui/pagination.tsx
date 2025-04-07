@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
 
-import { cn } from '@lemon/lib/utils';
 import { buttonVariants } from '@lemon/ui-kit/components/ui/button';
+import { cn } from '@lemon/ui-kit/lib/utils';
 
 import type { ButtonProps } from '@lemon/ui-kit/components/ui/button';
 

@@ -4,16 +4,14 @@
     "rsc": false,
     "tsx": true,
     "tailwind": {
-        "config": "apps/**/tailwind.config.js",
-        "css": "apps/**/app/style.css",
+        "config": "libs/ui-kit/tailwind.config.js",
+        "css": "libs/ui-kit/src/styles/global.css",
         "baseColor": "stone",
         "cssVariables": true
     },
     "aliases": {
         "components": "@lemon/ui-kit/components",
-        "utils": "@lemon/ui-kit/utils",
-        "ui": "@lemon/ui-kit/components/ui",
-        "lib": "@lemon/ui-kit/utils",
+        "utils": "@lemon/ui-kit/lib/utils",
         "hooks": "@lemon/ui-kit/hooks"
     },
     "iconLibrary": "lucide"

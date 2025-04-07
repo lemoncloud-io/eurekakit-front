@@ -1,7 +1,11 @@
 {
     "_COMMENT": "only used by shadcn/ui cli to generate shadcn/ui components",
-    "extends": "./tsconfig.base.json",
     "compilerOptions": {
-        "jsx": "react"
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./*"],
+            "@lemon/ui-kit": ["libs/ui-kit/src/index.ts"],
+            "@lemon/ui-kit/*": ["libs/ui-kit/src/*"]
+        }
     }
 }
