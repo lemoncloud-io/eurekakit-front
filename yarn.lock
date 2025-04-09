@@ -1730,6 +1730,13 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@lemoncloud/codes-backend-api@^0.25.214":
+  version "0.25.214"
+  resolved "https://registry.yarnpkg.com/@lemoncloud/codes-backend-api/-/codes-backend-api-0.25.214.tgz#c2e51fee92b77208f5376f10c07042be0570b64c"
+  integrity sha512-1flN79itxVRkIlwQZBc9wkdbqM3iLBS2WHfqq2NFmBaCLdA2gu8jKc9GuOi3/8pmEP/GXtnaxG22kxXicc7jjA==
+  dependencies:
+    lemon-model "^1.0.3"
+
 "@lemoncloud/lemon-boards-api@^2.25.109":
   version "2.25.109"
   resolved "https://registry.yarnpkg.com/@lemoncloud/lemon-boards-api/-/lemon-boards-api-2.25.109.tgz#b0e6586cb0418acd6422d02f944b778d8a7dfd16"
