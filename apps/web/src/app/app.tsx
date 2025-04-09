@@ -5,6 +5,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
+import { OverlayProvider } from '@lemon/overlay';
 import { ErrorFallback, GlobalLoader, LoadingFallback } from '@lemon/shared';
 import { ThemeProvider } from '@lemon/theme';
 import { Toaster } from '@lemon/ui-kit/components/ui/toaster';
@@ -34,9 +35,11 @@ export function App() {
                 <HelmetProvider>
                     <QueryClientProvider client={queryClient}>
                         <ThemeProvider defaultTheme="light">
-                            <Router />
-                            <GlobalLoader />
-                            <Toaster />
+                            <OverlayProvider>
+                                <Router />
+                                <GlobalLoader />
+                                <Toaster />
+                            </OverlayProvider>
                         </ThemeProvider>
                         {process.env.NODE_ENV !== 'prod' && <ReactQueryDevtools />}
                     </QueryClientProvider>
