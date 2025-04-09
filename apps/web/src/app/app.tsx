@@ -33,7 +33,7 @@ export function App() {
             <ErrorBoundary FallbackComponent={ErrorFallback}>
                 <HelmetProvider>
                     <QueryClientProvider client={queryClient}>
-                        <ThemeProvider>
+                        <ThemeProvider defaultTheme="light">
                             <Router />
                             <GlobalLoader />
                             <Toaster />
