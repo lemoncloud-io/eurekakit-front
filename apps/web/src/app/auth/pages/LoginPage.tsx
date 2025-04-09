@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import { Images } from '@lemon/assets';
 import { useGlobalLoader } from '@lemon/shared';
 import { Button } from '@lemon/ui-kit/components/ui/button';
-import { Card } from '@lemon/ui-kit/components/ui/card';
 
 export const LoginPage = () => {
     const { setIsLoading } = useGlobalLoader();
@@ -21,32 +20,25 @@ export const LoginPage = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-background">
-            <Card className="w-full max-w-md p-8 space-y-8 glassmorphism">
-                <div className="text-center">
-                    <h1 className="text-4xl font-bold gradient-text mb-2">Lemon</h1>
-                    <p className="text-muted-foreground">Sign in to continue</p>
-                </div>
-
-                <div className="space-y-4">
-                    <Button
-                        className="w-full flex items-center justify-center space-x-2"
-                        variant="outline"
-                        onClick={() => onClickLogin('google')}
-                    >
-                        <img src={Images.googleLogo} alt="Google Logo" width={20} height={20} />
-                        <span>Sign in with Google</span>
-                    </Button>
-
-                    <Button
-                        className="w-full flex items-center justify-center space-x-2 bg-[#FEE500] text-[#000000] hover:bg-[#FEE500]/90"
-                        onClick={() => onClickLogin('kakao')}
-                    >
-                        <img src={Images.kakaoLogo} alt="Kakao Logo" width={20} height={20} />
-                        <span>Sign in with Kakao</span>
-                    </Button>
-                </div>
-            </Card>
+        <div className="min-h-screen flex flex-col gap-4 items-center justify-center bg-background p-6">
+            <div className="fixed top-0 w-full bg-[#1F1F3C] rounded-b-[24px] py-5 text-background shadow-md pl-6">
+                <img src={Images.eurekaCodesLogo} alt="Eureka Codes Logo" />
+            </div>
+            <div className="text-center">
+                <h2 className="text-muted-foreground uppercase text-2xl font-semibold">LOGIN</h2>
+            </div>
+            <Button
+                className="w-full flex items-center justify-center space-x-2 rounded-full"
+                variant="secondary"
+                size={'lg'}
+                onClick={() => onClickLogin('google')}
+            >
+                <span className="w-5 h-5 flex-none">
+                    <img src={Images.googleLogo} alt="Google Logo" width={20} height={20} />
+                </span>
+                <span className="w-full">구글 계정으로 로그인</span>
+                <span className="w-5 h-5 flex-none" />
+            </Button>
         </div>
     );
 };
