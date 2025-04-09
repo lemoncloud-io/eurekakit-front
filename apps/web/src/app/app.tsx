@@ -29,7 +29,7 @@ export function App() {
     }
 
     return (
-        <Suspense fallback={LoadingFallback}>
+        <Suspense fallback={<LoadingFallback />}>
             <ErrorBoundary FallbackComponent={ErrorFallback}>
                 <HelmetProvider>
                     <QueryClientProvider client={queryClient}>
