@@ -1,9 +1,23 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
+
+import { useWebCoreStore } from '@lemon/web-core';
 
 import { HomeRoutes } from '../../home';
 
-export const ProtectedRoutes = [
-    { path: `/home/*`, element: <HomeRoutes /> },
-    { path: '*', element: <Navigate to="/home" replace /> },
-    { path: '/', element: <Navigate to="/home" replace /> },
+import type { RouteObject } from 'react-router-dom';
+
+export const ProtectedRoute = () => {
+    const { isAuthenticated } = useWebCoreStore();
+    return isAuthenticated ? <Outlet /> : <Navigate to="/" />;
+};
+
+export const ProtectedRoutes: RouteObject[] = [
+    {
+        element: <ProtectedRoute />,
+        children: [
+            { path: `/home/*`, element: <HomeRoutes /> },
+            { path: '*', element: <Navigate to="/home" replace /> },
+            { path: '/', element: <Navigate to="/home" replace /> },
+        ],
+    },
 ];
