@@ -7,6 +7,10 @@
     font-style: normal;
 }
 
-body {
+html,
+body,
+#root {
     font-family: 'Pretendard-Regular';
+    min-height: 100vh;
+    height: 100%;
 }
