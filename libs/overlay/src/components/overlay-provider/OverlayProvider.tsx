@@ -26,13 +26,11 @@ export const OverlayProvider = ({ children }: PropsWithChildren) => {
     };
 
     return (
-        <OverlayContext.Provider value={{ mount, unmount }} data-overlay-provider={true}>
-            <div className="contents" data-overlay-provider="true">
-                {children}
-                {Array.from(overlayMap.entries()).map(([id, element]) => (
-                    <Fragment key={id}>{element}</Fragment>
-                ))}
-            </div>
+        <OverlayContext.Provider value={{ mount, unmount }}>
+            {children}
+            {Array.from(overlayMap.entries()).map(([id, element]) => (
+                <Fragment key={id}>{element}</Fragment>
+            ))}
         </OverlayContext.Provider>
     );
 };
