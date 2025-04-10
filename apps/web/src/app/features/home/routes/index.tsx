@@ -1,11 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
 
-import { DashboardPage } from '../pages';
+import { HomePage } from '../pages';
 
 export const HomeRoutes = () => {
     return (
         <Routes>
-            <Route path="/" element={<DashboardPage />} />
+            <Route path="/" element={<HomePage />} />
         </Routes>
     );
 };
