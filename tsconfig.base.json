@@ -24,7 +24,9 @@
             "@lemon/theme": ["libs/theme/src/index.ts"],
             "@lemon/ui-kit": ["libs/ui-kit/src/index.ts"],
             "@lemon/ui-kit/*": ["libs/ui-kit/src/*"],
-            "@lemon/web-core": ["libs/web-core/src/index.ts"]
+            "@lemon/web-core": ["libs/web-core/src/index.ts"],
+            "@web/*": ["apps/web/src/app/*"],
+            "@web/features/*": ["apps/web/src/app/features/*"]
         }
     },
     "exclude": ["node_modules", "tmp"]
