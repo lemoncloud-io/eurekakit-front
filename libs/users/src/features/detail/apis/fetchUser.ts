@@ -6,8 +6,7 @@ import type { UserView } from '@lemoncloud/codes-backend-api';
 
 export const fetchUser = async (id?: string) => {
     if (!id) {
-        console.log('fetchUser = @id is required');
-        return;
+        throw new Error('fetchUser = @id is required');
     }
 
     const { data } = await webCore
