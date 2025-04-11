@@ -97,6 +97,7 @@
         "react-helmet-async": "^2.0.5",
         "react-hook-form": "^7.54.2",
         "react-native": "~0.76.3",
+        "react-native-bootsplash": "^6.3.4",
         "react-native-circular-progress": "^1.4.1",
         "react-native-device-info": "^14.0.4",
         "react-native-gesture-handler": "^2.25.0",
