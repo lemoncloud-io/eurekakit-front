@@ -18,6 +18,7 @@
             "@lemon/assets": ["assets/src/index.ts"],
             "@lemon/board-types": ["libs/board-types/src/index.ts"],
             "@lemon/boards": ["libs/boards/src/index.ts"],
+            "@lemon/feeds": ["libs/feeds/src/index.ts"],
             "@lemon/overlay": ["libs/overlay/src/index.ts"],
             "@lemon/posts": ["libs/posts/src/index.ts"],
             "@lemon/shared": ["libs/shared/src/index.ts"],
