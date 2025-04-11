@@ -8,6 +8,7 @@ interface ImportMetaEnv {
     VITE_OAUTH_ENDPOINT: string;
     VITE_SOCIAL_OAUTH_ENDPOINT: string;
     VITE_IMAGE_API_ENDPOINT: string;
+    VITE_PET_API_ENDPINT: string;
 }
 
 interface ImportMeta {
