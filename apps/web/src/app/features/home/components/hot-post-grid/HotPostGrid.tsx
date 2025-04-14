@@ -9,6 +9,7 @@ import { Condition } from '@lemon/ui-kit/components/ui/condition';
 import { POST_GRID_COUNT, POST_GRID_LIMIT } from '../../consts';
 import { NoPost } from '../no-post';
 import { PostGridBlock } from '../post-block';
+import { SkeletonPostGrid } from './SkeletonPostGrid';
 
 export const HotPostGrid = () => {
     const GRID_COUNT = POST_GRID_COUNT;
@@ -32,19 +33,7 @@ export const HotPostGrid = () => {
         <div className="flex flex-col gap-2 p-4">
             <h3 className="font-semibold">인기글</h3>
             <div className="flex flex-col gap-3 py-1">
-                <Condition
-                    condition={!isLoading}
-                    fallback={
-                        <div className="grid grid-cols-2 gap-2">
-                            {Array.from({ length: 4 })?.map((_, idx) => (
-                                <div key={idx} className="flex w-full flex-col gap-2">
-                                    <div className="bg-secondary aspect-square w-full animate-pulse rounded-lg" />
-                                    <div className="bg-secondary h-12 w-full animate-pulse rounded-lg" />
-                                </div>
-                            ))}
-                        </div>
-                    }
-                >
+                <Condition condition={!isLoading} fallback={<SkeletonPostGrid />}>
                     <Condition condition={!!feedList?.total} fallback={<NoPost />}>
                         <div className="grid grid-cols-2 gap-2">
                             {gridFeedList?.map(post => <PostGridBlock key={post.id} post={post} />)}

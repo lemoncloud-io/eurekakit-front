@@ -9,6 +9,7 @@ import { Separator } from '@lemon/ui-kit/components/ui/separator';
 import { INFINITE_POST_LIST_LIMIT } from '../../consts';
 import { NoPost } from '../no-post';
 import { PostListBlock } from '../post-block';
+import { SkeletonPostList } from './SkeletonPostList';
 
 // TODO : @luke-lemon 낙관적 업데이트 적용
 export const TotalPostList = () => {
@@ -35,23 +36,7 @@ export const TotalPostList = () => {
     return (
         <div className="flex flex-col p-4">
             <h3 className="font-semibold">전체글</h3>
-            <Condition
-                condition={!isLoading}
-                fallback={
-                    <List seperator={<Separator />} className="gap-3 py-3">
-                        {Array.from({ length: 5 }).map((_, idx) => (
-                            <div className="flex gap-2" key={idx}>
-                                <div className="flex w-full flex-col gap-2">
-                                    <div className="bg-secondary h-1/2 w-full animate-pulse rounded-lg" />
-                                    <div className="bg-secondary h-5 w-1/2 animate-pulse rounded-lg" />
-                                    <div className="bg-secondary h-5 w-1/2 animate-pulse rounded-lg" />
-                                </div>
-                                <div className="bg-secondary aspect-square h-24 animate-pulse rounded-lg" key={idx} />
-                            </div>
-                        ))}
-                    </List>
-                }
-            >
+            <Condition condition={!isLoading} fallback={<SkeletonPostList />}>
                 <Condition condition={!!feedList?.total} fallback={<NoPost />}>
                     <List seperator={<Separator />} className="gap-3 py-3">
                         {feedList?.list.map(post => (
