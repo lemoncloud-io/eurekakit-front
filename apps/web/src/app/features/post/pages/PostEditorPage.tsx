@@ -4,6 +4,7 @@ import { DevTool } from '@hookform/devtools';
 import { Image, X } from 'lucide-react';
 
 import { useCrerateFeed } from '@lemon/feeds';
+import { cn } from '@lemon/ui-kit';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@lemon/ui-kit/components/ui/form';
 import List from '@lemon/ui-kit/components/ui/list';
@@ -37,23 +38,31 @@ export const PostEditorPage = () => {
                     <FormField
                         control={methods.control}
                         name="text"
-                        render={({ field }) => (
+                        rules={{ minLength: 20, maxLength: 1500 }}
+                        render={({ field, fieldState }) => (
                             <FormItem>
                                 <FormLabel>
                                     내용
                                     <span className="text-destructive ml-0.5">*</span>
                                 </FormLabel>
-                                <div className="focus-within:ring-secondary-foreground rounded-lg border focus-within:ring-1">
+                                <div
+                                    className={cn(
+                                        'focus-within:ring-secondary-foreground rounded-lg border focus-within:ring-1',
+                                        fieldState.error && '!ring-destructive ring-1'
+                                    )}
+                                >
                                     <FormControl>
                                         <Textarea
-                                            className="h-72 resize-none rounded-b-none border-none focus-visible:ring-0"
+                                            className={
+                                                'h-72 resize-none rounded-b-none border-none focus-visible:ring-0'
+                                            }
                                             placeholder="내용을 입력해주세요"
                                             {...field}
                                         />
                                     </FormControl>
                                     <div className="flex justify-between px-3 py-4 text-xs">
                                         <span className="text-secondary-foreground">20글자 이상 작성해주세요</span>
-                                        <span className="text-muted-foreground">0/1,500</span>
+                                        <span className="text-muted-foreground">{field.value?.length}/1,500</span>
                                     </div>
                                 </div>
                             </FormItem>
