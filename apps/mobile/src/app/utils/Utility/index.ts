@@ -40,7 +40,6 @@ import type {
 } from '@lemon/types';
 import type { TokenSignature } from '@lemoncloud/lemon-web-core';
 
-
 export const changeAppLanguage = async (language: string) => {
     await AsyncStorage.setItem(EUREKA_LANGUAGE, language);
     await i18n.changeLanguage(language);

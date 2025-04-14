@@ -21,7 +21,6 @@ import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 import { useNavigation } from '@react-navigation/core';
 import RNFetchBlob from 'rn-fetch-blob';
 
-
 import { BASE_URL } from '../../../envs/env.json';
 import { OverlaySpinner, WebViewError } from '../../components';
 import {

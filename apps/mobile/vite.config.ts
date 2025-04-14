@@ -5,7 +5,6 @@ import react from '@vitejs/plugin-react';
 import * as esbuild from 'esbuild';
 import { defineConfig } from 'vite';
 
-
 const extensions = [
     '.mjs',
     '.web.tsx',
