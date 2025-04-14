@@ -5,7 +5,7 @@ import { fetchFeedList } from '../apis';
 
 import type { FeedListParams } from '../../../types';
 
-export const useFetchFeedList = (params: FeedListParams) =>
+export const useFetchFeedList = (params?: FeedListParams) =>
     useQuery({
         queryKey: feedKeys.list(params),
         queryFn: () => fetchFeedList(params),
