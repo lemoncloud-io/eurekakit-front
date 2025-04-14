@@ -1,0 +1,7 @@
+{
+    "PROJECT": "mobile",
+    "BASE_URL": "TODO",
+    "OAUTH_ENDPOINT": "TODO",
+    "ENV": "prod",
+    "PRODUCTION": true
+}
