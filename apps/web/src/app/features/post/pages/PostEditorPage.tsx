@@ -61,7 +61,14 @@ export const PostEditorPage = () => {
                                         />
                                     </FormControl>
                                     <div className="flex justify-between px-3 py-4 text-xs">
-                                        <span className="text-secondary-foreground">20글자 이상 작성해주세요</span>
+                                        <span
+                                            className={cn(
+                                                'text-secondary-foreground',
+                                                fieldState.error && 'text-destructive'
+                                            )}
+                                        >
+                                            20글자 이상 작성해주세요
+                                        </span>
                                         <span className="text-muted-foreground">{field.value?.length}/1,500</span>
                                     </div>
                                 </div>
