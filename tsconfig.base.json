@@ -25,6 +25,7 @@
             "@lemon/theme": ["libs/theme/src/index.ts"],
             "@lemon/ui-kit": ["libs/ui-kit/src/index.ts"],
             "@lemon/ui-kit/*": ["libs/ui-kit/src/*"],
+            "@lemon/uploads": ["libs/uploads/src/index.ts"],
             "@lemon/users": ["libs/users/src/index.ts"],
             "@lemon/web-core": ["libs/web-core/src/index.ts"]
         }
