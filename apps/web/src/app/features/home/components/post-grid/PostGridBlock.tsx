@@ -33,10 +33,10 @@ export const PostGridBlock = ({ post }: PostGridBlockProps) => {
                         </div>
                     </div>
                     <div className="ml-auto flex flex-none items-center gap-1 text-xs">
-                        <Heart className="flex-none" size={14} />
-                        <span className="flex-none">{formatCount(post?.likeCount)}</span>
-                        <MessageSquareMore className="flex-none" size={14} />
-                        <span className="flex-none">{formatCount(post?.commentPosted - post?.commentHidden)}</span>
+                        <Heart size={14} />
+                        <span>{formatCount(post?.likeCount)}</span>
+                        <MessageSquareMore size={14} />
+                        <span>{formatCount(post?.commentPosted - post?.commentHidden)}</span>
                     </div>
                 </div>
             </div>
