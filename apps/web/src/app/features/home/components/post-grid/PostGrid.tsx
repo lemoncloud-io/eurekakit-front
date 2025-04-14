@@ -1,6 +1,6 @@
 import { PostGridBlock } from './PostGridBlock';
 
-import type { FeedView } from '@lemoncloud/pets-socials-api';
+import type { FeedView } from '@lemon/feeds';
 
 interface PostGridProps {
     postList?: FeedView[];

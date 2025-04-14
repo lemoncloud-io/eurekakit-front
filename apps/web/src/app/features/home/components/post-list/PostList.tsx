@@ -3,7 +3,7 @@ import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { PostListBlock } from './PostListBlock';
 
-import type { FeedView } from '@lemoncloud/pets-socials-api';
+import type { FeedView } from '@lemon/feeds';
 
 interface PostListProps {
     postList?: FeedView[];

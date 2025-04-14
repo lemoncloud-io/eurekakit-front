@@ -3,11 +3,10 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { feedKeys } from '../../../consts';
 import { fetchFeedList } from '../apis';
 
-import type { FeedListParams } from '../../../types';
+import type { FeedListParam, FeedView } from '../../../types';
 import type { ListResult } from '@lemoncloud/codes-backend-api/dist/cores/types';
-import type { FeedView } from '@lemoncloud/pets-socials-api';
 
-export const useFetchInfiniteFeedList = (params?: FeedListParams) =>
+export const useFetchInfiniteFeedList = (params?: FeedListParam) =>
     useInfiniteQuery({
         queryKey: feedKeys.list(params, true),
         queryFn: ({ pageParam = 0 }) => fetchFeedList({ ...params, page: pageParam }),
@@ -28,7 +27,7 @@ export const useFetchInfiniteFeedList = (params?: FeedListParams) =>
                 (acc, cur) => {
                     return { ...acc, list: [...acc.list, ...cur.list] };
                 },
-                { list: [], total: data.pages[0].total } satisfies ListResult<FeedView>
+                { list: [], total: data.pages[0].total } as ListResult<FeedView>
             );
         },
     });

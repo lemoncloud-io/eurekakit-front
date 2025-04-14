@@ -2,11 +2,12 @@ import { Heart, MessageSquareMore } from 'lucide-react';
 
 import { cn } from '@lemon/ui-kit';
 import { Button } from '@lemon/ui-kit/components/ui/button';
+import { Condition } from '@lemon/ui-kit/components/ui/condition';
 import { List } from '@lemon/ui-kit/components/ui/list';
 
 import { formatCount, formatRelativeTime } from '../../../../utils';
 
-import type { FeedView } from '@lemoncloud/pets-socials-api';
+import type { FeedView } from '@lemon/feeds';
 
 interface PostListBlockProps {
     post: FeedView;
@@ -19,28 +20,37 @@ export const PostListBlock = ({ post }: PostListBlockProps) => {
                 <p className="line-clamp-2 break-all">{post.name}</p>
                 <div className="text-muted-foreground flex w-full flex-col gap-1 rounded-lg text-sm">
                     <List hotizontal seperator={<span>·</span>} className="gap-1">
-                        <span className="line-clamp-1">{post.user$?.name}</span>
+                        <span className="line-clamp-1">{post.user$.nick}</span>
                         <span>{formatRelativeTime(post.createdAt ?? 0)}</span>
                     </List>
                     <div className="flex items-center gap-2">
                         <Heart size={14} />
-                        <span>{formatCount(post.likeCount)}</span>
+                        <Condition condition={!!post.likeCount}>
+                            <span>{formatCount(post.likeCount!)}</span>
+                        </Condition>
                         <MessageSquareMore size={14} />
-                        <span>{formatCount(post.commentPosted - post.commentHidden)}</span>
+                        <Condition condition={!!post.commentPosted}>
+                            <span>{formatCount(post.commentPosted! - (post.commentHidden ?? 0))}</span>
+                        </Condition>
                     </div>
                 </div>
             </div>
-            <div className="relative ml-auto aspect-square h-24 w-24 flex-none overflow-hidden rounded-lg">
-                <img src={post.image$$[0].url} className="h-full w-full" />
-                <Button
-                    className="bg-foreground/40 absolute bottom-2 right-2 flex items-center justify-center rounded-full text-lg backdrop-blur-sm"
-                    size={'icon'}
-                >
-                    <Heart
-                        className={cn('!h-5 !w-5 flex-none stroke-white', post?.$activity?.isLike && 'fill-red-600')}
-                    />
-                </Button>
-            </div>
+            <Condition condition={!!post.image$$?.length && !!post.image$$[0].url}>
+                <div className="relative ml-auto aspect-square h-24 w-24 flex-none overflow-hidden rounded-lg">
+                    <img src={post.image$$![0]!.url!} className="h-full w-full" />
+                    <Button
+                        className="bg-foreground/40 absolute bottom-2 right-2 flex items-center justify-center rounded-full text-lg backdrop-blur-sm"
+                        size={'icon'}
+                    >
+                        <Heart
+                            className={cn(
+                                '!h-5 !w-5 flex-none stroke-white',
+                                post?.$activity?.isLike && 'fill-red-600'
+                            )}
+                        />
+                    </Button>
+                </div>
+            </Condition>
         </div>
     );
 };
