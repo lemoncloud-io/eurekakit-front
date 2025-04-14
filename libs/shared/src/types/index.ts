@@ -34,3 +34,7 @@ export interface PaginationType<T> {
 export declare type Params = {
     [key: string]: any;
 };
+
+export type RequiredKeys<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
+
+export type OptionalKeys<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
