@@ -60,7 +60,7 @@ const createFeedItem = (index: number): FeedView => {
         image$$: images,
         user$: {
             id: userId,
-            name: `닉네임${index + 1}`,
+            nick: `닉네임${index + 1}`,
             image: `https://i.pravatar.cc/150?img=${index + 1}`,
         },
         commentPosted: Math.floor(likeCount * 0.7),
