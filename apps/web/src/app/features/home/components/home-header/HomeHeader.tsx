@@ -1,18 +1,38 @@
-import { type PropsWithChildren } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Images } from '@lemon/assets';
 import { cn } from '@lemon/ui-kit';
+import { Input } from '@lemon/ui-kit/components/ui/input';
 
-import type { ClassNameValue } from 'tailwind-merge';
+export const HomeHeader = () => {
+    const [collapsed, setCollapsed] = useState(false);
+    const prevScrollYRef = useRef<number>(0);
 
-interface HomeHeaderProps extends PropsWithChildren {
-    className?: ClassNameValue;
-    collapsed?: boolean;
-}
+    useEffect(() => {
+        const scrollHandler = () => {
+            const currenctScrollY = window.scrollY;
+            const deltaY = currenctScrollY - prevScrollYRef.current;
+            prevScrollYRef.current = window.scrollY;
 
-export const HomeHeader = ({ children, collapsed, className }: HomeHeaderProps) => {
+            setCollapsed(deltaY > 0 ? true : false);
+        };
+
+        window.addEventListener('scroll', scrollHandler);
+
+        return () => {
+            window.removeEventListener('scroll', scrollHandler);
+        };
+    }, []);
+
     return (
-        <div className={cn('fixed top-0 z-50', 'w-full rounded-b-[24px] bg-[#1F1F3C] p-4 shadow-lg', className)}>
+        <div
+            className={cn(
+                'fixed top-0 z-50',
+                'w-full rounded-b-[24px] bg-[#1F1F3C] p-4 shadow-lg',
+                collapsed && 'rounded-b-none',
+                'transition-all'
+            )}
+        >
             <div>
                 <img src={Images.eurekaCodesLogo} alt="Eureka Codes Logo" />
             </div>
@@ -23,7 +43,9 @@ export const HomeHeader = ({ children, collapsed, className }: HomeHeaderProps) 
                     'ease transition-all duration-200'
                 )}
             >
-                <div className={'flex overflow-hidden'}>{children}</div>
+                <div className={'flex overflow-hidden'}>
+                    <Input className={cn('bg-background mt-4 rounded-full text-sm')} placeholder="검색" />
+                </div>
             </div>
         </div>
     );
