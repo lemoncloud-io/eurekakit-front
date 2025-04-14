@@ -44,7 +44,7 @@ export const PostGridBlock = ({ post }: PostGridBlockProps) => {
                     </div>
                 </div>
             </div>
-            <p className="line-clamp-2 w-full break-all">{post.name}</p>
+            <p className="line-clamp-2 w-full break-all">{post.text}</p>
         </div>
     );
 };

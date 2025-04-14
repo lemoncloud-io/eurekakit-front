@@ -55,7 +55,7 @@ const createFeedItem = (index: number): FeedView => {
 
     return {
         id,
-        name: sampleTitles[getRandomNumber(0, sampleTitles.length - 1)], // 랜덤하게 제목 선택
+        text: sampleTitles[getRandomNumber(0, sampleTitles.length - 1)], // 랜덤하게 제목 선택
         likeCount,
         image$$: images,
         user$: {
