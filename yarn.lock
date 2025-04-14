@@ -1798,6 +1798,13 @@
   dependencies:
     lemon-model "^1.0.3"
 
+"@lemoncloud/lemon-uploads-api@^0.24.802":
+  version "0.24.802"
+  resolved "https://registry.yarnpkg.com/@lemoncloud/lemon-uploads-api/-/lemon-uploads-api-0.24.802.tgz#e8451fb726ee97e9426601e96879f2121a93155e"
+  integrity sha512-gIsLTj2Gf1L3CL3gPkMapfrMQP57LMF08qgjwoWaJY26TwQzxG2a50+rRuRAL4+mMXVxA0j9ex1+FHNS6zHd8g==
+  dependencies:
+    lemon-model "^1.0.2"
+
 "@lemoncloud/lemon-web-core@^1.2.6":
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/@lemoncloud/lemon-web-core/-/lemon-web-core-1.2.6.tgz#b9935c8bd7dcc7dc42b7626ec415e809d704b467"
@@ -8362,7 +8369,7 @@ language-tags@^1.0.9:
   dependencies:
     language-subtag-registry "^0.3.20"
 
-lemon-model@^1.0.3:
+lemon-model@^1.0.2, lemon-model@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/lemon-model/-/lemon-model-1.0.3.tgz#45c45320854ca970eca245eeda14c89c42ba0b49"
   integrity sha512-f3UVRc+ihkMTttUrh3PKbm4GJGwiZmAwsAHL/AIznUXs0bZ4NPQFd6yp1J/Zt+pTeojqM+20AS4UtPADMIJskw==

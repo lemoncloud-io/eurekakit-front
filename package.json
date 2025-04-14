@@ -78,6 +78,7 @@
         "@eslint/js": "^9.8.0",
         "@lemoncloud/codes-backend-api": "^0.25.214",
         "@lemoncloud/lemon-boards-api": "^2.25.109",
+        "@lemoncloud/lemon-uploads-api": "^0.24.802",
         "@lemoncloud/pets-socials-api": "^0.25.403",
         "@nx/eslint": "20.1.4",
         "@nx/eslint-plugin": "20.1.4",
