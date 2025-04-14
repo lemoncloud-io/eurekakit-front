@@ -16,13 +16,15 @@ interface PostListBlockProps {
 export const PostListBlock = ({ post }: PostListBlockProps) => {
     return (
         <div className="flex gap-2">
-            <div className="flex w-full flex-col gap-1">
-                <p className="line-clamp-2 break-all">{post.name}</p>
-                <div className="text-muted-foreground flex w-full flex-col gap-1 rounded-lg text-sm">
-                    <List hotizontal seperator={<span>·</span>} className="gap-1">
+            <div className="flex w-full flex-col justify-between gap-1">
+                <div className="flex flex-col gap-1">
+                    <p className="line-clamp-2 break-all">{post.name}</p>
+                    <List hotizontal seperator={<span>·</span>} className="text-muted-foreground gap-1 text-sm">
                         <span className="line-clamp-1">{post.user$.nick}</span>
                         <span>{formatRelativeTime(post.createdAt ?? 0)}</span>
                     </List>
+                </div>
+                <div className="text-muted-foreground flex w-full flex-col gap-1 rounded-lg text-sm">
                     <div className="flex items-center gap-2">
                         <Heart size={14} />
                         <Condition condition={!!post.likeCount}>
