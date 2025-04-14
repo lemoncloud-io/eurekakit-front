@@ -4,7 +4,7 @@ import { TabButton } from './TabBarButton';
 
 export const TabBar = () => {
     return (
-        <nav className="sticky h-16 w-full bg-background bottom-0 border-t flex justify-around items-center">
+        <nav className="bg-background sticky bottom-0 flex h-16 w-full items-center justify-around border-t">
             <TabButton to="/home">
                 <Home size={24} />
             </TabButton>

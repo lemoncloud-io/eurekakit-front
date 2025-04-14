@@ -3,6 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useWebCoreStore } from '@lemon/web-core';
 
 import { HomeRoutes } from '../../features/home';
+import { PostRoutes } from '../../features/post';
 import { TabBarLayout } from '../../layout/TabBarLayout';
 
 import type { RouteObject } from 'react-router-dom';
@@ -16,6 +17,12 @@ export const ProtectedRoute = () => {
 export const ProtectedRoutes: RouteObject[] = [
     {
         element: <ProtectedRoute />,
-        children: [{ element: <TabBarLayout />, children: [{ path: `/home/*`, element: <HomeRoutes /> }] }],
+        children: [
+            {
+                element: <TabBarLayout />,
+                children: [{ path: `/home/*`, element: <HomeRoutes /> }],
+            },
+            { path: `/post/*`, element: <PostRoutes /> },
+        ],
     },
 ];
