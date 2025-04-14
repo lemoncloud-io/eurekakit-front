@@ -17,7 +17,10 @@ export const HotPostGrid = () => {
     const gridStartIdx = GRID_COUNT * gridPageIdx;
     const gridEndIdx = GRID_COUNT * (gridPageIdx + 1);
 
-    const gridFeedList = feedList?.list.slice(gridStartIdx, gridEndIdx);
+    // TODO : @luke-lemon 임시로 최신 순 20개를 가져와 인기순으로 정렬
+    const gridFeedList = feedList?.list
+        .sort((a, b) => Number(b.likeCount) - Number(a.likeCount))
+        .slice(gridStartIdx, gridEndIdx);
 
     const changeGridPage = () => {
         setGridPageIdx(prev => (prev + 1) % 5);
