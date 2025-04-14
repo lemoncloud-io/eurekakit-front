@@ -1,5 +1,6 @@
 import { Heart, MessageSquareMore } from 'lucide-react';
 
+import { type FeedView } from '@lemon/feeds';
 import { cn } from '@lemon/ui-kit';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Condition } from '@lemon/ui-kit/components/ui/condition';
@@ -7,13 +8,12 @@ import { List } from '@lemon/ui-kit/components/ui/list';
 
 import { formatCount, formatRelativeTime } from '../../../../utils';
 
-import type { FeedView } from '@lemon/feeds';
-
 interface PostListBlockProps {
     post: FeedView;
+    onClickLike?: (like?: boolean) => void;
 }
 
-export const PostListBlock = ({ post }: PostListBlockProps) => {
+export const PostListBlock = ({ post, onClickLike }: PostListBlockProps) => {
     return (
         <div className="flex gap-2">
             <div className="flex w-full flex-col justify-between gap-1">
@@ -41,6 +41,7 @@ export const PostListBlock = ({ post }: PostListBlockProps) => {
                     <Button
                         className="bg-foreground/40 absolute bottom-2 right-2 flex items-center justify-center rounded-full text-lg backdrop-blur-sm"
                         size={'icon'}
+                        onClick={() => onClickLike?.(post.$activity?.isLike)}
                     >
                         <Heart
                             className={cn(

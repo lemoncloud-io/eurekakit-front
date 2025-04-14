@@ -7,7 +7,7 @@ import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Condition } from '@lemon/ui-kit/components/ui/condition';
 
 import { NoPost } from '../no-post';
-import { PostGrid } from '../post-grid';
+import { PostGridBlock } from '../post-block';
 
 export const HotPostGrid = () => {
     const GRID_COUNT = 4;
@@ -31,7 +31,9 @@ export const HotPostGrid = () => {
             <h3 className="font-semibold">인기글</h3>
             <div className="flex flex-col gap-3 py-1">
                 <Condition condition={!!feedList?.total} fallback={<NoPost />}>
-                    <PostGrid postList={gridFeedList} />
+                    <div className="grid grid-cols-2 gap-2">
+                        {gridFeedList?.map(post => <PostGridBlock key={post.id} post={post} />)}
+                    </div>
                 </Condition>
                 <Condition condition={GRID_COUNT < (feedList?.list.length ?? 0)}>
                     <Button className="w-full gap-2" variant={'secondary'} onClick={changeGridPage}>

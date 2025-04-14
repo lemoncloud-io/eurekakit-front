@@ -3,9 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { cn } from '@lemon/ui-kit';
 import { Input } from '@lemon/ui-kit/components/ui/input';
 
-import { HomeHeader } from '../components';
-import { HotPostGrid } from '../components/hot-post-grid';
-import { TotalPostList } from '../components/total-post-list/TotalPostList';
+import { HomeHeader, HotPostGrid, TotalPostList } from '../components';
 
 export const HomePage = () => {
     const [collased, setCollapsed] = useState(false);
