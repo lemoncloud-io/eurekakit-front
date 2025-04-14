@@ -6,6 +6,7 @@ import { Condition } from '@lemon/ui-kit/components/ui/condition';
 import List from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
+import { INFINITE_POST_LIST_LIMIT } from '../../consts';
 import { NoPost } from '../no-post';
 import { PostListBlock } from '../post-block';
 
@@ -19,7 +20,7 @@ export const TotalPostList = () => {
         isFetchingNextPage,
         hasNextPage,
         isLoading,
-    } = useFetchInfiniteFeedList({ limit: 5 });
+    } = useFetchInfiniteFeedList({ limit: INFINITE_POST_LIST_LIMIT });
     const { mutate: changeLike } = useLikeFeed();
 
     const onChangeLike = (id: string, like?: boolean) => {

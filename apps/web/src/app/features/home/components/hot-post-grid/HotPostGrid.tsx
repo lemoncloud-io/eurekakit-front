@@ -6,13 +6,14 @@ import { useFetchFeedList } from '@lemon/feeds';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Condition } from '@lemon/ui-kit/components/ui/condition';
 
+import { POST_GRID_COUNT, POST_GRID_LIMIT } from '../../consts';
 import { NoPost } from '../no-post';
 import { PostGridBlock } from '../post-block';
 
 export const HotPostGrid = () => {
-    const GRID_COUNT = 4;
+    const GRID_COUNT = POST_GRID_COUNT;
     const [gridPageIdx, setGridPageIdx] = useState(0);
-    const { data: feedList, isLoading } = useFetchFeedList({ limit: 20 });
+    const { data: feedList, isLoading } = useFetchFeedList({ limit: POST_GRID_LIMIT });
 
     const gridStartIdx = GRID_COUNT * gridPageIdx;
     const gridEndIdx = GRID_COUNT * (gridPageIdx + 1);
