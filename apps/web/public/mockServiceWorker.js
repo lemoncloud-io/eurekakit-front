@@ -104,7 +104,6 @@ self.addEventListener('fetch', function (event) {
 
     // NOTE : @luke-lemon Bypass if not eureka.codes api
     if (typeof request.url === 'string' && !request.url.includes('https://api.eureka.codes')) {
-        console.log('bypass', request.url);
         return;
     }
 
