@@ -18,6 +18,7 @@ export function App() {
         defaultOptions: {
             queries: {
                 staleTime: Infinity,
+                throwOnError: true,
             },
         },
     });
