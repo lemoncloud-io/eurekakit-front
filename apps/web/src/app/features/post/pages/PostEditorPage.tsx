@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { Image, X } from 'lucide-react';
 
+import { useCrerateFeed } from '@lemon/feeds';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@lemon/ui-kit/components/ui/form';
 import List from '@lemon/ui-kit/components/ui/list';
@@ -14,7 +15,12 @@ import { isDev } from '../../../utils';
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
 
 export const PostEditorPage = () => {
-    const methods = useForm<FeedBody>({});
+    const methods = useForm<FeedBody>();
+    const { mutate: createFeed } = useCrerateFeed();
+
+    const submitPost = (feedBody: FeedBody) => {
+        createFeed(feedBody);
+    };
 
     return (
         <div className="w-full">
@@ -64,7 +70,9 @@ export const PostEditorPage = () => {
                         </Button>
                     </List>
                     <Separator className="h-6 bg-transparent" />
-                    <Button className="w-full">작성 완료</Button>
+                    <Button className="w-full" onClick={methods.handleSubmit(submitPost)}>
+                        작성 완료
+                    </Button>
                 </Form>
             </div>
         </div>
