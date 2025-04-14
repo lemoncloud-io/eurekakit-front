@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { RotateCcw } from 'lucide-react';
 
+import { fetchFeedList } from '@lemon/feeds';
 import { cn } from '@lemon/ui-kit';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Input } from '@lemon/ui-kit/components/ui/input';
@@ -32,6 +33,10 @@ export const HomePage = () => {
         };
     }, []);
 
+    useEffect(() => {
+        fetchFeedList().then(console.log).catch(console.error);
+    }, []);
+
     return (
         <div className="flex min-h-full flex-col">
             <HomeHeader collapsed={collased} className={cn(collased && 'rounded-b-none', 'transition-all')}>
@@ -42,8 +47,8 @@ export const HomePage = () => {
                 <h3 className="font-semibold">인기글</h3>
                 <div className="flex flex-col gap-3 py-1">
                     <div className="grid grid-cols-2 gap-2">
-                        {Array.from({ length: 4 }).map(() => (
-                            <PostGridBlock />
+                        {Array.from({ length: 4 }).map((_, idx) => (
+                            <PostGridBlock key={idx} />
                         ))}
                     </div>
                     <Button className="w-full gap-2" variant={'secondary'}>
@@ -56,8 +61,8 @@ export const HomePage = () => {
             <div className="flex flex-col p-4">
                 <h3 className="font-semibold">전체글</h3>
                 <List seperator={<Separator />} className="gap-3 py-3">
-                    {Array.from({ length: 5 }).map(() => (
-                        <PostListBlock />
+                    {Array.from({ length: 5 }).map((_, idx) => (
+                        <PostListBlock key={idx} />
                     ))}
                 </List>
                 <Button className="w-full gap-2" variant={'secondary'}>
