@@ -1,9 +1,21 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 
-import { HomeRoutes } from '../../home';
+import { useWebCoreStore } from '@lemon/web-core';
 
-export const ProtectedRoutes = [
-    { path: `/home/*`, element: <HomeRoutes /> },
-    { path: '*', element: <Navigate to="/home" replace /> },
-    { path: '/', element: <Navigate to="/home" replace /> },
+import { HomeRoutes } from '../../features/home';
+import { TabBarLayout } from '../../layout/TabBarLayout';
+
+import type { RouteObject } from 'react-router-dom';
+
+export const ProtectedRoute = () => {
+    const { isAuthenticated } = useWebCoreStore();
+
+    return isAuthenticated ? <Outlet /> : <Navigate to="/" />;
+};
+
+export const ProtectedRoutes: RouteObject[] = [
+    {
+        element: <ProtectedRoute />,
+        children: [{ element: <TabBarLayout />, children: [{ path: `/home/*`, element: <HomeRoutes /> }] }],
+    },
 ];

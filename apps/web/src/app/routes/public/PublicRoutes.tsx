@@ -1,16 +1,22 @@
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 
-import { AuthRoutes } from '../../auth';
+import { useWebCoreStore } from '@lemon/web-core';
 
-const AuthRedirect = () => {
-    const location = useLocation();
-    return <Navigate to="/auth/login" state={{ from: location.pathname }} />;
+import { AuthRoutes } from '../../features/auth';
+
+import type { RouteObject } from 'react-router-dom';
+
+export const PublicRoute = () => {
+    const { isAuthenticated } = useWebCoreStore();
+
+    import.meta.env.DEV ?? console.log('public routes', !isAuthenticated);
+
+    return isAuthenticated ? <Navigate to="/" /> : <Outlet />;
 };
 
-export const PublicRoutes = [
-    { path: `/auth/*`, element: <AuthRoutes /> },
+export const PublicRoutes: RouteObject[] = [
     {
-        path: '*',
-        element: <AuthRedirect />,
+        element: <PublicRoute />,
+        children: [{ path: `/auth/*`, element: <AuthRoutes /> }],
     },
 ];

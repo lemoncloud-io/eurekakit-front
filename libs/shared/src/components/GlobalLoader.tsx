@@ -5,7 +5,7 @@ import { Loader2 } from 'lucide-react';
 
 import { useGlobalLoader } from '../hooks';
 
-export const GlobalLoader: React.FC = () => {
+export const GlobalLoader = (): JSX.Element | null => {
     const { isLoading } = useGlobalLoader();
 
     useEffect(() => {
