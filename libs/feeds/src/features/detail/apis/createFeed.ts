@@ -2,16 +2,16 @@ import { webCore } from '@lemon/web-core';
 
 import { BACKEND_API, FEED, USERS } from '../../../consts';
 
-import type { MediaBody, MediaView } from '@lemoncloud/lemon-uploads-api';
+import type { FeedBody, FeedView } from '@lemoncloud/pets-socials-api';
 
-export const createFeed = async (body: MediaBody) => {
+export const createFeed = async (body: FeedBody) => {
     const { data } = await webCore
         .buildSignedRequest({
             method: 'POST',
             baseURL: [BACKEND_API, USERS, 0, FEED].join('/'),
         })
         .setBody({ ...body })
-        .execute<MediaView>();
+        .execute<FeedView>();
 
     return data;
 };
