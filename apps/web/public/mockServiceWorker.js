@@ -102,6 +102,12 @@ self.addEventListener('fetch', function (event) {
         return;
     }
 
+    // NOTE : @luke-lemon Bypass if not eureka.codes api
+    if (typeof request.url === 'string' && !request.url.includes('https://api.eureka.codes')) {
+        console.log('bypass', request.url);
+        return;
+    }
+
     // Opening the DevTools triggers the "only-if-cached" request
     // that cannot be handled by the worker. Bypass such requests.
     if (request.cache === 'only-if-cached' && request.mode !== 'same-origin') {
