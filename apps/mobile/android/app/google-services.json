@@ -1,0 +1,46 @@
+{
+    "project_info": {
+        "project_number": "1049222889151",
+        "project_id": "eurekapage-85049",
+        "storage_bucket": "eurekapage-85049.firebasestorage.app"
+    },
+    "client": [
+        {
+            "client_info": {
+                "mobilesdk_app_id": "1:1049222889151:android:4a53ed763dfa305244100a",
+                "android_client_info": {
+                    "package_name": "io.lemoncloud.eurekapage"
+                }
+            },
+            "oauth_client": [
+                {
+                    "client_id": "1049222889151-t1ms1q2afjltvie776br3knbair9vj0h.apps.googleusercontent.com",
+                    "client_type": 3
+                }
+            ],
+            "api_key": [
+                {
+                    "current_key": "AIzaSyB0Gn8azR8XRnaUnyjV_Di-iwmn_MXl43s"
+                }
+            ],
+            "services": {
+                "appinvite_service": {
+                    "other_platform_oauth_client": [
+                        {
+                            "client_id": "1049222889151-t1ms1q2afjltvie776br3knbair9vj0h.apps.googleusercontent.com",
+                            "client_type": 3
+                        },
+                        {
+                            "client_id": "1049222889151-tip0e04mq7ceia1pjgla475i3jhphkqg.apps.googleusercontent.com",
+                            "client_type": 2,
+                            "ios_info": {
+                                "bundle_id": "io.lemoncloud.eurekapage"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "configuration_version": "1"
+}

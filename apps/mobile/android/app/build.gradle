@@ -1,5 +1,8 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "org.jetbrains.kotlin.kapt"
+apply plugin: "com.google.gms.google-services"
+apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: "com.facebook.react"
 
 /**
@@ -45,7 +48,8 @@ react {
 
     /* Hermes Commands */
     //   The hermes compiler command to run. By default it is 'hermesc'
-    hermesCommand = "../../../../node_modules/react-native/sdks/hermesc/%OS-BIN%/hermesc"
+//     hermesCommand = "../../../../node_modules/react-native/sdks/hermesc/%OS-BIN%/hermesc"
+    hermesCommand = new File(rootProject.projectDir, '../../../node_modules/react-native/sdks/hermesc/%OS-BIN%/hermesc').absolutePath
     //
     //   The list of flags to pass to the Hermes compiler. By default is "-O", "-output-source-map"
     // hermesFlags = ["-O", "-output-source-map"]
@@ -92,6 +96,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file('eurekapage.keystore')
+            storePassword 'eurekapage'
+            keyAlias 'eurekapage'
+            keyPassword 'eurekapage'
+        }
     }
     buildTypes {
         debug {
@@ -100,7 +110,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -110,6 +120,9 @@ android {
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
+    implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
+    implementation 'com.google.firebase:firebase-core:21.0.0'
+    implementation 'com.google.firebase:firebase-messaging:23.0.6'
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")

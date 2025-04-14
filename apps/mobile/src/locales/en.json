@@ -1,0 +1,95 @@
+{
+    "hello": "Hello",
+    "oauth": {
+        "signing": "Signing...",
+        "signout": "Sign out",
+        "logout": "You have been successfully logged out.",
+        "error": {
+            "general": "An error occurred.",
+            "stateParam": "Failed to parse state parameter:"
+        }
+    },
+    "menu": {
+        "dashboard": "Dashboard",
+        "profile": "Profile",
+        "settings": "Settings",
+        "aiModel": "AI Model",
+        "aiChatbot": "AI Preprocess"
+    },
+    "common": {
+        "cancel": "Cancel",
+        "create": "Create",
+        "update": "Update",
+        "retry": "Retry"
+    },
+    "app": {
+        "name": "EurekaPage",
+        "exit": {
+            "title": "",
+            "message": "Do you want to exit the app?",
+            "cancel": "Cancel",
+            "confirm": "Confirm"
+        },
+        "error": {
+            "launch": "Failed to launch the app."
+        }
+    },
+    "notification": {
+        "title": "EurekaPage Notification",
+        "accessChanged": "Access permission has been changed",
+        "firstLaunch": "Initial app launch may take a moment",
+        "new": "You have a new notification.",
+        "appLaunchFailed": "Failed to launch the app.",
+        "messageTypes": {
+            "myNews": "MY",
+            "notice": "Notice",
+            "event": "Reservation",
+            "payment": "Payment",
+            "navigation": "Navigation"
+        }
+    },
+    "error": {
+        "network": {
+            "title": "Network Error",
+            "message": "A problem has occurred. Please check your internet connection."
+        },
+        "webview": {
+            "serviceUnavailable": "Service is not accessible.",
+            "tryAgainLater": "Please try again later",
+            "apologize": "We apologize for the inconvenience."
+        }
+    },
+    "imagePicker": {
+        "save": "Save",
+        "cancel": "Cancel"
+    },
+    "toast": {
+        "warning": "Warning"
+    },
+    "permission": {
+        "unsupportedOS": "Unsupported operating system",
+        "bluetooth": {
+            "unavailable": "Bluetooth feature is not available"
+        },
+        "location": {
+            "denied": "Location permission denied",
+            "allGranted": "All permissions granted",
+            "backgroundNeeded": "Background location permission is required",
+            "checkError": "An error occurred while checking permissions"
+        },
+        "alert": {
+            "title": "Permission Required",
+            "message": "This feature requires {{type}} permission. Please enable it in Settings.",
+            "types": {
+                "location": "location",
+                "bluetooth": "bluetooth"
+            },
+            "background": {
+                "title": "Background Location Permission Required",
+                "message": "Please change location permission to 'Always Allow' in app settings"
+            },
+            "cancel": "Cancel",
+            "settings": "Open Settings"
+        }
+    }
+}
