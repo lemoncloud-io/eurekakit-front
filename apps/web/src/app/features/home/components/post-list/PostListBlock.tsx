@@ -24,17 +24,15 @@ export const PostListBlock = ({ post }: PostListBlockProps) => {
                         <span>{formatRelativeTime(post.createdAt ?? 0)}</span>
                     </List>
                 </div>
-                <div className="text-muted-foreground flex w-full flex-col gap-1 rounded-lg text-sm">
-                    <div className="flex items-center gap-2">
-                        <Heart size={14} />
-                        <Condition condition={!!post.likeCount}>
-                            <span>{formatCount(post.likeCount!)}</span>
-                        </Condition>
-                        <MessageSquareMore size={14} />
-                        <Condition condition={!!post.commentPosted}>
-                            <span>{formatCount(post.commentPosted! - (post.commentHidden ?? 0))}</span>
-                        </Condition>
-                    </div>
+                <div className="text-muted-foreground flex w-full items-center gap-1 rounded-lg text-xs">
+                    <Heart size={14} />
+                    <Condition condition={!!post.likeCount}>
+                        <span>{formatCount(post.likeCount!)}</span>
+                    </Condition>
+                    <MessageSquareMore size={14} />
+                    <Condition condition={!!post.commentPosted}>
+                        <span>{formatCount(post.commentPosted! - (post.commentHidden ?? 0))}</span>
+                    </Condition>
                 </div>
             </div>
             <Condition condition={!!post.image$$?.length && !!post.image$$[0].url}>
