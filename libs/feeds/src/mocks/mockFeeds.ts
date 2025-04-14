@@ -75,4 +75,4 @@ const createFeedItem = (index: number): FeedView => {
 // 피드 리스트 생성 함수
 const generateFeeds = (count: number): FeedView[] => Array.from({ length: count }, (_, i) => createFeedItem(i));
 
-export const feedList = generateFeeds(110).sort((a, b) => Number(b.createdAt) - Number(a.createdAt));
+export const feedList = generateFeeds(13).sort((a, b) => Number(b.createdAt) - Number(a.createdAt));
