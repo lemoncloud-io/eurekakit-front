@@ -9,7 +9,7 @@ import { Separator } from '@lemon/ui-kit/components/ui/separator';
 import { NoPost } from '../no-post';
 import { PostListBlock } from '../post-block';
 
-// TODO : 낙관적 업데이트 적용
+// TODO : @luke-lemon 낙관적 업데이트 적용
 export const TotalPostList = () => {
     const queryClient = useQueryClient();
 
