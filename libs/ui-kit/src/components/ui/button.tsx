@@ -48,8 +48,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 ref={ref}
                 {...props}
             >
-                <span className="contents">{children}</span>
-                {isLoading && <Loader2 className="absolute animate-spin" />}
+                <>
+                    <span className="contents">{children}</span>
+                    {isLoading && <Loader2 className="absolute animate-spin" />}
+                </>
             </Comp>
         );
     }
