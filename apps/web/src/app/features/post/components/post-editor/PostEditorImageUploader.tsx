@@ -22,12 +22,12 @@ type TrackedPromise<T> =
     | {
           id: string;
           status: 'fulfilled';
-          value?: T;
+          value: T;
       }
     | {
           id: string;
           status: 'rejected';
-          error?: any;
+          error: any;
       };
 
 export const PostEditorImageUploader = () => {
@@ -66,7 +66,7 @@ export const PostEditorImageUploader = () => {
     useEffect(() => {
         const postImageList = uploadImageList
             .filter(imagePromise => imagePromise.status === 'fulfilled')
-            .map(imagePromise => imagePromise.value?.list ?? [])
+            .map(imagePromise => imagePromise.value.list)
             .flat();
 
         if (!postImageList) {
@@ -137,7 +137,7 @@ export const PostEditorImageUploader = () => {
                                     >
                                         <X />
                                     </Button>
-                                    <img src={imagePromise.value?.list[0].url} className="h-full w-full object-cover" />
+                                    <img src={imagePromise.value.list[0].url} className="h-full w-full object-cover" />
                                 </div>
                             </Condition>
                         ))}
