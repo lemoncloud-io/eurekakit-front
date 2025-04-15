@@ -1,16 +1,15 @@
 import { useForm, useWatch } from 'react-hook-form';
 
 import { DevTool } from '@hookform/devtools';
-import { Image } from 'lucide-react';
 
 import { useCrerateFeed } from '@lemon/feeds';
 import { cn } from '@lemon/ui-kit';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@lemon/ui-kit/components/ui/form';
-import List from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 import { Textarea } from '@lemon/ui-kit/components/ui/textarea';
 
+import { PostEditorImageUploader } from './PostEditorImageUploader';
 import { useNavigate } from '../../../../hooks';
 import { isDev } from '../../../../utils';
 
@@ -27,6 +26,7 @@ export const PostEditor = () => {
     const submitPost = (feedBody: FeedBody) => {
         createFeed(feedBody, { onSuccess: () => navigate(-1) });
     };
+
     return (
         <div className="flex w-full flex-col gap-3 p-4">
             <Form {...methods}>
@@ -49,7 +49,9 @@ export const PostEditor = () => {
                             >
                                 <FormControl>
                                     <Textarea
-                                        className={'h-72 resize-none rounded-b-none border-none focus-visible:ring-0'}
+                                        className={
+                                            'h-72 resize-none rounded-b-none border-none text-sm focus-visible:ring-0'
+                                        }
                                         placeholder="내용을 입력해주세요"
                                         {...field}
                                     />
@@ -69,16 +71,7 @@ export const PostEditor = () => {
                         </FormItem>
                     )}
                 />
-                <List horizontal>
-                    <Button
-                        variant={'outline'}
-                        size={'icon'}
-                        className="h-[72px] w-[72px] flex-col gap-1 border-dashed"
-                    >
-                        <Image size={24} className="text-secondary-foreground !h-7 !w-7" />
-                        <span className="text-muted-foreground text-xs">0/5</span>
-                    </Button>
-                </List>
+                <PostEditorImageUploader />
                 <Separator className="h-6 bg-transparent" />
                 <Button disabled={isSubmitBtnDisabled} className="w-full" onClick={methods.handleSubmit(submitPost)}>
                     작성 완료

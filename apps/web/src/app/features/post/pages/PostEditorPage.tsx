@@ -1,5 +1,4 @@
-import { PostEditor } from '../components/post-editor/PostEditor';
-import { PostEditorHeader } from '../components/post-editor-header';
+import { PostEditor, PostEditorHeader } from '../components';
 
 export const PostEditorPage = () => {
     return (
