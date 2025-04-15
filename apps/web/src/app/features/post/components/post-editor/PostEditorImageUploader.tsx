@@ -137,7 +137,13 @@ export const PostEditorImageUploader = () => {
                                     >
                                         <X />
                                     </Button>
-                                    <img src={imagePromise.value.list[0].url} className="h-full w-full object-cover" />
+                                    <img
+                                        src={
+                                            (imagePromise as TrackedPromise<UploadView> & { status: 'fulfilled' }).value
+                                                .list[0].url
+                                        }
+                                        className="h-full w-full object-cover"
+                                    />
                                 </div>
                             </Condition>
                         ))}
