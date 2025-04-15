@@ -23,6 +23,7 @@ export const PostEditor = () => {
     const postText = useWatch({ control: methods.control, name: 'text' });
     const isSubmitBtnDisabled = !postText?.length || !!methods.getFieldState('text').error;
 
+    // TODO : 글쓰기 상세로 이동
     const submitPost = (feedBody: FeedBody) => {
         createFeed(feedBody, { onSuccess: () => navigate(-1) });
     };
