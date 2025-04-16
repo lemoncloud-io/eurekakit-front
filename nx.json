@@ -33,12 +33,6 @@
             }
         },
         {
-            "plugin": "@nx/jest/plugin",
-            "options": {
-                "targetName": "test"
-            }
-        },
-        {
             "plugin": "@nx/react-native/plugin",
             "options": {
                 "startTargetName": "start",

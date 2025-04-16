@@ -1,4 +1,4 @@
-import List from '@lemon/ui-kit/components/ui/list';
+import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 export const SkeletonPostList = () => {
