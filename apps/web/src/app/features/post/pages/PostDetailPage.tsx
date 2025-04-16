@@ -9,7 +9,7 @@ import { Carousel, CarouselContent, CarouselItem } from '@lemon/ui-kit/component
 import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
-import { useIsIntersecting } from '../../../hooks';
+import { useIsIntersecting, useNavigate } from '../../../hooks';
 import { formatCount, formatRelativeTime } from '../../../utils';
 
 interface UserProfileProps {
@@ -35,6 +35,7 @@ export const UserNickName = ({ nickname }: UserNickNameProps) => {
 };
 
 export const PostDetailPage = () => {
+    const navigate = useNavigate();
     const { postId } = useParams();
     const { setRef, isIntersecting } = useIsIntersecting<HTMLDivElement>();
 
@@ -55,7 +56,7 @@ export const PostDetailPage = () => {
     return (
         <div className="h-full overflow-x-hidden">
             <header className="flex h-12 items-center px-2">
-                <Button variant={'ghost'} size={'icon'}>
+                <Button variant={'ghost'} size={'icon'} onClick={() => navigate(-1)}>
                     <ChevronLeft />
                 </Button>
             </header>
