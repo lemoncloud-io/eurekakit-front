@@ -54,8 +54,8 @@ export const PostDetailPage = () => {
     }, [isIntersecting, fetchNextPage]);
 
     return (
-        <div className="h-full overflow-x-hidden">
-            <header className="flex h-12 items-center px-2">
+        <div className="relative h-full overflow-x-hidden">
+            <header className="bg-background sticky top-0 z-50 flex h-12 items-center px-2">
                 <Button variant={'ghost'} size={'icon'} onClick={() => navigate(-1)}>
                     <ChevronLeft />
                 </Button>
