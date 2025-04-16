@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { ChevronLeft, ChevronRight, Heart, Loader2, MoreVerticalIcon, User2Icon } from 'lucide-react';
 
-import { useFetchFeed } from '@lemon/feeds';
+import { useFetchFeed, useFetchInfiniteFeedCommentList } from '@lemon/feeds';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem } from '@lemon/ui-kit/components/ui/carousel';
 import { List } from '@lemon/ui-kit/components/ui/list';
+import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
+import { useIsIntersecting } from '../../../hooks';
 import { formatCount, formatRelativeTime } from '../../../utils';
 
 interface UserProfileProps {
@@ -29,13 +31,26 @@ interface UserNickNameProps {
 }
 
 export const UserNickName = ({ nickname }: UserNickNameProps) => {
-    return <span className="overflow-hidden text-ellipsis text-nowrap">{nickname}</span>;
+    return <span className="overflow-hidden text-ellipsis text-nowrap text-sm">{nickname}</span>;
 };
 
 export const PostDetailPage = () => {
     const { postId } = useParams();
+    const { setRef, isIntersecting } = useIsIntersecting<HTMLDivElement>();
 
     const { data: post, isLoading } = useFetchFeed(postId);
+    const {
+        data: commentList,
+        fetchNextPage,
+        isFetchingNextPage,
+        hasNextPage,
+    } = useFetchInfiniteFeedCommentList(postId);
+
+    useEffect(() => {
+        if (isIntersecting) {
+            fetchNextPage();
+        }
+    }, [isIntersecting, fetchNextPage]);
 
     return (
         <div className="h-full overflow-x-hidden">
@@ -88,7 +103,55 @@ export const PostDetailPage = () => {
                                 <ChevronRight size={16} />
                             </button>
                         </div>
-                        <List></List>
+                        <List seperator={<Separator />} className="gap-3 py-3">
+                            {commentList?.list.map(comment => (
+                                <div className="flex flex-col items-start gap-2 px-4" key={comment.id}>
+                                    <div className="flex w-full items-center gap-2 py-2">
+                                        <UserProfile src={comment.user$.image} />
+                                        <List
+                                            seperator={<span className="text-muted-foreground">·</span>}
+                                            horizontal
+                                            className="items-center gap-1"
+                                        >
+                                            <UserNickName nickname={comment.user$.nick} />
+                                            <span className="text-muted-foreground text-sm">
+                                                {formatRelativeTime(comment.createdAt)}
+                                            </span>
+                                        </List>
+                                        <button className="text-muted-foreground ml-auto aspect-square">
+                                            <MoreVerticalIcon size={16} />
+                                        </button>
+                                    </div>
+                                    <div>{comment.text}</div>
+                                    <Carousel opts={{ dragFree: true }}>
+                                        <CarouselContent
+                                            className="-ml-2 overflow-visible"
+                                            containerClassName="overflow-visible"
+                                        >
+                                            {comment.image$$?.map(image => (
+                                                <CarouselItem key={image.id} className="basis-[150px] pl-2">
+                                                    <div className="aspect-square overflow-hidden rounded-lg">
+                                                        <img src={image.url} className="h-full w-full object-cover" />
+                                                    </div>
+                                                </CarouselItem>
+                                            ))}
+                                        </CarouselContent>
+                                    </Carousel>
+                                    <button className="mt-1 flex items-center gap-1 text-xs">
+                                        <Heart size={16} />
+                                        <span>{formatCount(comment.likeCount)}</span>
+                                    </button>
+                                </div>
+                            ))}
+                        </List>
+                        {hasNextPage && (
+                            <>
+                                <Separator />
+                                <div className="flex h-12 w-full items-center justify-center" ref={setRef}>
+                                    {isFetchingNextPage && <Loader2 className="animate-spin" />}
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
             ) : (
