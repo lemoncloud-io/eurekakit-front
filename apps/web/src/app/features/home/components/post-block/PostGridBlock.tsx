@@ -15,10 +15,12 @@ export const PostGridBlock = ({ post }: PostGridBlockProps) => {
         <div className="flex w-full flex-col gap-2">
             <div className="relative z-0 flex aspect-square w-full items-end">
                 <Condition condition={!!post.image$$?.length && !!post.image$$[0].url}>
-                    <img
-                        src={post.image$$?.[0]?.url}
-                        className="absolute -z-10 h-full w-full rounded-lg object-cover"
-                    />
+                    {post.image$$?.length && (
+                        <img
+                            src={post.image$$?.[0]?.url}
+                            className="absolute -z-10 h-full w-full rounded-lg object-cover"
+                        />
+                    )}
                 </Condition>
                 <div className="bg-foreground/40 text-background flex w-full items-center gap-2 rounded-lg p-2 backdrop-blur-sm">
                     <div className="text-background bg-foreground flex aspect-square h-8 w-8 flex-none items-center justify-center overflow-hidden rounded-full">
