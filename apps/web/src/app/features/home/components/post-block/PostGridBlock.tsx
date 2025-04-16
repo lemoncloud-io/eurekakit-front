@@ -2,6 +2,7 @@ import { Heart, MessageSquareMore, User2Icon } from 'lucide-react';
 
 import { Condition } from '@lemon/ui-kit/components/ui/condition';
 
+import { Link } from '../../../../components';
 import { formatCount, formatRelativeTime } from '../../../../utils';
 
 import type { FeedView } from '@lemon/feeds';
@@ -12,7 +13,7 @@ interface PostGridBlockProps {
 
 export const PostGridBlock = ({ post }: PostGridBlockProps) => {
     return (
-        <div className="flex w-full flex-col gap-2">
+        <Link className="flex w-full flex-col gap-2" to={`/post/${post.id}`}>
             <div className="relative z-0 flex aspect-square w-full items-end">
                 <Condition condition={!!post.image$$?.length && !!post.image$$[0].url}>
                     {post.image$$?.length && (
@@ -47,6 +48,6 @@ export const PostGridBlock = ({ post }: PostGridBlockProps) => {
                 </div>
             </div>
             <p className="line-clamp-2 w-full break-all">{post.text}</p>
-        </div>
+        </Link>
     );
 };

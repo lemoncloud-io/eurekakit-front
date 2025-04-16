@@ -6,6 +6,7 @@ import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Condition } from '@lemon/ui-kit/components/ui/condition';
 import { List } from '@lemon/ui-kit/components/ui/list';
 
+import { Link } from '../../../../components';
 import { formatCount, formatRelativeTime } from '../../../../utils';
 
 interface PostListBlockProps {
@@ -15,7 +16,7 @@ interface PostListBlockProps {
 
 export const PostListBlock = ({ post, onClickLike }: PostListBlockProps) => {
     return (
-        <div className="flex gap-2">
+        <Link className="flex gap-2" to={`/post/${post.id}`}>
             <div className="flex w-full flex-col justify-between gap-1">
                 <div className="flex flex-col gap-1">
                     <p className="line-clamp-2 break-all">{post.text}</p>
@@ -52,6 +53,6 @@ export const PostListBlock = ({ post, onClickLike }: PostListBlockProps) => {
                     </Button>
                 </div>
             </Condition>
-        </div>
+        </Link>
     );
 };
