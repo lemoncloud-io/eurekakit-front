@@ -67,7 +67,7 @@ const createFeedItem = (index: number, parentId?: string): FeedView => {
         $activity: {
             isLike: Boolean(Math.floor(Math.random() * 100) % 2),
         },
-        childNo: Math.floor(Math.random() * 30),
+        childNo: Math.floor(Math.random() * 50),
         parentId,
     };
 };
