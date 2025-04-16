@@ -37,7 +37,7 @@ const createFeedItem = (index: number, parentId?: string): FeedView => {
     const likeCount = getRandomNumber(randomRange.min, randomRange.max);
 
     // 이미지 개수 랜덤 (1-2개)
-    const imageCount = 5;
+    const imageCount = Math.floor(Math.random() * 5);
     const images: ImageView[] = Array.from({ length: imageCount }, (_, i) => ({
         id: i.toString(),
         url: `https://picsum.photos/800/600?random=${index * 2 + i + 16}`,
@@ -69,7 +69,7 @@ const createFeedItem = (index: number, parentId?: string): FeedView => {
         $activity: {
             isLike: Boolean(Math.floor(Math.random() * 100) % 2),
         },
-        childNo: Math.ceil(Math.random() * 30),
+        childNo: Math.floor(Math.random() * 30),
         parentId,
     };
 };
