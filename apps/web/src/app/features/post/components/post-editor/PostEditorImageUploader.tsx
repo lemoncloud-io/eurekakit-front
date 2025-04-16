@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 
 import { Image, Loader2, X } from 'lucide-react';
 
-import { cn } from '@lemon/ui-kit';
+import { cn, useToast } from '@lemon/ui-kit';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Condition } from '@lemon/ui-kit/components/ui/condition';
 import { FormField, FormItem } from '@lemon/ui-kit/components/ui/form';
@@ -33,6 +33,7 @@ type TrackedPromise<T> =
 export const PostEditorImageUploader = () => {
     const inputId = useId();
     const methods = useFormContext<FeedBody>();
+    const { toast } = useToast();
 
     const [uploadImageList, setUploadImageList] = useState<TrackedPromise<UploadView>[]>([]);
 
@@ -82,12 +83,21 @@ export const PostEditorImageUploader = () => {
             name="images"
             render={() => (
                 <FormItem>
-                    <List horizontal className="gap-2 overflow-x-auto [&>*]:flex-none">
+                    <List horizontal className="gap-2 overflow-x-auto pb-2 [&>*]:flex-none">
                         <Label
                             htmlFor={inputId}
                             className={cn(
                                 'flex h-[72px] w-[72px] flex-col items-center justify-center gap-1 rounded-lg border border-dashed'
                             )}
+                            onClick={
+                                uploadImageList.length < 5
+                                    ? undefined
+                                    : () =>
+                                          toast({
+                                              description: '이미지 삭제 후 등록이 가능합니다.',
+                                              className: 'justify-center',
+                                          })
+                            }
                         >
                             <Image size={24} className="text-secondary-foreground !h-7 !w-7" />
                             <span className="text-muted-foreground text-xs">{uploadImageList.length}/5</span>
@@ -95,6 +105,7 @@ export const PostEditorImageUploader = () => {
                         <input
                             type="file"
                             id={inputId}
+                            disabled={5 <= uploadImageList.length}
                             accept="image/jpg, image/jpeg, image/png"
                             className="hidden"
                             onChange={handleUploadImage}
