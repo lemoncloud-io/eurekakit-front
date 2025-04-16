@@ -31,9 +31,7 @@ export const PostListBlock = ({ post, onClickLike }: PostListBlockProps) => {
                         <span>{formatCount(post.likeCount!)}</span>
                     </Condition>
                     <MessageSquareMore size={14} />
-                    <Condition condition={!!post.commentPosted}>
-                        <span>{formatCount(post.commentPosted! - (post.commentHidden ?? 0))}</span>
-                    </Condition>
+                    <span>{formatCount(post.childNo)}</span>
                 </div>
             </div>
             <Condition condition={!!post.image$$?.length && !!post.image$$[0].url}>

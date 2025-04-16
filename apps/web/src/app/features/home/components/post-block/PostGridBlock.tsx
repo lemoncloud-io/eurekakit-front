@@ -41,9 +41,7 @@ export const PostGridBlock = ({ post }: PostGridBlockProps) => {
                             <span>{formatCount(post.likeCount!)}</span>
                         </Condition>
                         <MessageSquareMore size={14} />
-                        <Condition condition={!!post.commentPosted}>
-                            <span>{formatCount(post.commentPosted! - (post.commentHidden ?? 0))}</span>
-                        </Condition>
+                        <span>{formatCount(post.childNo)}</span>
                     </div>
                 </div>
             </div>

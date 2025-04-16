@@ -63,8 +63,6 @@ const createFeedItem = (index: number, parentId?: string): FeedView => {
             nick: `닉네임${index + 1}`,
             image: `https://i.pravatar.cc/150?img=${index + 1}`,
         },
-        commentPosted: Math.floor(likeCount * 0.7),
-        commentHidden: Math.min(Math.floor(likeCount * 0.7), getRandomNumber(0, 15)),
         createdAt: now - randomTime,
         $activity: {
             isLike: Boolean(Math.floor(Math.random() * 100) % 2),
