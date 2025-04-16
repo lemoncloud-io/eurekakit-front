@@ -73,7 +73,7 @@ export const PostEditorImageUploader = () => {
             return;
         }
 
-        methods.setValue('images', postImageList);
+        methods.setValue('images', postImageList, { shouldDirty: true });
     }, [uploadImageList]);
 
     return (

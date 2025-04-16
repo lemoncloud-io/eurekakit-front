@@ -1,10 +1,12 @@
 import { useForm, useWatch } from 'react-hook-form';
+import { useBlocker } from 'react-router-dom';
 
 import { DevTool } from '@hookform/devtools';
 
 import { useCrerateFeed } from '@lemon/feeds';
 import { cn } from '@lemon/ui-kit';
 import { Button } from '@lemon/ui-kit/components/ui/button';
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTitle } from '@lemon/ui-kit/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@lemon/ui-kit/components/ui/form';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 import { Textarea } from '@lemon/ui-kit/components/ui/textarea';
@@ -17,11 +19,20 @@ import type { FeedBody } from '@lemoncloud/pets-socials-api';
 
 export const PostEditor = () => {
     const navigate = useNavigate();
-    const methods = useForm<FeedBody>({ mode: 'all' });
+    const methods = useForm<FeedBody>({ mode: 'all', defaultValues: { images: [], text: '' } });
+
     const { mutate: createFeed } = useCrerateFeed();
 
-    const postText = useWatch({ control: methods.control, name: 'text' });
-    const isSubmitBtnDisabled = !postText?.length || !!methods.getFieldState('text').error;
+    const watchedImages = useWatch({ control: methods.control, name: 'images' });
+    const watchedText = useWatch({ control: methods.control, name: 'text' });
+
+    const isTextDirty = watchedText?.length !== 0;
+    const isImageDirty = !!watchedImages && watchedImages?.length !== 0;
+    const isPostDirty = isTextDirty || isImageDirty;
+
+    const isSubmitBtnDisabled = !(isTextDirty && !methods.getFieldState('text').error);
+
+    const blocker = useBlocker(() => isPostDirty);
 
     // TODO : 글쓰기 상세로 이동
     const submitPost = (feedBody: FeedBody) => {
@@ -78,6 +89,19 @@ export const PostEditor = () => {
                     작성 완료
                 </Button>
             </Form>
+            <Dialog open={blocker.state === 'blocked'}>
+                <DialogContent>
+                    <DialogTitle className="flex min-h-20 items-center justify-center">
+                        글쓰기를 중단하시겠어요?
+                    </DialogTitle>
+                    <DialogFooter>
+                        <DialogClose onClick={() => blocker.reset?.()}>취소</DialogClose>
+                        <DialogClose onClick={() => blocker.proceed?.()} className="font-semibold">
+                            중단
+                        </DialogClose>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </div>
     );
 };
