@@ -3,7 +3,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { feedKeys, useFetchInfiniteFeedList, useLikeFeed } from '@lemon/feeds';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Condition } from '@lemon/ui-kit/components/ui/condition';
-import List from '@lemon/ui-kit/components/ui/list';
+import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { INFINITE_POST_LIST_LIMIT } from '../../consts';

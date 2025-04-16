@@ -8,7 +8,7 @@ import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Condition } from '@lemon/ui-kit/components/ui/condition';
 import { FormField, FormItem } from '@lemon/ui-kit/components/ui/form';
 import { Label } from '@lemon/ui-kit/components/ui/label';
-import List from '@lemon/ui-kit/components/ui/list';
+import { List } from '@lemon/ui-kit/components/ui/list';
 import { useUploadImage } from '@lemon/uploads';
 
 import type { UploadView } from '@lemon/uploads';
