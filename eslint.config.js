@@ -93,6 +93,7 @@ module.exports = [
                     argsIgnorePattern: '^_',
                 },
             ],
+            'no-case-declarations': 'off',
         },
     },
 ];

@@ -1,0 +1,95 @@
+{
+    "hello": "안녕하세요",
+    "oauth": {
+        "signing": "로그인 중...",
+        "signout": "로그아웃",
+        "logout": "성공적으로 로그아웃되었습니다.",
+        "error": {
+            "general": "오류가 발생했습니다.",
+            "stateParam": "상태 매개변수 파싱 실패:"
+        }
+    },
+    "menu": {
+        "dashboard": "대시보드",
+        "profile": "프로필",
+        "settings": "설정",
+        "aiModel": "AI 모델 비교",
+        "aiChatbot": "AI 전처리"
+    },
+    "common": {
+        "cancel": "취소",
+        "create": "생성",
+        "update": "업데이트",
+        "retry": "재시도"
+    },
+    "app": {
+        "name": "EurekaPage",
+        "exit": {
+            "title": "",
+            "message": "앱을 종료하시겠습니까?",
+            "cancel": "취소",
+            "confirm": "확인"
+        },
+        "error": {
+            "launch": "앱 실행에 실패했습니다."
+        }
+    },
+    "notification": {
+        "title": "EurekaPage 알림",
+        "accessChanged": "출입 권한이 변경되었습니다",
+        "firstLaunch": "처음 앱 구동시 약간의 시간이 걸릴 수 있습니다",
+        "new": "새로운 알림이 있습니다.",
+        "appLaunchFailed": "앱 실행에 실패했습니다.",
+        "messageTypes": {
+            "myNews": "MY",
+            "notice": "공지",
+            "event": "예약",
+            "payment": "결제",
+            "navigation": "네비게이션"
+        }
+    },
+    "error": {
+        "network": {
+            "title": "네트워크 에러",
+            "message": "문제가 발생했습니다. 인터넷 연결을 확인해주세요."
+        },
+        "webview": {
+            "serviceUnavailable": "서비스에 접속할 수 없습니다.",
+            "tryAgainLater": "잠시 후 다시 이용 부탁드리며",
+            "apologize": "이용에 불편을 드려 죄송합니다."
+        }
+    },
+    "imagePicker": {
+        "save": "저장",
+        "cancel": "취소"
+    },
+    "toast": {
+        "warning": "주의"
+    },
+    "permission": {
+        "unsupportedOS": "지원하지 않는 OS입니다.",
+        "bluetooth": {
+            "unavailable": "블루투스 기능을 사용할 수 없습니다."
+        },
+        "location": {
+            "denied": "위치 권한이 거부되었습니다.",
+            "allGranted": "모든 권한이 허용되었습니다.",
+            "backgroundNeeded": "백그라운드 위치 권한이 필요합니다.",
+            "checkError": "권한 체크 중 오류가 발생했습니다."
+        },
+        "alert": {
+            "title": "권한 필요",
+            "message": "이 기능을 사용하려면 {{type}} 권한이 필요합니다. 설정에서 권한을 허용해주세요.",
+            "types": {
+                "location": "위치",
+                "bluetooth": "블루투스"
+            },
+            "background": {
+                "title": "백그라운드 위치 권한 필요",
+                "message": "앱 설정에서 '항상 허용'으로 위치 권한을 변경해주세요."
+            },
+            "cancel": "취소",
+            "settings": "설정으로 이동"
+        }
+    }
+}
