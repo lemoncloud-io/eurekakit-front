@@ -1,4 +1,4 @@
-import { feedCommentHandler } from './feedCommentHandlers';
-import { feedHandler } from './feedHandlers';
+import { feedCommentHandler } from './feedComments/feedCommentHandlers';
+import { feedHandler } from './feeds/feedHandlers';
 
 export const feedApiHander = [...feedHandler, ...feedCommentHandler];

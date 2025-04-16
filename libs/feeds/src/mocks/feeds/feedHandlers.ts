@@ -1,10 +1,10 @@
 import { HttpResponse, delay, http } from 'msw';
 
-import { ACTIVITY, BACKEND_API, DETAIL, FEEDS, LIST_V2 } from '../consts';
 import { feedList } from './mockFeeds';
+import { ACTIVITY, BACKEND_API, DETAIL, FEEDS, LIST_V2 } from '../../consts';
 
-import type { FeedView } from '../types';
-import type { ListResult } from '@lemoncloud/codes-backend-api/dist/cores/types';
+import type { FeedView } from '../../types';
+import type { ListResult } from '@lemon/shared';
 
 let mutableFeedList = [...feedList];
 

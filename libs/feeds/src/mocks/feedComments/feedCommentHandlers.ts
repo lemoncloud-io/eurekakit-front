@@ -1,9 +1,9 @@
 import { HttpResponse, delay, http } from 'msw';
 
-import { BACKEND_API, COMMENTS, FEEDS } from '../consts';
 import { commentList } from './mockFeedComments';
+import { BACKEND_API, COMMENTS, FEEDS } from '../../consts';
 
-import type { FeedView } from '../types';
+import type { FeedView } from '../../types';
 import type { ListResult } from '@lemon/shared';
 
 const mutableFeedCommentList = [...commentList];
