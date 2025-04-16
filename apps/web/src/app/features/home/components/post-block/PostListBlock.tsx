@@ -18,8 +18,8 @@ export const PostListBlock = ({ post, onClickLike }: PostListBlockProps) => {
         <div className="flex gap-2">
             <div className="flex w-full flex-col justify-between gap-1">
                 <div className="flex flex-col gap-1">
-                    <p className="line-clamp-2 break-all">{post.name}</p>
-                    <List hotizontal seperator={<span>·</span>} className="text-muted-foreground gap-1 text-sm">
+                    <p className="line-clamp-2 break-all">{post.text}</p>
+                    <List horizontal seperator={<span>·</span>} className="text-muted-foreground gap-1 text-sm">
                         <span className="line-clamp-1">{post.user$.nick}</span>
                         <span>{formatRelativeTime(post.createdAt ?? 0)}</span>
                     </List>
