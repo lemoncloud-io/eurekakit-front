@@ -7,3 +7,4 @@ export const FEEDS = 'feeds';
 export const LIST_V2 = 'list-v2';
 export const DETAIL = 'detail';
 export const ACTIVITY = 'activity';
+export const COMMENTS = 'childs';

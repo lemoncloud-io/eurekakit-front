@@ -1,1 +1,1 @@
-export * from './feedHandlers';
+export * from './feedApiHandler';

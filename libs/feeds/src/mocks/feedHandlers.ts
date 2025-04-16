@@ -8,7 +8,7 @@ import type { ListResult } from '@lemoncloud/codes-backend-api/dist/cores/types'
 
 let mutableFeedList = [...feedList];
 
-export const feedsHandler = [
+export const feedHandler = [
     http.get([BACKEND_API, FEEDS, 0, LIST_V2].join('/'), async ({ request }) => {
         const page = Number(new URL(request.url).searchParams.get('page')) || 0;
         const limit = Number(new URL(request.url).searchParams.get('limit')) || 10;

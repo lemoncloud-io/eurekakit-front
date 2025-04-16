@@ -1,5 +1,5 @@
 import { setupWorker } from 'msw/browser';
 
-import { feedsHandler } from '@lemon/feeds';
+import { feedApiHander } from '@lemon/feeds';
 
-export const worker = setupWorker(...feedsHandler);
+export const worker = setupWorker(...feedApiHander);

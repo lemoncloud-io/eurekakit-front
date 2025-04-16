@@ -18,8 +18,8 @@ const sampleTitles = [
 ];
 
 // 피드 아이템 생성 함수
-const createFeedItem = (index: number): FeedView => {
-    const id = (index + 1).toString();
+const createFeedItem = (index: number, parentId?: string): FeedView => {
+    const id = parentId ? `${parentId}_${(index + 1).toString()}` : (index + 1).toString();
     const userId = (100000 + index + 1).toString();
 
     // likeCount 자릿수 분포 (0 ~ 10,000,000)
@@ -37,7 +37,7 @@ const createFeedItem = (index: number): FeedView => {
     const likeCount = getRandomNumber(randomRange.min, randomRange.max);
 
     // 이미지 개수 랜덤 (1-2개)
-    const imageCount = Math.random() > 0.5 ? 1 : 2;
+    const imageCount = 5;
     const images: ImageView[] = Array.from({ length: imageCount }, (_, i) => ({
         id: i.toString(),
         url: `https://picsum.photos/800/600?random=${index * 2 + i + 16}`,
@@ -69,10 +69,13 @@ const createFeedItem = (index: number): FeedView => {
         $activity: {
             isLike: Boolean(Math.floor(Math.random() * 100) % 2),
         },
+        childNo: Math.ceil(Math.random() * 30),
+        parentId,
     };
 };
 
 // 피드 리스트 생성 함수
-const generateFeeds = (count: number): FeedView[] => Array.from({ length: count }, (_, i) => createFeedItem(i));
+export const generateFeeds = (count: number, parentId?: string): FeedView[] =>
+    Array.from({ length: count }, (_, i) => createFeedItem(i, parentId));
 
 export const feedList = generateFeeds(13).sort((a, b) => Number(b.createdAt) - Number(a.createdAt));
