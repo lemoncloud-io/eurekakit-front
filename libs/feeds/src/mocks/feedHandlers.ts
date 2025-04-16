@@ -1,6 +1,6 @@
 import { HttpResponse, delay, http } from 'msw';
 
-import { ACTIVITY, BACKEND_API, FEEDS, LIST_V2 } from '../consts';
+import { ACTIVITY, BACKEND_API, DETAIL, FEEDS, LIST_V2 } from '../consts';
 import { feedList } from './mockFeeds';
 
 import type { FeedView } from '../types';
@@ -26,6 +26,19 @@ export const feedsHandler = [
             page,
             limit,
         } as ListResult<FeedView>);
+    }),
+    http.get([BACKEND_API, FEEDS, ':id', DETAIL].join('/'), async ({ request, params }) => {
+        const feedId = params['id'];
+
+        const targetFeed = mutableFeedList.find(feed => feed.id === feedId);
+
+        await delay(1000);
+
+        if (!targetFeed) {
+            return HttpResponse.error();
+        }
+
+        return HttpResponse.json(targetFeed);
     }),
     http.put([BACKEND_API, FEEDS, ':id', ACTIVITY].join('/'), async ({ request, params }) => {
         const feedId = params['id'];
