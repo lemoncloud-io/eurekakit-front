@@ -8,7 +8,7 @@ import type { ListResult } from '@lemon/shared';
 export const fetchFeedList = async (params?: FeedListParam) => {
     const { data } = await webCore
         .buildSignedRequest({ method: 'GET', baseURL: [BACKEND_API, FEEDS, 0, LIST_V2].join('/') })
-        .setParams({ ...params })
+        .setParams({ mine: true, ...params })
         .execute<ListResult<FeedView>>();
 
     return data;
