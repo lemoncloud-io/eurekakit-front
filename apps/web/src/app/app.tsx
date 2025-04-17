@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { HelmetProvider } from 'react-helmet-async';
+import { Outlet } from 'react-router-dom';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -10,8 +11,6 @@ import { ErrorFallback, GlobalLoader, LoadingFallback } from '@lemon/shared';
 import { ThemeProvider } from '@lemon/theme';
 import { Toaster } from '@lemon/ui-kit/components/ui/toaster';
 import { useInitWebCore, useRefreshToken } from '@lemon/web-core';
-
-import { Router } from './routes';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -37,7 +36,7 @@ export function App() {
                     <QueryClientProvider client={queryClient}>
                         <ThemeProvider defaultTheme="light">
                             <OverlayProvider>
-                                <Router />
+                                <Outlet />
                                 <GlobalLoader />
                                 <Toaster />
                             </OverlayProvider>
