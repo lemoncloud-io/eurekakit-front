@@ -1,7 +1,7 @@
 import { HttpResponse, delay, http } from 'msw';
 
-import { feedList } from './mockFeeds';
-import { ACTIVITY, BACKEND_API, DETAIL, FEEDS, LIST_V2 } from '../../consts';
+import { createFeedItem, feedList } from './mockFeeds';
+import { ACTIVITY, BACKEND_API, DETAIL, FEED, FEEDS, LIST_V2, USERS } from '../../consts';
 
 import type { FeedView } from '../../types';
 import type { ListResult } from '@lemon/shared';
@@ -27,7 +27,7 @@ export const feedHandler = [
             limit,
         } as ListResult<FeedView>);
     }),
-    http.get([BACKEND_API, FEEDS, ':id', DETAIL].join('/'), async ({ request, params }) => {
+    http.get([BACKEND_API, FEEDS, ':id', DETAIL].join('/'), async ({ params }) => {
         const feedId = params['id'];
 
         const targetFeed = mutableFeedList.find(feed => feed.id === feedId);
@@ -56,5 +56,24 @@ export const feedHandler = [
         await delay(1000);
 
         return HttpResponse.json(toBeFeed);
+    }),
+    http.post([BACKEND_API, USERS, 0, FEED].join('/'), async ({ request }) => {
+        const body = await request.json();
+
+        const nextId = Math.max(...mutableFeedList.map(feed => Number(feed.id ?? 0)));
+
+        const newFeed = {
+            ...createFeedItem(nextId + 1),
+            createdAt: Date.now(),
+            text: body['text'],
+            image$$: body['images'],
+            user$: { id: '1', nick: 'DefaultUser' },
+        } as FeedView;
+
+        await delay(2000);
+
+        mutableFeedList.unshift(newFeed);
+
+        return HttpResponse.json(newFeed);
     }),
 ];

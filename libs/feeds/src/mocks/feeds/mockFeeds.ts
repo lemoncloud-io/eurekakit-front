@@ -18,7 +18,7 @@ const sampleTitles = [
 ];
 
 // 피드 아이템 생성 함수
-const createFeedItem = (index: number, parentId?: string): FeedView => {
+export const createFeedItem = (index: number, parentId?: string): FeedView => {
     const id = parentId ? `${parentId}_${(index + 1).toString()}` : (index + 1).toString();
     const userId = (100000 + index + 1).toString();
 
