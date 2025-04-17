@@ -11,7 +11,10 @@ interface GoodsReviewImageCarouselProps extends OverlayProps {
 export const ImageCarouselModal = ({ startIndex = 0, images, ...modalProps }: GoodsReviewImageCarouselProps) => {
     return (
         <Dialog {...modalProps}>
-            <DialogContent className="border-none bg-transparent focus-visible:border-none focus-visible:outline-none">
+            <DialogContent
+                className="border-none bg-transparent focus-visible:border-none focus-visible:outline-none"
+                showCloseBtn
+            >
                 <Carousel opts={{ startIndex }}>
                     <CarouselContent>
                         {images.map(

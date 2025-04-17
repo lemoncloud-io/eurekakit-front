@@ -72,6 +72,7 @@ export const Post = ({ post }: PostProps) => {
                     close={() => setClickedImageIdx(undefined)}
                     startIndex={clickedImageIdx}
                     images={post.image$$.map(imageView => ({ id: imageView.id, url: imageView.url }))}
+                    aria-describedby="image viewer modal"
                 />
             )}
             <button
