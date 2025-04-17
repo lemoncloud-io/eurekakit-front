@@ -21,7 +21,7 @@ export const PostListBlock = ({ post, onClickLike }: PostListBlockProps) => {
                 <div className="flex flex-col gap-1">
                     <p className="line-clamp-2 break-all">{post.text}</p>
                     <List horizontal seperator={<span>·</span>} className="text-muted-foreground gap-1 text-sm">
-                        <NickName className="line-clamp-1" nickname={post.user$.nick} />
+                        <NickName className="line-clamp-1" nickname={post.user$?.nick} />
                         <span>{formatRelativeTime(post.createdAt ?? 0)}</span>
                     </List>
                 </div>
