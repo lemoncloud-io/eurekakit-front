@@ -11,7 +11,7 @@ import { formatCount, formatRelativeTime } from '../../../../utils';
 
 interface PostListBlockProps {
     post: FeedView;
-    onClickLike?: (like?: boolean) => void;
+    onClickLike?: (e: React.MouseEvent, like?: boolean) => void;
 }
 
 export const PostListBlock = ({ post, onClickLike }: PostListBlockProps) => {
@@ -40,7 +40,7 @@ export const PostListBlock = ({ post, onClickLike }: PostListBlockProps) => {
                     <Button
                         className="bg-foreground/40 absolute bottom-2 right-2 flex items-center justify-center rounded-full text-lg backdrop-blur-sm"
                         size={'icon'}
-                        onClick={() => onClickLike?.(post.$activity?.isLike)}
+                        onClick={e => onClickLike?.(e, post.$activity?.isLike)}
                     >
                         <Heart
                             className={cn(

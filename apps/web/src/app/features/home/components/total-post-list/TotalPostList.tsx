@@ -22,13 +22,16 @@ export const TotalPostList = () => {
         hasNextPage,
         isLoading,
     } = useFetchInfiniteFeedList({ limit: INFINITE_POST_LIST_LIMIT });
+
     const { mutate: changeLike } = useLikeFeed();
 
-    const onChangeLike = (id: string, like?: boolean) => {
-        const toBeLike = !like;
+    const onChangeLike = (e: React.MouseEvent, id: string, like?: boolean) => {
+        e.preventDefault();
+
+        const isLike = !like;
 
         changeLike(
-            { id, like: toBeLike },
+            { id, like: isLike },
             { onSuccess: () => queryClient.invalidateQueries({ queryKey: feedKeys.lists() }) }
         );
     };
@@ -43,7 +46,7 @@ export const TotalPostList = () => {
                             <PostListBlock
                                 key={post.id}
                                 post={post}
-                                onClickLike={like => onChangeLike(post.id, like)}
+                                onClickLike={(e, like) => onChangeLike(e, post.id, like)}
                             />
                         ))}
                     </List>
