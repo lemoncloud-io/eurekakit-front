@@ -5,10 +5,10 @@ import type { OverlayProps } from '@lemon/overlay';
 
 interface GoodsReviewImageCarouselProps extends OverlayProps {
     images: string[];
-    startIndex: number;
+    startIndex?: number;
 }
 
-export const ImageCarouselModal = ({ startIndex, images, ...modalProps }: GoodsReviewImageCarouselProps) => {
+export const ImageCarouselModal = ({ startIndex = 0, images, ...modalProps }: GoodsReviewImageCarouselProps) => {
     return (
         <Dialog {...modalProps}>
             <DialogContent className="border-none bg-transparent focus-visible:border-none focus-visible:outline-none">
