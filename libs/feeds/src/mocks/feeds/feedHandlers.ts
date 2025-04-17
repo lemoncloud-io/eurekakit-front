@@ -68,6 +68,8 @@ export const feedHandler = [
             text: body['text'],
             image$$: body['images'],
             user$: { id: '1', nick: 'DefaultUser' },
+            likeCount: 0,
+            childNo: 0,
         } as FeedView;
 
         await delay(2000);
