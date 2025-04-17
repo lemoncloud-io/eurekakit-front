@@ -8,9 +8,8 @@ import { cn } from '@lemon/ui-kit';
 import { Carousel, CarouselContent, CarouselItem } from '@lemon/ui-kit/components/ui/carousel';
 import { List } from '@lemon/ui-kit/components/ui/list';
 
-import { ImageCarouselModal } from '../../../../components';
+import { ImageCarouselModal, NickName, Profile } from '../../../../components';
 import { formatCount, formatRelativeTime } from '../../../../utils';
-import { UserNickName, UserProfile } from '../../pages';
 
 import type { FeedView } from '@lemon/feeds';
 
@@ -46,13 +45,13 @@ export const Post = ({ post }: PostProps) => {
     return (
         <div className="flex flex-col items-start gap-2 px-4">
             <div className="flex w-full items-center gap-2 py-2">
-                <UserProfile src={post.user$.image} />
+                <Profile src={post.user$.image} />
                 <List
                     seperator={<span className="text-muted-foreground">·</span>}
                     horizontal
                     className="items-center gap-1"
                 >
-                    <UserNickName nickname={post.user$.nick} />
+                    <NickName nickname={post.user$.nick} />
                     <span className="text-muted-foreground text-sm">{formatRelativeTime(post.createdAt)}</span>
                 </List>
                 <button className="text-muted-foreground ml-auto aspect-square">

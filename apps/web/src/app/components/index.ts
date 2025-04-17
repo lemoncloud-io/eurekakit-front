@@ -1,4 +1,10 @@
 export * from './image-carousel-modal';
-export * from './not-found';
+
+export * from './nickname';
+export * from './profile';
+
 export * from './link';
+
+export * from './not-found';
+
 export * from './tab-bar';
