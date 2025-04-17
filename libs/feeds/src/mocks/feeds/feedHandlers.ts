@@ -57,6 +57,20 @@ export const feedHandler = [
 
         return HttpResponse.json(toBeFeed);
     }),
+    http.put([BACKEND_API, FEEDS, ':id'].join('/'), async ({ request, params }) => {
+        const feedId = params['id'];
+
+        const body = await request.json();
+
+        const targetFeed = mutableFeedList.find(feed => feed.id === feedId);
+        mutableFeedList = mutableFeedList
+            .map(feed => (feed.id !== feedId ? feed : { ...feed, ...body }))
+            .filter(feed => !feed.hidden);
+
+        await delay(1000);
+
+        return HttpResponse.json({ ...targetFeed, ...body });
+    }),
     http.post([BACKEND_API, USERS, 0, FEED].join('/'), async ({ request }) => {
         const body = await request.json();
 

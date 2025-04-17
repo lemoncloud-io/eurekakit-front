@@ -44,21 +44,26 @@ export const Post = ({ post }: PostProps) => {
 
     return (
         <div className="flex flex-col items-start gap-2 px-4">
-            <PostHeader profileImg={post.user$.image} nickname={post.user$?.nick} createdAt={post.createdAt} />
+            <PostHeader
+                postId={post.id}
+                profileImg={post.user$?.image}
+                nickname={post.user$?.nick}
+                createdAt={post.createdAt}
+            />
             <div>{post.text}</div>
             <Carousel opts={{ dragFree: true }}>
                 <CarouselContent className="-ml-2 overflow-visible" containerClassName="overflow-visible">
                     {post.image$$?.map(
                         (image, idx) =>
-                            image.url && (
+                            image?.url && (
                                 <CarouselItem
-                                    key={image.id}
+                                    key={image?.id}
                                     className="basis-[150px] pl-2"
                                     onClick={onClickImage}
                                     data-image-idx={idx}
                                 >
                                     <div className="aspect-square overflow-hidden rounded-lg">
-                                        <Image src={image.url} />
+                                        <Image src={image?.url} />
                                     </div>
                                 </CarouselItem>
                             )
