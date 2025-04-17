@@ -4,7 +4,7 @@ import { feedKeys } from '../../../consts';
 import { fetchFeedList } from '../apis';
 
 import type { FeedListParam, FeedView } from '../../../types';
-import type { ListResult } from '@lemoncloud/codes-backend-api/dist/cores/types';
+import type { ListResult } from '@lemon/shared';
 
 export const useFetchInfiniteFeedList = (params?: FeedListParam) =>
     useInfiniteQuery({

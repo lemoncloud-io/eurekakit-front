@@ -1,4 +1,8 @@
-export const formatCount = (count: number) => {
+export const formatCount = (count?: number) => {
+    if (!count) {
+        return '';
+    }
+
     if (count < 10000) {
         return `${count.toLocaleString()}`;
     } else {

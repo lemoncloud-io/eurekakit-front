@@ -13,16 +13,16 @@ import { useInitWebCore, useRefreshToken } from '@lemon/web-core';
 
 import { Router } from './routes';
 
-export function App() {
-    const queryClient = new QueryClient({
-        defaultOptions: {
-            queries: {
-                staleTime: Infinity,
-                throwOnError: true,
-            },
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            staleTime: Infinity,
+            throwOnError: true,
         },
-    });
+    },
+});
 
+export function App() {
     const isInitialized = useInitWebCore();
     useRefreshToken();
 
@@ -42,7 +42,7 @@ export function App() {
                                 <Toaster />
                             </OverlayProvider>
                         </ThemeProvider>
-                        {process.env.NODE_ENV !== 'prod' && <ReactQueryDevtools />}
+                        {process.env.NODE_ENV !== 'prod' && <ReactQueryDevtools client={queryClient} />}
                     </QueryClientProvider>
                 </HelmetProvider>
             </ErrorBoundary>
