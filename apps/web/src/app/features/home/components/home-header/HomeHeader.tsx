@@ -1,12 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
 
+import { Cog } from 'lucide-react';
+
 import { Images } from '@lemon/assets';
+import { useOverlay } from '@lemon/overlay';
 import { cn } from '@lemon/ui-kit';
+import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Input } from '@lemon/ui-kit/components/ui/input';
+
+import { isDev } from '../../../../utils';
+import { DevModeSettingModal } from '../dev-mode-setting-modal';
 
 export const HomeHeader = () => {
     const [collapsed, setCollapsed] = useState(false);
     const prevScrollYRef = useRef<number>(0);
+    const overlay = useOverlay();
 
     useEffect(() => {
         const scrollHandler = () => {
@@ -33,8 +41,22 @@ export const HomeHeader = () => {
                 'transition-all'
             )}
         >
-            <div>
-                <img src={Images.eurekaCodesLogo} alt="Eureka Codes Logo" />
+            <div className="text-primary-foreground flex items-center">
+                <img src={Images.eurekaCodesLogo} alt="Eureka Codes Logo" className="flex-none" />
+                {isDev() && (
+                    <Button
+                        className="ml-auto"
+                        variant={'ghost'}
+                        size={'icon'}
+                        onClick={() =>
+                            overlay
+                                .validate(() => isDev())
+                                ?.open(overlayProps => <DevModeSettingModal {...overlayProps} />)
+                        }
+                    >
+                        <Cog />
+                    </Button>
+                )}
             </div>
             <div
                 className={cn(
