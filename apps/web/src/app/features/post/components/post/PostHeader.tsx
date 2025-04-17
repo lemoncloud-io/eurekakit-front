@@ -22,7 +22,7 @@ interface PostHeaderProps {
     isMe?: boolean;
 }
 
-export const PostHeader = ({ postId, profileImg, nickname, createdAt, isMe = true }: PostHeaderProps) => {
+export const PostHeader = ({ postId, profileImg, nickname, createdAt, isMe }: PostHeaderProps) => {
     const overlay = useOverlay();
 
     return (
