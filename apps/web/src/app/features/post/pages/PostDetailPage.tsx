@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { ChevronLeft, ChevronRight, Heart, Loader2, MoreVerticalIcon, User2Icon } from 'lucide-react';
 
-import { useFetchFeed, useFetchInfiniteFeedCommentList } from '@lemon/feeds';
+import { useFetchFeed, useFetchInfiniteFeedCommentList, useLikeFeed } from '@lemon/feeds';
+import { cn } from '@lemon/ui-kit';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem } from '@lemon/ui-kit/components/ui/carousel';
 import { List } from '@lemon/ui-kit/components/ui/list';
@@ -35,7 +37,9 @@ export const UserNickName = ({ nickname }: UserNickNameProps) => {
 };
 
 export const PostDetailPage = () => {
+    const queryClient = useQueryClient();
     const navigate = useNavigate();
+
     const { postId } = useParams();
     const { setRef, isIntersecting } = useIsIntersecting<HTMLDivElement>();
 
@@ -46,6 +50,16 @@ export const PostDetailPage = () => {
         isFetchingNextPage,
         hasNextPage,
     } = useFetchInfiniteFeedCommentList(postId);
+
+    const { mutate: changeLike } = useLikeFeed();
+
+    const onChangeLike = (e: React.MouseEvent, id: string, like?: boolean) => {
+        e.preventDefault();
+
+        const isLike = !like;
+
+        changeLike({ id, like: isLike }, { onSuccess: async () => await queryClient.invalidateQueries() });
+    };
 
     useEffect(() => {
         if (isIntersecting) {
@@ -91,8 +105,11 @@ export const PostDetailPage = () => {
                                 ))}
                             </CarouselContent>
                         </Carousel>
-                        <button className="mt-1 flex items-center gap-1 text-xs">
-                            <Heart size={16} />
+                        <button
+                            className="mt-1 flex items-center gap-1 text-xs"
+                            onClick={e => onChangeLike(e, post.id, post.$activity?.isLike)}
+                        >
+                            <Heart size={16} className={cn(post.$activity?.isLike && 'fill-red-500 stroke-red-500')} />
                             <span>{formatCount(post.likeCount)}</span>
                         </button>
                     </div>
@@ -138,7 +155,10 @@ export const PostDetailPage = () => {
                                             ))}
                                         </CarouselContent>
                                     </Carousel>
-                                    <button className="mt-1 flex items-center gap-1 text-xs">
+                                    <button
+                                        className="mt-1 flex items-center gap-1 text-xs"
+                                        onClick={e => onChangeLike(e, comment.id, comment.$activity?.isLike)}
+                                    >
                                         <Heart size={16} />
                                         <span>{formatCount(comment.likeCount)}</span>
                                     </button>
