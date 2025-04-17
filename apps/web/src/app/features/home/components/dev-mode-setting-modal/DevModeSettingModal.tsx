@@ -21,7 +21,7 @@ export const DevModeSettingModal = (overlayProps: OverlayProps) => {
         }
 
         await queryClient.invalidateQueries({ refetchType: 'all' });
-        // window.location.reload();
+        window.location.reload();
     };
 
     return (
