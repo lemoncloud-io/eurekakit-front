@@ -11,24 +11,9 @@ import { Label } from '@lemon/ui-kit/components/ui/label';
 import { List } from '@lemon/ui-kit/components/ui/list';
 import { useUploadImage } from '@lemon/uploads';
 
+import type { TrackedPromise } from '../../../../types';
 import type { UploadView } from '@lemon/uploads';
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
-
-type TrackedPromise<T> =
-    | {
-          id: string;
-          status: 'pending';
-      }
-    | {
-          id: string;
-          status: 'fulfilled';
-          value: T;
-      }
-    | {
-          id: string;
-          status: 'rejected';
-          error: any;
-      };
 
 export const PostEditorImageUploader = () => {
     const inputId = useId();
