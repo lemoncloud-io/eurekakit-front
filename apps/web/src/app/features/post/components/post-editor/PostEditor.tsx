@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useBlocker } from 'react-router-dom';
 
@@ -18,10 +19,12 @@ import { isDev } from '../../../../utils';
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
 
 export const PostEditor = () => {
+    const [blocked, setBlocked] = useState(true);
+
     const navigate = useNavigate();
     const methods = useForm<FeedBody>({ mode: 'all', defaultValues: { images: [], text: '' } });
 
-    const { mutate: createFeed } = useCrerateFeed();
+    const { mutate: createFeed, isPending } = useCrerateFeed();
 
     const watchedImages = useWatch({ control: methods.control, name: 'images' });
     const watchedText = useWatch({ control: methods.control, name: 'text' });
@@ -32,11 +35,19 @@ export const PostEditor = () => {
 
     const isSubmitBtnDisabled = !(isTextDirty && !methods.getFieldState('text').error);
 
-    const blocker = useBlocker(() => isPostDirty);
+    const blocker = useBlocker(() => blocked && isPostDirty);
 
-    // TODO : 글쓰기 상세로 이동
     const submitPost = (feedBody: FeedBody) => {
-        createFeed(feedBody, { onSuccess: () => navigate(-1) });
+        setBlocked(false);
+
+        createFeed(feedBody, {
+            onSuccess: async feedResult => {
+                navigate(`/post/${feedResult.id}`, { replace: true });
+            },
+            onError: () => {
+                setBlocked(true);
+            },
+        });
     };
 
     return (
@@ -85,7 +96,12 @@ export const PostEditor = () => {
                 />
                 <PostEditorImageUploader />
                 <Separator className="h-6 bg-transparent" />
-                <Button disabled={isSubmitBtnDisabled} className="w-full" onClick={methods.handleSubmit(submitPost)}>
+                <Button
+                    isLoading={isPending}
+                    disabled={isSubmitBtnDisabled}
+                    className="w-full"
+                    onClick={methods.handleSubmit(submitPost)}
+                >
                     작성 완료
                 </Button>
             </Form>
