@@ -6,7 +6,7 @@ import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Condition } from '@lemon/ui-kit/components/ui/condition';
 import { List } from '@lemon/ui-kit/components/ui/list';
 
-import { Link } from '../../../../components';
+import { Link, NickName } from '../../../../components';
 import { formatCount, formatRelativeTime } from '../../../../utils';
 
 interface PostListBlockProps {
@@ -21,7 +21,7 @@ export const PostListBlock = ({ post, onClickLike }: PostListBlockProps) => {
                 <div className="flex flex-col gap-1">
                     <p className="line-clamp-2 break-all">{post.text}</p>
                     <List horizontal seperator={<span>·</span>} className="text-muted-foreground gap-1 text-sm">
-                        <span className="line-clamp-1">{post.user$?.nick}</span>
+                        <NickName className="line-clamp-1" nickname={post.user$.nick} />
                         <span>{formatRelativeTime(post.createdAt ?? 0)}</span>
                     </List>
                 </div>
