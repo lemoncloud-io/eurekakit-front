@@ -5,7 +5,7 @@ import { useBlocker } from 'react-router-dom';
 import { DevTool } from '@hookform/devtools';
 
 import { useCrerateFeed } from '@lemon/feeds';
-import { cn } from '@lemon/ui-kit';
+import { cn, useToast } from '@lemon/ui-kit';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTitle } from '@lemon/ui-kit/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@lemon/ui-kit/components/ui/form';
@@ -19,6 +19,7 @@ import { isDev } from '../../../../utils';
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
 
 export const PostEditor = () => {
+    const { toast } = useToast();
     const [blocked, setBlocked] = useState(true);
 
     const navigate = useNavigate();
@@ -42,6 +43,7 @@ export const PostEditor = () => {
 
         createFeed(feedBody, {
             onSuccess: async feedResult => {
+                toast({ description: '게시글 등록이 완료되었습니다.', className: 'justify-center' });
                 navigate(`/post/${feedResult.id}`, { replace: true });
             },
             onError: () => {
