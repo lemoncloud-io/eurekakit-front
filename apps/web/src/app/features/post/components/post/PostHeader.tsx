@@ -1,5 +1,6 @@
 import { MoreVerticalIcon } from 'lucide-react';
 
+import { useOverlay } from '@lemon/overlay';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -11,15 +12,19 @@ import { List } from '@lemon/ui-kit/components/ui/list';
 
 import { NickName, Profile } from '../../../../components';
 import { formatRelativeTime } from '../../../../utils';
+import { DeletePostModal } from '../delete-post-modal';
 
 interface PostHeaderProps {
+    postId: string;
     profileImg?: string;
     nickname: string;
     createdAt: EpochTimeStamp;
     isMe?: boolean;
 }
 
-export const PostHeader = ({ profileImg, nickname, createdAt, isMe }: PostHeaderProps) => {
+export const PostHeader = ({ postId, profileImg, nickname, createdAt, isMe = true }: PostHeaderProps) => {
+    const overlay = useOverlay();
+
     return (
         <div className="flex w-full items-center gap-2 py-2">
             <Profile src={profileImg} />
@@ -40,7 +45,13 @@ export const PostHeader = ({ profileImg, nickname, createdAt, isMe }: PostHeader
                         <>
                             <DropdownMenuItem>수정하기</DropdownMenuItem>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem>삭제하기</DropdownMenuItem>
+                            <DropdownMenuItem
+                                onClick={() =>
+                                    overlay.open(overlayProps => <DeletePostModal postId={postId} {...overlayProps} />)
+                                }
+                            >
+                                삭제하기
+                            </DropdownMenuItem>
                         </>
                     ) : (
                         <DropdownMenuItem>신고</DropdownMenuItem>
