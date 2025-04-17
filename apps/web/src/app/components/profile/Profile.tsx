@@ -1,8 +1,8 @@
-import { useState } from 'react';
-
 import { User2Icon } from 'lucide-react';
 
 import { cn } from '@lemon/ui-kit';
+
+import { Image } from '../image';
 
 import type { ComponentPropsWithoutRef } from 'react';
 
@@ -11,8 +11,6 @@ interface ProfileProps extends ComponentPropsWithoutRef<'span'> {
 }
 
 export const Profile = ({ src, className, ...props }: ProfileProps) => {
-    const [isImageError, setIsImageError] = useState(false);
-
     return (
         <span
             className={cn(
@@ -21,11 +19,7 @@ export const Profile = ({ src, className, ...props }: ProfileProps) => {
             )}
             {...props}
         >
-            {!!src && !isImageError ? (
-                <img src={src} onError={() => setIsImageError(true)} className="h-full w-full object-cover" />
-            ) : (
-                <User2Icon size={16} />
-            )}
+            <Image src={src} fallback={<User2Icon size={16} />} />
         </span>
     );
 };

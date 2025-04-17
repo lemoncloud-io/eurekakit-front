@@ -8,7 +8,7 @@ import { cn } from '@lemon/ui-kit';
 import { Carousel, CarouselContent, CarouselItem } from '@lemon/ui-kit/components/ui/carousel';
 import { List } from '@lemon/ui-kit/components/ui/list';
 
-import { ImageCarouselModal, NickName, Profile } from '../../../../components';
+import { Image, ImageCarouselModal, NickName, Profile } from '../../../../components';
 import { formatCount, formatRelativeTime } from '../../../../utils';
 
 import type { FeedView } from '@lemon/feeds';
@@ -61,18 +61,21 @@ export const Post = ({ post }: PostProps) => {
             <div>{post.text}</div>
             <Carousel opts={{ dragFree: true }}>
                 <CarouselContent className="-ml-2 overflow-visible" containerClassName="overflow-visible">
-                    {post.image$$?.map((image, idx) => (
-                        <CarouselItem
-                            key={image.id}
-                            className="basis-[150px] pl-2"
-                            onClick={onClickImage}
-                            data-image-idx={idx}
-                        >
-                            <div className="aspect-square overflow-hidden rounded-lg">
-                                <img src={image.url} className="h-full w-full object-cover" />
-                            </div>
-                        </CarouselItem>
-                    ))}
+                    {post.image$$?.map(
+                        (image, idx) =>
+                            image.url && (
+                                <CarouselItem
+                                    key={image.id}
+                                    className="basis-[150px] pl-2"
+                                    onClick={onClickImage}
+                                    data-image-idx={idx}
+                                >
+                                    <div className="aspect-square overflow-hidden rounded-lg">
+                                        <Image src={image.url} />
+                                    </div>
+                                </CarouselItem>
+                            )
+                    )}
                 </CarouselContent>
             </Carousel>
             {post.image$$ && (
