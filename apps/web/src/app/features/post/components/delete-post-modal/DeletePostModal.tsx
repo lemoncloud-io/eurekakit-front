@@ -2,6 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 
 import { useDeleteFeed } from '@lemon/feeds';
 import { useGlobalLoader } from '@lemon/shared';
+import { useToast } from '@lemon/ui-kit';
 import {
     Dialog,
     DialogClose,
@@ -23,6 +24,7 @@ interface DeletePostModalProps extends OverlayProps {
 export const DeletePostModal = ({ postId, open, onOpenChange }: DeletePostModalProps) => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
+    const { toast } = useToast();
 
     const { setIsLoading } = useGlobalLoader();
     const { mutate: deletePost } = useDeleteFeed();
@@ -59,6 +61,7 @@ export const DeletePostModal = ({ postId, open, onOpenChange }: DeletePostModalP
 
     async function onSuccessDelete() {
         setIsLoading(false);
+        toast({ description: '삭제되었습니다', className: 'flex justify-center items-center' });
         navigate(-1);
         await queryClient.invalidateQueries();
     }
