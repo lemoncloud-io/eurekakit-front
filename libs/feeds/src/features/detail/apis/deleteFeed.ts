@@ -11,7 +11,7 @@ export const deleteFeed = async (id?: string) => {
 
     const { data } = await webCore
         .buildSignedRequest({ method: 'PUT', baseURL: [BACKEND_API, FEEDS, id].join('/') })
-        .setParams({ hidden: true })
+        .setBody({ hidden: true })
         .execute<FeedView>();
 
     return data;
