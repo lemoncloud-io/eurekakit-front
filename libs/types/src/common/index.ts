@@ -6,6 +6,11 @@ export type WebViewType = 'main' | 'modal';
 // TODO: define type
 export type UserProfileView = any;
 
+export interface SupportVersionMap {
+    android: string;
+    ios: string;
+}
+
 export interface RegisterAppInfo extends DeviceInfo {
     domain: string;
     version: string;
