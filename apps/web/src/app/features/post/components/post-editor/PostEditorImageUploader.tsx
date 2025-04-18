@@ -15,16 +15,13 @@ import { Image } from '../../../../components';
 import type { TrackedPromise } from '../../../../types';
 import type { UploadView } from '@lemon/uploads';
 import type { FeedBody, ImageView } from '@lemoncloud/pets-socials-api';
-import type { UseFormReturn } from 'react-hook-form';
 
 export const PostEditorImageUploader = () => {
     const inputId = useId();
     const methods = useFormContext<FeedBody>();
     const { toast } = useToast();
 
-    const [uploadImageList, setUploadImageList] = useState<TrackedPromise<ImageView>[]>(() =>
-        getInitialImageList(methods)
-    );
+    const [uploadImageList, setUploadImageList] = useState<TrackedPromise<ImageView>[]>(() => getInitialImageList());
 
     const { mutateAsync: uploadImages } = useUploadImage();
 
@@ -39,7 +36,15 @@ export const PostEditorImageUploader = () => {
 
             setUploadImageList(prev => [...prev, { id: promiseId, status: 'pending' }]);
 
-            imagePromise.then(data => updateFulfilledPromise(promiseId, data)).catch(() => removePromise(promiseId));
+            imagePromise
+                .then(data => updateFulfilledPromise(promiseId, data))
+                .catch(() => {
+                    removePromise(promiseId);
+                    toast({
+                        description: '이미지를 업로드 할 수 없습니다.',
+                        className: 'flex justufy-center items-center',
+                    });
+                });
         }
 
         e.target.value = '';
@@ -52,7 +57,7 @@ export const PostEditorImageUploader = () => {
             .flat()
             .filter(image => image !== undefined);
 
-        if (!postImageList.length) {
+        if (!postImageList) {
             return;
         }
 
@@ -97,6 +102,11 @@ export const PostEditorImageUploader = () => {
                                 className="relative h-[72px] w-[72px] overflow-hidden rounded-lg border"
                                 key={imagePromise.id}
                             >
+                                <Image
+                                    src={imagePromise.value?.url}
+                                    className="h-full w-full object-cover"
+                                    noSrcPending
+                                />
                                 <Button
                                     className="absolute right-1 top-1 h-4 w-4 rounded-full"
                                     size={'icon'}
@@ -105,12 +115,6 @@ export const PostEditorImageUploader = () => {
                                 >
                                     <X />
                                 </Button>
-                                <Image
-                                    src={imagePromise.value?.url}
-                                    loadingFallback={<div className="bg-secondary h-full w-full animate-pulse" />}
-                                    className="h-full w-full object-cover"
-                                    noSrcPending
-                                />
                             </div>
                         ))}
                     </List>
@@ -119,7 +123,7 @@ export const PostEditorImageUploader = () => {
         />
     );
 
-    function getInitialImageList(methods: UseFormReturn<FeedBody, any, FeedBody>) {
+    function getInitialImageList() {
         return (
             methods
                 .getValues('image$$')
