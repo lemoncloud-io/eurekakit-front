@@ -35,7 +35,10 @@ export const UpdatePostPage = () => {
     const isImageDirty = !!watchedImages && watchedImages?.length !== 0;
     const isPostDirty = isTextDirty || isImageDirty;
 
-    const { setBlockerOn } = useFormBlockModal(isPostDirty);
+    const { setBlockerOn } = useFormBlockModal(isPostDirty, {
+        title: '수정하기를 중단하시겠습니까?',
+        description: '해당 화면에서 이탈 시 변경된 내용이 사라집니다.',
+    });
 
     const submitPost = (feedBody: FeedBody) => {
         setBlockerOn(false);
