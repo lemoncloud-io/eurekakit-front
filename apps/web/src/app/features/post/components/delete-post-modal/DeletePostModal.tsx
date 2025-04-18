@@ -11,7 +11,6 @@ import {
     DialogFooter,
     DialogTitle,
 } from '@lemon/ui-kit/components/ui/dialog';
-import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { useModalWithDropDown, useNavigate } from '../../../../hooks';
 
@@ -53,7 +52,6 @@ export const DeletePostModal = ({ postId, open, onOpenChange }: DeletePostModalP
                 </DialogDescription>
                 <DialogFooter>
                     <DialogClose className="text-muted-foreground">취소</DialogClose>
-                    <Separator orientation="vertical" />
                     <DialogClose className="text-accent-foreground font-semibold" onClick={onClickDelete}>
                         삭제
                     </DialogClose>

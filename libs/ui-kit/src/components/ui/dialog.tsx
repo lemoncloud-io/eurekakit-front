@@ -5,6 +5,9 @@ import { X } from 'lucide-react';
 
 import { cn } from '@lemon/ui-kit/lib/utils';
 
+import { List } from './list';
+import { Separator } from './separator';
+
 const Dialog = DialogPrimitive.Root;
 
 const DialogTrigger = DialogPrimitive.Trigger;
@@ -68,14 +71,18 @@ const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivEleme
 );
 DialogHeader.displayName = 'DialogHeader';
 
-const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-    <div
+const DialogFooter = ({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+    <List
+        horizontal
+        seperator={<Separator orientation="vertical" />}
         className={cn(
             'flex h-12 items-center justify-center overflow-hidden border-t [&_button]:h-full [&_button]:w-full',
             className
         )}
         {...props}
-    />
+    >
+        {children}
+    </List>
 );
 DialogFooter.displayName = 'DialogFooter';
 
