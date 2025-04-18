@@ -84,7 +84,7 @@ export const Post = ({ post }: PostProps) => {
                 className="mt-1 flex items-center gap-1 text-xs"
                 onClick={e => onChangeLike(e, post.id, post.$activity?.isLike)}
             >
-                <Heart size={16} className={cn(post.$activity?.isLike && 'fill-red-500 stroke-red-500')} />
+                <Heart size={16} className={cn(post.$activity?.isLike && 'fill-like stroke-like')} />
                 <span>{formatCount(post.likeCount)}</span>
             </button>
         </div>
