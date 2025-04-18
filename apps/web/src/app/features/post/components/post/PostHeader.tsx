@@ -11,6 +11,7 @@ import {
 import { List } from '@lemon/ui-kit/components/ui/list';
 
 import { NickName, Profile } from '../../../../components';
+import { useNavigate } from '../../../../hooks';
 import { formatRelativeTime } from '../../../../utils';
 import { DeletePostModal } from '../delete-post-modal';
 
@@ -22,7 +23,8 @@ interface PostHeaderProps {
     isMe?: boolean;
 }
 
-export const PostHeader = ({ postId, profileImg, nickname, createdAt, isMe }: PostHeaderProps) => {
+export const PostHeader = ({ postId, profileImg, nickname, createdAt, isMe = true }: PostHeaderProps) => {
+    const navigate = useNavigate();
     const overlay = useOverlay();
 
     return (
@@ -43,7 +45,9 @@ export const PostHeader = ({ postId, profileImg, nickname, createdAt, isMe }: Po
                 <DropdownMenuContent>
                     {isMe ? (
                         <>
-                            <DropdownMenuItem>수정하기</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => navigate(`/post/update/${postId}`)}>
+                                수정하기
+                            </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem
                                 onClick={() =>
