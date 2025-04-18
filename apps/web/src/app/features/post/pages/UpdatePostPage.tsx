@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { X } from 'lucide-react';
 
-import { feedKeys, useCrerateFeed, useFetchFeed } from '@lemon/feeds';
+import { feedKeys, useFetchFeed, useUpdateFeed } from '@lemon/feeds';
 import { useGlobalLoader } from '@lemon/shared';
 import { useToast } from '@lemon/ui-kit';
 import { Button } from '@lemon/ui-kit/components/ui/button';
@@ -25,7 +25,7 @@ export const UpdatePostPage = () => {
     const params = useParams();
 
     const { data: post, isPending: isLoadingPost } = useFetchFeed(params.postId);
-    const { mutate: createFeed, isPending } = useCrerateFeed();
+    const { mutate: updateFeed, isPending } = useUpdateFeed();
 
     const methods = useForm<FeedBody>({
         mode: 'all',
@@ -49,11 +49,14 @@ export const UpdatePostPage = () => {
         setBlockerOn(false);
         setIsLoading(true);
 
-        createFeed(feedBody, {
-            onSuccess: onSuccessUpdate,
-            onError: () => setBlockerOn(true),
-            onSettled: () => setIsLoading(false),
-        });
+        updateFeed(
+            { id: params.postId, body: feedBody },
+            {
+                onSuccess: onSuccessUpdate,
+                onError: () => setBlockerOn(true),
+                onSettled: () => setIsLoading(false),
+            }
+        );
     };
 
     return (
