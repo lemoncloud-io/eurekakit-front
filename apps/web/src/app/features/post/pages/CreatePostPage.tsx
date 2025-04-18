@@ -18,9 +18,9 @@ export const CreatePostPage = () => {
 
     const { mutate: createFeed, isPending } = useCrerateFeed();
 
-    const methods = useForm<FeedBody>({ mode: 'all', defaultValues: { images: [], text: '' } });
+    const methods = useForm<FeedBody>({ mode: 'all', defaultValues: { image$$: [], text: '' } });
 
-    const watchedImages = useWatch({ control: methods.control, name: 'images' });
+    const watchedImages = useWatch({ control: methods.control, name: 'image$$' });
     const watchedText = useWatch({ control: methods.control, name: 'text' });
 
     const isTextDirty = watchedText?.length !== 0;
