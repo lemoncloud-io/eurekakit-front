@@ -9,7 +9,6 @@ export const PostRoutes = () => {
             <Route path="/:postId" element={<PostDetailPage />} />
             <Route path="/create" element={<CreatePostPage />} />
             <Route path="/update/:postId" element={<UpdatePostPage />} />
-            <Route path="*" element={<CreatePostPage />} />
         </Routes>
     );
 };
