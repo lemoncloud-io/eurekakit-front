@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 import { OverlayController, type OverlayControllerRef, type OverlayElement } from '../../components';
 import { useOverlayContext } from '../use-overlay-context';
@@ -21,28 +21,31 @@ export const useOverlay = () => {
         return overlayApi;
     };
 
-    const overlayApi = {
-        open: (overlayElement: OverlayElement) => {
-            // NOTE : key가 없으면 제대로 동작을 안함.
-            mount(
-                id,
-                <OverlayController
-                    key={Date.now()}
-                    element={overlayElement}
-                    onExit={() => unmount(id)}
-                    ref={overlayRef}
-                />
-            );
-        },
-        close: () => {
-            overlayRef.current?.close();
-        },
-        onOpenChange: (open?: boolean) => {
-            overlayRef.current?.onOpenChange(open);
-        },
-        unmount: () => unmount(id),
-        validate,
-    };
+    const overlayApi = useMemo(
+        () => ({
+            open: (overlayElement: OverlayElement) => {
+                // NOTE : key가 없으면 제대로 동작을 안함.
+                mount(
+                    id,
+                    <OverlayController
+                        key={Date.now()}
+                        element={overlayElement}
+                        onExit={() => unmount(id)}
+                        ref={overlayRef}
+                    />
+                );
+            },
+            close: () => {
+                overlayRef.current?.close();
+            },
+            onOpenChange: (open?: boolean) => {
+                overlayRef.current?.onOpenChange(open);
+            },
+            unmount: () => unmount(id),
+            validate,
+        }),
+        [id]
+    );
 
     return overlayApi;
 };
