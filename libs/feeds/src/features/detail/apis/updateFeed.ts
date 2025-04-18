@@ -1,16 +1,13 @@
 import { webCore } from '@lemon/web-core';
 
-import { BACKEND_API, FEED, USERS } from '../../../consts';
+import { BACKEND_API, FEEDS } from '../../../consts';
 
 import type { FeedView } from '../../../types';
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
 
-export const createFeed = async (body: FeedBody) => {
+export const updateFeed = async (id?: string, body?: FeedBody) => {
     const { data } = await webCore
-        .buildSignedRequest({
-            method: 'POST',
-            baseURL: [BACKEND_API, USERS, 0, FEED].join('/'),
-        })
+        .buildSignedRequest({ method: 'PUT', baseURL: [BACKEND_API, FEEDS, id].join('/') })
         .setBody({ ...body })
         .execute<FeedView>();
 

@@ -1,8 +1,9 @@
-import moment from 'moment';
-export const formatDate = (value: number, format: string) => {
+import { format as dateFormatter } from 'date-fns';
+
+export const formatDate = (value: EpochTimeStamp, format: string) => {
     if (!value || !format) {
         return '-';
     }
 
-    return moment(value).format(format) || '-';
+    return dateFormatter(value, format) || '-';
 };

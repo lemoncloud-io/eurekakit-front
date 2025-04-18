@@ -1,26 +1,27 @@
 import { useEffect, useId, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { Image, Loader2, X } from 'lucide-react';
+import { Image as ImageIcon, X } from 'lucide-react';
 
 import { cn, useToast } from '@lemon/ui-kit';
 import { Button } from '@lemon/ui-kit/components/ui/button';
-import { Condition } from '@lemon/ui-kit/components/ui/condition';
 import { FormField, FormItem } from '@lemon/ui-kit/components/ui/form';
 import { Label } from '@lemon/ui-kit/components/ui/label';
 import { List } from '@lemon/ui-kit/components/ui/list';
 import { useUploadImage } from '@lemon/uploads';
 
+import { Image } from '../../../../components';
+
 import type { TrackedPromise } from '../../../../types';
 import type { UploadView } from '@lemon/uploads';
-import type { FeedBody } from '@lemoncloud/pets-socials-api';
+import type { FeedBody, ImageView } from '@lemoncloud/pets-socials-api';
 
 export const PostEditorImageUploader = () => {
     const inputId = useId();
     const methods = useFormContext<FeedBody>();
     const { toast } = useToast();
 
-    const [uploadImageList, setUploadImageList] = useState<TrackedPromise<UploadView>[]>([]);
+    const [uploadImageList, setUploadImageList] = useState<TrackedPromise<ImageView>[]>(() => getInitialImageList());
 
     const { mutateAsync: uploadImages } = useUploadImage();
 
@@ -36,14 +37,14 @@ export const PostEditorImageUploader = () => {
             setUploadImageList(prev => [...prev, { id: promiseId, status: 'pending' }]);
 
             imagePromise
-                .then(data =>
-                    setUploadImageList(prev =>
-                        prev.map(promise =>
-                            promise.id === promiseId ? { ...promise, status: 'fulfilled', value: data } : promise
-                        )
-                    )
-                )
-                .catch(() => setUploadImageList(prev => prev.filter(promise => promise.id !== promiseId)));
+                .then(data => updateFulfilledPromise(promiseId, data))
+                .catch(() => {
+                    removePromise(promiseId);
+                    toast({
+                        description: '이미지를 업로드 할 수 없습니다.',
+                        className: 'flex justufy-center items-center',
+                    });
+                });
         }
 
         e.target.value = '';
@@ -52,20 +53,21 @@ export const PostEditorImageUploader = () => {
     useEffect(() => {
         const postImageList = uploadImageList
             .filter(imagePromise => imagePromise.status === 'fulfilled')
-            .map(imagePromise => imagePromise.value.list)
-            .flat();
+            .map(imagePromise => imagePromise.value)
+            .flat()
+            .filter(image => image !== undefined);
 
         if (!postImageList) {
             return;
         }
 
-        methods.setValue('images', postImageList, { shouldDirty: true });
+        methods.setValue('image$$', postImageList, { shouldDirty: true });
     }, [uploadImageList]);
 
     return (
         <FormField
             control={methods.control}
-            name="images"
+            name="image$$"
             render={() => (
                 <FormItem>
                     <List horizontal className="gap-2 overflow-x-auto pb-2 [&>*]:flex-none">
@@ -84,7 +86,7 @@ export const PostEditorImageUploader = () => {
                                           })
                             }
                         >
-                            <Image size={24} className="text-secondary-foreground !h-7 !w-7" />
+                            <ImageIcon size={24} className="text-secondary-foreground !h-7 !w-7" />
                             <span className="text-muted-foreground text-xs">{uploadImageList.length}/5</span>
                         </Label>
                         <input
@@ -96,55 +98,50 @@ export const PostEditorImageUploader = () => {
                             onChange={handleUploadImage}
                         />
                         {uploadImageList.map(imagePromise => (
-                            <Condition
-                                condition={imagePromise.status === 'fulfilled'}
-                                fallback={
-                                    <div
-                                        className="relative flex h-[72px] w-[72px] items-center justify-center rounded-lg border"
-                                        key={imagePromise.id}
-                                    >
-                                        <Button
-                                            className="absolute right-1 top-1 h-4 w-4 rounded-full"
-                                            size={'icon'}
-                                            variant={'secondary'}
-                                            onClick={() =>
-                                                setUploadImageList(prev =>
-                                                    prev.filter(promise => promise.id !== imagePromise.id)
-                                                )
-                                            }
-                                        >
-                                            <X />
-                                        </Button>
-                                        <Loader2 className="animate-spin" />
-                                    </div>
-                                }
+                            <div
+                                className="relative h-[72px] w-[72px] overflow-hidden rounded-lg border"
                                 key={imagePromise.id}
                             >
-                                <div className="relative h-[72px] w-[72px] rounded-lg border">
-                                    <Button
-                                        className="absolute right-1 top-1 h-4 w-4 rounded-full"
-                                        size={'icon'}
-                                        variant={'secondary'}
-                                        onClick={() =>
-                                            setUploadImageList(prev =>
-                                                prev.filter(promise => promise.id !== imagePromise.id)
-                                            )
-                                        }
-                                    >
-                                        <X />
-                                    </Button>
-                                    {imagePromise.status === 'fulfilled' && imagePromise.value.list.length > 0 && (
-                                        <img
-                                            src={imagePromise.value.list[0].url}
-                                            className="h-full w-full object-cover"
-                                        />
-                                    )}
-                                </div>
-                            </Condition>
+                                <Image
+                                    src={imagePromise.value?.url}
+                                    className="h-full w-full object-cover"
+                                    noSrcPending
+                                />
+                                <Button
+                                    className="absolute right-1 top-1 h-4 w-4 rounded-full"
+                                    size={'icon'}
+                                    variant={'secondary'}
+                                    onClick={() => removePromise(imagePromise.id)}
+                                >
+                                    <X />
+                                </Button>
+                            </div>
                         ))}
                     </List>
                 </FormItem>
             )}
         />
     );
+
+    function getInitialImageList() {
+        return (
+            methods
+                .getValues('image$$')
+                ?.map(image => ({ status: 'fulfilled', value: image, id: image.id }) as TrackedPromise<ImageView>) ?? []
+        );
+    }
+
+    function updateFulfilledPromise(promiseId: string, data: UploadView) {
+        setUploadImageList(prev =>
+            prev.map(promise =>
+                promise.id === promiseId
+                    ? { ...promise, status: 'fulfilled', value: data.list[0] as ImageView }
+                    : promise
+            )
+        );
+    }
+
+    function removePromise(promiseId: string) {
+        setUploadImageList(prev => prev.filter(promise => promise.id !== promiseId));
+    }
 };

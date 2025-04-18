@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 
-import { useDeleteFeed } from '@lemon/feeds';
+import { feedKeys, useDeleteFeed } from '@lemon/feeds';
 import { useGlobalLoader } from '@lemon/shared';
 import { useToast } from '@lemon/ui-kit';
 import {
@@ -11,7 +11,6 @@ import {
     DialogFooter,
     DialogTitle,
 } from '@lemon/ui-kit/components/ui/dialog';
-import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { useModalWithDropDown, useNavigate } from '../../../../hooks';
 
@@ -35,6 +34,9 @@ export const DeletePostModal = ({ postId, open, onOpenChange }: DeletePostModalP
         setIsLoading(true);
         deletePost(postId, {
             onSuccess: onSuccessDelete,
+            onError: () =>
+                toast({ description: '게시글을 삭제할 수 없습니다.', className: 'flex justify-center items-center' }),
+            onSettled: () => setIsLoading(false),
         });
     };
 
@@ -50,8 +52,7 @@ export const DeletePostModal = ({ postId, open, onOpenChange }: DeletePostModalP
                 </DialogDescription>
                 <DialogFooter>
                     <DialogClose className="text-muted-foreground">취소</DialogClose>
-                    <Separator orientation="vertical" />
-                    <DialogClose className="font-semibold" onClick={onClickDelete}>
+                    <DialogClose className="text-accent-foreground font-semibold" onClick={onClickDelete}>
                         삭제
                     </DialogClose>
                 </DialogFooter>
@@ -60,9 +61,8 @@ export const DeletePostModal = ({ postId, open, onOpenChange }: DeletePostModalP
     );
 
     async function onSuccessDelete() {
-        setIsLoading(false);
+        await queryClient.invalidateQueries({ queryKey: feedKeys.all });
         toast({ description: '삭제되었습니다', className: 'flex justify-center items-center' });
         navigate(-1);
-        await queryClient.invalidateQueries();
     }
 };

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Heart } from 'lucide-react';
 
-import { useLikeFeed } from '@lemon/feeds';
+import { feedKeys, useLikeFeed } from '@lemon/feeds';
 import { cn } from '@lemon/ui-kit';
 import { Carousel, CarouselContent, CarouselItem } from '@lemon/ui-kit/components/ui/carousel';
 
@@ -29,7 +29,10 @@ export const Post = ({ post }: PostProps) => {
 
         const isLike = !like;
 
-        changeLike({ id, like: isLike }, { onSuccess: async () => await queryClient.invalidateQueries() });
+        changeLike(
+            { id, like: isLike },
+            { onSuccess: async () => await queryClient.invalidateQueries({ queryKey: feedKeys.all }) }
+        );
     };
 
     const onClickImage = (e: React.MouseEvent) => {
@@ -84,7 +87,7 @@ export const Post = ({ post }: PostProps) => {
                 className="mt-1 flex items-center gap-1 text-xs"
                 onClick={e => onChangeLike(e, post.id, post.$activity?.isLike)}
             >
-                <Heart size={16} className={cn(post.$activity?.isLike && 'fill-red-500 stroke-red-500')} />
+                <Heart size={16} className={cn(post.$activity?.isLike && 'fill-like stroke-like')} />
                 <span>{formatCount(post.likeCount)}</span>
             </button>
         </div>

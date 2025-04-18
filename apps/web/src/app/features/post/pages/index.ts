@@ -1,2 +1,2 @@
-export * from './PostEditorPage';
+export * from './CreatePostPage';
 export * from './PostDetailPage';

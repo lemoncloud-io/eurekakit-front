@@ -1,20 +1,32 @@
 import { useEffect, useState } from 'react';
 
+import { ImageOff } from 'lucide-react';
+
 import { cn } from '@lemon/ui-kit';
 
 import type { PromiseStatus } from '../../types';
 import type { ComponentPropsWithRef, ReactNode } from 'react';
 
 interface ImageProps extends ComponentPropsWithRef<'img'> {
-    fallback?: ReactNode;
+    noSrcPending?: boolean;
+    errorFallback?: ReactNode;
+    loadingFallback?: ReactNode;
 }
 
-export const Image = ({ src, alt, className, fallback, ...imageProps }: ImageProps) => {
+export const Image = ({
+    src,
+    alt,
+    className,
+    errorFallback,
+    loadingFallback,
+    noSrcPending,
+    ...imageProps
+}: ImageProps) => {
     const [imageStatus, setImageStatus] = useState<PromiseStatus>('pending');
 
     useEffect(() => {
         if (!src) {
-            setImageStatus('rejected');
+            setImageStatus(noSrcPending ? 'pending' : 'rejected');
             return;
         }
 
@@ -31,11 +43,11 @@ export const Image = ({ src, alt, className, fallback, ...imageProps }: ImagePro
     }, [src]);
 
     if (imageStatus === 'rejected') {
-        return fallback;
+        return errorFallback ?? <ImageOff />;
     }
 
     if (imageStatus === 'pending') {
-        return <div className="bg-secondary h-full w-full animate-pulse" />;
+        return loadingFallback ?? <div className="bg-secondary h-full w-full animate-pulse" />;
     }
 
     return <img className={cn('h-full w-full object-cover', className)} src={src} alt={alt} {...imageProps} />;

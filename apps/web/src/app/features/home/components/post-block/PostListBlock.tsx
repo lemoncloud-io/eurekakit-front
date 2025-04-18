@@ -45,7 +45,7 @@ export const PostListBlock = ({ post, onClickLike }: PostListBlockProps) => {
                         <Heart
                             className={cn(
                                 '!h-5 !w-5 flex-none stroke-white',
-                                post?.$activity?.isLike && 'fill-red-600'
+                                post?.$activity?.isLike && 'fill-like stroke-like'
                             )}
                         />
                     </Button>
