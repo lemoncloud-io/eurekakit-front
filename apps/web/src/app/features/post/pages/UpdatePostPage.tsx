@@ -42,7 +42,7 @@ export const UpdatePostPage = () => {
 
         createFeed(feedBody, {
             onSuccess: async feedResult => {
-                toast({ description: '게시글 수정이 완료되었습니다.', className: 'justify-center' });
+                toast({ description: '수정이 완료되었습니다.', className: 'justify-center' });
                 navigate(`/post/${feedResult.id}`, { replace: true });
             },
             onError: () => {
