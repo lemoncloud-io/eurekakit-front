@@ -51,8 +51,6 @@ export const UpdatePostPage = () => {
         });
     };
 
-    console.log(isLoadingPost);
-
     return (
         <div className="w-full">
             <header className="flex h-12 w-full items-center justify-between border-b px-2">
