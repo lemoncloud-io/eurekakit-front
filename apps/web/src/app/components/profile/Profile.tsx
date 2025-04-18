@@ -19,7 +19,7 @@ export const Profile = ({ src, className, ...props }: ProfileProps) => {
             )}
             {...props}
         >
-            <Image src={src} fallback={<User2Icon size={16} />} />
+            <Image src={src} errorFallback={<User2Icon size={16} />} />
         </span>
     );
 };
