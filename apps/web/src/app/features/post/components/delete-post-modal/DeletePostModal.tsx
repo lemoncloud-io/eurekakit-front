@@ -51,7 +51,7 @@ export const DeletePostModal = ({ postId, open, onOpenChange }: DeletePostModalP
                 <DialogFooter>
                     <DialogClose className="text-muted-foreground">취소</DialogClose>
                     <Separator orientation="vertical" />
-                    <DialogClose className="font-semibold" onClick={onClickDelete}>
+                    <DialogClose className="text-accent-foreground font-semibold" onClick={onClickDelete}>
                         삭제
                     </DialogClose>
                 </DialogFooter>
