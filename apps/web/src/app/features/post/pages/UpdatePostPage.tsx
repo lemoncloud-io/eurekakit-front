@@ -1,9 +1,11 @@
 import { useForm, useWatch } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { X } from 'lucide-react';
 
-import { useCrerateFeed, useFetchFeed } from '@lemon/feeds';
+import { feedKeys, useCrerateFeed, useFetchFeed } from '@lemon/feeds';
+import { useGlobalLoader } from '@lemon/shared';
 import { useToast } from '@lemon/ui-kit';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Form } from '@lemon/ui-kit/components/ui/form';
@@ -14,8 +16,11 @@ import { PostEditor } from '../components';
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
 
 export const UpdatePostPage = () => {
+    const { setIsLoading } = useGlobalLoader();
     const { toast } = useToast();
+
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
 
     const params = useParams();
 
@@ -42,15 +47,12 @@ export const UpdatePostPage = () => {
 
     const submitPost = (feedBody: FeedBody) => {
         setBlockerOn(false);
+        setIsLoading(true);
 
         createFeed(feedBody, {
-            onSuccess: async feedResult => {
-                toast({ description: '수정이 완료되었습니다.', className: 'justify-center' });
-                navigate(`/post/${feedResult.id}`, { replace: true });
-            },
-            onError: () => {
-                setBlockerOn(true);
-            },
+            onSuccess: onSuccessUpdate,
+            onError: () => setBlockerOn(true),
+            onSettled: () => setIsLoading(false),
         });
     };
 
@@ -70,4 +72,10 @@ export const UpdatePostPage = () => {
             )}
         </div>
     );
+
+    async function onSuccessUpdate() {
+        toast({ description: '수정이 완료되었습니다.', className: 'justify-center' });
+        navigate(-1);
+        await queryClient.invalidateQueries({ queryKey: feedKeys.all });
+    }
 };

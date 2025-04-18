@@ -1,8 +1,10 @@
 import { useForm, useWatch } from 'react-hook-form';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { X } from 'lucide-react';
 
-import { useCrerateFeed } from '@lemon/feeds';
+import { feedKeys, useCrerateFeed } from '@lemon/feeds';
+import { useGlobalLoader } from '@lemon/shared';
 import { useToast } from '@lemon/ui-kit';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Form } from '@lemon/ui-kit/components/ui/form';
@@ -10,9 +12,12 @@ import { Form } from '@lemon/ui-kit/components/ui/form';
 import { useFormBlockModal, useNavigate } from '../../../hooks';
 import { PostEditor } from '../components';
 
+import type { FeedView } from '@lemon/feeds';
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
 
 export const CreatePostPage = () => {
+    const { setIsLoading } = useGlobalLoader();
+    const queryClient = useQueryClient();
     const { toast } = useToast();
     const navigate = useNavigate();
 
@@ -31,15 +36,12 @@ export const CreatePostPage = () => {
 
     const submitPost = (feedBody: FeedBody) => {
         setBlockerOn(false);
+        setIsLoading(true);
 
         createFeed(feedBody, {
-            onSuccess: async feedResult => {
-                toast({ description: '게시글 등록이 완료되었습니다.', className: 'justify-center' });
-                navigate(`/post/${feedResult.id}`, { replace: true });
-            },
-            onError: () => {
-                setBlockerOn(true);
-            },
+            onSuccess: onSuccessCreate,
+            onError: () => setBlockerOn(true),
+            onSettled: () => setIsLoading(false),
         });
     };
 
@@ -57,4 +59,10 @@ export const CreatePostPage = () => {
             </Form>
         </div>
     );
+
+    async function onSuccessCreate(feedResult: FeedView) {
+        toast({ description: '게시글 등록이 완료되었습니다.', className: 'justify-center' });
+        navigate(`/post/${feedResult.id}`, { replace: true });
+        await queryClient.invalidateQueries({ queryKey: feedKeys.all });
+    }
 };

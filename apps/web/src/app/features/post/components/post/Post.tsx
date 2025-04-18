@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Heart } from 'lucide-react';
 
-import { useLikeFeed } from '@lemon/feeds';
+import { feedKeys, useLikeFeed } from '@lemon/feeds';
 import { cn } from '@lemon/ui-kit';
 import { Carousel, CarouselContent, CarouselItem } from '@lemon/ui-kit/components/ui/carousel';
 
@@ -29,7 +29,10 @@ export const Post = ({ post }: PostProps) => {
 
         const isLike = !like;
 
-        changeLike({ id, like: isLike }, { onSuccess: async () => await queryClient.invalidateQueries() });
+        changeLike(
+            { id, like: isLike },
+            { onSuccess: async () => await queryClient.invalidateQueries({ queryKey: feedKeys.all }) }
+        );
     };
 
     const onClickImage = (e: React.MouseEvent) => {
