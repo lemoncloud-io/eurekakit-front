@@ -18,6 +18,7 @@ export const likeFeed = async (id?: string, like?: boolean) => {
             baseURL: [BACKEND_API, FEEDS, id, ACTIVITY].join('/'),
         })
         .setParams({ like } satisfies FeedActivityParam)
+        .setBody({})
         .execute<FeedView>();
 
     return data;
