@@ -1,46 +1,43 @@
-import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { useAppChecker, useAppMessage } from '@lemon/app-checker';
+import { useAppChecker } from '@lemon/app-checker';
 import { Images } from '@lemon/assets';
 import { useGlobalLoader } from '@lemon/shared';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 
-import type { LoginProvider, WebMessage } from '@lemon/types';
+import { useKakaoAuth } from '../hooks';
+
+import type { LoginProvider } from '@lemon/types';
 
 export const LoginPage = () => {
     const { setIsLoading } = useGlobalLoader();
     const location = useLocation();
     const from = location.state?.from || '/home';
 
-    const { isOnMobileApp, deviceInfo } = useAppChecker();
-    const { sendMessage, subscribeToMessages } = useAppMessage();
+    const { isOnMobileApp } = useAppChecker();
+    const { getKakaoAuthUrl } = useKakaoAuth();
 
-    useEffect(() => {
-        const unsubscribe = subscribeToMessages(async message => {
-            // TODO: verify native token from api
-            // if (message.type === 'SuccessToGetVerifyNativeToken') {...}
-        });
-
-        return () => {
-            unsubscribe();
-        };
-    }, []);
-
-    const onClickLogin = (provider: LoginProvider) => {
-        if (isOnMobileApp) {
-            const message: WebMessage = { type: 'LoginWithSDK', data: { provider } };
-            sendMessage(message);
-            return;
+    const handleSocialLoginClick = (provider: LoginProvider) => {
+        switch (provider) {
+            case 'kakao':
+                window.location.href = getKakaoAuthUrl();
+                return;
+            case 'google':
+                handleGoogleLogin();
+                return;
+            default:
+                return;
         }
+    };
 
+    const handleGoogleLogin = () => {
         setIsLoading(true);
         const HOST = import.meta.env.VITE_HOST.toLowerCase();
         const SOCIAL_OAUTH = import.meta.env.VITE_SOCIAL_OAUTH_ENDPOINT.toLowerCase();
         const state = encodeURIComponent(JSON.stringify({ from }));
         const redirectUrl = `${HOST}/auth/oauth-response?state=${state}`;
 
-        window.location.replace(`${SOCIAL_OAUTH}/oauth/${provider}/authorize?redirect=${redirectUrl}`);
+        window.location.replace(`${SOCIAL_OAUTH}/oauth/google/authorize?redirect=${redirectUrl}`);
     };
 
     return (
@@ -55,14 +52,28 @@ export const LoginPage = () => {
                 className="flex w-full items-center justify-center space-x-2 rounded-full"
                 variant="secondary"
                 size={'lg'}
-                onClick={() => onClickLogin('google')}
+                onClick={() => handleSocialLoginClick('kakao')}
             >
                 <span className="h-5 w-5 flex-none">
-                    <img src={Images.googleLogo} alt="Google Logo" width={20} height={20} />
+                    <img src={Images.kakaoLogo} alt="Kakao Logo" width={20} height={20} />
                 </span>
-                <span className="w-full">구글 계정으로 로그인</span>
+                <span className="w-full">카카오 계정으로 로그인</span>
                 <span className="h-5 w-5 flex-none" />
             </Button>
+            {!isOnMobileApp && (
+                <Button
+                    className="flex w-full items-center justify-center space-x-2 rounded-full"
+                    variant="secondary"
+                    size={'lg'}
+                    onClick={() => handleSocialLoginClick('google')}
+                >
+                    <span className="h-5 w-5 flex-none">
+                        <img src={Images.googleLogo} alt="Google Logo" width={20} height={20} />
+                    </span>
+                    <span className="w-full">구글 계정으로 로그인</span>
+                    <span className="h-5 w-5 flex-none" />
+                </Button>
+            )}
         </div>
     );
 };

@@ -4,6 +4,17 @@ import { useAppChecker } from './useAppChecker';
 
 import type { AppMessage, WebMessage } from '@lemon/types';
 
+// NOTE: how to use on component to receive message from native app
+// const { sendMessage, subscribeToMessages } = useAppMessage();
+//
+// useEffect(() => {
+//     const unsubscribe = subscribeToMessages(message => {
+//         // handle message
+//     });
+//     return () => {
+//         unsubscribe();
+//     };
+// }, [subscribeToMessages]);
 export const useAppMessage = () => {
     const { isOnMobileApp } = useAppChecker();
     const messageCallbacks = useRef<Set<(message: AppMessage) => void>>(new Set());
