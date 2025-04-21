@@ -112,5 +112,5 @@ yarn-error.log
 # testing
 /coverage
 
-secret.json
+**/secret.json
 **/.env
