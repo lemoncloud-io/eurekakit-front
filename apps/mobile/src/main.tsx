@@ -25,4 +25,4 @@ const HeadlessCheck = props => {
     return <App />;
 };
 
-AppRegistry.registerComponent('EurekaPage', () => HeadlessCheck);
+AppRegistry.registerComponent('EurekaKit', () => HeadlessCheck);

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="io.lemoncloud.eurekapage">
+          package="io.lemoncloud.eurekakit">
 
     <queries>
         <package android:name="aptip.app" />
@@ -144,10 +144,10 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="eurekapage" />
+                <data android:scheme="eurekakit" />
 
-                <data android:host="eurekapage.page.link" android:scheme="http"/>
-                <data android:host="eurekapage.page.link" android:scheme="https"/>
+                <data android:host="eurekakit.page.link" android:scheme="http"/>
+                <data android:host="eurekakit.page.link" android:scheme="https"/>
             </intent-filter>
         </activity>
     </application>

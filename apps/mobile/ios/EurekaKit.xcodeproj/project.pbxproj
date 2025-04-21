@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* EurekaPageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EurekaPageTests.m */; };
+		00E356F31AD99517003FC87E /* EurekaKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EurekaKitTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		3B6801B42DACEEBF00E11919 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B6801B32DACEEBF00E11919 /* GoogleService-Info.plist */; };
+		478665AD5742ADF48D5F4BE3 /* Pods_EurekaKit_EurekaKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FBC00535205BB60F39BB7B9 /* Pods_EurekaKit_EurekaKitTests.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		A5D8C47227F1DAD9B5227B5D /* Pods_EurekaPage_EurekaPageTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3ADE11881DF09599B76EC90 /* Pods_EurekaPage_EurekaPageTests.framework */; };
 		AF52454C85124A5D85002A80 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
-		C051158EAFD83D3B47AB87A4 /* Pods_EurekaPage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05482B8666F7F81DC2750A6A /* Pods_EurekaPage.framework */; };
+		B7BDE93B9838C1DE96F18B20 /* Pods_EurekaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2968BB2B30483631D17A98C6 /* Pods_EurekaKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,30 +24,30 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = EurekaPage;
+			remoteInfo = EurekaKit;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* EurekaPageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EurekaPageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* EurekaKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EurekaKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* EurekaPageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EurekaPageTests.m; sourceTree = "<group>"; };
-		05482B8666F7F81DC2750A6A /* Pods_EurekaPage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EurekaPage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07F961A680F5B00A75B9A /* EurekaPage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EurekaPage.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = EurekaPage/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = EurekaPage/AppDelegate.mm; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = EurekaPage/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = EurekaPage/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = EurekaPage/main.m; sourceTree = "<group>"; };
-		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = EurekaPage/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		3B4392A12AC88292D35C810B /* Pods-EurekaPage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EurekaPage.debug.xcconfig"; path = "Target Support Files/Pods-EurekaPage/Pods-EurekaPage.debug.xcconfig"; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* EurekaKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EurekaKitTests.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* EurekaKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EurekaKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = EurekaKit/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = EurekaKit/AppDelegate.mm; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = EurekaKit/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = EurekaKit/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = EurekaKit/main.m; sourceTree = "<group>"; };
+		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = EurekaKit/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		2968BB2B30483631D17A98C6 /* Pods_EurekaKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EurekaKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B4392A12AC88292D35C810B /* Pods-EurekaKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EurekaKit.debug.xcconfig"; path = "Target Support Files/Pods-EurekaKit/Pods-EurekaKit.debug.xcconfig"; sourceTree = "<group>"; };
 		3B6801B32DACEEBF00E11919 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		3B730D372DACE722007AED4F /* EurekaPage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = EurekaPage.entitlements; path = EurekaPage/EurekaPage.entitlements; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-EurekaPage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EurekaPage.release.xcconfig"; path = "Target Support Files/Pods-EurekaPage/Pods-EurekaPage.release.xcconfig"; sourceTree = "<group>"; };
-		5B7EB9410499542E8C5724F5 /* Pods-EurekaPage-EurekaPageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EurekaPage-EurekaPageTests.debug.xcconfig"; path = "Target Support Files/Pods-EurekaPage-EurekaPageTests/Pods-EurekaPage-EurekaPageTests.debug.xcconfig"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = EurekaPage/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		89C6BE57DB24E9ADA2F236DE /* Pods-EurekaPage-EurekaPageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EurekaPage-EurekaPageTests.release.xcconfig"; path = "Target Support Files/Pods-EurekaPage-EurekaPageTests/Pods-EurekaPage-EurekaPageTests.release.xcconfig"; sourceTree = "<group>"; };
-		A3ADE11881DF09599B76EC90 /* Pods_EurekaPage_EurekaPageTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EurekaPage_EurekaPageTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B730D372DACE722007AED4F /* EurekaKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = EurekaKit.entitlements; path = EurekaKit/EurekaKit.entitlements; sourceTree = "<group>"; };
+		5709B34CF0A7D63546082F79 /* Pods-EurekaKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EurekaKit.release.xcconfig"; path = "Target Support Files/Pods-EurekaKit/Pods-EurekaKit.release.xcconfig"; sourceTree = "<group>"; };
+		5B7EB9410499542E8C5724F5 /* Pods-EurekaKit-EurekaKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EurekaKit-EurekaKitTests.debug.xcconfig"; path = "Target Support Files/Pods-EurekaKit-EurekaKitTests/Pods-EurekaKit-EurekaKitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6FBC00535205BB60F39BB7B9 /* Pods_EurekaKit_EurekaKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EurekaKit_EurekaKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = EurekaKit/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		89C6BE57DB24E9ADA2F236DE /* Pods-EurekaKit-EurekaKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EurekaKit-EurekaKitTests.release.xcconfig"; path = "Target Support Files/Pods-EurekaKit-EurekaKitTests/Pods-EurekaKit-EurekaKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -56,7 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5D8C47227F1DAD9B5227B5D /* Pods_EurekaPage_EurekaPageTests.framework in Frameworks */,
+				478665AD5742ADF48D5F4BE3 /* Pods_EurekaKit_EurekaKitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,20 +64,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C051158EAFD83D3B47AB87A4 /* Pods_EurekaPage.framework in Frameworks */,
+				B7BDE93B9838C1DE96F18B20 /* Pods_EurekaKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* EurekaPageTests */ = {
+		00E356EF1AD99517003FC87E /* EurekaKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* EurekaPageTests.m */,
+				00E356F21AD99517003FC87E /* EurekaKitTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = EurekaPageTests;
+			path = EurekaKitTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -88,11 +88,11 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* EurekaPage */ = {
+		13B07FAE1A68108700A75B9A /* EurekaKit */ = {
 			isa = PBXGroup;
 			children = (
 				3B6801B32DACEEBF00E11919 /* GoogleService-Info.plist */,
-				3B730D372DACE722007AED4F /* EurekaPage.entitlements */,
+				3B730D372DACE722007AED4F /* EurekaKit.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -101,15 +101,15 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
 			);
-			name = EurekaPage;
+			name = EurekaKit;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				05482B8666F7F81DC2750A6A /* Pods_EurekaPage.framework */,
-				A3ADE11881DF09599B76EC90 /* Pods_EurekaPage_EurekaPageTests.framework */,
+				2968BB2B30483631D17A98C6 /* Pods_EurekaKit.framework */,
+				6FBC00535205BB60F39BB7B9 /* Pods_EurekaKit_EurekaKitTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -124,9 +124,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* EurekaPage */,
+				13B07FAE1A68108700A75B9A /* EurekaKit */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* EurekaPageTests */,
+				00E356EF1AD99517003FC87E /* EurekaKitTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
@@ -139,8 +139,8 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* EurekaPage.app */,
-				00E356EE1AD99517003FC87E /* EurekaPageTests.xctest */,
+				13B07F961A680F5B00A75B9A /* EurekaKit.app */,
+				00E356EE1AD99517003FC87E /* EurekaKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -148,10 +148,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-EurekaPage.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-EurekaPage.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-EurekaPage-EurekaPageTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-EurekaPage-EurekaPageTests.release.xcconfig */,
+				3B4392A12AC88292D35C810B /* Pods-EurekaKit.debug.xcconfig */,
+				5709B34CF0A7D63546082F79 /* Pods-EurekaKit.release.xcconfig */,
+				5B7EB9410499542E8C5724F5 /* Pods-EurekaKit-EurekaKitTests.debug.xcconfig */,
+				89C6BE57DB24E9ADA2F236DE /* Pods-EurekaKit-EurekaKitTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -159,9 +159,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* EurekaPageTests */ = {
+		00E356ED1AD99517003FC87E /* EurekaKitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "EurekaPageTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "EurekaKitTests" */;
 			buildPhases = (
 				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -175,14 +175,13 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = EurekaPageTests;
-			productName = EurekaPageTests;
-			productReference = 00E356EE1AD99517003FC87E /* EurekaPageTests.xctest */;
+			name = EurekaKitTests;
+			productReference = 00E356EE1AD99517003FC87E /* EurekaKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* EurekaPage */ = {
+		13B07F861A680F5B00A75B9A /* EurekaKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "EurekaPage" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "EurekaKit" */;
 			buildPhases = (
 				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
@@ -198,9 +197,9 @@
 			);
 			dependencies = (
 			);
-			name = EurekaPage;
-			productName = EurekaPage;
-			productReference = 13B07F961A680F5B00A75B9A /* EurekaPage.app */;
+			name = EurekaKit;
+			productName = EurekaKit;
+			productReference = 13B07F961A680F5B00A75B9A /* EurekaKit.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -220,7 +219,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "EurekaPage" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "EurekaKit" */;
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -233,8 +232,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* EurekaPage */,
-				00E356ED1AD99517003FC87E /* EurekaPageTests */,
+				13B07F861A680F5B00A75B9A /* EurekaKit */,
+				00E356ED1AD99517003FC87E /* EurekaKitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -283,15 +282,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EurekaPage/Pods-EurekaPage-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-EurekaKit/Pods-EurekaKit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EurekaPage/Pods-EurekaPage-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-EurekaKit/Pods-EurekaKit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EurekaPage/Pods-EurekaPage-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EurekaKit/Pods-EurekaKit-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
@@ -309,7 +308,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EurekaPage-EurekaPageTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-EurekaKit-EurekaKitTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -345,7 +344,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EurekaPage-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-EurekaKit-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -358,15 +357,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EurekaPage-EurekaPageTests/Pods-EurekaPage-EurekaPageTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-EurekaKit-EurekaKitTests/Pods-EurekaKit-EurekaKitTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EurekaPage-EurekaPageTests/Pods-EurekaPage-EurekaPageTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-EurekaKit-EurekaKitTests/Pods-EurekaKit-EurekaKitTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EurekaPage-EurekaPageTests/Pods-EurekaPage-EurekaPageTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EurekaKit-EurekaKitTests/Pods-EurekaKit-EurekaKitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
@@ -375,15 +374,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EurekaPage/Pods-EurekaPage-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-EurekaKit/Pods-EurekaKit-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EurekaPage/Pods-EurekaPage-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-EurekaKit/Pods-EurekaKit-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EurekaPage/Pods-EurekaPage-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EurekaKit/Pods-EurekaKit-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EA1C1BB3AC22AAAAC9A17DEC /* [CP-User] [RNFB] Core Configuration */ = {
@@ -405,15 +404,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EurekaPage-EurekaPageTests/Pods-EurekaPage-EurekaPageTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-EurekaKit-EurekaKitTests/Pods-EurekaKit-EurekaKitTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EurekaPage-EurekaPageTests/Pods-EurekaPage-EurekaPageTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-EurekaKit-EurekaKitTests/Pods-EurekaKit-EurekaKitTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EurekaPage-EurekaPageTests/Pods-EurekaPage-EurekaPageTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EurekaKit-EurekaKitTests/Pods-EurekaKit-EurekaKitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -423,7 +422,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* EurekaPageTests.m in Sources */,
+				00E356F31AD99517003FC87E /* EurekaKitTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,7 +440,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* EurekaPage */;
+			target = 13B07F861A680F5B00A75B9A /* EurekaKit */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -449,14 +448,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-EurekaPage-EurekaPageTests.debug.xcconfig */;
+			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-EurekaKit-EurekaKitTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = EurekaPageTests/Info.plist;
+				INFOPLIST_FILE = EurekaKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -468,19 +467,19 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.lemoncloud.eurekapage;
+				PRODUCT_BUNDLE_IDENTIFIER = io.lemoncloud.eurekakit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EurekaPage.app/EurekaPage";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EurekaKit.app/EurekaKit";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-EurekaPage-EurekaPageTests.release.xcconfig */;
+			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-EurekaKit-EurekaKitTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = EurekaPageTests/Info.plist;
+				INFOPLIST_FILE = EurekaKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -492,24 +491,24 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.lemoncloud.eurekapage;
+				PRODUCT_BUNDLE_IDENTIFIER = io.lemoncloud.eurekakit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EurekaPage.app/EurekaPage";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EurekaKit.app/EurekaKit";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-EurekaPage.debug.xcconfig */;
+			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-EurekaKit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = EurekaPage/EurekaPage.entitlements;
+				CODE_SIGN_ENTITLEMENTS = EurekaKit/EurekaKit.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CH8U9VM6SR;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = EurekaPage/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = EurekaPage;
+				INFOPLIST_FILE = EurekaKit/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = EurekaKit;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -520,8 +519,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.lemoncloud.eurekapage;
-				PRODUCT_NAME = EurekaPage;
+				PRODUCT_BUNDLE_IDENTIFIER = io.lemoncloud.eurekakit;
+				PRODUCT_NAME = EurekaKit;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -530,15 +529,15 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-EurekaPage.release.xcconfig */;
+			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-EurekaKit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = EurekaPage/EurekaPage.entitlements;
+				CODE_SIGN_ENTITLEMENTS = EurekaKit/EurekaKit.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CH8U9VM6SR;
-				INFOPLIST_FILE = EurekaPage/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = EurekaPage;
+				INFOPLIST_FILE = EurekaKit/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = EurekaKit;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -549,8 +548,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.lemoncloud.eurekapage;
-				PRODUCT_NAME = EurekaPage;
+				PRODUCT_BUNDLE_IDENTIFIER = io.lemoncloud.eurekakit;
+				PRODUCT_NAME = EurekaKit;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -636,7 +635,10 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -716,7 +718,10 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -727,7 +732,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "EurekaPageTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "EurekaKitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -736,7 +741,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "EurekaPage" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "EurekaKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -745,7 +750,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "EurekaPage" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "EurekaKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

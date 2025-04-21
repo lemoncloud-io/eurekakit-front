@@ -1,4 +1,4 @@
-package io.lemoncloud.eurekapage
+package io.lemoncloud.eurekakit
 
 import android.app.Application
 import com.facebook.react.PackageList

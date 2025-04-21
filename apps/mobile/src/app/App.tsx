@@ -288,7 +288,7 @@ const App = props => {
 
     useEffect(() => {
         GoogleSignin.configure({
-            // EurekaPage OAuth 2.0 Client ID
+            // EurekaKit OAuth 2.0 Client ID
             webClientId: GOOGLE.webClientId,
         });
     }, []);
@@ -301,7 +301,7 @@ const App = props => {
         StatusBar.setBarStyle('dark-content');
     }, []);
 
-    const renderEurekaPage = () => {
+    const renderEureka = () => {
         return (
             <I18nextProvider i18n={i18n}>
                 <GestureHandlerRootView>
@@ -323,7 +323,7 @@ const App = props => {
         );
     };
 
-    return isReady && renderEurekaPage();
+    return isReady && renderEureka();
 };
 
 export default App;
