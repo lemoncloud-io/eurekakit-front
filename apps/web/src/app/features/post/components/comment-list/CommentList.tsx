@@ -7,10 +7,12 @@ import { useFetchFeed, useFetchInfiniteFeedCommentList } from '@lemon/feeds';
 import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
-import { useIsIntersecting } from '../../../../hooks';
+import { useIsIntersecting, useNavigate } from '../../../../hooks';
 import { Post } from '../post';
 
 export const CommentList = () => {
+    const navigate = useNavigate();
+
     const { postId } = useParams();
     const { setRef, isIntersecting } = useIsIntersecting<HTMLDivElement>();
 
@@ -33,7 +35,10 @@ export const CommentList = () => {
         <div>
             <div className="bg-muted flex px-4 py-1.5 text-sm">
                 <span>답글 {post?.childNo ?? 0}</span>
-                <button className="text-secondary-foreground ml-auto inline-flex items-center gap-1 text-xs">
+                <button
+                    className="text-secondary-foreground ml-auto inline-flex items-center gap-1 text-xs"
+                    onClick={() => navigate(`/comment/create?postId=${postId}`)}
+                >
                     <span>답글 쓰기</span>
                     <ChevronRight size={16} />
                 </button>

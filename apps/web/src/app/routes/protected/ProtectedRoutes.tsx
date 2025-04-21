@@ -2,6 +2,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 import { useWebCoreStore } from '@lemon/web-core';
 
+import { CommentRoutes } from '../../features/comment';
 import { HomeRoutes } from '../../features/home';
 import { PostRoutes } from '../../features/post';
 import { TabBarLayout } from '../../layout/TabBarLayout';
@@ -23,6 +24,7 @@ export const ProtectedRoutes: RouteObject[] = [
                 children: [{ path: `/home/*`, element: <HomeRoutes /> }],
             },
             { path: `/post/*`, element: <PostRoutes /> },
+            { path: '/comment/*', element: <CommentRoutes /> },
         ],
     },
 ];
