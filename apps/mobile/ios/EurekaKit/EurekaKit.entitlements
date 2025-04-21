@@ -6,8 +6,8 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:io.lemoncloud.eurekapage.app.goo.gl</string>
-		<string>applinks:eurekapage.page.link</string>
+		<string>applinks:io.lemoncloud.eurekakit.app.goo.gl</string>
+		<string>applinks:eurekakit.page.link</string>
 	</array>
 	<key>com.apple.developer.applesignin</key>
 	<array>

@@ -44,8 +44,8 @@ class NotificationHandler {
     }
 }
 
-export const DEFAULT_CHANNEL_ID = 'io.lemoncloud.eurekapage.channel'; // should be same as android variables
-export const DEFAULT_CHANNEL_NAME = 'eureka-page';
+export const DEFAULT_CHANNEL_ID = 'io.lemoncloud.eurekakit.channel'; // should be same as android variables
+export const DEFAULT_CHANNEL_NAME = 'eurekakit';
 
 const notificationHandler = new NotificationHandler();
 

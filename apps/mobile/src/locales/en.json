@@ -23,7 +23,7 @@
         "retry": "Retry"
     },
     "app": {
-        "name": "EurekaPage",
+        "name": "EurekaKit",
         "exit": {
             "title": "",
             "message": "Do you want to exit the app?",
@@ -35,7 +35,7 @@
         }
     },
     "notification": {
-        "title": "EurekaPage Notification",
+        "title": "EurekaKit Notification",
         "accessChanged": "Access permission has been changed",
         "firstLaunch": "Initial app launch may take a moment",
         "new": "You have a new notification.",

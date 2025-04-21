@@ -85,7 +85,7 @@ export const getVersionInfo = async (): Promise<VersionInfo> => {
     return { currentVersion, latestVersion, shouldUpdate };
 };
 
-export const getEurekaPageUserAgent = async (): Promise<string> => {
+export const getEurekaUserAgent = async (): Promise<string> => {
     const defaultUserAgent = (await RNDeviceInfo.getUserAgent()) || '';
     const userAgentPostfix = Platform.OS === 'android' ? 'EUREKA_ANDROID' : 'EUREKA_IOS';
     return `${defaultUserAgent} ${userAgentPostfix}`;
@@ -95,7 +95,7 @@ export const setDefaultDeviceInfo = async (deviceToken = ''): Promise<DeviceInfo
     const installId = (await FIRInstallations.installations().getId()) || '';
     const savedDeviceId = (await AsyncStorage.getItem(EUREKA_DEVICE_ID)) || (uuid.v4() as string);
     const savedDeviceToken = (await AsyncStorage.getItem(EUREKA_DEVICE_TOKEN)) || '';
-    const userAgent = await getEurekaPageUserAgent();
+    const userAgent = await getEurekaUserAgent();
 
     const deviceInfo: DeviceInfo = {
         stage: __DEV__ ? 'dev' : 'prod',
@@ -155,7 +155,7 @@ export const deleteUndefinedProperty = (query: any) => {
     return query;
 };
 
-const iOSUrl = 'https://itunes.apple.com/lookup?bundleId=io.lemoncloud.eurekapage';
+const iOSUrl = 'https://itunes.apple.com/lookup?bundleId=io.lemoncloud.eurekakit';
 
 export const getIOSLatestVersion = (url: string = iOSUrl) => {
     return fetch(url)
@@ -321,7 +321,7 @@ export const redirectWebView = (redirectUrl: string, extra: any = '') => {
 
 // 1. save redirect url to storage
 // 2. after loading end, get url and redirect
-// NOTE: onLoadEnd() on EurekaPageWebviewScreen
+// NOTE: onLoadEnd() on EurekaWebviewScreen
 export const setRedirectUrl = async (url: string, extra: any = '') => {
     if (!url) {
         return;
@@ -345,7 +345,7 @@ export const sendLocalNotification = (notification: any, title?: string, message
     try {
         const data = JSON.stringify(notification.data || {});
         PushNotification.localNotification({
-            channelId: 'io.lemoncloud.eurekapage.channel',
+            channelId: 'io.lemoncloud.eurekakit.channel',
             vibrate: true,
             allowWhileIdle: true,
             title: notiTitle,

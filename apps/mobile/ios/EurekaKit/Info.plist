@@ -26,20 +26,20 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>eurekpage</string>
+			<string>eurekakit</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>eurekpage</string>
+				<string>eurekakit</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>io.lemoncloud.eurekapage</string>
+			<string>io.lemoncloud.eurekakit</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>eurekapage</string>
+				<string>eurekakit</string>
 			</array>
 		</dict>
 		<dict>
@@ -49,7 +49,7 @@
 			<string>dynamic-link</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>eurekapage</string>
+				<string>eurekakit</string>
 			</array>
 		</dict>
 		<dict>
@@ -73,14 +73,14 @@
         <true/>
         <key>NSExceptionDomains</key>
         <dict>
-            <key>applinks:io.lemoncloud.eurekapage.app.goo.gl</key>
+            <key>applinks:io.lemoncloud.eurekakit.app.goo.gl</key>
             <dict>
                 <key>NSExceptionAllowsInsecureHTTPLoads</key>
                 <true/>
                 <key>NSIncludesSubdomains</key>
                 <true/>
             </dict>
-            <key>applinks:eurekapage.page.link</key>
+            <key>applinks:eurekakit.page.link</key>
             <dict>
                 <key>NSExceptionAllowsInsecureHTTPLoads</key>
                 <true/>

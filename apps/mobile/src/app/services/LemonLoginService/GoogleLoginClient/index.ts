@@ -9,7 +9,7 @@ import type { LemonLoginProvider } from '../LoginService';
 import type { OAuthTokenResult } from '@lemon/types';
 import type { User } from '@react-native-google-signin/google-signin/src/types';
 
-// EurekaPage => 웹 클라이언트 1
+// EurekaKit => 웹 클라이언트 1
 const GOOGLE_KEYS = {
     clientId: GOOGLE.webClientId,
     clientSecret: GOOGLE.clientSecret,
