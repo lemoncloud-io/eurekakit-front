@@ -31,6 +31,7 @@ const App = props => {
     const forceInitOniOS = () => {
         // NOTE: app 처음 인스톨 후 실행시 알림 문제
         if (Platform.OS !== 'ios') {
+            setIsReady(true);
             return;
         }
         setTimeout(async () => {

@@ -4,7 +4,6 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTLinkingManager.h>
-#import <Firebase.h>
 
 @implementation AppDelegate
 
@@ -15,10 +14,10 @@
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
 
-    [FIRApp configure];
-    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    // [FIRApp configure];
+     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     center.delegate = self;
-    
+
     BOOL ret = [super application:application didFinishLaunchingWithOptions:launchOptions];
     return ret;
 }

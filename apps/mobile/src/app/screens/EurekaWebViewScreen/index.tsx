@@ -39,7 +39,6 @@ import i18n from '../../i18n';
 import { getLemonOAuthToken } from '../../services';
 import { AppColors } from '../../theme';
 import {
-    buildShareLink,
     changeAppLanguage,
     clearAsyncStorage,
     clearDeviceIdFromDeviceInfo,
