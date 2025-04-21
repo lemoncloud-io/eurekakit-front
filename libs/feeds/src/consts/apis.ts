@@ -1,4 +1,4 @@
-export const BACKEND_API = import.meta.env.VITE_PET_API_ENDPINT?.toLowerCase();
+export const BACKEND_API = import.meta.env.VITE_PET_API_ENDPOINT?.toLowerCase();
 
 export const FEED = 'feed';
 export const USERS = 'users';

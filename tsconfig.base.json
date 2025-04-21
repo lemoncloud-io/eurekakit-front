@@ -15,6 +15,7 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
+            "@lemon/app-checker": ["libs/app-checker/src/index.ts"],
             "@lemon/assets": ["assets/src/index.ts"],
             "@lemon/board-types": ["libs/board-types/src/index.ts"],
             "@lemon/boards": ["libs/boards/src/index.ts"],

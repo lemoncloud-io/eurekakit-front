@@ -14,9 +14,7 @@ export const LogoutPage = () => {
 
     useEffect(() => {
         toast({ description: t('oauth.logout') });
-        setTimeout(() => {
-            logout();
-        }, 2000);
+        logout();
     }, []);
 
     useEffect(() => {

@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { LoginPage, LogoutPage, OAuthResponsePage } from '../pages';
+import { KakaoCallbackPage, LoginPage, LogoutPage, OAuthResponsePage } from '../pages';
 
 export const AuthRoutes = () => {
     return (
@@ -8,6 +8,7 @@ export const AuthRoutes = () => {
             <Route path="login" element={<LoginPage />} />
             <Route path="logout" element={<LogoutPage />} />
             <Route path="oauth-response" element={<OAuthResponsePage />} />
+            <Route path="kakao/callback" element={<KakaoCallbackPage />} />
             <Route path="*" element={<Navigate to="/auth/login"></Navigate>} />
         </Routes>
     );

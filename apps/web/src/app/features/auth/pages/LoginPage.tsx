@@ -1,44 +1,79 @@
 import { useLocation } from 'react-router-dom';
 
+import { useAppChecker } from '@lemon/app-checker';
 import { Images } from '@lemon/assets';
 import { useGlobalLoader } from '@lemon/shared';
 import { Button } from '@lemon/ui-kit/components/ui/button';
+
+import { useKakaoAuth } from '../hooks';
+
+import type { LoginProvider } from '@lemon/types';
 
 export const LoginPage = () => {
     const { setIsLoading } = useGlobalLoader();
     const location = useLocation();
     const from = location.state?.from || '/home';
 
-    const onClickLogin = (provider: string) => {
+    const { isOnMobileApp } = useAppChecker();
+    const { getKakaoAuthUrl } = useKakaoAuth();
+
+    const handleSocialLoginClick = (provider: LoginProvider) => {
+        switch (provider) {
+            case 'kakao':
+                window.location.href = getKakaoAuthUrl();
+                return;
+            case 'google':
+                handleGoogleLogin();
+                return;
+            default:
+                return;
+        }
+    };
+
+    const handleGoogleLogin = () => {
         setIsLoading(true);
         const HOST = import.meta.env.VITE_HOST.toLowerCase();
         const SOCIAL_OAUTH = import.meta.env.VITE_SOCIAL_OAUTH_ENDPOINT.toLowerCase();
         const state = encodeURIComponent(JSON.stringify({ from }));
         const redirectUrl = `${HOST}/auth/oauth-response?state=${state}`;
 
-        window.location.replace(`${SOCIAL_OAUTH}/oauth/${provider}/authorize?redirect=${redirectUrl}`);
+        window.location.replace(`${SOCIAL_OAUTH}/oauth/google/authorize?redirect=${redirectUrl}`);
     };
 
     return (
-        <div className="min-h-screen flex flex-col gap-4 items-center justify-center bg-background p-6">
-            <div className="fixed top-0 w-full bg-[#1F1F3C] rounded-b-[24px] py-5 text-background shadow-md pl-6">
+        <div className="bg-background flex min-h-screen flex-col items-center justify-center gap-4 p-6">
+            <div className="text-background fixed top-0 w-full rounded-b-[24px] bg-[#1F1F3C] py-5 pl-6 shadow-md">
                 <img src={Images.eurekaCodesLogo} alt="Eureka Codes Logo" />
             </div>
             <div className="text-center">
-                <h2 className="text-muted-foreground uppercase text-2xl font-semibold">LOGIN</h2>
+                <h2 className="text-muted-foreground text-2xl font-semibold uppercase">LOGIN</h2>
             </div>
             <Button
-                className="w-full flex items-center justify-center space-x-2 rounded-full"
+                className="flex w-full items-center justify-center space-x-2 rounded-full"
                 variant="secondary"
                 size={'lg'}
-                onClick={() => onClickLogin('google')}
+                onClick={() => handleSocialLoginClick('kakao')}
             >
-                <span className="w-5 h-5 flex-none">
-                    <img src={Images.googleLogo} alt="Google Logo" width={20} height={20} />
+                <span className="h-5 w-5 flex-none">
+                    <img src={Images.kakaoLogo} alt="Kakao Logo" width={20} height={20} />
                 </span>
-                <span className="w-full">구글 계정으로 로그인</span>
-                <span className="w-5 h-5 flex-none" />
+                <span className="w-full">카카오 계정으로 로그인</span>
+                <span className="h-5 w-5 flex-none" />
             </Button>
+            {!isOnMobileApp && (
+                <Button
+                    className="flex w-full items-center justify-center space-x-2 rounded-full"
+                    variant="secondary"
+                    size={'lg'}
+                    onClick={() => handleSocialLoginClick('google')}
+                >
+                    <span className="h-5 w-5 flex-none">
+                        <img src={Images.googleLogo} alt="Google Logo" width={20} height={20} />
+                    </span>
+                    <span className="w-full">구글 계정으로 로그인</span>
+                    <span className="h-5 w-5 flex-none" />
+                </Button>
+            )}
         </div>
     );
 };
