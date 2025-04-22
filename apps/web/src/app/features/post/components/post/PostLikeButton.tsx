@@ -21,8 +21,6 @@ export const PostLikeButton = ({ postId, isLike, likeCount }: PostLikeButtonProp
     const onChangeLike = (e: React.MouseEvent) => {
         e.preventDefault();
 
-        console.log('click');
-
         setOptimisticIsLike(prev => {
             changeLike(
                 { id: postId, like: !prev },
