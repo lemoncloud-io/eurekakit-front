@@ -1,18 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useQueryClient } from '@tanstack/react-query';
-import { RefreshCw } from 'lucide-react';
+import { ChevronDown, ChevronUp, Edit, RefreshCw, Save, Trash, X } from 'lucide-react';
 
 import { feedsKeys, useComments, useCreateFeed, useDeleteFeed, useFeed, useUpdateFeed } from '@lemon/feeds';
-import { Loader } from '@lemon/shared';
+import { Loader, usePagination } from '@lemon/shared';
 import { Alert, AlertDescription } from '@lemon/ui-kit/components/ui/alert';
 import { Badge } from '@lemon/ui-kit/components/ui/badge';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@lemon/ui-kit/components/ui/card';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@lemon/ui-kit/components/ui/collapsible';
 import { Input } from '@lemon/ui-kit/components/ui/input';
+import {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+} from '@lemon/ui-kit/components/ui/pagination';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 import { Textarea } from '@lemon/ui-kit/components/ui/textarea';
 import { toast } from '@lemon/ui-kit/hooks/use-toast';
@@ -34,24 +44,51 @@ export const FeedFormPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
+    const commentsContainerRef = useRef<HTMLDivElement>(null);
 
     const [images, setImages] = useState<any[]>([]);
 
+    // 답글 섹션 상태
     const [commentsOpen, setCommentsOpen] = useState(false);
     const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
     const [editingCommentText, setEditingCommentText] = useState('');
 
+    // 페이지네이션 상태
+    const [currentPage, setCurrentPage] = useState(0);
+    const pageSize = 10; // 페이지당 표시할 답글 수
+    const [isLoading, setIsLoading] = useState(false);
+
+    // API 훅 사용
     const { data: feed, isLoading: isLoadingFeed, error: fetchError } = useFeed(id || '');
     const updateFeed = useUpdateFeed();
     const createFeed = useCreateFeed();
-
     const { mutate: deleteFeed } = useDeleteFeed();
 
+    // 답글 데이터 가져오기 (페이지네이션 적용)
     const {
         data: commentsData,
         isLoading: isLoadingComments,
         refetch: refetchComments,
-    } = useComments({ feedId: id || '', params: { limit: 100, page: 0 } });
+    } = useComments(
+        {
+            feedId: id || '',
+            params: {
+                limit: pageSize,
+                page: currentPage,
+            },
+        },
+        {
+            enabled: !!id && commentsOpen,
+        }
+    );
+
+    // 페이지네이션 범위 계산
+    const { paginationRange } = usePagination({
+        totalCount: commentsData?.total || 0,
+        pageSize,
+        currentPage,
+        siblingCount: 1,
+    });
 
     // 폼 상태 관리
     const {
@@ -90,6 +127,13 @@ export const FeedFormPage = () => {
         }
     }, [feed, setValue]);
 
+    // 페이지 변경 시 스크롤 위치 조정
+    useEffect(() => {
+        if (commentsOpen && !isLoadingComments && commentsContainerRef.current) {
+            commentsContainerRef.current.scrollTop = 0;
+        }
+    }, [currentPage, isLoadingComments, commentsOpen]);
+
     // 이미지 파일 선택 처리
     const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -116,6 +160,13 @@ export const FeedFormPage = () => {
             newImages.splice(index, 1);
             return newImages;
         });
+    };
+
+    // 페이지 변경 핸들러
+    const handlePageChange = (newPage: number) => {
+        if (newPage >= 0 && newPage < Math.ceil((commentsData?.total || 0) / pageSize)) {
+            setCurrentPage(newPage);
+        }
     };
 
     // 폼 제출 처리
@@ -225,6 +276,7 @@ export const FeedFormPage = () => {
         }
 
         try {
+            setIsLoading(true);
             deleteFeed(commentId, {
                 onSuccess: async () => {
                     await refetchComments();
@@ -242,6 +294,7 @@ export const FeedFormPage = () => {
                 onSettled: () => setIsLoading(false),
             });
         } catch (error) {
+            setIsLoading(false);
             toast({
                 variant: 'destructive',
                 description: t('feeds.toast.commentDeleteError', '답글 삭제에 실패했습니다.'),
@@ -422,6 +475,243 @@ export const FeedFormPage = () => {
                                     </div>
                                 </div>
                             )}
+
+                            {/* 답글 관리 섹션 */}
+                            {id && feed && feed.childNo > 0 && (
+                                <Collapsible
+                                    open={commentsOpen}
+                                    onOpenChange={setCommentsOpen}
+                                    className="rounded-md border"
+                                >
+                                    <CollapsibleTrigger asChild>
+                                        <Button
+                                            variant="ghost"
+                                            className="w-full justify-between rounded-none border-b p-4 font-medium"
+                                        >
+                                            <span>
+                                                {t('feeds.form.commentsSection', '답글 관리')}
+                                                <Badge className="ml-2">{feed.childNo}</Badge>
+                                            </span>
+                                            {commentsOpen ? (
+                                                <ChevronUp className="h-5 w-5" />
+                                            ) : (
+                                                <ChevronDown className="h-5 w-5" />
+                                            )}
+                                        </Button>
+                                    </CollapsibleTrigger>
+                                    <CollapsibleContent>
+                                        <div ref={commentsContainerRef} className="max-h-[600px] overflow-y-auto p-4">
+                                            {isLoadingComments ? (
+                                                <div className="flex h-40 items-center justify-center">
+                                                    <Loader />
+                                                </div>
+                                            ) : !commentsData || commentsData.list.length === 0 ? (
+                                                <div className="text-muted-foreground py-8 text-center">
+                                                    {t('feeds.form.noComments', '답글이 없습니다')}
+                                                </div>
+                                            ) : (
+                                                <>
+                                                    <div className="space-y-4">
+                                                        {commentsData.list.map(comment => (
+                                                            <div
+                                                                key={comment.id}
+                                                                className="hover:border-primary/50 rounded-md border p-4 transition-all"
+                                                            >
+                                                                {editingCommentId === comment.id ? (
+                                                                    <div className="space-y-3">
+                                                                        <Textarea
+                                                                            value={editingCommentText}
+                                                                            onChange={e =>
+                                                                                setEditingCommentText(e.target.value)
+                                                                            }
+                                                                            rows={4}
+                                                                            className="w-full"
+                                                                            placeholder={t(
+                                                                                'feeds.form.commentPlaceholder',
+                                                                                '답글 내용을 입력하세요...'
+                                                                            )}
+                                                                        />
+                                                                        <div className="flex justify-end space-x-2">
+                                                                            <Button
+                                                                                type="button"
+                                                                                variant="outline"
+                                                                                size="sm"
+                                                                                onClick={handleCancelEditComment}
+                                                                            >
+                                                                                <X className="mr-1 h-4 w-4" />
+                                                                                {t('common.cancel', '취소')}
+                                                                            </Button>
+                                                                            <Button
+                                                                                type="button"
+                                                                                size="sm"
+                                                                                onClick={() =>
+                                                                                    handleSaveComment(comment.id)
+                                                                                }
+                                                                                disabled={updateFeed.isPending}
+                                                                            >
+                                                                                {updateFeed.isPending ? (
+                                                                                    <Loader className="h-4 w-4" />
+                                                                                ) : (
+                                                                                    <>
+                                                                                        <Save className="mr-1 h-4 w-4" />
+                                                                                        {t('common.save', '저장')}
+                                                                                    </>
+                                                                                )}
+                                                                            </Button>
+                                                                        </div>
+                                                                    </div>
+                                                                ) : (
+                                                                    <>
+                                                                        <div className="mb-2 flex justify-between">
+                                                                            <div className="flex items-center space-x-2">
+                                                                                <Badge variant="outline">
+                                                                                    #{comment.no}
+                                                                                </Badge>
+                                                                                <span className="text-muted-foreground text-sm">
+                                                                                    {formatDate(comment.createdAt)}
+                                                                                </span>
+                                                                            </div>
+                                                                            <div className="flex space-x-1">
+                                                                                <Button
+                                                                                    type="button"
+                                                                                    variant="ghost"
+                                                                                    size="sm"
+                                                                                    onClick={() =>
+                                                                                        handleEditComment(comment)
+                                                                                    }
+                                                                                >
+                                                                                    <Edit className="h-4 w-4" />
+                                                                                </Button>
+                                                                                <Button
+                                                                                    type="button"
+                                                                                    variant="ghost"
+                                                                                    size="sm"
+                                                                                    onClick={() =>
+                                                                                        handleDeleteComment(comment.id)
+                                                                                    }
+                                                                                    disabled={isLoading}
+                                                                                >
+                                                                                    {isLoading ? (
+                                                                                        <Loader className="h-4 w-4" />
+                                                                                    ) : (
+                                                                                        <Trash className="h-4 w-4 text-red-500" />
+                                                                                    )}
+                                                                                </Button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="border-muted border-l-4 py-1 pl-3">
+                                                                            <p className="whitespace-pre-wrap">
+                                                                                {comment.text}
+                                                                            </p>
+                                                                        </div>
+                                                                        <div className="mt-2 flex justify-between text-sm">
+                                                                            <div className="text-muted-foreground">
+                                                                                {t(
+                                                                                    'feeds.form.commentUserId',
+                                                                                    'User ID'
+                                                                                )}
+                                                                                : {comment.userId || '-'}
+                                                                            </div>
+                                                                            {comment.likeCount > 0 && (
+                                                                                <div className="flex items-center">
+                                                                                    <span className="mr-1">
+                                                                                        {t(
+                                                                                            'feeds.form.likes',
+                                                                                            '좋아요'
+                                                                                        )}
+                                                                                        :
+                                                                                    </span>
+                                                                                    <Badge variant="secondary">
+                                                                                        {comment.likeCount}
+                                                                                    </Badge>
+                                                                                </div>
+                                                                            )}
+                                                                        </div>
+                                                                    </>
+                                                                )}
+                                                            </div>
+                                                        ))}
+                                                    </div>
+
+                                                    {/* 페이지네이션 컴포넌트 */}
+                                                    {commentsData.total > pageSize && (
+                                                        <Pagination className="mt-6">
+                                                            <PaginationContent>
+                                                                <PaginationItem>
+                                                                    <PaginationPrevious
+                                                                        onClick={() =>
+                                                                            handlePageChange(currentPage - 1)
+                                                                        }
+                                                                        aria-disabled={currentPage <= 0}
+                                                                        tabIndex={currentPage <= 0 ? -1 : undefined}
+                                                                        className={
+                                                                            currentPage <= 0
+                                                                                ? 'pointer-events-none opacity-50'
+                                                                                : 'cursor-pointer'
+                                                                        }
+                                                                    />
+                                                                </PaginationItem>
+
+                                                                {paginationRange.map((pageNumber, index) => (
+                                                                    <PaginationItem key={index}>
+                                                                        {pageNumber === '...' ? (
+                                                                            <PaginationEllipsis />
+                                                                        ) : (
+                                                                            <PaginationLink
+                                                                                className="cursor-pointer"
+                                                                                onClick={() =>
+                                                                                    handlePageChange(Number(pageNumber))
+                                                                                }
+                                                                                isActive={
+                                                                                    currentPage === Number(pageNumber)
+                                                                                }
+                                                                            >
+                                                                                {Number(pageNumber) + 1}
+                                                                            </PaginationLink>
+                                                                        )}
+                                                                    </PaginationItem>
+                                                                ))}
+
+                                                                <PaginationItem>
+                                                                    <PaginationNext
+                                                                        onClick={() =>
+                                                                            handlePageChange(currentPage + 1)
+                                                                        }
+                                                                        disabled={
+                                                                            currentPage ===
+                                                                            Math.ceil(
+                                                                                (commentsData?.total || 0) / pageSize
+                                                                            ) -
+                                                                                1
+                                                                        }
+                                                                        aria-disabled={
+                                                                            currentPage ===
+                                                                            Math.ceil(
+                                                                                (commentsData?.total || 0) / pageSize
+                                                                            ) -
+                                                                                1
+                                                                        }
+                                                                        className={
+                                                                            currentPage ===
+                                                                            Math.ceil(
+                                                                                (commentsData?.total || 0) / pageSize
+                                                                            ) -
+                                                                                1
+                                                                                ? 'pointer-events-none opacity-50'
+                                                                                : 'cursor-pointer'
+                                                                        }
+                                                                    />
+                                                                </PaginationItem>
+                                                            </PaginationContent>
+                                                        </Pagination>
+                                                    )}
+                                                </>
+                                            )}
+                                        </div>
+                                    </CollapsibleContent>
+                                </Collapsible>
+                            )}
+
                             <div className="flex justify-end space-x-3 pt-4">
                                 <Button type="button" variant="outline" onClick={() => navigate('/feeds')}>
                                     {t('common.cancel', '취소')}
