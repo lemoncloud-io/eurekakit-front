@@ -18,11 +18,11 @@ import {
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 import { Textarea } from '@lemon/ui-kit/components/ui/textarea';
 
-import type { FeedView} from '@lemon/feeds';
+import type { FeedView } from '@lemon/feeds';
 
 interface FeedCommentManagerProps {
     feedId: string;
-    commentsData: any; // 실제 타입에 맞게 조정 필요
+    commentsData: any;
     isLoadingComments: boolean;
     commentsContainerRef: React.RefObject<HTMLDivElement>;
     currentPage: number;

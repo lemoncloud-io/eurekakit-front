@@ -1,13 +1,9 @@
 import { useTranslation } from 'react-i18next';
 
-
 import { formatDate } from '@lemon/shared';
 import { Badge } from '@lemon/ui-kit/components/ui/badge';
 
-
-
-
-import type { FeedView} from '@lemon/feeds';
+import type { FeedView } from '@lemon/feeds';
 
 interface FeedBasicInfoProps {
     feed: FeedView;

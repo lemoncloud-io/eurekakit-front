@@ -1,11 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import { useQueryClient } from '@tanstack/react-query';
 import { ClipboardX, PlusCircle, RefreshCcw } from 'lucide-react';
 
 import { useFeeds } from '@lemon/feeds';
-import { Loader, formatDate, useGlobalLoader, usePagination } from '@lemon/shared';
+import { Loader, formatDate, usePagination } from '@lemon/shared';
 import { Badge } from '@lemon/ui-kit/components/ui/badge';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@lemon/ui-kit/components/ui/card';
@@ -27,9 +26,7 @@ const truncateText = (text?: string, maxLength = 50) => {
 export const FeedListPage = () => {
     const navigate = useNavigate();
     const { t } = useTranslation();
-    const { setIsLoading } = useGlobalLoader();
     const [searchParams, setSearchParams] = useSearchParams();
-    const queryClient = useQueryClient();
 
     const page = parseInt(searchParams.get('page') || '0', 10);
     const limit = 20;

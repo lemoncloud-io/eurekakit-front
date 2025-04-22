@@ -5,10 +5,6 @@ import { Trash } from 'lucide-react';
 import { Loader } from '@lemon/shared';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 
-
-
-
-
 interface FeedFormActionsProps {
     id?: string;
     handleDeleteFeed: () => void;

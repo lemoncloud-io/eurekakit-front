@@ -50,7 +50,6 @@ export const FeedFormPage = () => {
         },
     });
 
-    // 페이지네이션 범위 계산
     const { paginationRange } = usePagination({
         totalCount: commentsData?.total || 0,
         pageSize,
@@ -58,7 +57,6 @@ export const FeedFormPage = () => {
         siblingCount: 1,
     });
 
-    // 폼 상태 관리
     const methods = useForm<FeedBody>({
         defaultValues: {
             text: '',
@@ -66,12 +64,7 @@ export const FeedFormPage = () => {
         },
     });
 
-    const {
-        register,
-        handleSubmit,
-        setValue,
-        formState: { errors },
-    } = methods;
+    const { handleSubmit } = methods;
 
     useEffect(() => {
         if (!feed) {
