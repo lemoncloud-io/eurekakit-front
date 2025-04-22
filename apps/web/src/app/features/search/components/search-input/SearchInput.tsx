@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, Search, XCircle } from 'lucide-react';
 
 import { useLocalStorage, useQueryState } from '@lemon/shared';
+import { cn } from '@lemon/ui-kit';
 import { FormControl, FormField } from '@lemon/ui-kit/components/ui/form';
 import { Input } from '@lemon/ui-kit/components/ui/input';
 
@@ -41,7 +42,12 @@ export const SearchInput = () => {
                     <button onClick={() => navigate(-1)}>
                         <ChevronLeft />
                     </button>
-                    <div className="flex w-full items-center rounded-full border border-[#53555B] bg-[#fbfbfb] pl-2 pr-4 focus-within:ring-1">
+                    <div
+                        className={cn(
+                            'flex w-full items-center overflow-hidden rounded-full border border-[#53555B] bg-[#fbfbfb] pl-2 pr-4 focus-within:ring-1',
+                            'has-[input:autofill]:bg-blue-50 [&_input:autofill]:shadow-[inset_0_0_0_1000px] [&_input:autofill]:shadow-blue-50'
+                        )}
+                    >
                         <FormControl>
                             <Input
                                 className="border-none text-sm shadow-none focus-visible:border-none focus-visible:ring-0"
