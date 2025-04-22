@@ -15,8 +15,8 @@ import { toast } from '@lemon/ui-kit/hooks/use-toast';
 
 import { FeedBasicInfo, FeedCommentManager, FeedContentEditor, FeedFormActions } from '../components';
 
-import type { FeedView} from '@lemon/feeds';
-import type { FeedBody } from '@lemoncloud/lemon-feeds-api';
+import type { FeedView } from '@lemon/feeds';
+import type { FeedBody } from '@lemoncloud/pets-socials-api';
 
 export const FeedFormPage = () => {
     const { t } = useTranslation();
