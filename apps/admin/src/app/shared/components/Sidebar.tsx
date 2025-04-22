@@ -37,7 +37,7 @@ const menuItems = [
 export const Sidebar = () => {
     const { t } = useTranslation();
     const isSidebarOpen = useLayoutStore(state => state.isSidebarOpen);
-    const [isExpanded, setIsExpanded] = useState(true);
+    const [isExpanded, setIsExpanded] = useState(false);
     const { data: boardsData, isLoading } = useBoards({ page: 0, limit: 100 });
 
     return (
