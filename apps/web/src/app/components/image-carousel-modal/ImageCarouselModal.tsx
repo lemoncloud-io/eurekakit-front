@@ -2,9 +2,10 @@ import { Carousel, CarouselContent, CarouselItem } from '@lemon/ui-kit/component
 import { Dialog, DialogContent } from '@lemon/ui-kit/components/ui/dialog';
 
 import type { OverlayProps } from '@lemon/overlay';
+import type { ImageView } from '@lemoncloud/pets-socials-api';
 
 interface GoodsReviewImageCarouselProps extends OverlayProps {
-    images: { id?: string; url?: string }[];
+    images: ImageView[];
     startIndex?: number;
 }
 
