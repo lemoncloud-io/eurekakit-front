@@ -37,6 +37,8 @@ export const PostListBlock = ({ post }: PostListBlockProps) => {
                     <LikeButton
                         hideCount
                         postId={post.id}
+                        likeCount={post.likeCount}
+                        isLike={post.$activity?.isLike}
                         className="bg-foreground/40 absolute bottom-2 right-2 flex items-center justify-center rounded-full p-2 text-lg backdrop-blur-sm"
                     />
                 </div>
