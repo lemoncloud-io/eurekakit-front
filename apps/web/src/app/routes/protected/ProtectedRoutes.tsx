@@ -5,6 +5,7 @@ import { useWebCoreStore } from '@lemon/web-core';
 import { CommentRoutes } from '../../features/comment';
 import { HomeRoutes } from '../../features/home';
 import { PostRoutes } from '../../features/post';
+import { SearchRoutes } from '../../features/search';
 import { TabBarLayout } from '../../layout/TabBarLayout';
 
 import type { RouteObject } from 'react-router-dom';
@@ -25,6 +26,7 @@ export const ProtectedRoutes: RouteObject[] = [
             },
             { path: `/post/*`, element: <PostRoutes /> },
             { path: '/comment/*', element: <CommentRoutes /> },
+            { path: '/search/*', element: <SearchRoutes /> },
         ],
     },
 ];
