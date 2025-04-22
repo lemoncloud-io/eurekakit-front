@@ -7,7 +7,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { ChevronDown, ChevronUp, Edit, RefreshCw, Save, Trash, X } from 'lucide-react';
 
 import { feedsKeys, useComments, useCreateFeed, useDeleteFeed, useFeed, useUpdateFeed } from '@lemon/feeds';
-import { Loader, usePagination } from '@lemon/shared';
+import { Loader, formatDate, usePagination } from '@lemon/shared';
 import { Alert, AlertDescription } from '@lemon/ui-kit/components/ui/alert';
 import { Badge } from '@lemon/ui-kit/components/ui/badge';
 import { Button } from '@lemon/ui-kit/components/ui/button';
@@ -29,11 +29,6 @@ import { toast } from '@lemon/ui-kit/hooks/use-toast';
 import { ImageUploader } from '../components';
 
 import type { FeedBody, FeedView } from '@lemoncloud/lemon-feeds-api';
-
-const formatDate = (timestamp?: number) => {
-    if (!timestamp) return '-';
-    return new Date(timestamp).toLocaleString();
-};
 
 export const FeedFormPage = () => {
     const { t } = useTranslation();

@@ -5,7 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { ClipboardX, PlusCircle, RefreshCcw } from 'lucide-react';
 
 import { useFeeds } from '@lemon/feeds';
-import { Loader, useGlobalLoader, usePagination } from '@lemon/shared';
+import { Loader, formatDate, useGlobalLoader, usePagination } from '@lemon/shared';
 import { Badge } from '@lemon/ui-kit/components/ui/badge';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@lemon/ui-kit/components/ui/card';
@@ -19,16 +19,9 @@ import {
     PaginationPrevious,
 } from '@lemon/ui-kit/components/ui/pagination';
 
-// 피드 텍스트 내용 일부만 표시하는 유틸리티 함수
 const truncateText = (text?: string, maxLength = 50) => {
     if (!text) return '';
     return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
-};
-
-// 타임스탬프를 날짜 형식으로 변환하는 유틸리티 함수
-const formatDate = (timestamp?: number) => {
-    if (!timestamp) return '';
-    return new Date(timestamp).toLocaleDateString();
 };
 
 export const FeedListPage = () => {
