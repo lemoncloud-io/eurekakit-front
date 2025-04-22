@@ -18,7 +18,7 @@ export const Comment = ({ comment }: CommentProps) => {
                 nickname={comment.user$?.nick}
                 createdAt={comment.createdAt}
             />
-            <div className="break-all">{comment.text}</div>
+            <div className="whitespace-pre-line break-all">{comment.text}</div>
             <ImageListViewer images={comment.image$$} />
             <LikeButton postId={comment.id} isLike={comment.$activity?.isLike} likeCount={comment.likeCount} />
         </div>
