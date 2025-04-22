@@ -53,7 +53,7 @@ export const Post = ({ post }: PostProps) => {
                 nickname={post.user$?.nick}
                 createdAt={post.createdAt}
             />
-            <div>{post.text}</div>
+            <div className="break-all">{post.text}</div>
             <Carousel opts={{ dragFree: true }}>
                 <CarouselContent className="-ml-2 overflow-visible" containerClassName="overflow-visible">
                     {post.image$$?.map(
