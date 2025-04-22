@@ -9,7 +9,7 @@ interface PostProps {
 
 export const Post = ({ post }: PostProps) => {
     return (
-        <div className="flex flex-col items-start gap-2 px-4">
+        <div className="flex flex-col items-start gap-2 overflow-hidden px-4">
             <PostHeader
                 postId={post.id}
                 profileImg={post.user$?.image}
