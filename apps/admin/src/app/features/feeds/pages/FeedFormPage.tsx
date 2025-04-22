@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { RefreshCw } from 'lucide-react';
 
-import { feedsKeys, useCreateFeed, useFeed, useUpdateFeed } from '@lemon/feeds';
+import { feedsKeys, useComments, useCreateFeed, useDeleteFeed, useFeed, useUpdateFeed } from '@lemon/feeds';
 import { Loader } from '@lemon/shared';
 import { Alert, AlertDescription } from '@lemon/ui-kit/components/ui/alert';
 import { Badge } from '@lemon/ui-kit/components/ui/badge';
@@ -24,17 +24,10 @@ const formatDate = (timestamp?: number) => {
     return new Date(timestamp).toLocaleString();
 };
 
-// 이미지 타입 정의
-interface ImageFile {
-    id?: string;
-    file?: File;
-    preview: string;
-    width?: number;
-    height?: number;
-    contentType?: string;
-    url?: string;
-    name?: string;
-}
+const truncateText = (text?: string, maxLength = 100) => {
+    if (!text) return '';
+    return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
+};
 
 export const FeedFormPage = () => {
     const { t } = useTranslation();
@@ -42,20 +35,29 @@ export const FeedFormPage = () => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
-    // 이미지 상태 관리
-    const [images, setImages] = useState<ImageFile[]>([]);
+    const [images, setImages] = useState<any[]>([]);
 
-    // API 훅 사용
+    const [commentsOpen, setCommentsOpen] = useState(false);
+    const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
+    const [editingCommentText, setEditingCommentText] = useState('');
+
     const { data: feed, isLoading: isLoadingFeed, error: fetchError } = useFeed(id || '');
     const updateFeed = useUpdateFeed();
     const createFeed = useCreateFeed();
+
+    const { mutate: deleteFeed } = useDeleteFeed();
+
+    const {
+        data: commentsData,
+        isLoading: isLoadingComments,
+        refetch: refetchComments,
+    } = useComments({ feedId: id || '', params: { limit: 100, page: 0 } });
 
     // 폼 상태 관리
     const {
         register,
         handleSubmit,
         setValue,
-        watch,
         formState: { errors },
     } = useForm<FeedBody>({
         defaultValues: {
@@ -67,6 +69,10 @@ export const FeedFormPage = () => {
     useEffect(() => {
         if (feed) {
             setValue('text', feed.text || '');
+
+            if (feed.childNo && feed.childNo > 0) {
+                setCommentsOpen(true);
+            }
 
             // 기존 이미지 설정
             if (feed.image$$ && feed.image$$.length > 0) {
@@ -116,7 +122,6 @@ export const FeedFormPage = () => {
     const onSubmit = async (data: FeedBody) => {
         try {
             if (id) {
-                // 피드 수정
                 await updateFeed.mutateAsync(
                     {
                         id,
@@ -165,6 +170,86 @@ export const FeedFormPage = () => {
         }
     };
 
+    const handleEditComment = (comment: FeedView) => {
+        setEditingCommentId(comment.id);
+        setEditingCommentText(comment.text || '');
+    };
+
+    const handleCancelEditComment = () => {
+        setEditingCommentId(null);
+        setEditingCommentText('');
+    };
+
+    const handleSaveComment = async (commentId: string) => {
+        if (!editingCommentText.trim()) {
+            toast({
+                variant: 'destructive',
+                description: t('feeds.toast.commentEmpty', '답글 내용을 입력해주세요.'),
+                duration: 2000,
+            });
+            return;
+        }
+
+        try {
+            await updateFeed.mutateAsync(
+                {
+                    id: commentId,
+                    body: {
+                        text: editingCommentText,
+                    },
+                },
+                {
+                    onSuccess: async () => {
+                        await refetchComments();
+                        setEditingCommentId(null);
+                        setEditingCommentText('');
+                        toast({
+                            description: t('feeds.toast.commentUpdateSuccess', '답글이 업데이트되었습니다.'),
+                            duration: 2000,
+                        });
+                    },
+                }
+            );
+        } catch (error) {
+            toast({
+                variant: 'destructive',
+                description: t('feeds.toast.commentUpdateError', '답글 업데이트에 실패했습니다.'),
+                duration: 3000,
+            });
+        }
+    };
+
+    const handleDeleteComment = async (commentId: string) => {
+        if (!window.confirm(t('feeds.confirm.deleteComment', '이 답글을 삭제하시겠습니까?'))) {
+            return;
+        }
+
+        try {
+            deleteFeed(commentId, {
+                onSuccess: async () => {
+                    await refetchComments();
+                    await queryClient.invalidateQueries(feedsKeys.detail(id || ''));
+                    toast({
+                        description: t('feeds.toast.commentDeleteSuccess', '답글이 삭제되었습니다.'),
+                        duration: 2000,
+                    });
+                },
+                onError: () =>
+                    toast({
+                        description: '게시글을 삭제할 수 없습니다.',
+                        className: 'flex justify-center items-center',
+                    }),
+                onSettled: () => setIsLoading(false),
+            });
+        } catch (error) {
+            toast({
+                variant: 'destructive',
+                description: t('feeds.toast.commentDeleteError', '답글 삭제에 실패했습니다.'),
+                duration: 3000,
+            });
+        }
+    };
+
     return (
         <div className="container mx-auto py-10">
             {(fetchError || updateFeed.error || createFeed.error) && (
@@ -205,7 +290,6 @@ export const FeedFormPage = () => {
                 ) : (
                     <CardContent>
                         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                            {/* 피드 기본 정보 (수정 모드에서만 표시) */}
                             {id && feed && (
                                 <div className="mb-6 space-y-4">
                                     <div className="grid grid-cols-2 gap-4">
@@ -268,7 +352,7 @@ export const FeedFormPage = () => {
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-2">
                                             <span className="text-muted-foreground text-sm font-medium">
-                                                {t('feeds.form.replies', '답글')}:
+                                                {t('feeds.form.comments', '답글')}:
                                             </span>
                                             <Badge>{feed.childNo || 0}</Badge>
                                         </div>
@@ -292,7 +376,6 @@ export const FeedFormPage = () => {
                                 </div>
                             )}
 
-                            {/* 수정 가능한 컨텐츠 영역 */}
                             <div className="space-y-2">
                                 <label className="text-sm font-medium">
                                     {t('feeds.form.content', '내용')}
@@ -318,7 +401,6 @@ export const FeedFormPage = () => {
                                 {errors.text && <p className="mt-1 text-sm text-red-500">{errors.text.message}</p>}
                             </div>
 
-                            {/* 이미지 영역 (기존 이미지 표시만 구현) */}
                             {id && feed && feed.image$$ && feed.image$$.length > 0 && (
                                 <div className="space-y-4">
                                     <label className="text-sm font-medium">
@@ -340,7 +422,6 @@ export const FeedFormPage = () => {
                                     </div>
                                 </div>
                             )}
-
                             <div className="flex justify-end space-x-3 pt-4">
                                 <Button type="button" variant="outline" onClick={() => navigate('/feeds')}>
                                     {t('common.cancel', '취소')}
