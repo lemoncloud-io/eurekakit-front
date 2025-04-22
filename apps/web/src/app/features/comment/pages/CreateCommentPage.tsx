@@ -5,33 +5,24 @@ import { ChevronRight, X } from 'lucide-react';
 
 import { feedKeys, useCrerateComment } from '@lemon/feeds';
 import { useOverlay } from '@lemon/overlay';
-import { useGlobalLoader } from '@lemon/shared';
+import { useGlobalLoader, useQueryState } from '@lemon/shared';
 import { useToast } from '@lemon/ui-kit';
 import { Button } from '@lemon/ui-kit/components/ui/button';
-import { Dialog, DialogContent } from '@lemon/ui-kit/components/ui/dialog';
 import { Form } from '@lemon/ui-kit/components/ui/form';
 
 import { useFormBlockModal, useNavigate } from '../../../hooks';
-import { Post, PostEditor } from '../../post/components';
+import { PostEditor } from '../../post/components';
+import { PostViewerModal } from '../components';
 
 import type { FeedView } from '@lemon/feeds';
-import type { OverlayProps } from '@lemon/overlay';
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
-
-export const PostViewerModal = ({ ...overlayProps }: OverlayProps) => {
-    return (
-        <Dialog {...overlayProps}>
-            <DialogContent>
-                <Post />
-            </DialogContent>
-        </Dialog>
-    );
-};
 
 export const CreateCommentPage = () => {
     const overlay = useOverlay();
     const queryClient = useQueryClient();
     const navigate = useNavigate();
+
+    const [postId] = useQueryState('postId');
 
     const { setIsLoading } = useGlobalLoader();
     const { toast } = useToast();
@@ -54,7 +45,7 @@ export const CreateCommentPage = () => {
         setIsLoading(true);
 
         createComment(
-            { body: commentBody },
+            { feedId: postId, body: commentBody },
             {
                 onSuccess: onSuccessCreate,
                 onError: () => setBlockerOn(true),
@@ -76,7 +67,7 @@ export const CreateCommentPage = () => {
                 <Button
                     variant={'outline'}
                     className="h-14 justify-start rounded-lg"
-                    onClick={() => overlay.open(overlayProps => <PostViewerModal {...overlayProps} />)}
+                    onClick={() => overlay.open(overlayProps => <PostViewerModal postId={postId} {...overlayProps} />)}
                 >
                     본문 보기
                     <span className="ml-auto">
