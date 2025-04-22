@@ -8,7 +8,7 @@ import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { useIsIntersecting, useNavigate } from '../../../../hooks';
-import { Post } from '../post';
+import { Comment } from '../../../comment/components';
 
 export const CommentList = () => {
     const navigate = useNavigate();
@@ -44,7 +44,7 @@ export const CommentList = () => {
                 </button>
             </div>
             <List seperator={<Separator />} className="gap-3 py-3">
-                {commentList?.list.map(comment => <Post key={comment.id} post={comment} />)}
+                {commentList?.list.map(comment => <Comment key={comment.id} comment={comment} />)}
             </List>
             {hasNextPage && (
                 <>
