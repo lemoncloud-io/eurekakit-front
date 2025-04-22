@@ -1,7 +1,7 @@
 {
     "generalError": "An error occurred.",
     "login": {
-        "welcome": "Welcome to Lemon",
+        "welcome": "Welcome to EurekaKit",
         "googleButton": "Log in with Google account",
         "kakaoButton": "Log in with Kakao account"
     },
