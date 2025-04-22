@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 
-import { ChevronDown, FileText, LayoutGrid, LayoutList, LucideHome } from 'lucide-react';
+import { ChevronDown, FileText, LayoutGrid, LayoutList, LucideHome, MessageSquare } from 'lucide-react';
 
 import { useBoards } from '@lemon/boards';
 import { Loader } from '@lemon/shared';
@@ -17,6 +17,11 @@ const menuItems = [
         icon: LucideHome,
     },
     {
+        titleKey: 'menu.feeds',
+        path: '/feeds',
+        icon: MessageSquare,
+    },
+    {
         titleKey: 'menu.boardTypes',
         path: '/board-types',
         icon: FileText,
@@ -24,11 +29,6 @@ const menuItems = [
     {
         titleKey: 'menu.boards',
         path: '/boards',
-        icon: LayoutGrid,
-    },
-    {
-        titleKey: 'menu.feeds',
-        path: '/feeds',
         icon: LayoutGrid,
     },
     // Add more menu items as needed
