@@ -40,7 +40,7 @@ export const PostViewerModal = ({ postId, close, ...overlayProps }: PostViewerMo
                                 hideMenu
                             />
                             <div className="flex flex-col gap-2">
-                                <p className="break-all">{post.text}</p>
+                                <p className="whitespace-pre-line break-all">{post.text}</p>
                                 <ImageListViewer images={post.image$$} />
                             </div>
                         </div>
