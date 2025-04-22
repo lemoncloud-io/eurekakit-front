@@ -20,7 +20,8 @@
         "settings": "Settings",
         "boardTypes": "Board Types",
         "boards": "Boards",
-        "boardList": "Board List"
+        "boardList": "Board List",
+        "feeds": "Feeds"
     },
     "boardTypes": {
         "title": "Board Types",
@@ -167,6 +168,62 @@
             "category": "Please select a category."
         },
         "deleteConfirmText": "Are you sure you want to delete this post?"
+    },
+    "feeds": {
+        "title": "Feeds",
+        "description": "Manage all feeds and replies in the system",
+        "createButton": "Create Feed",
+        "totalCount": "{{count}} feeds found",
+        "table": {
+            "id": "ID",
+            "feedNo": "Feed No",
+            "text": "Content",
+            "author": "Author",
+            "replies": "Replies",
+            "images": "Images",
+            "createdAt": "Created At",
+            "updatedAt": "Updated At",
+            "actions": "Actions"
+        },
+        "filters": {
+            "title": "Filters",
+            "userId": "User ID",
+            "dateRange": "Date Range",
+            "apply": "Apply Filters",
+            "reset": "Reset"
+        },
+        "status": {
+            "active": "Active",
+            "deleted": "Deleted"
+        },
+        "error": {
+            "loadFailed": "Failed to load feeds",
+            "createFailed": "Failed to create feed",
+            "updateFailed": "Failed to update feed",
+            "deleteFailed": "Failed to delete feed"
+        },
+        "noData": "No feeds found",
+        "details": {
+            "title": "Feed Details",
+            "edit": "Edit Feed",
+            "delete": "Delete Feed",
+            "confirmDelete": "Are you sure you want to delete this feed?",
+            "replies": "Replies ({{count}})",
+            "createdBy": "Created by",
+            "postedOn": "Posted on"
+        },
+        "form": {
+            "content": "Content",
+            "contentPlaceholder": "Enter feed content...",
+            "images": "Images",
+            "tags": "Tags",
+            "save": "Save Feed",
+            "cancel": "Cancel",
+            "validation": {
+                "contentRequired": "Content is required",
+                "contentLength": "Content must be between 1 and 2000 characters"
+            }
+        }
     },
     "common": {
         "cancel": "Cancel",

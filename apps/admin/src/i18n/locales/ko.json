@@ -20,7 +20,8 @@
         "settings": "설정",
         "boardTypes": "게시판 유형",
         "boards": "게시판",
-        "boardList": "게시판 목록"
+        "boardList": "게시판 목록",
+        "feeds": "피드 관리"
     },
     "boardTypes": {
         "title": "게시판 유형",
@@ -166,6 +167,63 @@
         },
         "deleteConfirmText": "정말 이 게시글을 삭제하시겠습니까?"
     },
+    "feeds": {
+        "title": "피드",
+        "description": "시스템의 모든 피드와 답글을 관리합니다",
+        "createButton": "피드 생성",
+        "totalCount": "{{count}}개의 피드가 있습니다",
+        "table": {
+            "id": "아이디",
+            "feedNo": "피드 번호",
+            "text": "내용",
+            "author": "작성자",
+            "replies": "답글",
+            "images": "이미지",
+            "createdAt": "생성일",
+            "updatedAt": "수정일",
+            "actions": "작업"
+        },
+        "filters": {
+            "title": "필터",
+            "userId": "사용자 ID",
+            "dateRange": "날짜 범위",
+            "apply": "필터 적용",
+            "reset": "초기화"
+        },
+        "status": {
+            "active": "활성",
+            "deleted": "삭제됨"
+        },
+        "error": {
+            "loadFailed": "피드를 불러오는데 실패했습니다",
+            "createFailed": "피드 생성에 실패했습니다",
+            "updateFailed": "피드 업데이트에 실패했습니다",
+            "deleteFailed": "피드 삭제에 실패했습니다"
+        },
+        "noData": "피드가 없습니다",
+        "details": {
+            "title": "피드 상세",
+            "edit": "피드 수정",
+            "delete": "피드 삭제",
+            "confirmDelete": "이 피드를 삭제하시겠습니까?",
+            "replies": "답글 ({{count}}개)",
+            "createdBy": "작성자",
+            "postedOn": "작성일"
+        },
+        "form": {
+            "content": "내용",
+            "contentPlaceholder": "피드 내용을 입력하세요...",
+            "images": "이미지",
+            "tags": "태그",
+            "save": "피드 저장",
+            "cancel": "취소",
+            "validation": {
+                "contentRequired": "내용을 입력해주세요",
+                "contentLength": "내용은 1~2000자 사이여야 합니다"
+            }
+        }
+    },
+
     "common": {
         "cancel": "취소",
         "create": "만들기",
