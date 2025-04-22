@@ -43,7 +43,6 @@ export const useRefreshToken = () => {
     const isAuthenticated = useWebCoreStore(state => state.isAuthenticated);
     const { fetchProfile } = useProfile();
     const { refreshAuthToken } = useTokenRefresh();
-
     const initializationRef = useRef(false);
 
     useEffect(() => {
@@ -55,19 +54,24 @@ export const useRefreshToken = () => {
 
         const initialize = async () => {
             if (!initializationRef.current) {
-                await fetchProfile();
-                initializationRef.current = true;
+                try {
+                    await refreshAuthToken();
+                    await fetchProfile();
+                    initializationRef.current = true;
+                } catch (error) {
+                    console.error('Initialization failed:', error);
+                }
             }
         };
 
         const startTokenRefresh = () => {
-            refreshAuthToken();
             intervalId = setInterval(refreshAuthToken, REFRESH_POLLING_TIME);
         };
 
-        initialize();
-        startTokenRefresh();
+        initialize().then(() => {
+            startTokenRefresh();
+        });
 
         return () => clearInterval(intervalId);
-    }, [isAuthenticated]);
+    }, [isAuthenticated, fetchProfile, refreshAuthToken]);
 };
