@@ -1,7 +1,7 @@
 import { HttpResponse, delay, http } from 'msw';
 
 import { createFeedItem, feedList } from './mockFeeds';
-import { ACTIVITY, BACKEND_API, DETAIL, FEED, FEEDS, LIST_V2, USERS } from '../../consts';
+import { ACTIVITY, BACKEND_API, DETAIL, FEED, FEEDS, HELLO, LIST, LIST_V2, USERS } from '../../consts';
 
 import type { FeedView } from '../../types';
 import type { ListResult } from '@lemon/shared';
@@ -39,6 +39,31 @@ export const feedHandler = [
         }
 
         return HttpResponse.json(targetFeed);
+    }),
+    http.get([BACKEND_API, HELLO, FEEDS, LIST].join('/'), async ({ request }) => {
+        const page = Number(new URL(request.url).searchParams.get('page')) || 0;
+        const limit = Number(new URL(request.url).searchParams.get('limit')) || 10;
+        const keyword = new URL(request.url).searchParams.get('keyword') || '';
+
+        if (!keyword) {
+            return HttpResponse.error();
+        }
+
+        const searchedFeedList = mutableFeedList.filter(feed => feed.text?.includes(keyword));
+
+        const startFeedIdx = page * limit;
+        const endFeedIdx = Math.min((page + 1) * limit, searchedFeedList.length);
+
+        const responseFeedList = searchedFeedList.slice(startFeedIdx, endFeedIdx);
+
+        await delay(1000);
+
+        return HttpResponse.json({
+            list: responseFeedList,
+            total: searchedFeedList.length,
+            page,
+            limit,
+        } as ListResult<FeedView>);
     }),
     http.put([BACKEND_API, FEEDS, ':id', ACTIVITY].join('/'), async ({ request, params }) => {
         const feedId = params['id'];
