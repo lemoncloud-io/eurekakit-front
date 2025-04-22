@@ -1,158 +1,451 @@
+import { useEffect, useState } from 'react';
+
 import {
     Activity,
     ArrowDownRight,
     ArrowUpRight,
+    Calendar,
     DollarSign,
     Download,
-    ShoppingBag,
+    Filter,
+    ShoppingCart,
     Users,
 } from 'lucide-react';
-import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import {
+    Bar,
+    BarChart,
+    CartesianGrid,
+    Legend,
+    Line,
+    LineChart,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis,
+} from 'recharts';
 
-import { Card, CardContent, CardHeader } from '@lemon/ui-kit/components/ui/card';
+import { Avatar, AvatarFallback } from '@lemon/ui-kit/components/ui/avatar';
+import { Button } from '@lemon/ui-kit/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@lemon/ui-kit/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@lemon/ui-kit/components/ui/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@lemon/ui-kit/components/ui/tabs';
 
-const stats = [
-    {
-        title: '총 수익',
-        value: '₩45,231,000',
-        description: '전월 대비 +20.1%',
-        trend: 'up',
-        icon: DollarSign,
-    },
-    {
-        title: '구독자',
-        value: '2,350',
-        description: '전월 대비 +180',
-        trend: 'up',
-        icon: Users,
-    },
-    {
-        title: '판매량',
-        value: '12,234',
-        description: '전월 대비 +19%',
-        trend: 'up',
-        icon: ShoppingBag,
-    },
-    {
-        title: '활성 사용자',
-        value: '573',
-        description: '실시간 접속자',
-        trend: 'down',
-        icon: Activity,
-    },
-];
+export const generateData = () => {
+    // Current date info for realistic date ranges
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
+    const currentYear = currentDate.getFullYear();
 
-const revenueData = [
-    { name: '1월', value: 35000000 },
-    { name: '2월', value: 38000000 },
-    { name: '3월', value: 42000000 },
-    { name: '4월', value: 45231000 },
-];
+    // Generate last 6 months of data
+    const months = [];
+    for (let i = 5; i >= 0; i--) {
+        const monthIndex = (currentMonth - i + 12) % 12;
+        const monthDate = new Date(currentYear, monthIndex, 1);
+        months.push(monthDate.toLocaleString('default', { month: 'short' }));
+    }
 
-const recentTransactions = [
-    { id: 1, user: '김철수', amount: '₩125,000', status: '완료', date: '2024-04-15' },
-    { id: 2, user: '이영희', amount: '₩89,000', status: '처리중', date: '2024-04-15' },
-    { id: 3, user: '박지민', amount: '₩230,000', status: '완료', date: '2024-04-14' },
-    { id: 4, user: '최유진', amount: '₩67,000', status: '완료', date: '2024-04-14' },
-];
+    // Generate revenue data with realistic trends (gradual increase with some variations)
+    const baseRevenue = 30000 + Math.random() * 20000;
+    const revenueData = months.map((month, index) => {
+        // Create a general upward trend with some randomness
+        const growthTrend = 1 + index * 0.05;
+        const randomVariation = 0.9 + Math.random() * 0.2; // 0.9 to 1.1
+        const revenue = Math.round(baseRevenue * growthTrend * randomVariation);
+
+        // Expenses are typically 50-70% of revenue
+        const expenseRatio = 0.5 + Math.random() * 0.2;
+        const expenses = Math.round(revenue * expenseRatio);
+
+        return {
+            name: month,
+            revenue,
+            expenses,
+            profit: revenue - expenses,
+        };
+    });
+
+    // Generate random products performance
+    const products = ['Product A', 'Product B', 'Product C', 'Product D', 'Product E'];
+    const productData = products.map(product => ({
+        name: product,
+        sales: Math.round(1000 + Math.random() * 4000),
+        returns: Math.round(50 + Math.random() * 200),
+    }));
+
+    // Generate some realistic-looking transactions
+    const names = ['James Smith', 'Mary Johnson', 'Robert Williams', 'Patricia Brown', 'John Davis', 'Jennifer Miller'];
+    const statuses = ['completed', 'processing', 'failed'];
+
+    const transactions = Array.from({ length: 5 }, (_, i) => {
+        const user = names[Math.floor(Math.random() * names.length)];
+        const initials = user
+            .split(' ')
+            .map(n => n[0])
+            .join('');
+        const amount = Math.round(50 + Math.random() * 450);
+        const status = statuses[Math.floor(Math.random() * (i === 0 ? 2 : 3))]; // Make first one always completed or processing
+
+        // Generate realistic timestamp (within past 24 hours)
+        const hoursAgo = Math.floor(Math.random() * 24);
+        const minutesAgo = Math.floor(Math.random() * 60);
+        let timeAgo;
+
+        if (hoursAgo === 0) {
+            timeAgo = `${minutesAgo} minute${minutesAgo !== 1 ? 's' : ''} ago`;
+        } else {
+            timeAgo = `${hoursAgo} hour${hoursAgo !== 1 ? 's' : ''} ago`;
+        }
+
+        return {
+            id: i + 1,
+            user,
+            avatar: initials,
+            amount: `$${amount.toFixed(2)}`,
+            status,
+            date: timeAgo,
+        };
+    });
+
+    // Generate key metrics
+    const lastMonthRevenue = revenueData[revenueData.length - 2].revenue;
+    const currentRevenue = revenueData[revenueData.length - 1].revenue;
+    const revenueGrowth = ((currentRevenue - lastMonthRevenue) / lastMonthRevenue) * 100;
+
+    const baseUsers = 2000 + Math.floor(Math.random() * 500);
+    const userGrowth = Math.floor(50 + Math.random() * 200);
+    const currentUsers = baseUsers + userGrowth;
+
+    const baseSales = 10000 + Math.floor(Math.random() * 5000);
+    const salesGrowth = (Math.random() * 20 + 5).toFixed(1);
+    const currentSales = baseSales * (1 + parseFloat(salesGrowth) / 100);
+
+    const activeUsers = Math.floor(400 + Math.random() * 300);
+    const activeUsersChange = Math.random() > 0.7 ? 'down' : 'up'; // Mostly up, sometimes down
+
+    const stats = [
+        {
+            title: 'Total Revenue',
+            value: `$${Math.round(currentRevenue).toLocaleString()}`,
+            description: `${revenueGrowth > 0 ? '+' : ''}${revenueGrowth.toFixed(1)}% from last month`,
+            trend: revenueGrowth > 0 ? 'up' : 'down',
+            icon: DollarSign,
+        },
+        {
+            title: 'Subscribers',
+            value: currentUsers.toLocaleString(),
+            description: `+${userGrowth} this month`,
+            trend: 'up',
+            icon: Users,
+        },
+        {
+            title: 'Sales',
+            value: Math.round(currentSales).toLocaleString(),
+            description: `+${salesGrowth}% from last month`,
+            trend: 'up',
+            icon: ShoppingCart,
+        },
+        {
+            title: 'Active Users',
+            value: activeUsers.toLocaleString(),
+            description: 'Currently online',
+            trend: activeUsersChange,
+            icon: Activity,
+        },
+    ];
+
+    return {
+        stats,
+        revenueData,
+        productData,
+        transactions,
+    };
+};
 
 export const DashboardPage = () => {
+    const [data, setData] = useState(null);
+    const [timeframe, setTimeframe] = useState('week');
+
+    // Generate data on component mount
+    useEffect(() => {
+        // Here you could replace this with a real API call
+        setData(generateData());
+
+        // If using real APIs, this is where you'd fetch data
+        // const fetchData = async () => {
+        //   const response = await fetch('/api/dashboard-data');
+        //   const result = await response.json();
+        //   setData(result);
+        // };
+        // fetchData();
+    }, []);
+
+    // Handle timeframe changes (in a real app, this would refetch data)
+    const handleTimeframeChange = value => {
+        setTimeframe(value);
+        // In a real implementation, you would call your API with the new timeframe
+        // For demo purposes, we'll just regenerate the data
+        setData(generateData());
+    };
+
+    // Show loading state if data isn't loaded yet
+    if (!data) {
+        return (
+            <div className="flex min-h-screen items-center justify-center">
+                <div className="text-lg">Loading dashboard data...</div>
+            </div>
+        );
+    }
+
     return (
-        <div className="flex-1 space-y-6 p-8 pt-6">
-            <div className="flex items-center justify-between">
-                <h2 className="text-3xl font-bold tracking-tight">대시보드</h2>
-                <button className="focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-10 items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                    <Download className="mr-2 h-4 w-4" />
-                    리포트 다운로드
-                </button>
-            </div>
+        <div className="min-h-screen bg-slate-50">
+            {/* Top navigation bar */}
+            <header className="sticky top-0 z-10 border-b bg-white px-6 py-3">
+                <div className="flex items-center justify-between">
+                    <h1 className="text-xl font-bold">Dashboard</h1>
+                    <div className="ml-auto flex items-center gap-4">
+                        <Select value={timeframe} onValueChange={handleTimeframeChange}>
+                            <SelectTrigger className="w-[180px]">
+                                <SelectValue placeholder="Select period" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="day">Last 24 hours</SelectItem>
+                                <SelectItem value="week">This week</SelectItem>
+                                <SelectItem value="month">This month</SelectItem>
+                                <SelectItem value="quarter">This quarter</SelectItem>
+                                <SelectItem value="year">This year</SelectItem>
+                            </SelectContent>
+                        </Select>
+                        <Button>
+                            <Download className="mr-2 h-4 w-4" />
+                            Export Report
+                        </Button>
+                    </div>
+                </div>
+            </header>
 
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                {stats.map(stat => (
-                    <Card key={stat.title} className="relative overflow-hidden">
-                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <div className="text-sm font-medium">{stat.title}</div>
-                            <div className="bg-primary/10 rounded-full p-2">
-                                <stat.icon className="text-primary h-4 w-4" />
-                            </div>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="text-2xl font-bold">{stat.value}</div>
-                            <div className="text-muted-foreground flex items-center text-xs">
-                                {stat.trend === 'up' ? (
-                                    <ArrowUpRight className="mr-1 h-4 w-4 text-green-500" />
-                                ) : (
-                                    <ArrowDownRight className="mr-1 h-4 w-4 text-red-500" />
-                                )}
-                                {stat.description}
-                            </div>
-                        </CardContent>
-                    </Card>
-                ))}
-            </div>
+            {/* Main content */}
+            <main className="container mx-auto px-4 py-6">
+                <div className="mb-8 flex items-center justify-between">
+                    <div>
+                        <h2 className="text-3xl font-bold tracking-tight">Analytics Overview</h2>
+                        <p className="text-slate-500">Monitor your business performance and growth</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <Button variant="outline" size="sm">
+                            <Calendar className="mr-2 h-4 w-4" />
+                            {data.revenueData[0].name} - {data.revenueData[data.revenueData.length - 1].name}
+                        </Button>
+                        <Button variant="outline" size="sm">
+                            <Filter className="mr-2 h-4 w-4" />
+                            Filters
+                        </Button>
+                    </div>
+                </div>
 
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-                <Card className="col-span-4">
-                    <CardHeader>
-                        <h3 className="text-lg font-medium">매출 추이</h3>
-                    </CardHeader>
-                    <CardContent className="h-[300px]">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <LineChart data={revenueData}>
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="name" />
-                                <YAxis />
-                                <Tooltip
-                                    formatter={value =>
-                                        new Intl.NumberFormat('ko-KR', {
-                                            style: 'currency',
-                                            currency: 'KRW',
-                                        }).format(value)
-                                    }
-                                />
-                                <Line
-                                    type="monotone"
-                                    dataKey="value"
-                                    stroke="#2563eb"
-                                    strokeWidth={2}
-                                    dot={{ fill: '#2563eb' }}
-                                />
-                            </LineChart>
-                        </ResponsiveContainer>
-                    </CardContent>
-                </Card>
-
-                <Card className="col-span-3">
-                    <CardHeader>
-                        <h3 className="text-lg font-medium">최근 거래</h3>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="space-y-4">
-                            {recentTransactions.map(transaction => (
-                                <div
-                                    key={transaction.id}
-                                    className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0"
-                                >
-                                    <div className="space-y-1">
-                                        <p className="text-sm font-medium">{transaction.user}</p>
-                                        <p className="text-muted-foreground text-xs">{transaction.date}</p>
-                                    </div>
-                                    <div className="text-right">
-                                        <p className="text-sm font-medium">{transaction.amount}</p>
-                                        <p
-                                            className={`text-xs ${
-                                                transaction.status === '완료' ? 'text-green-500' : 'text-yellow-500'
-                                            }`}
-                                        >
-                                            {transaction.status}
-                                        </p>
-                                    </div>
+                {/* Stats cards */}
+                <div className="mb-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                    {data.stats.map(stat => (
+                        <Card key={stat.title} className="overflow-hidden">
+                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
+                                <div className="rounded-full bg-slate-100 p-2">
+                                    <stat.icon className="h-4 w-4 text-slate-700" />
                                 </div>
-                            ))}
+                            </CardHeader>
+                            <CardContent>
+                                <div className="text-2xl font-bold">{stat.value}</div>
+                                <div className="flex items-center text-xs text-slate-500">
+                                    {stat.trend === 'up' ? (
+                                        <ArrowUpRight className="mr-1 h-4 w-4 text-emerald-500" />
+                                    ) : (
+                                        <ArrowDownRight className="mr-1 h-4 w-4 text-rose-500" />
+                                    )}
+                                    {stat.description}
+                                </div>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </div>
+
+                {/* Charts section */}
+                <Tabs defaultValue="overview" className="space-y-6">
+                    <TabsList>
+                        <TabsTrigger value="overview">Overview</TabsTrigger>
+                        <TabsTrigger value="revenue">Revenue</TabsTrigger>
+                        <TabsTrigger value="products">Products</TabsTrigger>
+                        <TabsTrigger value="customers">Customers</TabsTrigger>
+                    </TabsList>
+
+                    <TabsContent value="overview" className="space-y-6">
+                        <div className="grid gap-6 md:grid-cols-2">
+                            {/* Revenue chart */}
+                            <Card className="col-span-2 lg:col-span-1">
+                                <CardHeader>
+                                    <CardTitle>Revenue & Expenses</CardTitle>
+                                    <CardDescription>Financial performance for the last 6 months</CardDescription>
+                                </CardHeader>
+                                <CardContent className="h-[300px]">
+                                    <ResponsiveContainer width="100%" height="100%">
+                                        <LineChart
+                                            data={data.revenueData}
+                                            margin={{
+                                                top: 5,
+                                                right: 30,
+                                                left: 20,
+                                                bottom: 5,
+                                            }}
+                                        >
+                                            <CartesianGrid strokeDasharray="3 3" />
+                                            <XAxis dataKey="name" />
+                                            <YAxis />
+                                            <Tooltip
+                                                formatter={value => [`$${value.toLocaleString()}`, undefined]}
+                                                labelFormatter={label => `Month: ${label}`}
+                                            />
+                                            <Legend />
+                                            <Line
+                                                type="monotone"
+                                                dataKey="revenue"
+                                                stroke="#8884d8"
+                                                strokeWidth={2}
+                                                name="Revenue"
+                                            />
+                                            <Line
+                                                type="monotone"
+                                                dataKey="expenses"
+                                                stroke="#82ca9d"
+                                                strokeWidth={2}
+                                                name="Expenses"
+                                            />
+                                            <Line
+                                                type="monotone"
+                                                dataKey="profit"
+                                                stroke="#ff7300"
+                                                strokeWidth={2}
+                                                name="Profit"
+                                            />
+                                        </LineChart>
+                                    </ResponsiveContainer>
+                                </CardContent>
+                            </Card>
+
+                            {/* Product performance */}
+                            <Card className="col-span-2 lg:col-span-1">
+                                <CardHeader>
+                                    <CardTitle>Product Performance</CardTitle>
+                                    <CardDescription>Sales and returns by product</CardDescription>
+                                </CardHeader>
+                                <CardContent className="h-[300px]">
+                                    <ResponsiveContainer width="100%" height="100%">
+                                        <BarChart
+                                            data={data.productData}
+                                            margin={{
+                                                top: 5,
+                                                right: 30,
+                                                left: 20,
+                                                bottom: 5,
+                                            }}
+                                        >
+                                            <CartesianGrid strokeDasharray="3 3" />
+                                            <XAxis dataKey="name" />
+                                            <YAxis />
+                                            <Tooltip />
+                                            <Legend />
+                                            <Bar dataKey="sales" fill="#8884d8" name="Sales" />
+                                            <Bar dataKey="returns" fill="#ff7300" name="Returns" />
+                                        </BarChart>
+                                    </ResponsiveContainer>
+                                </CardContent>
+                            </Card>
                         </div>
-                    </CardContent>
-                </Card>
-            </div>
+
+                        {/* Recent Transactions */}
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Recent Transactions</CardTitle>
+                                <CardDescription>Your latest customer purchases and activity</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="space-y-4">
+                                    {data.transactions.map(transaction => (
+                                        <div
+                                            key={transaction.id}
+                                            className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0"
+                                        >
+                                            <div className="flex items-center gap-4">
+                                                <Avatar>
+                                                    <AvatarFallback>{transaction.avatar}</AvatarFallback>
+                                                </Avatar>
+                                                <div className="space-y-1">
+                                                    <p className="font-medium">{transaction.user}</p>
+                                                    <p className="text-sm text-slate-500">{transaction.date}</p>
+                                                </div>
+                                            </div>
+                                            <div className="text-right">
+                                                <p className="font-medium">{transaction.amount}</p>
+                                                <p
+                                                    className={`text-sm ${
+                                                        transaction.status === 'completed'
+                                                            ? 'text-emerald-500'
+                                                            : transaction.status === 'processing'
+                                                              ? 'text-amber-500'
+                                                              : 'text-rose-500'
+                                                    }`}
+                                                >
+                                                    {transaction.status.charAt(0).toUpperCase() +
+                                                        transaction.status.slice(1)}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </TabsContent>
+
+                    <TabsContent value="revenue" className="space-y-4">
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Revenue Analysis</CardTitle>
+                                <CardDescription>Detailed revenue insights would be shown here</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <p className="text-slate-500">
+                                    This tab would contain more detailed revenue metrics and visualizations.
+                                </p>
+                            </CardContent>
+                        </Card>
+                    </TabsContent>
+
+                    <TabsContent value="products" className="space-y-4">
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Product Analytics</CardTitle>
+                                <CardDescription>Detailed product performance metrics</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <p className="text-slate-500">
+                                    This tab would contain more detailed product metrics and inventory information.
+                                </p>
+                            </CardContent>
+                        </Card>
+                    </TabsContent>
+
+                    <TabsContent value="customers" className="space-y-4">
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Customer Insights</CardTitle>
+                                <CardDescription>Customer behavior and demographics</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <p className="text-slate-500">
+                                    This tab would contain customer analytics, demographics and retention metrics.
+                                </p>
+                            </CardContent>
+                        </Card>
+                    </TabsContent>
+                </Tabs>
+            </main>
         </div>
     );
 };
