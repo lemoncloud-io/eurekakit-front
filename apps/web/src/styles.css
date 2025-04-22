@@ -7,15 +7,15 @@
     font-style: normal;
 }
 
-html,
-body,
-#root {
-    font-family: 'Pretendard-Regular';
-    min-height: 100vh;
-    height: 100%;
-}
-
 @layer base {
+    html,
+    body,
+    #root {
+        font-family: 'Pretendard-Regular';
+        min-height: 100vh;
+        height: 100%;
+    }
+
     :root {
         --like: 345, 100%, 63.1%;
     }
