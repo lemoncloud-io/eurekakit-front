@@ -10,7 +10,7 @@ import {
 } from '@lemon/ui-kit/components/ui/dropdown-menu';
 import { List } from '@lemon/ui-kit/components/ui/list';
 
-import { NickName, Profile } from '../../../../components';
+import { NickName, Profile, ReportModal } from '../../../../components';
 import { useNavigate } from '../../../../hooks';
 import { formatRelativeTime } from '../../../../utils';
 import { DeletePostModal } from '../delete-post-modal';
@@ -24,14 +24,7 @@ interface PostHeaderProps {
     hideMenu?: boolean;
 }
 
-export const PostHeader = ({
-    postId,
-    profileImg,
-    nickname,
-    createdAt,
-    hideMenu = false,
-    isMe = true,
-}: PostHeaderProps) => {
+export const PostHeader = ({ postId, profileImg, nickname, createdAt, isMe, hideMenu = false }: PostHeaderProps) => {
     const navigate = useNavigate();
     const overlay = useOverlay();
 
@@ -69,7 +62,13 @@ export const PostHeader = ({
                                 </DropdownMenuItem>
                             </>
                         ) : (
-                            <DropdownMenuItem>신고</DropdownMenuItem>
+                            <DropdownMenuItem
+                                onClick={() =>
+                                    overlay.open(overlayProps => <ReportModal id={postId} {...overlayProps} />)
+                                }
+                            >
+                                신고
+                            </DropdownMenuItem>
                         )}
                     </DropdownMenuContent>
                 </DropdownMenu>
