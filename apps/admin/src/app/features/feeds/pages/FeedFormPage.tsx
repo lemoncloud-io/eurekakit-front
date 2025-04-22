@@ -128,8 +128,8 @@ export const FeedFormPage = () => {
 
         setIsLoading(true);
         deleteFeed(id, {
-            onSuccess: () => {
-                queryClient.invalidateQueries(feedsKeys.invalidateList());
+            onSuccess: async () => {
+                await queryClient.invalidateQueries(feedsKeys.invalidateList());
                 toast({
                     description: t('feeds.toast.deleteFeedSuccess', '피드가 삭제되었습니다.'),
                     duration: 2000,
