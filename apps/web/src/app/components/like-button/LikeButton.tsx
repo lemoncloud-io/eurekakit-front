@@ -6,6 +6,8 @@ import { useLikeFeed } from '@lemon/feeds';
 import { formatCount } from '@lemon/shared';
 import { cn, useToast } from '@lemon/ui-kit';
 
+import type { ClassNameValue } from 'tailwind-merge';
+
 interface LikeState {
     isLike: boolean;
     likeCount: number;
@@ -13,9 +15,17 @@ interface LikeState {
 
 interface LikeButtonProps extends Partial<LikeState> {
     postId: string;
+    hideCount?: boolean;
+    className?: ClassNameValue;
 }
 
-export const LikeButton = ({ postId, isLike = false, likeCount = 0 }: LikeButtonProps) => {
+export const LikeButton = ({
+    postId,
+    isLike = false,
+    likeCount = 0,
+    hideCount = false,
+    className,
+}: LikeButtonProps) => {
     const { toast } = useToast();
     const [optimisticLike, setOptimisticLike] = useState<LikeState>({
         isLike,
@@ -40,9 +50,9 @@ export const LikeButton = ({ postId, isLike = false, likeCount = 0 }: LikeButton
     };
 
     return (
-        <button className="mt-1 flex items-center gap-1 text-xs" onClick={e => onChangeLike(e)}>
+        <button className={cn('mt-1 flex items-center gap-1 text-xs', className)} onClick={e => onChangeLike(e)}>
             <Heart size={16} className={cn(optimisticLike.isLike && 'fill-like stroke-like')} />
-            <span>{formatCount(optimisticLike.likeCount)}</span>
+            {!hideCount && !!optimisticLike.likeCount && <span>{formatCount(optimisticLike.likeCount)}</span>}
         </button>
     );
 
