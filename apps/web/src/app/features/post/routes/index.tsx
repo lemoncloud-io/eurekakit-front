@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 
-import { CreatePostPage, PostDetailPage } from '../pages';
-import { UpdatePostPage } from '../pages/UpdatePostPage';
+import { CreatePostPage, PostDetailPage, UpdatePostPage } from '../pages';
 
 export const PostRoutes = () => {
     return (

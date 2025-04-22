@@ -5,7 +5,6 @@ import { DevTool } from '@hookform/devtools';
 import { cn } from '@lemon/ui-kit';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { FormControl, FormField, FormItem, FormLabel } from '@lemon/ui-kit/components/ui/form';
-import { Separator } from '@lemon/ui-kit/components/ui/separator';
 import { Textarea } from '@lemon/ui-kit/components/ui/textarea';
 
 import { PostEditorImageUploader } from './PostEditorImageUploader';
@@ -29,7 +28,7 @@ export const PostEditor = ({ isSubmitting, onValid, onInvalid }: PostEditorProps
     const isSubmitBtnDisabled = !(isTextDirty && !methods.getFieldState('text').error);
 
     return (
-        <div className="flex w-full flex-col gap-3 p-4">
+        <div className="flex h-full w-full flex-col gap-3">
             {isDev() && <DevTool control={methods.control} />}
             <FormField
                 control={methods.control}
@@ -69,11 +68,10 @@ export const PostEditor = ({ isSubmitting, onValid, onInvalid }: PostEditorProps
                 )}
             />
             <PostEditorImageUploader />
-            <Separator className="h-6 bg-transparent" />
             <Button
                 isLoading={isSubmitting}
                 disabled={isSubmitBtnDisabled}
-                className="w-full"
+                className="mt-auto w-full"
                 onClick={methods.handleSubmit(onValid, onInvalid)}
             >
                 작성 완료

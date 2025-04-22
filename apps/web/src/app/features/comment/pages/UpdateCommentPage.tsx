@@ -2,20 +2,24 @@ import { useForm, useWatch } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
 import { useQueryClient } from '@tanstack/react-query';
-import { X } from 'lucide-react';
+import { ChevronRight, X } from 'lucide-react';
 
 import { feedKeys, useFetchFeed, useUpdateFeed } from '@lemon/feeds';
-import { useGlobalLoader } from '@lemon/shared';
+import { useOverlay } from '@lemon/overlay';
+import { useGlobalLoader, useQueryState } from '@lemon/shared';
 import { useToast } from '@lemon/ui-kit';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Form } from '@lemon/ui-kit/components/ui/form';
 
 import { useFormBlockModal, useNavigate } from '../../../hooks';
-import { PostEditor } from '../components';
+import { PostEditor } from '../../post/components';
+import { PostViewerModal } from '../components';
 
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
 
-export const UpdatePostPage = () => {
+export const UpdateCommentPage = () => {
+    const overlay = useOverlay();
+
     const { setIsLoading } = useGlobalLoader();
     const { toast } = useToast();
 
@@ -24,13 +28,15 @@ export const UpdatePostPage = () => {
 
     const params = useParams();
 
-    const { data: post, isPending: isLoadingPost } = useFetchFeed(params.postId);
+    const [postId] = useQueryState('postId');
+
+    const { data: comment, isPending: isLoadingComment } = useFetchFeed(params.commentId);
     const { mutate: updateFeed, isPending } = useUpdateFeed();
 
     const methods = useForm<FeedBody>({
         mode: 'all',
         defaultValues: { image$$: [], text: '' },
-        values: post,
+        values: comment,
     });
 
     const watchedImages = useWatch({ control: methods.control, name: 'images' });
@@ -38,19 +44,19 @@ export const UpdatePostPage = () => {
 
     const isTextDirty = watchedText?.length !== 0;
     const isImageDirty = !!watchedImages && watchedImages?.length !== 0;
-    const isPostDirty = isTextDirty || isImageDirty;
+    const isCommentDirty = isTextDirty || isImageDirty;
 
-    const { setBlockerOn } = useFormBlockModal(isPostDirty, {
+    const { setBlockerOn } = useFormBlockModal(isCommentDirty, {
         title: '수정하기를 중단하시겠습니까?',
         description: '해당 화면에서 이탈 시 변경된 내용이 사라집니다.',
     });
 
-    const submitPost = (feedBody: FeedBody) => {
+    const submitComment = (feedBody: FeedBody) => {
         setBlockerOn(false);
         setIsLoading(true);
 
         updateFeed(
-            { id: params.postId, body: feedBody },
+            { id: params.commentId, body: feedBody },
             {
                 onSuccess: onSuccessUpdate,
                 onError: () => setBlockerOn(true),
@@ -68,10 +74,22 @@ export const UpdatePostPage = () => {
                     <X />
                 </Button>
             </header>
-            {!isLoadingPost && (
-                <div className="h-[calc(100%-3rem)] p-4">
+            {!isLoadingComment && comment && (
+                <div className="flex h-[calc(100%-3rem)] flex-col gap-3 p-4">
+                    <Button
+                        variant={'outline'}
+                        className="h-14 w-full justify-start rounded-lg"
+                        onClick={() =>
+                            overlay.open(overlayProps => <PostViewerModal postId={postId} {...overlayProps} />)
+                        }
+                    >
+                        본문 보기
+                        <span className="ml-auto">
+                            <ChevronRight />
+                        </span>
+                    </Button>
                     <Form {...methods}>
-                        <PostEditor isSubmitting={isPending} onValid={submitPost} />
+                        <PostEditor isSubmitting={isPending} onValid={submitComment} />
                     </Form>
                 </div>
             )}

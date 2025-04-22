@@ -21,9 +21,17 @@ interface PostHeaderProps {
     nickname: string;
     createdAt: EpochTimeStamp;
     isMe?: boolean;
+    hideMenu?: boolean;
 }
 
-export const PostHeader = ({ postId, profileImg, nickname, createdAt, isMe = true }: PostHeaderProps) => {
+export const PostHeader = ({
+    postId,
+    profileImg,
+    nickname,
+    createdAt,
+    hideMenu = false,
+    isMe = true,
+}: PostHeaderProps) => {
     const navigate = useNavigate();
     const overlay = useOverlay();
 
@@ -38,30 +46,34 @@ export const PostHeader = ({ postId, profileImg, nickname, createdAt, isMe = tru
                 <NickName nickname={nickname} />
                 <span className="text-muted-foreground text-sm">{formatRelativeTime(createdAt)}</span>
             </List>
-            <DropdownMenu>
-                <DropdownMenuTrigger className="text-muted-foreground ml-auto aspect-square">
-                    <MoreVerticalIcon size={16} />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                    {isMe ? (
-                        <>
-                            <DropdownMenuItem onClick={() => navigate(`/post/update/${postId}`)}>
-                                수정하기
-                            </DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem
-                                onClick={() =>
-                                    overlay.open(overlayProps => <DeletePostModal postId={postId} {...overlayProps} />)
-                                }
-                            >
-                                삭제하기
-                            </DropdownMenuItem>
-                        </>
-                    ) : (
-                        <DropdownMenuItem>신고</DropdownMenuItem>
-                    )}
-                </DropdownMenuContent>
-            </DropdownMenu>
+            {!hideMenu && (
+                <DropdownMenu>
+                    <DropdownMenuTrigger className="text-muted-foreground ml-auto aspect-square">
+                        <MoreVerticalIcon size={16} />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        {isMe ? (
+                            <>
+                                <DropdownMenuItem onClick={() => navigate(`/post/update/${postId}`)}>
+                                    수정하기
+                                </DropdownMenuItem>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem
+                                    onClick={() =>
+                                        overlay.open(overlayProps => (
+                                            <DeletePostModal postId={postId} {...overlayProps} />
+                                        ))
+                                    }
+                                >
+                                    삭제하기
+                                </DropdownMenuItem>
+                            </>
+                        ) : (
+                            <DropdownMenuItem>신고</DropdownMenuItem>
+                        )}
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            )}
         </div>
     );
 };

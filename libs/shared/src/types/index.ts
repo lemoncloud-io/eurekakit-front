@@ -38,3 +38,5 @@ export declare type Params = {
 export type RequiredKeys<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
 
 export type OptionalKeys<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+
+export type NonNullableObject<T extends Record<string, any>> = { [K in keyof T]: NonNullable<T[K]> };

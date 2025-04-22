@@ -12,6 +12,8 @@ import { ThemeProvider } from '@lemon/theme';
 import { Toaster } from '@lemon/ui-kit/components/ui/toaster';
 import { useInitWebCore, useRefreshToken } from '@lemon/web-core';
 
+import { useDesktopMobileView } from './hooks';
+
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
@@ -24,6 +26,8 @@ const queryClient = new QueryClient({
 export function App() {
     const isInitialized = useInitWebCore();
     useRefreshToken();
+
+    useDesktopMobileView();
 
     if (!isInitialized) {
         return <LoadingFallback />;

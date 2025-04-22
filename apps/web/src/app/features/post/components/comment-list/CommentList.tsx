@@ -7,10 +7,15 @@ import { useFetchFeed, useFetchInfiniteFeedCommentList } from '@lemon/feeds';
 import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
-import { useIsIntersecting } from '../../../../hooks';
-import { Post } from '../post';
+import { useIsIntersecting, useNavigate } from '../../../../hooks';
+import { Comment } from '../../../comment/components';
+
+import type { FeedView } from '@lemon/feeds';
+import type { RequiredKeys } from '@lemon/shared';
 
 export const CommentList = () => {
+    const navigate = useNavigate();
+
     const { postId } = useParams();
     const { setRef, isIntersecting } = useIsIntersecting<HTMLDivElement>();
 
@@ -33,13 +38,18 @@ export const CommentList = () => {
         <div>
             <div className="bg-muted flex px-4 py-1.5 text-sm">
                 <span>답글 {post?.childNo ?? 0}</span>
-                <button className="text-secondary-foreground ml-auto inline-flex items-center gap-1 text-xs">
+                <button
+                    className="text-secondary-foreground ml-auto inline-flex items-center gap-1 text-xs"
+                    onClick={() => navigate(`/comment/create?postId=${postId}`)}
+                >
                     <span>답글 쓰기</span>
                     <ChevronRight size={16} />
                 </button>
             </div>
             <List seperator={<Separator />} className="gap-3 py-3">
-                {commentList?.list.map(comment => <Post key={comment.id} post={comment} />)}
+                {commentList?.list
+                    .filter((comment): comment is RequiredKeys<FeedView, 'parentId'> => !!comment.parentId)
+                    .map(comment => <Comment key={comment.id} comment={comment} />)}
             </List>
             {hasNextPage && (
                 <>

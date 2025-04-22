@@ -46,7 +46,7 @@ export const CreatePostPage = () => {
     };
 
     return (
-        <div className="w-full">
+        <div className="h-full w-full">
             <header className="flex h-12 w-full items-center justify-between border-b px-2">
                 <div className="w-9" />
                 <span className="font-medium">새로운 글쓰기</span>
@@ -54,9 +54,11 @@ export const CreatePostPage = () => {
                     <X />
                 </Button>
             </header>
-            <Form {...methods}>
-                <PostEditor isSubmitting={isPending} onValid={submitPost} />
-            </Form>
+            <div className="h-[calc(100%-3rem)] p-4">
+                <Form {...methods}>
+                    <PostEditor isSubmitting={isPending} onValid={submitPost} />
+                </Form>
+            </div>
         </div>
     );
 
