@@ -8,6 +8,7 @@ import { cn } from '@lemon/ui-kit';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Input } from '@lemon/ui-kit/components/ui/input';
 
+import { useNavigate } from '../../../../hooks';
 import { isDev } from '../../../../utils';
 import { DevModeSettingModal } from '../dev-mode-setting-modal';
 
@@ -15,6 +16,7 @@ export const HomeHeader = () => {
     const [collapsed, setCollapsed] = useState(false);
     const prevScrollYRef = useRef<number>(0);
     const overlay = useOverlay();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const scrollHandler = () => {
@@ -65,7 +67,7 @@ export const HomeHeader = () => {
                     'ease transition-all duration-200'
                 )}
             >
-                <div className={'flex overflow-hidden'}>
+                <div className={'flex overflow-hidden'} onClick={() => navigate('/search')}>
                     <Input className={cn('bg-background mt-4 rounded-full text-sm')} placeholder="검색" />
                 </div>
             </div>
