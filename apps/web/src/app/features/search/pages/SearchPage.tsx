@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 
 import { DevTool } from '@hookform/devtools';
 
@@ -10,13 +10,14 @@ import type { SearchState } from '../types';
 
 export const SearchPage = () => {
     const methods = useForm<SearchState>({ defaultValues: { keyword: '' } });
+    const inputKeywork = useWatch({ control: methods.control, name: 'keyword' });
+    const isShowingRecentKeyword = inputKeywork.length <= 0;
 
     return (
         <Form {...methods}>
             <DevTool control={methods.control} />
             <SearchInput />
-            <RecentKeywordList />
-            <SearchResultList />
+            {isShowingRecentKeyword ? <RecentKeywordList /> : <SearchResultList />}
         </Form>
     );
 };
