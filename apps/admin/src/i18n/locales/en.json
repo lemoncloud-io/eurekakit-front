@@ -1,4 +1,77 @@
 {
+    "dashboard": {
+        "title": "Dashboard",
+        "analyticsOverview": "Analytics Overview",
+        "monitorPerformance": "Monitor your business performance and growth",
+        "exportReport": "Export Report",
+        "filters": "Filters"
+    },
+    "timeframe": {
+        "day": "Last 24 hours",
+        "week": "This week",
+        "month": "This month",
+        "quarter": "This quarter",
+        "year": "This year",
+        "dateRange": "{startMonth} - {endMonth}"
+    },
+    "stats": {
+        "revenue": {
+            "title": "Total Revenue",
+            "description": "{percent}% from last month"
+        },
+        "subscribers": {
+            "title": "Subscribers",
+            "description": "+{count} this month"
+        },
+        "sales": {
+            "title": "Sales",
+            "description": "+{percent}% from last month"
+        },
+        "activeUsers": {
+            "title": "Active Users",
+            "description": "Currently online"
+        }
+    },
+    "charts": {
+        "tabs": {
+            "overview": "Overview",
+            "revenue": "Revenue",
+            "products": "Products",
+            "customers": "Customers"
+        },
+        "revenue": {
+            "title": "Revenue & Expenses",
+            "description": "Financial performance for the last 6 months",
+            "series": {
+                "revenue": "Revenue",
+                "expenses": "Expenses",
+                "profit": "Profit"
+            }
+        },
+        "products": {
+            "title": "Product Performance",
+            "description": "Sales and returns by product",
+            "series": {
+                "sales": "Sales",
+                "returns": "Returns"
+            }
+        }
+    },
+    "transactions": {
+        "title": "Recent Transactions",
+        "description": "Your latest customer purchases and activity",
+        "status": {
+            "completed": "Completed",
+            "processing": "Processing",
+            "failed": "Failed"
+        }
+    },
+    "placeholders": {
+        "revenue": "This tab would contain more detailed revenue metrics and visualizations.",
+        "products": "This tab would contain more detailed product metrics and inventory information.",
+        "customers": "This tab would contain customer analytics, demographics and retention metrics."
+    },
+    "loading": "Loading dashboard data...",
     "generalError": "An error occurred.",
     "login": {
         "welcome": "Welcome to EurekaKit",

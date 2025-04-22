@@ -1,4 +1,77 @@
 {
+    "dashboard": {
+        "title": "대시보드",
+        "analyticsOverview": "분석 개요",
+        "monitorPerformance": "비즈니스 성과 및 성장 모니터링",
+        "exportReport": "보고서 내보내기",
+        "filters": "필터"
+    },
+    "timeframe": {
+        "day": "지난 24시간",
+        "week": "이번 주",
+        "month": "이번 달",
+        "quarter": "이번 분기",
+        "year": "올해",
+        "dateRange": "{startMonth} - {endMonth}"
+    },
+    "stats": {
+        "revenue": {
+            "title": "총 수익",
+            "description": "전월 대비 {percent}%"
+        },
+        "subscribers": {
+            "title": "구독자",
+            "description": "이번 달 +{count}명"
+        },
+        "sales": {
+            "title": "판매량",
+            "description": "전월 대비 +{percent}%"
+        },
+        "activeUsers": {
+            "title": "활성 사용자",
+            "description": "실시간 접속자"
+        }
+    },
+    "charts": {
+        "tabs": {
+            "overview": "개요",
+            "revenue": "수익",
+            "products": "제품",
+            "customers": "고객"
+        },
+        "revenue": {
+            "title": "수익 및 지출",
+            "description": "최근 6개월 재무 성과",
+            "series": {
+                "revenue": "수익",
+                "expenses": "지출",
+                "profit": "이익"
+            }
+        },
+        "products": {
+            "title": "제품 성과",
+            "description": "제품별 판매 및 반품",
+            "series": {
+                "sales": "판매",
+                "returns": "반품"
+            }
+        }
+    },
+    "transactions": {
+        "title": "최근 거래",
+        "description": "최신 고객 구매 및 활동",
+        "status": {
+            "completed": "완료",
+            "processing": "처리중",
+            "failed": "실패"
+        }
+    },
+    "placeholders": {
+        "revenue": "이 탭에는 더 자세한 수익 지표 및 시각화가 표시됩니다.",
+        "products": "이 탭에는 더 자세한 제품 지표 및 재고 정보가 표시됩니다.",
+        "customers": "이 탭에는 고객 분석, 인구 통계 및 유지율 지표가 표시됩니다."
+    },
+    "loading": "대시보드 데이터 로딩 중...",
     "generalError": "오류가 발생했습니다.",
     "login": {
         "welcome": "레몬에 오신 것을 환영합니다",

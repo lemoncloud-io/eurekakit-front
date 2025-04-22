@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
     Activity,
@@ -30,7 +31,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@lemo
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@lemon/ui-kit/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@lemon/ui-kit/components/ui/tabs';
 
-export const generateData = () => {
+const generateData = () => {
     // Current date info for realistic date ranges
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth();
@@ -122,39 +123,36 @@ export const generateData = () => {
     const activeUsers = Math.floor(400 + Math.random() * 300);
     const activeUsersChange = Math.random() > 0.7 ? 'down' : 'up'; // Mostly up, sometimes down
 
-    const stats = [
-        {
-            title: 'Total Revenue',
-            value: `$${Math.round(currentRevenue).toLocaleString()}`,
-            description: `${revenueGrowth > 0 ? '+' : ''}${revenueGrowth.toFixed(1)}% from last month`,
-            trend: revenueGrowth > 0 ? 'up' : 'down',
-            icon: DollarSign,
-        },
-        {
-            title: 'Subscribers',
-            value: currentUsers.toLocaleString(),
-            description: `+${userGrowth} this month`,
-            trend: 'up',
-            icon: Users,
-        },
-        {
-            title: 'Sales',
-            value: Math.round(currentSales).toLocaleString(),
-            description: `+${salesGrowth}% from last month`,
-            trend: 'up',
-            icon: ShoppingCart,
-        },
-        {
-            title: 'Active Users',
-            value: activeUsers.toLocaleString(),
-            description: 'Currently online',
-            trend: activeUsersChange,
-            icon: Activity,
-        },
-    ];
-
     return {
-        stats,
+        stats: [
+            {
+                key: 'revenue',
+                value: currentRevenue,
+                percent: revenueGrowth.toFixed(1),
+                trend: revenueGrowth > 0 ? 'up' : 'down',
+                icon: DollarSign,
+            },
+            {
+                key: 'subscribers',
+                value: currentUsers,
+                count: userGrowth,
+                trend: 'up',
+                icon: Users,
+            },
+            {
+                key: 'sales',
+                value: Math.round(currentSales),
+                percent: salesGrowth,
+                trend: 'up',
+                icon: ShoppingCart,
+            },
+            {
+                key: 'activeUsers',
+                value: activeUsers,
+                trend: activeUsersChange,
+                icon: Activity,
+            },
+        ],
         revenueData,
         productData,
         transactions,
@@ -162,32 +160,35 @@ export const generateData = () => {
 };
 
 export const DashboardPage = () => {
+    const { i18n, t } = useTranslation();
     const [data, setData] = useState(null);
     const [timeframe, setTimeframe] = useState('week');
 
-    // Generate data on component mount
     useEffect(() => {
-        // Here you could replace this with a real API call
         setData(generateData());
-
-        // If using real APIs, this is where you'd fetch data
-        // const fetchData = async () => {
-        //   const response = await fetch('/api/dashboard-data');
-        //   const result = await response.json();
-        //   setData(result);
-        // };
-        // fetchData();
     }, []);
 
-    // Handle timeframe changes (in a real app, this would refetch data)
     const handleTimeframeChange = value => {
         setTimeframe(value);
-        // In a real implementation, you would call your API with the new timeframe
-        // For demo purposes, we'll just regenerate the data
         setData(generateData());
     };
 
-    // Show loading state if data isn't loaded yet
+    const formatCurrency = value => {
+        const locale = i18n.language === 'ko' ? 'ko-KR' : 'en-US';
+        const currency = i18n.language === 'ko' ? 'KRW' : 'USD';
+
+        return new Intl.NumberFormat(locale, {
+            style: 'currency',
+            currency: currency,
+            maximumFractionDigits: 0,
+        }).format(value);
+    };
+
+    const formatNumber = value => {
+        const locale = i18n.language === 'ko' ? 'ko-KR' : 'en-US';
+        return new Intl.NumberFormat(locale).format(value);
+    };
+
     if (!data) {
         return (
             <div className="flex min-h-screen items-center justify-center">
@@ -201,23 +202,23 @@ export const DashboardPage = () => {
             {/* Top navigation bar */}
             <header className="sticky top-0 z-10 border-b bg-white px-6 py-3">
                 <div className="flex items-center justify-between">
-                    <h1 className="text-xl font-bold">Dashboard</h1>
+                    <h1 className="text-xl font-bold">{t('dashboard.title')}</h1>
                     <div className="ml-auto flex items-center gap-4">
                         <Select value={timeframe} onValueChange={handleTimeframeChange}>
                             <SelectTrigger className="w-[180px]">
                                 <SelectValue placeholder="Select period" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="day">Last 24 hours</SelectItem>
-                                <SelectItem value="week">This week</SelectItem>
-                                <SelectItem value="month">This month</SelectItem>
-                                <SelectItem value="quarter">This quarter</SelectItem>
-                                <SelectItem value="year">This year</SelectItem>
+                                <SelectItem value="day">{t('timeframe.day')}</SelectItem>
+                                <SelectItem value="week">{t('timeframe.week')}</SelectItem>
+                                <SelectItem value="month">{t('timeframe.month')}</SelectItem>
+                                <SelectItem value="quarter">{t('timeframe.quarter')}</SelectItem>
+                                <SelectItem value="year">{t('timeframe.year')}</SelectItem>
                             </SelectContent>
                         </Select>
                         <Button>
                             <Download className="mr-2 h-4 w-4" />
-                            Export Report
+                            {t('dashboard.exportReport')}
                         </Button>
                     </div>
                 </div>
@@ -227,17 +228,20 @@ export const DashboardPage = () => {
             <main className="container mx-auto px-4 py-6">
                 <div className="mb-8 flex items-center justify-between">
                     <div>
-                        <h2 className="text-3xl font-bold tracking-tight">Analytics Overview</h2>
-                        <p className="text-slate-500">Monitor your business performance and growth</p>
+                        <h2 className="text-3xl font-bold tracking-tight">{t('dashboard.analyticsOverview')}</h2>
+                        <p className="text-slate-500">{t('dashboard.monitorPerformance')}</p>
                     </div>
                     <div className="flex items-center gap-2">
                         <Button variant="outline" size="sm">
                             <Calendar className="mr-2 h-4 w-4" />
-                            {data.revenueData[0].name} - {data.revenueData[data.revenueData.length - 1].name}
+                            {t('timeframe.dateRange', {
+                                startMonth: data.revenueData[0].name,
+                                endMonth: data.revenueData[data.revenueData.length - 1].name,
+                            })}
                         </Button>
                         <Button variant="outline" size="sm">
                             <Filter className="mr-2 h-4 w-4" />
-                            Filters
+                            {t('dashboard.filters')}
                         </Button>
                     </div>
                 </div>
@@ -245,22 +249,28 @@ export const DashboardPage = () => {
                 {/* Stats cards */}
                 <div className="mb-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     {data.stats.map(stat => (
-                        <Card key={stat.title} className="overflow-hidden">
+                        <Card key={stat.key} className="overflow-hidden">
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                                <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
+                                <CardTitle className="text-sm font-medium">{t(`stats.${stat.key}.title`)}</CardTitle>
                                 <div className="rounded-full bg-slate-100 p-2">
                                     <stat.icon className="h-4 w-4 text-slate-700" />
                                 </div>
                             </CardHeader>
                             <CardContent>
-                                <div className="text-2xl font-bold">{stat.value}</div>
+                                <div className="text-2xl font-bold">
+                                    {stat.key === 'revenue' ? formatCurrency(stat.value) : formatNumber(stat.value)}
+                                </div>
                                 <div className="flex items-center text-xs text-slate-500">
                                     {stat.trend === 'up' ? (
                                         <ArrowUpRight className="mr-1 h-4 w-4 text-emerald-500" />
                                     ) : (
                                         <ArrowDownRight className="mr-1 h-4 w-4 text-rose-500" />
                                     )}
-                                    {stat.description}
+                                    {stat.key === 'revenue' || stat.key === 'sales'
+                                        ? t(`stats.${stat.key}.description`, { percent: stat.percent })
+                                        : stat.key === 'subscribers'
+                                          ? t(`stats.${stat.key}.description`, { count: formatNumber(stat.count) })
+                                          : t(`stats.${stat.key}.description`)}
                                 </div>
                             </CardContent>
                         </Card>
@@ -270,10 +280,10 @@ export const DashboardPage = () => {
                 {/* Charts section */}
                 <Tabs defaultValue="overview" className="space-y-6">
                     <TabsList>
-                        <TabsTrigger value="overview">Overview</TabsTrigger>
-                        <TabsTrigger value="revenue">Revenue</TabsTrigger>
-                        <TabsTrigger value="products">Products</TabsTrigger>
-                        <TabsTrigger value="customers">Customers</TabsTrigger>
+                        <TabsTrigger value="overview">{t('charts.tabs.overview')}</TabsTrigger>
+                        <TabsTrigger value="revenue">{t('charts.tabs.revenue')}</TabsTrigger>
+                        <TabsTrigger value="products">{t('charts.tabs.products')}</TabsTrigger>
+                        <TabsTrigger value="customers">{t('charts.tabs.customers')}</TabsTrigger>
                     </TabsList>
 
                     <TabsContent value="overview" className="space-y-6">
@@ -281,8 +291,8 @@ export const DashboardPage = () => {
                             {/* Revenue chart */}
                             <Card className="col-span-2 lg:col-span-1">
                                 <CardHeader>
-                                    <CardTitle>Revenue & Expenses</CardTitle>
-                                    <CardDescription>Financial performance for the last 6 months</CardDescription>
+                                    <CardTitle>{t('charts.revenue.title')}</CardTitle>
+                                    <CardDescription>{t('charts.revenue.description')}</CardDescription>
                                 </CardHeader>
                                 <CardContent className="h-[300px]">
                                     <ResponsiveContainer width="100%" height="100%">
@@ -299,8 +309,8 @@ export const DashboardPage = () => {
                                             <XAxis dataKey="name" />
                                             <YAxis />
                                             <Tooltip
-                                                formatter={value => [`$${value.toLocaleString()}`, undefined]}
-                                                labelFormatter={label => `Month: ${label}`}
+                                                formatter={value => [formatCurrency(value), undefined]}
+                                                labelFormatter={label => `${label}`}
                                             />
                                             <Legend />
                                             <Line
@@ -308,21 +318,21 @@ export const DashboardPage = () => {
                                                 dataKey="revenue"
                                                 stroke="#8884d8"
                                                 strokeWidth={2}
-                                                name="Revenue"
+                                                name={t('charts.revenue.series.revenue')}
                                             />
                                             <Line
                                                 type="monotone"
                                                 dataKey="expenses"
                                                 stroke="#82ca9d"
                                                 strokeWidth={2}
-                                                name="Expenses"
+                                                name={t('charts.revenue.series.expenses')}
                                             />
                                             <Line
                                                 type="monotone"
                                                 dataKey="profit"
                                                 stroke="#ff7300"
                                                 strokeWidth={2}
-                                                name="Profit"
+                                                name={t('charts.revenue.series.profit')}
                                             />
                                         </LineChart>
                                     </ResponsiveContainer>
@@ -332,8 +342,8 @@ export const DashboardPage = () => {
                             {/* Product performance */}
                             <Card className="col-span-2 lg:col-span-1">
                                 <CardHeader>
-                                    <CardTitle>Product Performance</CardTitle>
-                                    <CardDescription>Sales and returns by product</CardDescription>
+                                    <CardTitle>{t('charts.products.title')}</CardTitle>
+                                    <CardDescription>{t('charts.products.description')}</CardDescription>
                                 </CardHeader>
                                 <CardContent className="h-[300px]">
                                     <ResponsiveContainer width="100%" height="100%">
@@ -349,10 +359,18 @@ export const DashboardPage = () => {
                                             <CartesianGrid strokeDasharray="3 3" />
                                             <XAxis dataKey="name" />
                                             <YAxis />
-                                            <Tooltip />
+                                            <Tooltip formatter={value => [formatNumber(value), undefined]} />
                                             <Legend />
-                                            <Bar dataKey="sales" fill="#8884d8" name="Sales" />
-                                            <Bar dataKey="returns" fill="#ff7300" name="Returns" />
+                                            <Bar
+                                                dataKey="sales"
+                                                fill="#8884d8"
+                                                name={t('charts.products.series.sales')}
+                                            />
+                                            <Bar
+                                                dataKey="returns"
+                                                fill="#ff7300"
+                                                name={t('charts.products.series.returns')}
+                                            />
                                         </BarChart>
                                     </ResponsiveContainer>
                                 </CardContent>
@@ -362,8 +380,8 @@ export const DashboardPage = () => {
                         {/* Recent Transactions */}
                         <Card>
                             <CardHeader>
-                                <CardTitle>Recent Transactions</CardTitle>
-                                <CardDescription>Your latest customer purchases and activity</CardDescription>
+                                <CardTitle>{t('transactions.title')}</CardTitle>
+                                <CardDescription>{t('transactions.description')}</CardDescription>
                             </CardHeader>
                             <CardContent>
                                 <div className="space-y-4">
@@ -382,7 +400,11 @@ export const DashboardPage = () => {
                                                 </div>
                                             </div>
                                             <div className="text-right">
-                                                <p className="font-medium">{transaction.amount}</p>
+                                                <p className="font-medium">
+                                                    {i18n.language === 'ko'
+                                                        ? transaction.amount.replace('$', '₩')
+                                                        : transaction.amount}
+                                                </p>
                                                 <p
                                                     className={`text-sm ${
                                                         transaction.status === 'completed'
@@ -392,8 +414,7 @@ export const DashboardPage = () => {
                                                               : 'text-rose-500'
                                                     }`}
                                                 >
-                                                    {transaction.status.charAt(0).toUpperCase() +
-                                                        transaction.status.slice(1)}
+                                                    {t(`transactions.status.${transaction.status}`)}
                                                 </p>
                                             </div>
                                         </div>
@@ -406,13 +427,11 @@ export const DashboardPage = () => {
                     <TabsContent value="revenue" className="space-y-4">
                         <Card>
                             <CardHeader>
-                                <CardTitle>Revenue Analysis</CardTitle>
-                                <CardDescription>Detailed revenue insights would be shown here</CardDescription>
+                                <CardTitle>{t('charts.tabs.revenue')}</CardTitle>
+                                <CardDescription>{t('charts.revenue.description')}</CardDescription>
                             </CardHeader>
                             <CardContent>
-                                <p className="text-slate-500">
-                                    This tab would contain more detailed revenue metrics and visualizations.
-                                </p>
+                                <p className="text-slate-500">{t('placeholders.revenue')}</p>
                             </CardContent>
                         </Card>
                     </TabsContent>
@@ -420,13 +439,11 @@ export const DashboardPage = () => {
                     <TabsContent value="products" className="space-y-4">
                         <Card>
                             <CardHeader>
-                                <CardTitle>Product Analytics</CardTitle>
-                                <CardDescription>Detailed product performance metrics</CardDescription>
+                                <CardTitle>{t('charts.tabs.products')}</CardTitle>
+                                <CardDescription>{t('charts.products.description')}</CardDescription>
                             </CardHeader>
                             <CardContent>
-                                <p className="text-slate-500">
-                                    This tab would contain more detailed product metrics and inventory information.
-                                </p>
+                                <p className="text-slate-500">{t('placeholders.products')}</p>
                             </CardContent>
                         </Card>
                     </TabsContent>
@@ -434,13 +451,11 @@ export const DashboardPage = () => {
                     <TabsContent value="customers" className="space-y-4">
                         <Card>
                             <CardHeader>
-                                <CardTitle>Customer Insights</CardTitle>
-                                <CardDescription>Customer behavior and demographics</CardDescription>
+                                <CardTitle>{t('charts.tabs.customers')}</CardTitle>
+                                <CardDescription>{t('transactions.description')}</CardDescription>
                             </CardHeader>
                             <CardContent>
-                                <p className="text-slate-500">
-                                    This tab would contain customer analytics, demographics and retention metrics.
-                                </p>
+                                <p className="text-slate-500">{t('placeholders.customers')}</p>
                             </CardContent>
                         </Card>
                     </TabsContent>
