@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="io.lemoncloud.eurekapage">
+          package="io.lemoncloud.eurekakit">
 
     <queries>
         <package android:name="aptip.app" />
@@ -83,48 +83,6 @@
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/ic_notification"
         />
-        <meta-data android:name="com.dieam.reactnativepushnotification.notification_foreground"
-                   android:value="true" />
-        <meta-data android:name="com.dieam.reactnativepushnotification.channel_create_default"
-                   android:value="true" />
-        <meta-data android:name="com.dieam.reactnativepushnotification.notification_color"
-                   android:resource="@color/white" />
-        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationActions"
-                  android:exported="true" />
-        <receiver
-            android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher"
-            android:exported="true" />
-        <receiver
-            android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationBootEventReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
-            </intent-filter>
-        </receiver>
-
-        <service
-            android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
-<!--        <activity-->
-<!--            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-
-<!--                &lt;!&ndash; Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ &ndash;&gt;-->
-<!--                <data android:host="oauth"-->
-<!--                      android:scheme="TODO: set kakao key" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
 
         <activity
             android:name=".MainActivity"
@@ -144,10 +102,10 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="eurekapage" />
+                <data android:scheme="eurekakit" />
 
-                <data android:host="eurekapage.page.link" android:scheme="http"/>
-                <data android:host="eurekapage.page.link" android:scheme="https"/>
+                <data android:host="eurekakit.page.link" android:scheme="http"/>
+                <data android:host="eurekakit.page.link" android:scheme="https"/>
             </intent-filter>
         </activity>
     </application>

@@ -1,2 +1,2 @@
-export * from './EurekaPageWebViewScreen';
+export * from './EurekaWebViewScreen';
 export * from './ModalWebViewScreen';

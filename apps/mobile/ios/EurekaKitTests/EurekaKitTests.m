@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface EurekaPageTests : XCTestCase
+@interface EurekaKitTests : XCTestCase
 
 @end
 
-@implementation EurekaPageTests
+@implementation EurekaKitTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL (^)(UIView *view))test
 {

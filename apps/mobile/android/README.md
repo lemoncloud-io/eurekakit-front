@@ -1,15 +1,15 @@
-# EurekaPage
+# EurekaKit
 
 ## Android
 
 ### Create key
 
 ```shell
-$ sudo keytool -genkey -v -keystore eurekapage.keystore -alias eurekapage -keyalg RSA -keysize 2048 -validity 10000
+$ sudo keytool -genkey -v -keystore eurekakit.keystore -alias eurekakit -keyalg RSA -keysize 2048 -validity 10000
 ```
 
-- Keystore password: eurekapage
-- alias: eurekapage
+- Keystore password: eurekakit
+- alias: eurekakit
 
 ## Key Hash
 
@@ -29,20 +29,20 @@ $ sudo keytool -genkey -v -keystore eurekapage.keystore -alias eurekapage -keyal
 
 ### Release
 
-- qjaVdMWyOMMCqqKlQAHd2xpIRyU=
+- 3oWiJOM+uYDpyGQtfrRArVQWo7g=
 
 ```
-❯ keytool -exportcert -alias eurekapage -keystore eurekapage.keystore | openssl sha1 -binary | openssl base64
-Enter keystore password:  eurekapage
-Jsy5r9dhap87HSSdClTY3kgifqE=
+❯ keytool -exportcert -alias eurekakit -keystore eurekakit.keystore | openssl sha1 -binary | openssl base64
+Enter keystore password:  eurekakit
+3oWiJOM+uYDpyGQtfrRArVQWo7g=
 ```
 
-- SHA1: 26:CC:B9:AF:D7:61:6A:9F:3B:1D:24:9D:0A:54:D8:DE:48:22:7E:A1
-- SHA256: B6:16:E8:FB:64:2D:20:D5:B9:5A:0E:83:33:D7:85:15:46:70:E7:E5:39:37:64:33:63:30:57:30:B7:27:69:3F
+- SHA1: DE:85:A2:24:E3:3E:B9:80:E9:C8:64:2D:7E:B4:40:AD:54:16:A3:B8
+- SHA256: 46:9D:67:F4:B0:67:72:B6:8B:D0:E6:4A:7F:CF:CD:81:E4:E9:89:33:AF:2E:97:03:D9:70:33:6B:FE:85:F4:FE
 
 ```
-❯ keytool -list -v -alias eurekapage -keystore eurekapage.keystore
-Enter keystore password:  eurekapage
+❯ keytool -list -v -alias eurekakit -keystore eurekakit.keystore
+Enter keystore password:  eurekakit
 ```
 
 ### Debug

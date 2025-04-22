@@ -1,5 +1,5 @@
 {
-    "name": "eurekapage",
+    "name": "eurekakit",
     "version": "0.0.1",
     "private": true,
     "dependencies": {
@@ -21,7 +21,6 @@
         "react-native-safe-area-context": "*",
         "@react-navigation/native": "*",
         "react-native-webview": "*",
-        "react-native-push-notification": "*",
         "@react-native-community/push-notification-ios": "*",
         "react-native-device-info": "*",
         "react-native-haptic-feedback": "*",
@@ -32,11 +31,6 @@
         "react-native-version-check": "*",
         "@lemoncloud/lemon-web-core": "*",
         "@react-native-async-storage/async-storage": "*",
-        "@react-native-firebase/app": "*",
-        "@react-native-firebase/crashlytics": "*",
-        "@react-native-firebase/dynamic-links": "*",
-        "@react-native-firebase/installations": "*",
-        "@react-native-firebase/messaging": "*",
         "react-i18next": "*",
         "react-native-screens": "*",
         "@react-native-google-signin/google-signin": "*",

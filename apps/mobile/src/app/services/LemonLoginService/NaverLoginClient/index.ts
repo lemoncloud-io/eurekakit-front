@@ -9,7 +9,7 @@ import type { OAuthTokenResult } from '@lemon/types';
 import type { NaverLoginInitParams, NaverLoginResponse } from '@react-native-seoul/naver-login';
 
 const NAVER_PARAMS: NaverLoginInitParams = {
-    appName: 'EurekaPage',
+    appName: 'EurekaKit',
     consumerKey: NAVER.consumerKey,
     consumerSecret: NAVER.consumerSecret,
     serviceUrlSchemeIOS: NAVER.serviceUrlSchemeIOS,

@@ -1,8 +1,8 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "org.jetbrains.kotlin.kapt"
-apply plugin: "com.google.gms.google-services"
-apply plugin: 'com.google.firebase.crashlytics'
+// apply plugin: "com.google.gms.google-services"
+// apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: "com.facebook.react"
 
 /**
@@ -81,9 +81,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "io.lemoncloud.eurekapage"
+    namespace "io.lemoncloud.eurekakit"
     defaultConfig {
-        applicationId "io.lemoncloud.eurekapage"
+        applicationId "io.lemoncloud.eurekakit"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -97,10 +97,10 @@ android {
             keyPassword 'android'
         }
         release {
-            storeFile file('eurekapage.keystore')
-            storePassword 'eurekapage'
-            keyAlias 'eurekapage'
-            keyPassword 'eurekapage'
+            storeFile file('eurekakit.keystore')
+            storePassword 'eurekakit'
+            keyAlias 'eurekakit'
+            keyPassword 'eurekakit'
         }
     }
     buildTypes {
@@ -120,9 +120,9 @@ android {
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
-    implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
-    implementation 'com.google.firebase:firebase-core:21.0.0'
-    implementation 'com.google.firebase:firebase-messaging:23.0.6'
+//    implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
+//    implementation 'com.google.firebase:firebase-core:21.0.0'
+//    implementation 'com.google.firebase:firebase-messaging:23.0.6'
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")

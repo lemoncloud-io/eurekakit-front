@@ -39,14 +39,13 @@ import i18n from '../../i18n';
 import { getLemonOAuthToken } from '../../services';
 import { AppColors } from '../../theme';
 import {
-    buildShareLink,
     changeAppLanguage,
     clearAsyncStorage,
     clearDeviceIdFromDeviceInfo,
     createAsyncDelay,
     getCurrentLanguage,
     getDeviceInfoJS,
-    getEurekaPageUserAgent,
+    getEurekaUserAgent,
     getExtendedDeviceInfo,
     getWebViewInfoJS,
     hapticFeedback,
@@ -75,7 +74,7 @@ import type { AppStateStatus } from 'react-native';
 import type { Options } from 'react-native-image-crop-picker';
 import type { ShouldStartLoadRequest } from 'react-native-webview/lib/WebViewTypes';
 
-export const EurekaPageWebViewScreen = () => {
+export const EurekaWebViewScreen = () => {
     const { t } = useTranslation();
     const navigation = useNavigation();
     const appState = useRef(AppState.currentState);
@@ -152,7 +151,7 @@ export const EurekaPageWebViewScreen = () => {
 
     // set DEVICE INFO
     useEffect(() => {
-        getEurekaPageUserAgent()
+        getEurekaUserAgent()
             .then(userAgent => setUserAgent(userAgent))
             .then(() => AsyncStorage.getItem(EUREKA_BASE_URL))
             .then(url => setBaseURL(url || BASE_URL))
@@ -214,7 +213,7 @@ export const EurekaPageWebViewScreen = () => {
         }
     };
 
-    const openWebViewAsModal = (title = 'EurekaPage', url: string) => {
+    const openWebViewAsModal = (title = 'EurekaKit', url: string) => {
         if (!url) {
             return;
         }
@@ -304,13 +303,6 @@ export const EurekaPageWebViewScreen = () => {
     const saveCurrentUserInfo = async (profile: UserProfileView, lemonOAuthToken: LemonOAuthTokenResult) => {
         await AsyncStorage.setItem(USER_PROFILE, JSON.stringify(profile));
         await AsyncStorage.setItem(EUREKA_OAUTH_TOKEN, JSON.stringify(lemonOAuthToken));
-        // NOTE: please parse data
-        // try {
-        //     const userProfileStr: string = await AsyncStorage.getItem(USER_PROFILE);
-        //     const userProfile: UserProfileView = JSON.parse(userProfileStr);
-        // } catch (e) {
-        //     console.error(e);
-        // }
     };
 
     const checkMessageType = (message: WebMessage) => {
