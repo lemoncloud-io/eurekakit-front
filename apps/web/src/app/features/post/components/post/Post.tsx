@@ -1,6 +1,5 @@
 import { PostHeader } from './PostHeader';
-import { PostImageViewer } from './PostImageViewer';
-import { PostLikeButton } from './PostLikeButton';
+import { ImageListViewer, LikeButton } from '../../../../components';
 
 import type { FeedView } from '@lemon/feeds';
 
@@ -18,8 +17,8 @@ export const Post = ({ post }: PostProps) => {
                 createdAt={post.createdAt}
             />
             <div className="break-all">{post.text}</div>
-            {post.image$$ && <PostImageViewer images={post.image$$} />}
-            <PostLikeButton postId={post.id} isLike={post.$activity?.isLike} likeCount={post.likeCount} />
+            <ImageListViewer images={post.image$$} />
+            <LikeButton postId={post.id} isLike={post.$activity?.isLike} likeCount={post.likeCount} />
         </div>
     );
 };
