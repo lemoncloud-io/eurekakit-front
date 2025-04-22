@@ -107,18 +107,45 @@ export const FeedFormPage = () => {
         }
     }, [feed, setValue]);
 
-    // 페이지 변경 시 스크롤 위치 조정
     useEffect(() => {
         if (commentsOpen && !isLoadingComments && commentsContainerRef.current) {
             commentsContainerRef.current.scrollTop = 0;
         }
     }, [currentPage, isLoadingComments, commentsOpen]);
 
-    // 페이지 변경 핸들러
     const handlePageChange = (newPage: number) => {
         if (newPage >= 0 && newPage < Math.ceil((commentsData?.total || 0) / pageSize)) {
             setCurrentPage(newPage);
         }
+    };
+
+    const handleDeleteFeed = () => {
+        if (!id) return;
+
+        if (!window.confirm(t('feeds.confirm.deleteFeed', '이 피드를 삭제하시겠습니까?'))) {
+            return;
+        }
+
+        setIsLoading(true);
+        deleteFeed(id, {
+            onSuccess: () => {
+                queryClient.invalidateQueries(feedsKeys.invalidateList());
+                toast({
+                    description: t('feeds.toast.deleteFeedSuccess', '피드가 삭제되었습니다.'),
+                    duration: 2000,
+                });
+                navigate('/feeds');
+            },
+            onError: () => {
+                toast({
+                    variant: 'destructive',
+                    description: t('feeds.toast.deleteFeedError', '피드 삭제에 실패했습니다.'),
+                    duration: 3000,
+                    className: 'flex justify-center items-center',
+                });
+            },
+            onSettled: () => setIsLoading(false),
+        });
     };
 
     // 폼 제출 처리
@@ -740,25 +767,41 @@ export const FeedFormPage = () => {
                                     )}
                                 </div>
 
-                                <div className="flex justify-end space-x-3 border-t pt-6">
-                                    <Button type="button" variant="outline" onClick={() => navigate('/feeds')}>
-                                        {t('common.cancel', '취소')}
-                                    </Button>
-                                    <Button
-                                        type="submit"
-                                        disabled={isFeedCreating || isFeedUpdating}
-                                        className="min-w-24 px-6"
-                                    >
-                                        {isFeedCreating || isFeedUpdating ? (
-                                            <div className="flex items-center gap-2">
-                                                <Loader size="sm" className="text-white" />
-                                            </div>
-                                        ) : id ? (
-                                            t('common.update', '수정')
-                                        ) : (
-                                            t('common.create', '작성')
+                                <div className="flex justify-between border-t pt-6">
+                                    <div>
+                                        {id && (
+                                            <Button
+                                                type="button"
+                                                variant="destructive"
+                                                onClick={handleDeleteFeed}
+                                                disabled={isLoading || isFeedUpdating || isFeedCreating}
+                                                className="gap-1"
+                                            >
+                                                <Trash className="h-4 w-4" />
+                                                {t('feeds.form.deleteFeed', '피드 삭제')}
+                                            </Button>
                                         )}
-                                    </Button>
+                                    </div>
+                                    <div className="flex space-x-3">
+                                        <Button type="button" variant="outline" onClick={() => navigate('/feeds')}>
+                                            {t('common.cancel', '취소')}
+                                        </Button>
+                                        <Button
+                                            type="submit"
+                                            disabled={isFeedCreating || isFeedUpdating}
+                                            className="min-w-24 px-6"
+                                        >
+                                            {isFeedCreating || isFeedUpdating ? (
+                                                <div className="flex items-center gap-2">
+                                                    <Loader size="sm" className="text-white" />
+                                                </div>
+                                            ) : id ? (
+                                                t('common.update', '수정')
+                                            ) : (
+                                                t('common.create', '작성')
+                                            )}
+                                        </Button>
+                                    </div>
                                 </div>
                             </form>
                         </FormProvider>

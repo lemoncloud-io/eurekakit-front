@@ -236,10 +236,12 @@
             "likes": "Likes",
             "currentImages": "Current Images",
             "imageHelp": "Supported formats: JPG, JPEG, PNG (Max 5MB)",
-            "maxImagesReached": "Maximum 5 images allowed"
+            "maxImagesReached": "Maximum 5 images allowed",
+            "deleteFeed": "Delete"
         },
         "confirm": {
-            "deleteComment": "Are you sure you want to delete this reply?"
+            "deleteComment": "Are you sure you want to delete this reply?",
+            "deleteFeed": "Are you sure you want to delete this feed?"
         },
         "toast": {
             "updateSuccess": "Feed updated successfully",

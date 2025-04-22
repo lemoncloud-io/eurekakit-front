@@ -234,10 +234,12 @@
             "likes": "좋아요",
             "currentImages": "현재 이미지",
             "imageHelp": "지원 형식: JPG, JPEG, PNG (최대 5MB)",
-            "maxImagesReached": "이미지는 최대 5개까지 등록 가능합니다"
+            "maxImagesReached": "이미지는 최대 5개까지 등록 가능합니다",
+            "deleteFeed": "피드 삭제"
         },
         "confirm": {
-            "deleteComment": "이 답글을 삭제하시겠습니까?"
+            "deleteComment": "이 답글을 삭제하시겠습니까?",
+            "deleteFeed": "이 피드를 삭제하시겠습니까?"
         },
         "toast": {
             "updateSuccess": "피드가 성공적으로 업데이트되었습니다",
