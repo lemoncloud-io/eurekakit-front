@@ -213,16 +213,44 @@
             "postedOn": "Posted on"
         },
         "form": {
-            "content": "Content",
-            "contentPlaceholder": "Enter feed content...",
             "images": "Images",
-            "tags": "Tags",
-            "save": "Save Feed",
-            "cancel": "Cancel",
+            "content": "Content",
             "validation": {
                 "contentRequired": "Content is required",
-                "contentLength": "Content must be between 1 and 2000 characters"
-            }
+                "contentLength": "Content must not exceed 2000 characters"
+            },
+            "contentPlaceholder": "Enter feed content...",
+            "basicInfo": "Basic Information",
+            "editTitle": "Edit Feed",
+            "createTitle": "Create Feed",
+            "id": "ID",
+            "feedNo": "Feed No",
+            "createdAt": "Created At",
+            "updatedAt": "Updated At",
+            "author": "Author",
+            "comments": "Replies",
+            "commentsSection": "Manage Replies",
+            "commentPlaceholder": "Enter reply content...",
+            "commentUserId": "User ID",
+            "noComments": "No replies found",
+            "likes": "Likes",
+            "currentImages": "Current Images",
+            "imageHelp": "Supported formats: JPG, JPEG, PNG (Max 5MB)",
+            "maxImagesReached": "Maximum 5 images allowed"
+        },
+        "confirm": {
+            "deleteComment": "Are you sure you want to delete this reply?"
+        },
+        "toast": {
+            "updateSuccess": "Feed updated successfully",
+            "createSuccess": "Feed created successfully",
+            "commentUpdateSuccess": "Reply updated successfully",
+            "commentDeleteSuccess": "Reply deleted successfully",
+            "commentEmpty": "Reply content cannot be empty",
+            "commentUpdateError": "Failed to update reply",
+            "commentDeleteError": "Failed to delete reply",
+            "imageUploadFailed": "Failed to upload image",
+            "error": "An error occurred. Please try again."
         }
     },
     "common": {
@@ -231,6 +259,7 @@
         "update": "Update",
         "retry": "Retry",
         "updating": "Updating..",
-        "creating": "Creating.."
+        "creating": "Creating..",
+        "save": "Save"
     }
 }

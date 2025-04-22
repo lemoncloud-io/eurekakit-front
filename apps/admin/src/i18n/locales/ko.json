@@ -211,25 +211,53 @@
             "postedOn": "작성일"
         },
         "form": {
-            "content": "내용",
-            "contentPlaceholder": "피드 내용을 입력하세요...",
             "images": "이미지",
-            "tags": "태그",
-            "save": "피드 저장",
-            "cancel": "취소",
+            "content": "내용",
             "validation": {
                 "contentRequired": "내용을 입력해주세요",
-                "contentLength": "내용은 1~2000자 사이여야 합니다"
-            }
+                "contentLength": "내용은 2000자 이내로 입력해주세요"
+            },
+            "contentPlaceholder": "피드 내용을 입력하세요",
+            "basicInfo": "기본 정보",
+            "editTitle": "피드 수정",
+            "createTitle": "피드 작성",
+            "id": "아이디",
+            "feedNo": "피드 번호",
+            "createdAt": "생성일",
+            "updatedAt": "수정일",
+            "author": "작성자",
+            "comments": "답글",
+            "commentsSection": "답글 관리",
+            "commentPlaceholder": "답글 내용을 입력하세요...",
+            "commentUserId": "사용자 ID",
+            "noComments": "답글이 없습니다",
+            "likes": "좋아요",
+            "currentImages": "현재 이미지",
+            "imageHelp": "지원 형식: JPG, JPEG, PNG (최대 5MB)",
+            "maxImagesReached": "이미지는 최대 5개까지 등록 가능합니다"
+        },
+        "confirm": {
+            "deleteComment": "이 답글을 삭제하시겠습니까?"
+        },
+        "toast": {
+            "updateSuccess": "피드가 성공적으로 업데이트되었습니다",
+            "createSuccess": "피드가 성공적으로 생성되었습니다",
+            "commentUpdateSuccess": "답글이 업데이트되었습니다",
+            "commentDeleteSuccess": "답글이 삭제되었습니다",
+            "commentEmpty": "답글 내용을 입력해주세요",
+            "commentUpdateError": "답글 업데이트에 실패했습니다",
+            "commentDeleteError": "답글 삭제에 실패했습니다",
+            "imageUploadFailed": "이미지를 업로드할 수 없습니다",
+            "error": "오류가 발생했습니다. 다시 시도해주세요."
         }
     },
-
     "common": {
         "cancel": "취소",
         "create": "만들기",
         "update": "수정",
         "retry": "다시 시도",
         "updating": "수정중..",
-        "creating": "생성중.."
+        "creating": "생성중..",
+        "save": "저장"
     }
 }
