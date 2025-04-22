@@ -13,17 +13,25 @@ import { List } from '@lemon/ui-kit/components/ui/list';
 import { NickName, Profile } from '../../../../components';
 import { useNavigate } from '../../../../hooks';
 import { formatRelativeTime } from '../../../../utils';
-import { DeletePostModal } from '../../../post/components';
+import { DeleteCommentModal } from '../delete-comment-modal';
 
 interface CommentHeaderProps {
     commentId: string;
-    profileImg?: string;
+    postId: string;
     nickname: string;
     createdAt: EpochTimeStamp;
+    profileImg?: string;
     isMe?: boolean;
 }
 
-export const CommentHeader = ({ commentId, profileImg, nickname, createdAt, isMe = true }: CommentHeaderProps) => {
+export const CommentHeader = ({
+    commentId,
+    postId,
+    profileImg,
+    nickname,
+    createdAt,
+    isMe = true,
+}: CommentHeaderProps) => {
     const navigate = useNavigate();
     const overlay = useOverlay();
 
@@ -46,14 +54,14 @@ export const CommentHeader = ({ commentId, profileImg, nickname, createdAt, isMe
                 <DropdownMenuContent>
                     {isMe ? (
                         <>
-                            <DropdownMenuItem onClick={() => navigate(`/comment/update/${commentId}`)}>
+                            <DropdownMenuItem onClick={() => navigate(`/comment/update/${commentId}?postId=${postId}`)}>
                                 수정하기
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem
                                 onClick={() =>
                                     overlay.open(overlayProps => (
-                                        <DeletePostModal postId={commentId} {...overlayProps} />
+                                        <DeleteCommentModal postId={commentId} {...overlayProps} />
                                     ))
                                 }
                             >

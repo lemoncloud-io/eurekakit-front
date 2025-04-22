@@ -10,6 +10,9 @@ import { Separator } from '@lemon/ui-kit/components/ui/separator';
 import { useIsIntersecting, useNavigate } from '../../../../hooks';
 import { Comment } from '../../../comment/components';
 
+import type { FeedView } from '@lemon/feeds';
+import type { RequiredKeys } from '@lemon/shared';
+
 export const CommentList = () => {
     const navigate = useNavigate();
 
@@ -44,7 +47,9 @@ export const CommentList = () => {
                 </button>
             </div>
             <List seperator={<Separator />} className="gap-3 py-3">
-                {commentList?.list.map(comment => <Comment key={comment.id} comment={comment} />)}
+                {commentList?.list
+                    .filter((comment): comment is RequiredKeys<FeedView, 'parentId'> => !!comment.parentId)
+                    .map(comment => <Comment key={comment.id} comment={comment} />)}
             </List>
             {hasNextPage && (
                 <>
