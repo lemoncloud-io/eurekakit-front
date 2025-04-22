@@ -252,7 +252,9 @@
             "commentUpdateError": "Failed to update reply",
             "commentDeleteError": "Failed to delete reply",
             "imageUploadFailed": "Failed to upload image",
-            "error": "An error occurred. Please try again."
+            "error": "An error occurred. Please try again.",
+            "deleteFeedSuccess": "Feed deleted successfully",
+            "deleteFeedError": "Failed to delete feed"
         }
     },
     "common": {
