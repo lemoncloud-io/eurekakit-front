@@ -40,13 +40,13 @@ export const Header = () => {
     };
 
     return (
-        <header className="h-16 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 h-16 border-b backdrop-blur">
             <div className="flex h-full items-center justify-between px-4">
                 <div className="flex items-center gap-4">
                     <Button variant="ghost" size="icon" onClick={toggleSidebar}>
                         <AlignLeft className="h-5 w-5" />
                     </Button>
-                    <span className="text-2xl font-bold gradient-text">Lemon Admin</span>
+                    <span className="gradient-text text-2xl font-bold">EurekaKit Admin</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
@@ -56,13 +56,6 @@ export const Header = () => {
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                            <DropdownMenuItem onClick={handleMenuClick(() => navigate('/profile'))}>
-                                {t('menu.profile')}
-                            </DropdownMenuItem>
-                            <DropdownMenuItem onClick={handleMenuClick(() => navigate('/settings'))}>
-                                {t('menu.settings')}
-                            </DropdownMenuItem>
-                            <DropdownMenuSeparator />
                             <DropdownMenuItem onClick={handleMenuClick(toggleLanguage)}>
                                 <Languages className="mr-2 h-4 w-4" />
                                 {i18n.language === 'ko' ? 'English' : '한국어'}

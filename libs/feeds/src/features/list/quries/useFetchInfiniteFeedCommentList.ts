@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { feedKeys } from '../../../consts';
+import { feedsKeys } from '../../../consts';
 import { fetchFeedCommentList } from '../apis';
 
 import type { FeedView } from '../../../types';
@@ -9,7 +9,7 @@ import type { Params } from '@lemoncloud/lemon-web-core';
 
 export const useFetchInfiniteFeedCommentList = (feedId?: string, params?: Params) =>
     useInfiniteQuery({
-        queryKey: feedKeys.comment(feedId, params, true),
+        queryKey: feedsKeys.comment(feedId, params, true),
         queryFn: ({ pageParam = 0 }) => fetchFeedCommentList(feedId, { ...params, page: pageParam }),
         initialPageParam: 0,
         getNextPageParam: lastPage => {
