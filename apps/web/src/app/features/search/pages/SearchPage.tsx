@@ -1,9 +1,8 @@
-import { useForm, useWatch } from 'react-hook-form';
+import { FormProvider, useForm, useWatch } from 'react-hook-form';
 
 import { DevTool } from '@hookform/devtools';
 
 import { useQueryState } from '@lemon/shared';
-import { Form } from '@lemon/ui-kit/components/ui/form';
 
 import { RecentKeywordList, SearchInput, SearchResultList } from '../components';
 
@@ -18,10 +17,10 @@ export const SearchPage = () => {
     const isShowingRecentKeyword = inputKeywork.length === 0 || methods.formState.isDirty;
 
     return (
-        <Form {...methods}>
+        <FormProvider {...methods}>
             <DevTool control={methods.control} />
             <SearchInput />
             {isShowingRecentKeyword ? <RecentKeywordList /> : <SearchResultList />}
-        </Form>
+        </FormProvider>
     );
 };
