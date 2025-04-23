@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,15 +11,17 @@ import { Input } from '@lemon/ui-kit/components/ui/input';
 
 import { RECENT_KEYWORD_STORAGE_KEY } from '../../consts';
 
-import type { SearchState } from '../../types';
+import type { RecentKeyword, SearchState } from '../../types';
 
 export const SearchInput = () => {
     const navigate = useNavigate();
     const methods = useFormContext<SearchState>();
     const inputText = useWatch({ control: methods.control, name: 'keyword' });
 
+    const inputRef = useRef<HTMLInputElement>(null);
+
     const [, setKeyword] = useQueryState('keyword');
-    const [, setResentKeywordList] = useLocalStorage<string[]>(RECENT_KEYWORD_STORAGE_KEY, []);
+    const [, setResentKeywordList] = useLocalStorage<RecentKeyword[]>(RECENT_KEYWORD_STORAGE_KEY, []);
 
     const clearInput = () => {
         methods.reset({ keyword: '' });
@@ -29,15 +32,26 @@ export const SearchInput = () => {
             return;
         }
 
-        setResentKeywordList(prev => [data.keyword, ...prev.filter(keyword => keyword !== data.keyword)]);
+        setResentKeywordList(prev => [
+            { keyword: data.keyword, timestamp: Date.now() },
+            ...prev.filter(keyword => keyword.keyword !== data.keyword),
+        ]);
         setKeyword(data.keyword, { replace: true });
     };
+
+    useEffect(() => {
+        if (!inputRef.current) {
+            return;
+        }
+
+        inputRef.current.focus();
+    }, []);
 
     return (
         <FormField
             control={methods.control}
             name="keyword"
-            render={({ field }) => (
+            render={({ field: { value, onChange } }) => (
                 <div className="flex items-center gap-1 border-b p-4">
                     <button onClick={() => navigate(-1)}>
                         <ChevronLeft />
@@ -53,7 +67,9 @@ export const SearchInput = () => {
                                 className="border-none text-sm shadow-none focus-visible:border-none focus-visible:ring-0"
                                 placeholder="검색"
                                 onKeyUp={e => e.key === 'Enter' && methods.handleSubmit(submitSearch)()}
-                                {...field}
+                                value={value}
+                                onChange={onChange}
+                                ref={inputRef}
                             />
                         </FormControl>
                         <div className="flex items-center gap-2">
