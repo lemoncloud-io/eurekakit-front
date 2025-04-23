@@ -13,7 +13,7 @@ export const Post = ({ post }: PostProps) => {
     const { profile } = useWebCoreStore();
 
     return (
-        <div className="flex flex-col items-start gap-2 px-4">
+        <div className="flex flex-col items-start gap-2 px-4 py-2">
             <PostHeader
                 postId={post.id}
                 profileImg={post.user$?.image}
