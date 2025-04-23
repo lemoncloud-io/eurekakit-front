@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,8 +16,6 @@ export const SearchInput = () => {
     const navigate = useNavigate();
     const methods = useFormContext<SearchState>();
     const inputText = useWatch({ control: methods.control, name: 'keyword' });
-
-    const inputRef = useRef<HTMLInputElement>(null);
 
     const [, setKeyword] = useQueryState('keyword');
     const [, setResentKeywordList] = useLocalStorage<RecentKeyword[]>(RECENT_KEYWORD_STORAGE_KEY, []);
@@ -39,14 +36,6 @@ export const SearchInput = () => {
         setKeyword(data.keyword, { replace: true });
         methods.reset({ keyword: data.keyword });
     };
-
-    useEffect(() => {
-        if (!inputRef.current) {
-            return;
-        }
-
-        inputRef.current.focus();
-    }, []);
 
     return (
         <FormField
@@ -70,7 +59,7 @@ export const SearchInput = () => {
                                 onKeyUp={e => e.key === 'Enter' && methods.handleSubmit(submitSearch)()}
                                 value={value}
                                 onChange={onChange}
-                                ref={inputRef}
+                                autoFocus
                             />
                         </FormControl>
                         <div className="flex items-center gap-2">
