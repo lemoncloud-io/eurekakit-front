@@ -1,4 +1,4 @@
-import { useForm, useFormState, useWatch } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 
 import { DevTool } from '@hookform/devtools';
 
@@ -11,12 +11,11 @@ import type { SearchState } from '../types';
 
 export const SearchPage = () => {
     const [urlKeyword] = useQueryState('keyword');
+
     const methods = useForm<SearchState>({ defaultValues: { keyword: '' }, values: { keyword: urlKeyword } });
     const inputKeywork = useWatch({ control: methods.control, name: 'keyword' });
-    const inputFormState = useFormState({ control: methods.control, name: 'keyword' });
 
-    const isShowingRecentKeyword =
-        inputKeywork.length === 0 || inputFormState.isDirty || inputFormState.dirtyFields.keyword;
+    const isShowingRecentKeyword = inputKeywork.length === 0 || methods.formState.isDirty;
 
     return (
         <Form {...methods}>
