@@ -13,7 +13,6 @@ interface InfiniteListProps extends ComponentProps<typeof List> {
 }
 
 export const InfiniteList = ({ children, isFetching, showTrigger, fetchFn, ...listProps }: InfiniteListProps) => {
-    console.log('mount');
     const { setRef, isIntersecting } = useIsIntersecting();
 
     useEffect(() => {
