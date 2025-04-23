@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 
+import { isAfter, subDays } from 'date-fns';
 import { X } from 'lucide-react';
 
 import { useLocalStorage, useQueryState } from '@lemon/shared';
@@ -25,6 +27,12 @@ export const RecentKeywordList = () => {
         methods.reset({ keyword });
         setKeyword(keyword, { replace: true });
     };
+
+    useEffect(() => {
+        const TWO_WEEK_AGO = subDays(new Date(), 14);
+
+        setResentKeywordList(prev => prev.filter(keyword => isAfter(new Date(keyword.timestamp), TWO_WEEK_AGO)));
+    }, []);
 
     return (
         <div className="flex flex-col gap-4 p-4">
