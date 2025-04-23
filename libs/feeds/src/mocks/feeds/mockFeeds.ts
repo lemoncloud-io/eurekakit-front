@@ -76,4 +76,4 @@ export const createFeedItem = (index: number, parentId?: string): FeedView => {
 export const generateFeeds = (count: number, parentId?: string): FeedView[] =>
     Array.from({ length: count }, (_, i) => createFeedItem(i, parentId));
 
-export const feedList = generateFeeds(13).sort((a, b) => Number(b.createdAt) - Number(a.createdAt));
+export const feedList = generateFeeds(50).sort((a, b) => Number(b.createdAt) - Number(a.createdAt));

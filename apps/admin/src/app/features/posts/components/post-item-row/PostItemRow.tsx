@@ -23,13 +23,13 @@ export const PostItemRow = ({ post, onClickRow, onDeleteRow }: PostItemRowProps)
     return (
         <TableRow className="cursor-pointer" onClick={() => onClickRow(post.id)}>
             <TableCell className="truncate px-8 py-4">{post.id}</TableCell>
-            <TableCell className="truncate  max-w-[300px]  font-bold">{post.subject || '-'}</TableCell>
+            <TableCell className="max-w-[300px] truncate font-bold">{post.subject || '-'}</TableCell>
             <TableCell className="truncate">{post.author?.name}</TableCell>
             <TableCell className="truncate">{post?.['category'] || '-'}</TableCell>
             <TableCell className="truncate">
                 <Badge variant={post.isHidden ? 'outline' : 'secondary'}>{post.isHidden ? '숨김' : '노출'}</Badge>
             </TableCell>
-            <TableCell className="truncate">{formatDate(post.postedAt, 'YYYY.MM.DD')}</TableCell>
+            <TableCell className="truncate">{formatDate(post.postedAt, 'yyyy.MM.dd')}</TableCell>
             <TableCell>
                 <Popover>
                     <PopoverTrigger asChild>
@@ -42,12 +42,12 @@ export const PostItemRow = ({ post, onClickRow, onDeleteRow }: PostItemRowProps)
                             <EllipsisVertical size={15} />
                         </Button>
                     </PopoverTrigger>
-                    <PopoverContent className="p-2 w-25" onClick={e => e.stopPropagation()}>
+                    <PopoverContent className="w-25 p-2" onClick={e => e.stopPropagation()}>
                         <PopoverClose>
                             <Button
                                 onClick={() => onDeleteRow(post.id)}
                                 variant="destructive"
-                                className=" justify-between items-center flex"
+                                className="flex items-center justify-between"
                             >
                                 <Trash2 size={15} />
                                 삭제

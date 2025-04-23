@@ -21,8 +21,11 @@ export const ImageCarouselModal = ({ startIndex = 0, images, ...modalProps }: Go
                         {images.map(
                             image =>
                                 image.url && (
-                                    <CarouselItem key={image.id || image.url}>
-                                        <img src={image.url} className="w-full rounded-md object-cover" />
+                                    <CarouselItem
+                                        key={image.id || image.url}
+                                        className="flex max-h-[80vh] items-center justify-center overflow-hidden"
+                                    >
+                                        <img src={image.url} className="h-full rounded-md object-contain" />
                                     </CarouselItem>
                                 )
                         )}

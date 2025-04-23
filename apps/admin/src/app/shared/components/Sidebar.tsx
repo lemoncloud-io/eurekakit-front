@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 
-import { ChevronDown, FileText, LayoutGrid, LayoutList, LucideHome } from 'lucide-react';
+import { ChevronDown, FileText, LayoutGrid, LayoutList, LucideHome, MessageSquare } from 'lucide-react';
 
 import { useBoards } from '@lemon/boards';
 import { Loader } from '@lemon/shared';
@@ -15,6 +15,11 @@ const menuItems = [
         titleKey: 'menu.dashboard',
         path: '/home',
         icon: LucideHome,
+    },
+    {
+        titleKey: 'menu.feeds',
+        path: '/feeds',
+        icon: MessageSquare,
     },
     {
         titleKey: 'menu.boardTypes',
@@ -32,30 +37,30 @@ const menuItems = [
 export const Sidebar = () => {
     const { t } = useTranslation();
     const isSidebarOpen = useLayoutStore(state => state.isSidebarOpen);
-    const [isExpanded, setIsExpanded] = useState(true);
+    const [isExpanded, setIsExpanded] = useState(false);
     const { data: boardsData, isLoading } = useBoards({ page: 0, limit: 100 });
 
     return (
         <aside
             className={cn(
-                'left-0 top-16 h-[calc(100vh-4rem)] bg-background border-r transition-all duration-300 z-20',
+                'bg-background left-0 top-16 z-20 h-[calc(100vh-4rem)] border-r transition-all duration-300',
                 isSidebarOpen ? 'w-64' : 'w-0 -translate-x-full'
             )}
         >
-            <nav className={cn('overflow-y-auto h-full', isSidebarOpen ? 'space-y-2 p-4' : '')}>
+            <nav className={cn('h-full overflow-y-auto', isSidebarOpen ? 'space-y-2 p-4' : '')}>
                 {menuItems.map(item => (
                     <NavLink
                         key={item.path}
                         to={item.path}
                         className={({ isActive }) =>
                             cn(
-                                'flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors',
+                                'flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors',
                                 'hover:bg-accent hover:text-accent-foreground',
                                 isActive ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'
                             )
                         }
                     >
-                        <item.icon className="w-4 h-4" />
+                        <item.icon className="h-4 w-4" />
                         {t(item.titleKey)}
                     </NavLink>
                 ))}
@@ -63,16 +68,16 @@ export const Sidebar = () => {
                     <div className="mt-6">
                         <button
                             onClick={() => setIsExpanded(!isExpanded)}
-                            className="w-full px-4 py-2 flex items-center justify-between hover:bg-accent hover:text-accent-foreground rounded-md"
+                            className="hover:bg-accent hover:text-accent-foreground flex w-full items-center justify-between rounded-md px-4 py-2"
                         >
-                            <h3 className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                                <LayoutList className="w-4 h-4" />
+                            <h3 className="text-muted-foreground flex items-center gap-2 text-sm font-medium">
+                                <LayoutList className="h-4 w-4" />
                                 {t('menu.boardList')}
                             </h3>
                             <ChevronDown
                                 className={cn(
-                                    'w-4 h-4 text-muted-foreground transition-transform',
-                                    isExpanded ? 'transform rotate-0' : 'transform -rotate-90'
+                                    'text-muted-foreground h-4 w-4 transition-transform',
+                                    isExpanded ? 'rotate-0 transform' : '-rotate-90 transform'
                                 )}
                             />
                         </button>
@@ -83,7 +88,7 @@ export const Sidebar = () => {
                                         <Loader />
                                     </div>
                                 ) : (
-                                    <div className="space-y-1 mt-2">
+                                    <div className="mt-2 space-y-1">
                                         {boardsData?.data.map(board => (
                                             <NavLink
                                                 key={board.id}

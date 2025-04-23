@@ -15,6 +15,8 @@ export const ImageListViewer = ({ images }: ImageListViewerProps) => {
     const [clickedImageIdx, setClickedImageIdx] = useState<number | undefined>(undefined);
 
     const onClickImage = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        e.preventDefault();
         const imageIdx = (e.currentTarget as HTMLElement).dataset.imageIdx;
 
         if (!imageIdx) {

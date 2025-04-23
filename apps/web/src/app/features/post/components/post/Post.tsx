@@ -21,7 +21,7 @@ export const Post = ({ post }: PostProps) => {
                 createdAt={post.createdAt}
                 isMe={profile?.uid === post.user$.uid}
             />
-            <div className="whitespace-pre-line break-all">{post.text}</div>
+            <div className="whitespace-pre-line break-all" dangerouslySetInnerHTML={{ __html: post.text }} />
             <ImageListViewer images={post.image$$} />
             <LikeButton postId={post.id} isLike={post.$activity?.isLike} likeCount={post.likeCount} />
         </div>
