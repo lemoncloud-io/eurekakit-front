@@ -23,16 +23,16 @@ export const LoginPage = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-background">
-            <Card className="w-full max-w-md p-8 space-y-8 glassmorphism">
+        <div className="bg-background flex min-h-screen items-center justify-center">
+            <Card className="glassmorphism w-full max-w-md space-y-8 p-8">
                 <div className="text-center">
-                    <h1 className="text-4xl font-bold gradient-text mb-2">Lemon</h1>
-                    <h1 className="text-xl text-text font-medium">{t('login.welcome')}</h1>
+                    <h1 className="gradient-text mb-2 text-4xl font-bold">Admin</h1>
+                    <h1 className="text-text text-xl font-medium">{t('login.welcome')}</h1>
                 </div>
 
                 <div className="space-y-4">
                     <Button
-                        className="w-full flex items-center justify-center space-x-2"
+                        className="flex w-full items-center justify-center space-x-2"
                         variant="outline"
                         onClick={() => onClickLogin('google')}
                     >
@@ -41,7 +41,7 @@ export const LoginPage = () => {
                     </Button>
 
                     <Button
-                        className="w-full flex items-center justify-center space-x-2 bg-[#FEE500] text-[#000000] hover:bg-[#FEE500]/90"
+                        className="flex w-full items-center justify-center space-x-2 bg-[#FEE500] text-[#000000] hover:bg-[#FEE500]/90"
                         onClick={() => onClickLogin('kakao')}
                     >
                         <img src={Images.kakaoLogo} alt="Kakao Logo" width={20} height={20} />

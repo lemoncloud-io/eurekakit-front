@@ -4,7 +4,7 @@ import { createFeed } from '../apis';
 
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
 
-export const useCrerateFeed = () =>
+export const useCreateFeed = () =>
     useMutation({
         mutationFn: (body: FeedBody) => createFeed(body),
     });
