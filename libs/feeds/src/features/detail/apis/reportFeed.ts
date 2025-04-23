@@ -15,7 +15,7 @@ export const reportFeed = async (id?: string, reason?: string) => {
 
     const { data } = await webCore
         .buildSignedRequest({
-            method: 'POST',
+            method: 'PUT',
             baseURL: [BACKEND_API, FEEDS, id, ACTIVITY].join('/'),
         })
         .setParams({ report: true })
