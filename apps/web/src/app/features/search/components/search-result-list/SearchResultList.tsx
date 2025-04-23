@@ -45,7 +45,6 @@ export const SearchResultList = () => {
                     <Loader2 className="animate-spin" />
                 </div>
             )}
-
             {!isPending && isEmptyResult ? (
                 <div className="flex h-48 flex-col items-center justify-center">
                     <span>검색 결과가 없습니다.</span>
@@ -57,7 +56,7 @@ export const SearchResultList = () => {
                     fetchFn={fetchNextPage}
                     showTrigger={hasNextPage}
                     seperator={<Separator />}
-                    className="w-full overflow-x-hidden"
+                    className="overflow-x-hidden"
                 >
                     {highlightedResult.map(post => (
                         <Link key={post.id} className="pb-4 pt-2" to={`/post/${post.id}`}>
