@@ -19,9 +19,9 @@ export const Comment = ({ comment }: CommentProps) => {
                 commentId={comment.id}
                 postId={comment.parentId}
                 profileImg={comment.user$?.image}
-                nickname={comment.user$?.nick}
+                nickname={comment.user$?.nick ?? profile?.$user.nick}
                 createdAt={comment.createdAt}
-                isMe={profile?.uid === comment.user$?.uid}
+                isMe={profile?.uid === comment.userId}
             />
             <div className="whitespace-pre-line break-all">{comment.text}</div>
             <ImageListViewer images={comment.image$$} />

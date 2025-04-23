@@ -19,7 +19,7 @@ export const Post = ({ post }: PostProps) => {
                 profileImg={post.user$?.image}
                 nickname={post.user$?.nick}
                 createdAt={post.createdAt}
-                isMe={profile?.uid === post.user$.uid}
+                isMe={profile?.uid === post.userId}
             />
             <div className="whitespace-pre-line break-all" dangerouslySetInnerHTML={{ __html: post.text }} />
             <ImageListViewer images={post.image$$} />
