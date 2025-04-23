@@ -25,7 +25,7 @@ export const useDesktopMobileView = (maxWidth = 400) => {
             root.style.borderRightWidth = '1px';
 
             const observer = new MutationObserver(() => {
-                document.querySelectorAll('.fixed').forEach(el => {
+                root.querySelectorAll('.fixed').forEach(el => {
                     (el as HTMLElement).style.maxWidth = `${maxWidth}px`;
                 });
             });
