@@ -1,18 +1,15 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import { Loader2 } from 'lucide-react';
 
 import { useSearchFeed } from '@lemon/feeds';
 import { useQueryState } from '@lemon/shared';
-import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
-import { useIsIntersecting, useNavigate } from '../../../../hooks';
+import { InfiniteList, Link } from '../../../../components';
 import { Post } from '../../../post/components';
 
 export const SearchResultList = () => {
-    const navigate = useNavigate();
-
     const [keyword] = useQueryState('keyword');
     const {
         data: searchResults,
@@ -21,8 +18,6 @@ export const SearchResultList = () => {
         fetchNextPage,
         isFetchingNextPage,
     } = useSearchFeed({ keyword });
-
-    const { setRef, isIntersecting } = useIsIntersecting<HTMLDivElement>();
 
     const isEmptyResult = !!keyword && !searchResults?.total;
     const highlightedResult = useMemo(
@@ -43,41 +38,32 @@ export const SearchResultList = () => {
         [searchResults, keyword]
     );
 
-    useEffect(() => {
-        if (isIntersecting) {
-            fetchNextPage();
-        }
-    }, [isIntersecting, fetchNextPage]);
-
-    if (isPending) {
-        return (
-            <div className="flex h-48 items-center justify-center">
-                <Loader2 className="animate-spin" />
-            </div>
-        );
-    }
-
-    return isEmptyResult ? (
-        <div className="flex h-48 flex-col items-center justify-center">
-            <span>검색 결과가 없습니다.</span>
-            <span className="text-muted-foreground text-sm">다른 검색어를 입력해 보세요.</span>
-        </div>
-    ) : (
+    return (
         <>
-            <List seperator={<Separator />}>
-                {highlightedResult.map(post => (
-                    <div key={post.id} className="pb-4 pt-2" onClick={() => navigate(`/post/${post.id}`)}>
-                        <Post post={post} />
-                    </div>
-                ))}
-            </List>
-            {hasNextPage && (
-                <>
-                    <Separator />
-                    <div className="flex h-12 w-full items-center justify-center" ref={setRef}>
-                        {isFetchingNextPage && <Loader2 className="animate-spin" />}
-                    </div>
-                </>
+            {isPending && (
+                <div className="flex h-48 items-center justify-center">
+                    <Loader2 className="animate-spin" />
+                </div>
+            )}
+            {!isPending && isEmptyResult ? (
+                <div className="flex h-48 flex-col items-center justify-center">
+                    <span>검색 결과가 없습니다.</span>
+                    <span className="text-muted-foreground text-sm">다른 검색어를 입력해 보세요.</span>
+                </div>
+            ) : (
+                <InfiniteList
+                    isFetching={isFetchingNextPage}
+                    fetchFn={fetchNextPage}
+                    showTrigger={hasNextPage}
+                    seperator={<Separator />}
+                    className="overflow-x-hidden"
+                >
+                    {highlightedResult.map(post => (
+                        <Link key={post.id} className="pb-4 pt-2" to={`/post/${post.id}`}>
+                            <Post post={post} />
+                        </Link>
+                    ))}
+                </InfiniteList>
             )}
         </>
     );

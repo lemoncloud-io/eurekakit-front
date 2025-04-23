@@ -44,7 +44,7 @@ export const SearchInput = () => {
             control={methods.control}
             name="keyword"
             render={({ field: { value, onChange } }) => (
-                <div className="flex items-center gap-1 border-b p-4">
+                <div className="bg-background sticky top-0 z-50 flex items-center gap-1 border-b p-4">
                     <button onClick={() => navigate(-1)}>
                         <ChevronLeft />
                     </button>

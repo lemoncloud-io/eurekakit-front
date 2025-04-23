@@ -1,13 +1,12 @@
-import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { ChevronRight, Loader2 } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 import { useFetchFeed, useFetchInfiniteFeedCommentList } from '@lemon/feeds';
-import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
-import { useIsIntersecting, useNavigate } from '../../../../hooks';
+import { InfiniteList } from '../../../../components';
+import { useNavigate } from '../../../../hooks';
 import { Comment } from '../../../comment/components';
 
 import type { FeedView } from '@lemon/feeds';
@@ -17,7 +16,6 @@ export const CommentList = () => {
     const navigate = useNavigate();
 
     const { postId } = useParams();
-    const { setRef, isIntersecting } = useIsIntersecting<HTMLDivElement>();
 
     const { data: post } = useFetchFeed(postId);
 
@@ -27,12 +25,6 @@ export const CommentList = () => {
         isFetchingNextPage,
         hasNextPage,
     } = useFetchInfiniteFeedCommentList(postId);
-
-    useEffect(() => {
-        if (isIntersecting) {
-            fetchNextPage();
-        }
-    }, [isIntersecting, fetchNextPage]);
 
     return (
         <div>
@@ -46,19 +38,16 @@ export const CommentList = () => {
                     <ChevronRight size={16} />
                 </button>
             </div>
-            <List seperator={<Separator />} className="gap-3 py-3">
+            <InfiniteList
+                isFetching={isFetchingNextPage}
+                fetchFn={fetchNextPage}
+                showTrigger={hasNextPage}
+                seperator={<Separator />}
+            >
                 {commentList?.list
                     .filter((comment): comment is RequiredKeys<FeedView, 'parentId'> => !!comment.parentId)
                     .map(comment => <Comment key={comment.id} comment={comment} />)}
-            </List>
-            {hasNextPage && (
-                <>
-                    <Separator />
-                    <div className="flex h-12 w-full items-center justify-center" ref={setRef}>
-                        {isFetchingNextPage && <Loader2 className="animate-spin" />}
-                    </div>
-                </>
-            )}
+            </InfiniteList>
         </div>
     );
 };

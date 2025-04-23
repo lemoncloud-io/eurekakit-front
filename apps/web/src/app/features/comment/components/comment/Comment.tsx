@@ -14,7 +14,7 @@ export const Comment = ({ comment }: CommentProps) => {
     const { profile } = useWebCoreStore();
 
     return (
-        <div className="flex flex-col items-start gap-2 px-4">
+        <div className="flex flex-col items-start gap-2 px-4 pb-4 pt-2">
             <CommentHeader
                 commentId={comment.id}
                 postId={comment.parentId}
