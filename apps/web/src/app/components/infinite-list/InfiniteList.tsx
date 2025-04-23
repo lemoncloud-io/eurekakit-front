@@ -1,4 +1,4 @@
-import { type ComponentProps, type ReactNode, useEffect } from 'react';
+import { type ComponentProps, useEffect } from 'react';
 
 import { Loader2 } from 'lucide-react';
 
@@ -7,20 +7,13 @@ import { List } from '@lemon/ui-kit/components/ui/list';
 import { useIsIntersecting } from '../../hooks';
 
 interface InfiniteListProps extends ComponentProps<typeof List> {
-    trigger?: ReactNode;
-    isFetching?: boolean;
-    hasNextPage?: boolean;
-    fetchFn?: any;
+    isFetching: boolean;
+    showTrigger: boolean;
+    fetchFn: any;
 }
 
-export const InfiniteList = ({
-    children,
-    trigger,
-    isFetching,
-    hasNextPage,
-    fetchFn,
-    ...listProps
-}: InfiniteListProps) => {
+export const InfiniteList = ({ children, isFetching, showTrigger, fetchFn, ...listProps }: InfiniteListProps) => {
+    console.log('mount');
     const { setRef, isIntersecting } = useIsIntersecting();
 
     useEffect(() => {
@@ -30,16 +23,13 @@ export const InfiniteList = ({
     }, [isIntersecting, fetchFn]);
 
     return (
-        <List ref={setRef} {...listProps}>
+        <List {...listProps}>
             {children}
-            {hasNextPage &&
-                (trigger ? (
-                    <div ref={setRef}>hello{trigger}</div>
-                ) : (
-                    <div className="flex h-12 w-full items-center justify-center" ref={setRef}>
-                        {isFetching && <Loader2 className="animate-spin" />}
-                    </div>
-                ))}
+            {showTrigger && (
+                <div className="flex h-12 w-full items-center justify-center" ref={setRef}>
+                    {isFetching && <Loader2 className="animate-spin" />}
+                </div>
+            )}
         </List>
     );
 };
