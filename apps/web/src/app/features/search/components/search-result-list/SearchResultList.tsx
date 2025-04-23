@@ -28,12 +28,17 @@ export const SearchResultList = () => {
     const highlightedResult = useMemo(
         () =>
             searchResults?.list.map(post => {
-                const regex = new RegExp(keyword, 'g');
-                const highlighted = post.text.replace(
-                    regex,
-                    `<span class='bg-accent text-accent-foreground'>${keyword}</span>`
-                );
-                return { ...post, text: highlighted };
+                try {
+                    const regex = new RegExp(keyword, 'gi');
+                    const highlighted = post.text.replace(
+                        regex,
+                        match => `<span class='bg-accent text-accent-foreground'>${match}</span>`
+                    );
+
+                    return { ...post, text: highlighted };
+                } catch {
+                    return post;
+                }
             }) ?? [],
         [searchResults, keyword]
     );
