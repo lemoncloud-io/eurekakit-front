@@ -17,11 +17,8 @@
         "paths": {
             "@lemon/app-checker": ["libs/app-checker/src/index.ts"],
             "@lemon/assets": ["assets/src/index.ts"],
-            "@lemon/board-types": ["libs/board-types/src/index.ts"],
-            "@lemon/boards": ["libs/boards/src/index.ts"],
             "@lemon/feeds": ["libs/feeds/src/index.ts"],
             "@lemon/overlay": ["libs/overlay/src/index.ts"],
-            "@lemon/posts": ["libs/posts/src/index.ts"],
             "@lemon/shared": ["libs/shared/src/index.ts"],
             "@lemon/theme": ["libs/theme/src/index.ts"],
             "@lemon/types": ["libs/types/src/index.ts"],

@@ -191,16 +191,15 @@ export const DashboardPage = () => {
 
     if (!data) {
         return (
-            <div className="flex min-h-screen items-center justify-center">
-                <div className="text-lg">Loading dashboard data...</div>
+            <div className="bg-background flex min-h-screen items-center justify-center">
+                <div className="text-foreground text-lg">{t('loading')}</div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-slate-50">
-            {/* Top navigation bar */}
-            <header className="sticky top-0 z-10 border-b bg-white px-6 py-3">
+        <div className="bg-background text-foreground min-h-screen">
+            <header className="bg-background/95 sticky top-0 z-10 border-b px-6 py-3 backdrop-blur">
                 <div className="flex items-center justify-between">
                     <h1 className="text-xl font-bold">{t('dashboard.title')}</h1>
                     <div className="ml-auto flex items-center gap-4">
@@ -229,7 +228,7 @@ export const DashboardPage = () => {
                 <div className="mb-8 flex items-center justify-between">
                     <div>
                         <h2 className="text-3xl font-bold tracking-tight">{t('dashboard.analyticsOverview')}</h2>
-                        <p className="text-slate-500">{t('dashboard.monitorPerformance')}</p>
+                        <p className="text-muted-foreground">{t('dashboard.monitorPerformance')}</p>
                     </div>
                     <div className="flex items-center gap-2">
                         <Button variant="outline" size="sm">
@@ -249,18 +248,20 @@ export const DashboardPage = () => {
                 {/* Stats cards */}
                 <div className="mb-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     {data.stats.map(stat => (
-                        <Card key={stat.key} className="overflow-hidden">
+                        <Card key={stat.key} className="bg-card overflow-hidden border">
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                                <CardTitle className="text-sm font-medium">{t(`stats.${stat.key}.title`)}</CardTitle>
-                                <div className="rounded-full bg-slate-100 p-2">
-                                    <stat.icon className="h-4 w-4 text-slate-700" />
+                                <CardTitle className="text-card-foreground text-sm font-medium">
+                                    {t(`stats.${stat.key}.title`)}
+                                </CardTitle>
+                                <div className="bg-muted rounded-full p-2">
+                                    <stat.icon className="text-foreground h-4 w-4" />
                                 </div>
                             </CardHeader>
                             <CardContent>
-                                <div className="text-2xl font-bold">
+                                <div className="text-card-foreground text-2xl font-bold">
                                     {stat.key === 'revenue' ? formatCurrency(stat.value) : formatNumber(stat.value)}
                                 </div>
-                                <div className="flex items-center text-xs text-slate-500">
+                                <div className="text-muted-foreground flex items-center text-xs">
                                     {stat.trend === 'up' ? (
                                         <ArrowUpRight className="mr-1 h-4 w-4 text-emerald-500" />
                                     ) : (
@@ -279,20 +280,42 @@ export const DashboardPage = () => {
 
                 {/* Charts section */}
                 <Tabs defaultValue="overview" className="space-y-6">
-                    <TabsList>
-                        <TabsTrigger value="overview">{t('charts.tabs.overview')}</TabsTrigger>
-                        <TabsTrigger value="revenue">{t('charts.tabs.revenue')}</TabsTrigger>
-                        <TabsTrigger value="products">{t('charts.tabs.products')}</TabsTrigger>
-                        <TabsTrigger value="customers">{t('charts.tabs.customers')}</TabsTrigger>
+                    <TabsList className="bg-muted text-muted-foreground">
+                        <TabsTrigger
+                            value="overview"
+                            className="data-[state=active]:bg-background data-[state=active]:text-foreground"
+                        >
+                            {t('charts.tabs.overview')}
+                        </TabsTrigger>
+                        <TabsTrigger
+                            value="revenue"
+                            className="data-[state=active]:bg-background data-[state=active]:text-foreground"
+                        >
+                            {t('charts.tabs.revenue')}
+                        </TabsTrigger>
+                        <TabsTrigger
+                            value="products"
+                            className="data-[state=active]:bg-background data-[state=active]:text-foreground"
+                        >
+                            {t('charts.tabs.products')}
+                        </TabsTrigger>
+                        <TabsTrigger
+                            value="customers"
+                            className="data-[state=active]:bg-background data-[state=active]:text-foreground"
+                        >
+                            {t('charts.tabs.customers')}
+                        </TabsTrigger>
                     </TabsList>
 
                     <TabsContent value="overview" className="space-y-6">
                         <div className="grid gap-6 md:grid-cols-2">
                             {/* Revenue chart */}
-                            <Card className="col-span-2 lg:col-span-1">
+                            <Card className="bg-card col-span-2 border lg:col-span-1">
                                 <CardHeader>
-                                    <CardTitle>{t('charts.revenue.title')}</CardTitle>
-                                    <CardDescription>{t('charts.revenue.description')}</CardDescription>
+                                    <CardTitle className="text-card-foreground">{t('charts.revenue.title')}</CardTitle>
+                                    <CardDescription className="text-muted-foreground">
+                                        {t('charts.revenue.description')}
+                                    </CardDescription>
                                 </CardHeader>
                                 <CardContent className="h-[300px]">
                                     <ResponsiveContainer width="100%" height="100%">
@@ -305,12 +328,20 @@ export const DashboardPage = () => {
                                                 bottom: 5,
                                             }}
                                         >
-                                            <CartesianGrid strokeDasharray="3 3" />
-                                            <XAxis dataKey="name" />
-                                            <YAxis />
+                                            <CartesianGrid
+                                                strokeDasharray="3 3"
+                                                stroke={theme === 'dark' ? '#374151' : '#e5e7eb'}
+                                            />
+                                            <XAxis dataKey="name" stroke={theme === 'dark' ? '#9ca3af' : '#6b7280'} />
+                                            <YAxis stroke={theme === 'dark' ? '#9ca3af' : '#6b7280'} />
                                             <Tooltip
                                                 formatter={value => [formatCurrency(value), undefined]}
                                                 labelFormatter={label => `${label}`}
+                                                contentStyle={{
+                                                    backgroundColor: theme === 'dark' ? '#1f2937' : '#ffffff',
+                                                    borderColor: theme === 'dark' ? '#374151' : '#e5e7eb',
+                                                    color: theme === 'dark' ? '#f9fafb' : '#111827',
+                                                }}
                                             />
                                             <Legend />
                                             <Line
@@ -340,10 +371,12 @@ export const DashboardPage = () => {
                             </Card>
 
                             {/* Product performance */}
-                            <Card className="col-span-2 lg:col-span-1">
+                            <Card className="bg-card col-span-2 border lg:col-span-1">
                                 <CardHeader>
-                                    <CardTitle>{t('charts.products.title')}</CardTitle>
-                                    <CardDescription>{t('charts.products.description')}</CardDescription>
+                                    <CardTitle className="text-card-foreground">{t('charts.products.title')}</CardTitle>
+                                    <CardDescription className="text-muted-foreground">
+                                        {t('charts.products.description')}
+                                    </CardDescription>
                                 </CardHeader>
                                 <CardContent className="h-[300px]">
                                     <ResponsiveContainer width="100%" height="100%">
@@ -356,19 +389,29 @@ export const DashboardPage = () => {
                                                 bottom: 5,
                                             }}
                                         >
-                                            <CartesianGrid strokeDasharray="3 3" />
-                                            <XAxis dataKey="name" />
-                                            <YAxis />
-                                            <Tooltip formatter={value => [formatNumber(value), undefined]} />
+                                            <CartesianGrid
+                                                strokeDasharray="3 3"
+                                                stroke={theme === 'dark' ? '#374151' : '#e5e7eb'}
+                                            />
+                                            <XAxis dataKey="name" stroke={theme === 'dark' ? '#9ca3af' : '#6b7280'} />
+                                            <YAxis stroke={theme === 'dark' ? '#9ca3af' : '#6b7280'} />
+                                            <Tooltip
+                                                formatter={value => [formatNumber(value), undefined]}
+                                                contentStyle={{
+                                                    backgroundColor: theme === 'dark' ? '#1f2937' : '#ffffff',
+                                                    borderColor: theme === 'dark' ? '#374151' : '#e5e7eb',
+                                                    color: theme === 'dark' ? '#f9fafb' : '#111827',
+                                                }}
+                                            />
                                             <Legend />
                                             <Bar
                                                 dataKey="sales"
-                                                fill="#8884d8"
+                                                fill={theme === 'dark' ? '#8884d8' : '#8884d8'}
                                                 name={t('charts.products.series.sales')}
                                             />
                                             <Bar
                                                 dataKey="returns"
-                                                fill="#ff7300"
+                                                fill={theme === 'dark' ? '#ff9966' : '#ff7300'}
                                                 name={t('charts.products.series.returns')}
                                             />
                                         </BarChart>
@@ -378,29 +421,35 @@ export const DashboardPage = () => {
                         </div>
 
                         {/* Recent Transactions */}
-                        <Card>
+                        <Card className="bg-card border">
                             <CardHeader>
-                                <CardTitle>{t('transactions.title')}</CardTitle>
-                                <CardDescription>{t('transactions.description')}</CardDescription>
+                                <CardTitle className="text-card-foreground">{t('transactions.title')}</CardTitle>
+                                <CardDescription className="text-muted-foreground">
+                                    {t('transactions.description')}
+                                </CardDescription>
                             </CardHeader>
                             <CardContent>
                                 <div className="space-y-4">
                                     {data.transactions.map(transaction => (
                                         <div
                                             key={transaction.id}
-                                            className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0"
+                                            className="border-border flex items-center justify-between border-b pb-4 last:border-0 last:pb-0"
                                         >
                                             <div className="flex items-center gap-4">
                                                 <Avatar>
-                                                    <AvatarFallback>{transaction.avatar}</AvatarFallback>
+                                                    <AvatarFallback className="bg-muted text-muted-foreground">
+                                                        {transaction.avatar}
+                                                    </AvatarFallback>
                                                 </Avatar>
                                                 <div className="space-y-1">
-                                                    <p className="font-medium">{transaction.user}</p>
-                                                    <p className="text-sm text-slate-500">{transaction.date}</p>
+                                                    <p className="text-card-foreground font-medium">
+                                                        {transaction.user}
+                                                    </p>
+                                                    <p className="text-muted-foreground text-sm">{transaction.date}</p>
                                                 </div>
                                             </div>
                                             <div className="text-right">
-                                                <p className="font-medium">
+                                                <p className="text-card-foreground font-medium">
                                                     {i18n.language === 'ko'
                                                         ? transaction.amount.replace('$', '₩')
                                                         : transaction.amount}
@@ -425,37 +474,43 @@ export const DashboardPage = () => {
                     </TabsContent>
 
                     <TabsContent value="revenue" className="space-y-4">
-                        <Card>
+                        <Card className="bg-card border">
                             <CardHeader>
-                                <CardTitle>{t('charts.tabs.revenue')}</CardTitle>
-                                <CardDescription>{t('charts.revenue.description')}</CardDescription>
+                                <CardTitle className="text-card-foreground">{t('charts.tabs.revenue')}</CardTitle>
+                                <CardDescription className="text-muted-foreground">
+                                    {t('charts.revenue.description')}
+                                </CardDescription>
                             </CardHeader>
                             <CardContent>
-                                <p className="text-slate-500">{t('placeholders.revenue')}</p>
+                                <p className="text-muted-foreground">{t('placeholders.revenue')}</p>
                             </CardContent>
                         </Card>
                     </TabsContent>
 
                     <TabsContent value="products" className="space-y-4">
-                        <Card>
+                        <Card className="bg-card border">
                             <CardHeader>
-                                <CardTitle>{t('charts.tabs.products')}</CardTitle>
-                                <CardDescription>{t('charts.products.description')}</CardDescription>
+                                <CardTitle className="text-card-foreground">{t('charts.tabs.products')}</CardTitle>
+                                <CardDescription className="text-muted-foreground">
+                                    {t('charts.products.description')}
+                                </CardDescription>
                             </CardHeader>
                             <CardContent>
-                                <p className="text-slate-500">{t('placeholders.products')}</p>
+                                <p className="text-muted-foreground">{t('placeholders.products')}</p>
                             </CardContent>
                         </Card>
                     </TabsContent>
 
                     <TabsContent value="customers" className="space-y-4">
-                        <Card>
+                        <Card className="bg-card border">
                             <CardHeader>
-                                <CardTitle>{t('charts.tabs.customers')}</CardTitle>
-                                <CardDescription>{t('transactions.description')}</CardDescription>
+                                <CardTitle className="text-card-foreground">{t('charts.tabs.customers')}</CardTitle>
+                                <CardDescription className="text-muted-foreground">
+                                    {t('transactions.description')}
+                                </CardDescription>
                             </CardHeader>
                             <CardContent>
-                                <p className="text-slate-500">{t('placeholders.customers')}</p>
+                                <p className="text-muted-foreground">{t('placeholders.customers')}</p>
                             </CardContent>
                         </Card>
                     </TabsContent>
