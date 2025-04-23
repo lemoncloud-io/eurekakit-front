@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 import { cn } from '@lemon/ui-kit';
 
-
+import { Footer } from './Footer';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import { useLayoutStore } from '../stores/useLayoutStore';
@@ -28,6 +28,7 @@ export const AdminLayout = () => {
                     )}
                 >
                     <Outlet />
+                    <Footer />
                 </main>
             </div>
         </div>
