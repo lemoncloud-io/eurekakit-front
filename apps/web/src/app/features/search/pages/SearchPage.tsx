@@ -13,7 +13,8 @@ export const SearchPage = () => {
     const inputKeywork = useWatch({ control: methods.control, name: 'keyword' });
     const inputFormState = useFormState({ control: methods.control, name: 'keyword' });
 
-    const isShowingRecentKeyword = inputKeywork.length <= 0 || inputFormState.isDirty;
+    const isShowingRecentKeyword =
+        inputKeywork.length === 0 || inputFormState.isDirty || inputFormState.dirtyFields.keyword;
 
     return (
         <Form {...methods}>
