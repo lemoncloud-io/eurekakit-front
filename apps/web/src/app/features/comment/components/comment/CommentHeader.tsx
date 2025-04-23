@@ -10,7 +10,7 @@ import {
 } from '@lemon/ui-kit/components/ui/dropdown-menu';
 import { List } from '@lemon/ui-kit/components/ui/list';
 
-import { NickName, Profile } from '../../../../components';
+import { NickName, Profile, ReportModal } from '../../../../components';
 import { useNavigate } from '../../../../hooks';
 import { formatRelativeTime } from '../../../../utils';
 import { DeleteCommentModal } from '../delete-comment-modal';
@@ -24,14 +24,7 @@ interface CommentHeaderProps {
     isMe?: boolean;
 }
 
-export const CommentHeader = ({
-    commentId,
-    postId,
-    profileImg,
-    nickname,
-    createdAt,
-    isMe = true,
-}: CommentHeaderProps) => {
+export const CommentHeader = ({ commentId, postId, profileImg, nickname, createdAt, isMe }: CommentHeaderProps) => {
     const navigate = useNavigate();
     const overlay = useOverlay();
 
@@ -69,7 +62,13 @@ export const CommentHeader = ({
                             </DropdownMenuItem>
                         </>
                     ) : (
-                        <DropdownMenuItem>신고</DropdownMenuItem>
+                        <DropdownMenuItem
+                            onClick={() =>
+                                overlay.open(overlayProps => <ReportModal id={commentId} {...overlayProps} />)
+                            }
+                        >
+                            신고
+                        </DropdownMenuItem>
                     )}
                 </DropdownMenuContent>
             </DropdownMenu>

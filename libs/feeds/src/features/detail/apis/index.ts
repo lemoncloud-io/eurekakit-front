@@ -5,3 +5,6 @@ export * from './updateFeed';
 export * from './deleteFeed';
 
 export * from './likeFeed';
+export * from './reportFeed';
+
+export * from './createComment';

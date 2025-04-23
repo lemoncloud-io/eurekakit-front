@@ -16,7 +16,7 @@ export const fetchFeedCommentList = async (feedId?: string, params?: Params) => 
             method: 'GET',
             baseURL: [BACKEND_API, FEEDS, feedId, COMMENTS].join('/'),
         })
-        .setParams({ ...params })
+        .setParams({ activity: true, ...params })
         .execute<ListResult<FeedView>>();
 
     return data;

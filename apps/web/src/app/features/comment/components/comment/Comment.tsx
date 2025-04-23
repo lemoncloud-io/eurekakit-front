@@ -1,3 +1,5 @@
+import { useWebCoreStore } from '@lemon/web-core';
+
 import { CommentHeader } from './CommentHeader';
 import { ImageListViewer, LikeButton } from '../../../../components';
 
@@ -9,14 +11,17 @@ interface CommentProps {
 }
 
 export const Comment = ({ comment }: CommentProps) => {
+    const { profile } = useWebCoreStore();
+
     return (
         <div className="flex flex-col items-start gap-2 px-4">
             <CommentHeader
                 commentId={comment.id}
                 postId={comment.parentId}
                 profileImg={comment.user$?.image}
-                nickname={comment.user$?.nick}
+                nickname={comment.user$?.nick ?? profile?.$user.nick}
                 createdAt={comment.createdAt}
+                isMe={profile?.uid === comment.userId}
             />
             <div className="whitespace-pre-line break-all">{comment.text}</div>
             <ImageListViewer images={comment.image$$} />

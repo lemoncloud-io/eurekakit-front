@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { createComment } from '../apis/createComment';
+import { createComment } from '../apis';
 
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
 
