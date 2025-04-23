@@ -1,12 +1,15 @@
 import { useCallback, useMemo, useSyncExternalStore } from 'react';
 
+const EVENT_STORAGE = 'storage';
+const EVENT_LOCAL_STORAGE = 'local-storage';
+
 export const useLocalStorage = <T>(key: string, initialValue: T) => {
     const subscribe = (callback: () => void) => {
-        window.addEventListener('storage', callback);
-        window.addEventListener('local-storage', callback);
+        window.addEventListener(EVENT_STORAGE, callback);
+        window.addEventListener(EVENT_LOCAL_STORAGE, callback);
         return () => {
-            window.removeEventListener('storage', callback);
-            window.removeEventListener('local-storage', callback);
+            window.removeEventListener(EVENT_STORAGE, callback);
+            window.removeEventListener(EVENT_LOCAL_STORAGE, callback);
         };
     };
 
@@ -41,7 +44,7 @@ export const useLocalStorage = <T>(key: string, initialValue: T) => {
 
                 if (newValueStr !== currentValueStr) {
                     localStorage.setItem(key, newValueStr);
-                    window.dispatchEvent(new Event('local-storage'));
+                    window.dispatchEvent(new Event(EVENT_LOCAL_STORAGE));
                 }
             } catch (error) {
                 console.log('Error saving to localStorage:', error);
