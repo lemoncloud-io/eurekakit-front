@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { Loader2 } from 'lucide-react';
 
@@ -25,6 +25,18 @@ export const SearchResultList = () => {
     const { setRef, isIntersecting } = useIsIntersecting<HTMLDivElement>();
 
     const isEmptyResult = !!keyword && !searchResults?.total;
+    const highlightedResult = useMemo(
+        () =>
+            searchResults?.list.map(post => {
+                const regex = new RegExp(keyword, 'g');
+                const highlighted = post.text.replace(
+                    regex,
+                    `<span class='bg-accent text-accent-foreground'>${keyword}</span>`
+                );
+                return { ...post, text: highlighted };
+            }) ?? [],
+        [searchResults, keyword]
+    );
 
     useEffect(() => {
         if (isIntersecting) {
@@ -48,7 +60,7 @@ export const SearchResultList = () => {
     ) : (
         <>
             <List seperator={<Separator />}>
-                {searchResults?.list.map(post => (
+                {highlightedResult.map(post => (
                     <div className="pb-4 pt-2" onClick={() => navigate(`/post/${post.id}`)}>
                         <Post post={post} />
                     </div>
