@@ -9,7 +9,7 @@ import { useIsIntersecting } from '../../hooks';
 interface InfiniteListProps extends ComponentProps<typeof List> {
     isFetching: boolean;
     showTrigger: boolean;
-    fetchFn: any;
+    fetchFn: (...params: any) => Promise<any>;
 }
 
 export const InfiniteList = ({ children, isFetching, showTrigger, fetchFn, ...listProps }: InfiniteListProps) => {
