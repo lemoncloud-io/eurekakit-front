@@ -35,6 +35,7 @@ export const LikeButton = ({
     const { mutate: changeLike } = useLikeFeed();
 
     const onChangeLike = (e: React.MouseEvent) => {
+        e.stopPropagation();
         e.preventDefault();
 
         setOptimisticLike(prev => {

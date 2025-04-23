@@ -4,3 +4,5 @@ export * from './useComments';
 
 export * from './useFetchInfiniteFeedList';
 export * from './useFetchInfiniteFeedCommentList';
+
+export * from './useSearchFeed';

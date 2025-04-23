@@ -6,6 +6,6 @@ export interface FeedListParam extends OFeedListParam {
     parent?: boolean;
 }
 
-export interface FeedView extends Omit<RequiredKeys<OFeedView, 'id' | 'name' | 'createdAt'>, 'user$'> {
+export interface FeedView extends Omit<RequiredKeys<OFeedView, 'id' | 'name' | 'createdAt' | 'text'>, 'user$'> {
     user$: RequiredKeys<UserView, 'id' | 'nick'>;
 }
