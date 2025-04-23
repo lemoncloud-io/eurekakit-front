@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { feedKeys } from '../../../consts';
+import { feedsKeys } from '../../../consts';
 import { searchFeed } from '../apis';
 
 import type { FeedListParam, FeedView } from '../../../types';
@@ -8,7 +8,7 @@ import type { ListResult } from '@lemon/shared';
 
 export const useSearchFeed = (params?: FeedListParam) =>
     useInfiniteQuery({
-        queryKey: feedKeys.list(params, true),
+        queryKey: feedsKeys.list(params, true),
         queryFn: ({ pageParam = 0 }) => searchFeed({ ...params, page: pageParam }),
         initialPageParam: 0,
         getNextPageParam: lastPage => {
