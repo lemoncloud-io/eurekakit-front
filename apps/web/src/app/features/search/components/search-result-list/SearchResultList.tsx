@@ -66,7 +66,7 @@ export const SearchResultList = () => {
         <>
             <List seperator={<Separator />}>
                 {highlightedResult.map(post => (
-                    <div className="pb-4 pt-2" onClick={() => navigate(`/post/${post.id}`)}>
+                    <div key={post.id} className="pb-4 pt-2" onClick={() => navigate(`/post/${post.id}`)}>
                         <Post post={post} />
                     </div>
                 ))}
