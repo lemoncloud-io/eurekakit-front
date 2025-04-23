@@ -7,18 +7,18 @@ import { Carousel, CarouselContent, CarouselItem } from '@lemon/ui-kit/component
 
 import { RECENT_KEYWORD_STORAGE_KEY } from '../../consts';
 
-import type { SearchState } from '../../types';
+import type { RecentKeyword, SearchState } from '../../types';
 
 export const RecentKeywordList = () => {
     const methods = useFormContext<SearchState>();
 
     const [, setKeyword] = useQueryState('keyword');
-    const [recentKeywordList, setResentKeywordList] = useLocalStorage<string[]>(RECENT_KEYWORD_STORAGE_KEY, []);
+    const [recentKeywordList, setResentKeywordList] = useLocalStorage<RecentKeyword[]>(RECENT_KEYWORD_STORAGE_KEY, []);
 
     const removeRecentKeyword = (e: React.MouseEvent, removeKeyword: string) => {
         e.stopPropagation();
 
-        setResentKeywordList(prev => prev.filter(keyword => keyword !== removeKeyword));
+        setResentKeywordList(prev => prev.filter(keyword => keyword.keyword !== removeKeyword));
     };
 
     const setRecentKeyword = (keyword: string) => {
@@ -35,12 +35,12 @@ export const RecentKeywordList = () => {
                         {recentKeywordList.map(keyword => (
                             <CarouselItem
                                 className="max-w-[50vw] basis-auto"
-                                key={keyword}
-                                onClick={() => setRecentKeyword(keyword)}
+                                key={keyword.keyword}
+                                onClick={() => setRecentKeyword(keyword.keyword)}
                             >
                                 <div className="bg-secondary text-secondary-foreground flex items-center gap-2 rounded-full px-3 py-1">
-                                    <span className="overflow-hidden text-ellipsis text-nowrap">{keyword}</span>
-                                    <button onClick={e => removeRecentKeyword(e, keyword)}>
+                                    <span className="overflow-hidden text-ellipsis text-nowrap">{keyword.keyword}</span>
+                                    <button onClick={e => removeRecentKeyword(e, keyword.keyword)}>
                                         <X size={12} className="flex-none" />
                                     </button>
                                 </div>
