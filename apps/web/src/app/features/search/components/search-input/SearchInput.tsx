@@ -26,6 +26,8 @@ export const SearchInput = () => {
 
     const submitSearch = (data: SearchState) => {
         if (!data.keyword) {
+            methods.reset({ keyword: '' });
+            setKeyword(null);
             return;
         }
 
