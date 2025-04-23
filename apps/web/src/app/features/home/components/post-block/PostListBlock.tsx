@@ -4,7 +4,7 @@ import { type FeedView } from '@lemon/feeds';
 import { Condition } from '@lemon/ui-kit/components/ui/condition';
 import { List } from '@lemon/ui-kit/components/ui/list';
 
-import { LikeButton, Link, NickName } from '../../../../components';
+import { Image, LikeButton, Link, NickName } from '../../../../components';
 import { formatCount, formatRelativeTime } from '../../../../utils';
 
 interface PostListBlockProps {
@@ -33,7 +33,7 @@ export const PostListBlock = ({ post }: PostListBlockProps) => {
             </div>
             <Condition condition={!!post.image$$?.length && !!post.image$$[0].url}>
                 <div className="relative ml-auto aspect-square h-24 w-24 flex-none overflow-hidden rounded-lg">
-                    {post.image$$?.length && <img src={post.image$$![0]!.url!} className="h-full w-full" />}
+                    {post.image$$?.length && <Image src={post.image$$![0]!.url!} />}
                     <LikeButton
                         hideCount
                         postId={post.id}
