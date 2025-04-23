@@ -13,3 +13,4 @@ export * from './link';
 export * from './not-found';
 
 export * from './tab-bar';
+export * from './infinite-list';
