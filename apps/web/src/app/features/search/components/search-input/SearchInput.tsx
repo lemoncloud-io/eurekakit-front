@@ -37,6 +37,7 @@ export const SearchInput = () => {
             ...prev.filter(keyword => keyword.keyword !== data.keyword),
         ]);
         setKeyword(data.keyword, { replace: true });
+        methods.reset({ keyword: data.keyword });
     };
 
     useEffect(() => {
