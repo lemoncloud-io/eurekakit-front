@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 
 import { useSearchFeed } from '@lemon/feeds';
 import { useQueryState } from '@lemon/shared';
+import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { InfiniteList, Link } from '../../../../components';
@@ -18,7 +19,7 @@ export const SearchResultList = () => {
         isFetchingNextPage,
     } = useSearchFeed({ keyword });
 
-    const isEmptyResult = !!keyword && !searchResults?.total;
+    const isEmptyResult = !!keyword && searchResults?.total === 0;
     const highlightedResult = useMemo(
         () =>
             searchResults?.list.map(post => {
@@ -42,6 +43,14 @@ export const SearchResultList = () => {
             <span>검색 결과가 없습니다.</span>
             <span className="text-muted-foreground text-sm">다른 검색어를 입력해 보세요.</span>
         </div>
+    ) : isLoading ? (
+        <List seperator={<Separator />}>
+            <PostSkeleton />
+            <PostSkeleton />
+            <PostSkeleton />
+            <PostSkeleton />
+            <PostSkeleton />
+        </List>
     ) : (
         <InfiniteList
             isFetching={isFetchingNextPage}
@@ -50,13 +59,11 @@ export const SearchResultList = () => {
             seperator={<Separator />}
             className="overflow-x-hidden"
         >
-            {isLoading
-                ? Array.from({ length: 5 }).map(() => <PostSkeleton />)
-                : highlightedResult.map(post => (
-                      <Link key={post.id} className="pb-4 pt-2" to={`/post/${post.id}`}>
-                          <Post post={post} />
-                      </Link>
-                  ))}
+            {highlightedResult.map(post => (
+                <Link key={post.id} className="pb-4 pt-2" to={`/post/${post.id}`}>
+                    <Post post={post} />
+                </Link>
+            ))}
         </InfiniteList>
     );
 };
