@@ -6,9 +6,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@lemon/ui-kit/componen
 
 import { InfiniteList } from '../../../../components';
 import { Post } from '../../../post/components';
+import { PostSkeleton } from '../../../post/components/post/PostSkeleton';
 
 export const TotalFeedList = () => {
-    const { data: feedList, hasNextPage, fetchNextPage, isFetchingNextPage } = useFetchInfiniteFeedList();
+    const { data: feedList, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = useFetchInfiniteFeedList();
 
     return (
         <InfiniteList
@@ -18,7 +19,9 @@ export const TotalFeedList = () => {
             fetchFn={fetchNextPage}
             className="overflow-x-hidden"
         >
-            {feedList?.list.map(feed => <Post post={feed} />)}
+            {isLoading
+                ? Array.from({ length: 5 }).map(() => <PostSkeleton />)
+                : feedList?.list.map(feed => <Post post={feed} />)}
         </InfiniteList>
     );
 };
