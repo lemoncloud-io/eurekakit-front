@@ -12,7 +12,13 @@ import { useNavigate } from '../../../../hooks';
 import { isDev } from '../../../../utils';
 import { DevModeSettingModal } from '../dev-mode-setting-modal';
 
-export const HomeHeader = () => {
+import type { ClassNameValue } from 'tailwind-merge';
+
+interface HomeHeaderProps {
+    className?: ClassNameValue;
+}
+
+export const HomeHeader = ({ className }: HomeHeaderProps) => {
     const [collapsed, setCollapsed] = useState(false);
     const prevScrollYRef = useRef<number>(0);
     const overlay = useOverlay();
@@ -35,12 +41,13 @@ export const HomeHeader = () => {
     }, []);
 
     return (
-        <div
+        <header
             className={cn(
                 'fixed top-0 z-50',
                 'w-full rounded-b-[24px] bg-[#1F1F3C] p-4 shadow-lg',
                 collapsed && 'rounded-b-none',
-                'transition-all'
+                'transition-all',
+                className
             )}
         >
             <div className="text-primary-foreground flex items-center">
@@ -71,6 +78,6 @@ export const HomeHeader = () => {
                     <Input className={cn('bg-background mt-4 rounded-full text-sm')} placeholder="검색" />
                 </div>
             </div>
-        </div>
+        </header>
     );
 };

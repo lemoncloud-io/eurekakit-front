@@ -4,7 +4,7 @@ import { HomeHeader, HotPostGrid, TotalPostList } from '../components';
 
 export const HomePage = () => {
     return (
-        <div className="flex min-h-[calc(100vh-64px)] flex-col">
+        <>
             <HomeHeader />
             <div className="h-[7.5rem]" />
             <HotPostGrid />
@@ -12,6 +12,6 @@ export const HomePage = () => {
                 <Separator />
             </div>
             <TotalPostList />
-        </div>
+        </>
     );
 };
