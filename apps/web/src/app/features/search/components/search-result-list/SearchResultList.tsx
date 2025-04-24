@@ -38,20 +38,26 @@ export const SearchResultList = () => {
         [searchResults, keyword]
     );
 
-    return isEmptyResult ? (
-        <div className="flex h-48 flex-col items-center justify-center">
-            <span>검색 결과가 없습니다.</span>
-            <span className="text-muted-foreground text-sm">다른 검색어를 입력해 보세요.</span>
-        </div>
-    ) : isLoading ? (
-        <List seperator={<Separator />}>
-            <PostSkeleton />
-            <PostSkeleton />
-            <PostSkeleton />
-            <PostSkeleton />
-            <PostSkeleton />
-        </List>
-    ) : (
+    if (isLoading) {
+        return (
+            <List seperator={<Separator />}>
+                {Array.from({ length: Math.floor(window.innerHeight / 120) - 2 }).map(() => (
+                    <PostSkeleton />
+                ))}
+            </List>
+        );
+    }
+
+    if (isEmptyResult) {
+        return (
+            <div className="flex h-48 flex-col items-center justify-center">
+                <span>검색 결과가 없습니다.</span>
+                <span className="text-muted-foreground text-sm">다른 검색어를 입력해 보세요.</span>
+            </div>
+        );
+    }
+
+    return (
         <InfiniteList
             isFetching={isFetchingNextPage}
             fetchFn={fetchNextPage}
