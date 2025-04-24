@@ -16,7 +16,7 @@ export const PostDetailPage = () => {
     const { data: post, isLoading } = useFetchFeed(params.postId);
 
     return (
-        <div className="relative h-full overflow-x-hidden">
+        <>
             <header className="bg-background sticky top-0 z-50 flex h-12 items-center px-2">
                 <Button variant={'ghost'} size={'icon'} onClick={() => navigate(-1)}>
                     <ChevronLeft />
@@ -32,6 +32,6 @@ export const PostDetailPage = () => {
                     <Loader2 className="animate-spin" />
                 </div>
             )}
-        </div>
+        </>
     );
 };
