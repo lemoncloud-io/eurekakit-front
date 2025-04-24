@@ -1,7 +1,10 @@
 import type { RequiredKeys } from '@lemon/shared';
 import type { FeedListParam as OFeedListParam, FeedView as OFeedView, UserView } from '@lemoncloud/pets-socials-api';
 
+export type FeedType = 'all' | 'hot' | 'liked';
+
 export interface FeedListParam extends OFeedListParam {
+    type?: FeedType;
     activity?: boolean;
     parent?: boolean;
 }
