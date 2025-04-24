@@ -2,7 +2,7 @@ import { Heart, MessageSquareMore } from 'lucide-react';
 
 import { Condition } from '@lemon/ui-kit/components/ui/condition';
 
-import { Link, NickName, Profile } from '../../../../components';
+import { Image, Link, NickName, Profile } from '../../../../components';
 import { formatCount, formatRelativeTime } from '../../../../utils';
 
 import type { FeedView } from '@lemon/feeds';
@@ -15,14 +15,9 @@ export const PostGridBlock = ({ post }: PostGridBlockProps) => {
     return (
         <Link className="flex w-full flex-col gap-2" to={`/post/${post.id}`}>
             <div className="relative z-0 flex aspect-square w-full items-end">
-                <Condition condition={!!post.image$$?.length && !!post.image$$[0].url}>
-                    {post.image$$?.length && (
-                        <img
-                            src={post.image$$?.[0]?.url}
-                            className="absolute -z-10 h-full w-full rounded-lg object-cover"
-                        />
-                    )}
-                </Condition>
+                <div className="absolute -z-0 h-full w-full overflow-hidden rounded-lg">
+                    <Image src={post.image$$?.[0]?.url} />
+                </div>
                 <div className="bg-foreground/40 text-background flex w-full items-center gap-2 rounded-lg p-2 backdrop-blur-sm">
                     <Profile src={post.user$.image} className="h-8 w-8" />
                     <div className="shrink overflow-hidden text-xs">
