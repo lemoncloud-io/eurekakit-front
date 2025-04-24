@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-export const useIsIntersecting = <T extends HTMLElement>(initialValue = false) => {
+export const useIntersectionObserver = <T extends HTMLElement>(initialValue = false) => {
     const intersectingRef = useRef<T | null>(null);
     const observerRef = useRef<IntersectionObserver>();
     const [isIntersecting, setIsIntersecting] = useState(initialValue);
