@@ -7,7 +7,6 @@ export const useIsIntersecting = <T extends HTMLElement>(initialValue = false) =
 
     const setRef = useCallback((node: T | null) => {
         if (intersectingRef.current) {
-            // 이전 요소의 관찰을 중지
             observerRef.current?.unobserve(intersectingRef.current);
         }
 
@@ -15,6 +14,12 @@ export const useIsIntersecting = <T extends HTMLElement>(initialValue = false) =
 
         if (!node) return;
 
+        if (observerRef.current) {
+            observerRef.current.observe(node);
+        }
+    }, []);
+
+    useEffect(() => {
         if (!observerRef.current) {
             observerRef.current = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
@@ -22,11 +27,11 @@ export const useIsIntersecting = <T extends HTMLElement>(initialValue = false) =
                 });
             });
         }
+        if (intersectingRef.current) {
+            observerRef.current.unobserve(intersectingRef.current);
+            observerRef.current.observe(intersectingRef.current);
+        }
 
-        observerRef.current.observe(node);
-    }, []);
-
-    useEffect(() => {
         return () => {
             if (observerRef.current) {
                 observerRef.current.disconnect();
@@ -34,5 +39,5 @@ export const useIsIntersecting = <T extends HTMLElement>(initialValue = false) =
         };
     }, []);
 
-    return { setRef, isIntersecting };
+    return { ref: intersectingRef, observer: observerRef.current, setRef, isIntersecting };
 };
