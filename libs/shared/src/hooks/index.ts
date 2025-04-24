@@ -7,3 +7,5 @@ export * from './usePagination';
 export * from './useQueryState';
 export * from './useQueryStates';
 export * from './useQuerySchema';
+
+export * from './useIntersectionObserver';

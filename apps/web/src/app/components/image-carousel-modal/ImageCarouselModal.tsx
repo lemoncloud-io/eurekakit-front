@@ -1,6 +1,8 @@
 import { Carousel, CarouselContent, CarouselItem } from '@lemon/ui-kit/components/ui/carousel';
 import { Dialog, DialogContent } from '@lemon/ui-kit/components/ui/dialog';
 
+import { Image } from '../image/Image';
+
 import type { OverlayProps } from '@lemon/overlay';
 import type { ImageView } from '@lemoncloud/pets-socials-api';
 
@@ -25,7 +27,7 @@ export const ImageCarouselModal = ({ startIndex = 0, images, ...modalProps }: Go
                                         key={image.id || image.url}
                                         className="flex max-h-[80vh] items-center justify-center overflow-hidden"
                                     >
-                                        <img src={image.url} className="h-full rounded-md object-contain" />
+                                        <Image src={image.url} className="h-full rounded-md object-contain" />
                                     </CarouselItem>
                                 )
                         )}

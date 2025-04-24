@@ -35,14 +35,14 @@ export const RecentKeywordList = () => {
     }, []);
 
     return (
-        <div className="flex flex-col gap-4 p-4">
-            <div className="text-secondary-foreground">최근 검색어</div>
+        <div className="flex flex-col gap-3 py-4">
+            <div className="text-secondary-foreground pl-4">최근 검색어</div>
             {recentKeywordList.length ? (
                 <Carousel opts={{ dragFree: true }}>
-                    <CarouselContent className="text-sm">
+                    <CarouselContent className="ml-2 mr-4 text-sm">
                         {recentKeywordList.map(keyword => (
                             <CarouselItem
-                                className="max-w-[50vw] basis-auto"
+                                className="-ml-2 max-w-[50vw] basis-auto"
                                 key={keyword.keyword}
                                 onClick={() => setRecentKeyword(keyword.keyword)}
                             >

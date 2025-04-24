@@ -1,7 +1,7 @@
 import { HttpResponse, delay, http } from 'msw';
 
 import { createFeedItem, feedList } from './mockFeeds';
-import { ACTIVITY, BACKEND_API, DETAIL, FEED, FEEDS, HELLO, LIST, LIST_V2, USERS } from '../../consts';
+import { ACTIVITY, BACKEND_API, DETAIL, FEED, FEEDS, HELLO, LIKED, LIST, LIST_V2, USERS } from '../../consts';
 
 import type { FeedView } from '../../types';
 import type { ListResult } from '@lemon/shared';
@@ -23,6 +23,25 @@ export const feedHandler = [
         return HttpResponse.json({
             list: responseFeedList,
             total: mutableFeedList.length,
+            page,
+            limit,
+        } as ListResult<FeedView>);
+    }),
+    http.get([BACKEND_API, FEEDS, 0, LIKED].join('/'), async ({ request }) => {
+        const page = Number(new URL(request.url).searchParams.get('page')) || 0;
+        const limit = Number(new URL(request.url).searchParams.get('limit')) || 10;
+
+        const likedFeedList = mutableFeedList.filter(feed => feed.$activity?.isLike);
+        const startFeedIdx = page * limit;
+        const endFeedIdx = Math.min((page + 1) * limit, likedFeedList.length);
+
+        const responseFeedList = likedFeedList.slice(startFeedIdx, endFeedIdx);
+
+        await delay(1000);
+
+        return HttpResponse.json({
+            list: responseFeedList,
+            total: likedFeedList.length,
             page,
             limit,
         } as ListResult<FeedView>);

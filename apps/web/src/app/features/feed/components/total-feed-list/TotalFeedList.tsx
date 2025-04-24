@@ -1,0 +1,54 @@
+import { useFetchInfiniteFeedList } from '@lemon/feeds';
+import { useQueryState } from '@lemon/shared';
+import { List } from '@lemon/ui-kit/components/ui/list';
+import { Separator } from '@lemon/ui-kit/components/ui/separator';
+
+import { InfiniteList, Link } from '../../../../components';
+import { Post } from '../../../post/components';
+import { PostSkeleton } from '../../../post/components/post/PostSkeleton';
+import { NoPostGoWrite } from '../no-feed';
+
+import type { FeedType } from '@lemon/feeds';
+
+export const TotalFeedList = () => {
+    const [feedType] = useQueryState<FeedType>('type', { defaultValue: 'all' });
+    const {
+        data: feedList,
+        isLoading,
+        hasNextPage,
+        fetchNextPage,
+        isFetchingNextPage,
+    } = useFetchInfiniteFeedList({ type: feedType });
+
+    const isEmptyList = feedList?.list.length === 0;
+
+    if (isLoading) {
+        return (
+            <List seperator={<Separator />}>
+                {Array.from({ length: Math.floor(window.innerHeight / 120) - 2 }).map(() => (
+                    <PostSkeleton />
+                ))}
+            </List>
+        );
+    }
+
+    if (isEmptyList) {
+        return <NoPostGoWrite />;
+    }
+
+    return (
+        <InfiniteList
+            seperator={<Separator />}
+            isFetching={isFetchingNextPage}
+            showTrigger={hasNextPage}
+            fetchFn={fetchNextPage}
+            className="overflow-x-hidden"
+        >
+            {feedList?.list.map(feed => (
+                <Link key={feed.id} className="pb-4 pt-2" to={`/post/${feed.id}`}>
+                    <Post post={feed} />
+                </Link>
+            ))}
+        </InfiniteList>
+    );
+};
