@@ -2,7 +2,7 @@ import { Search } from 'lucide-react';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@lemon/ui-kit/components/ui/tabs';
 
-import { TotalFeedList } from '../../components';
+import { NoLikedFeed, NoPostGoWrite, TotalFeedList } from '../../components';
 
 export const FeedPage = () => {
     return (
@@ -22,7 +22,12 @@ export const FeedPage = () => {
                 <TabsContent value="all" className="flex-1">
                     <TotalFeedList />
                 </TabsContent>
-                <TabsContent value="hot" asChild></TabsContent>
+                <TabsContent value="hot" className="flex-1">
+                    <NoPostGoWrite />
+                </TabsContent>
+                <TabsContent value="liked" className="flex-1">
+                    <NoLikedFeed />
+                </TabsContent>
             </Tabs>
         </div>
     );

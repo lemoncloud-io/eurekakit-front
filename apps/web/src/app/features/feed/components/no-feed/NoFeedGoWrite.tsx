@@ -9,7 +9,7 @@ export const NoPostGoWrite = () => {
 
     return (
         <div className="flex h-full flex-col items-center justify-center gap-4">
-            <div className="flex flex-col items-center">
+            <div className="text-secondary-foreground flex flex-col items-center text-sm">
                 <span>아직 등록된 게시물이 없습니다.</span>
                 <span>{`다양한 이야기로 다른 사용자들과 소통해 보세요 :)`}</span>
             </div>
