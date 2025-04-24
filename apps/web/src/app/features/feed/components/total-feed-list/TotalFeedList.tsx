@@ -3,7 +3,7 @@ import { useQueryState } from '@lemon/shared';
 import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
-import { InfiniteList } from '../../../../components';
+import { InfiniteList, Link } from '../../../../components';
 import { Post } from '../../../post/components';
 import { PostSkeleton } from '../../../post/components/post/PostSkeleton';
 import { NoPostGoWrite } from '../no-feed';
@@ -44,7 +44,11 @@ export const TotalFeedList = () => {
             fetchFn={fetchNextPage}
             className="overflow-x-hidden"
         >
-            {feedList?.list.map(feed => <Post key={feed.id} post={feed} />)}
+            {feedList?.list.map(feed => (
+                <Link key={feed.id} className="pb-4 pt-2" to={`/post/${feed.id}`}>
+                    <Post post={feed} />
+                </Link>
+            ))}
         </InfiniteList>
     );
 };
