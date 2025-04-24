@@ -1,4 +1,4 @@
-import { useFetchInfiniteFeedList } from '@lemon/feeds';
+import { useFetchInfiniteLikedFeedList } from '@lemon/feeds';
 import { useQueryState } from '@lemon/shared';
 import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
@@ -6,21 +6,22 @@ import { Separator } from '@lemon/ui-kit/components/ui/separator';
 import { InfiniteList } from '../../../../components';
 import { Post } from '../../../post/components';
 import { PostSkeleton } from '../../../post/components/post/PostSkeleton';
-import { NoPostGoWrite } from '../no-feed';
+import { NoLikedFeed } from '../no-feed';
 
 import type { FeedType } from '@lemon/feeds';
 
-export const TotalFeedList = () => {
+export const LikedFeedList = () => {
     const [feedType] = useQueryState<FeedType>('type', { defaultValue: 'all' });
+
     const {
-        data: feedList,
+        data: likedFeedList,
         isLoading,
         hasNextPage,
         fetchNextPage,
         isFetchingNextPage,
-    } = useFetchInfiniteFeedList({ type: feedType });
+    } = useFetchInfiniteLikedFeedList({ type: feedType });
 
-    const isEmptyList = feedList?.list.length === 0;
+    const isEmptyList = likedFeedList?.list.length === 0;
 
     if (isLoading) {
         return (
@@ -33,7 +34,7 @@ export const TotalFeedList = () => {
     }
 
     if (isEmptyList) {
-        return <NoPostGoWrite />;
+        return <NoLikedFeed />;
     }
 
     return (
@@ -44,7 +45,7 @@ export const TotalFeedList = () => {
             fetchFn={fetchNextPage}
             className="overflow-x-hidden"
         >
-            {feedList?.list.map(feed => <Post key={feed.id} post={feed} />)}
+            {likedFeedList?.list.map(feed => <Post key={feed.id} post={feed} />)}
         </InfiniteList>
     );
 };
