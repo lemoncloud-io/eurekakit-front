@@ -3,11 +3,13 @@ import { useParams } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 
 import { useFetchFeed, useFetchInfiniteFeedCommentList } from '@lemon/feeds';
+import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { InfiniteList } from '../../../../components';
 import { useNavigate } from '../../../../hooks';
 import { Comment } from '../../../comment/components';
+import { PostSkeleton } from '../post/PostSkeleton';
 
 import type { FeedView } from '@lemon/feeds';
 import type { RequiredKeys } from '@lemon/shared';
@@ -24,6 +26,7 @@ export const CommentList = () => {
         fetchNextPage,
         isFetchingNextPage,
         hasNextPage,
+        isLoading,
     } = useFetchInfiniteFeedCommentList(postId);
 
     return (
@@ -38,16 +41,28 @@ export const CommentList = () => {
                     <ChevronRight size={16} />
                 </button>
             </div>
-            <InfiniteList
-                isFetching={isFetchingNextPage}
-                fetchFn={fetchNextPage}
-                showTrigger={hasNextPage}
-                seperator={<Separator />}
-            >
-                {commentList?.list
-                    .filter((comment): comment is RequiredKeys<FeedView, 'parentId'> => !!comment.parentId)
-                    .map(comment => <Comment key={comment.id} comment={comment} />)}
-            </InfiniteList>
+            {(() => {
+                if (isLoading) {
+                    return (
+                        <List seperator={<Separator />}>
+                            <PostSkeleton />
+                        </List>
+                    );
+                }
+
+                return (
+                    <InfiniteList
+                        isFetching={isFetchingNextPage}
+                        fetchFn={fetchNextPage}
+                        showTrigger={hasNextPage}
+                        seperator={<Separator />}
+                    >
+                        {commentList?.list
+                            .filter((comment): comment is RequiredKeys<FeedView, 'parentId'> => !!comment.parentId)
+                            .map(comment => <Comment key={comment.id} comment={comment} />)}
+                    </InfiniteList>
+                );
+            })()}
         </div>
     );
 };
