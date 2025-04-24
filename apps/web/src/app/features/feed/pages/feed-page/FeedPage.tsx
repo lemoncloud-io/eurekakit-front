@@ -1,5 +1,6 @@
 import { Search } from 'lucide-react';
 
+import { Images } from '@lemon/assets';
 import { useQueryState } from '@lemon/shared';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@lemon/ui-kit/components/ui/tabs';
 
@@ -13,7 +14,7 @@ export const FeedPage = () => {
     return (
         <div className="flex h-full flex-col">
             <header className="flex h-12 w-full flex-none items-center px-4">
-                Feed
+                <img src={Images.feedPageLogo} />
                 <button className="ml-auto">
                     <Search size={20} />
                 </button>
