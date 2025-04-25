@@ -15,7 +15,7 @@ import { useFormBlockModal, useNavigate } from '../../../hooks';
 import { PostEditor } from '../../post/components';
 import { PostViewerModal } from '../components';
 
-import type { FeedBody } from '@lemoncloud/pets-socials-api';
+import type { CommentBody } from '@lemoncloud/pets-socials-api';
 
 export const UpdateCommentPage = () => {
     const overlay = useOverlay();
@@ -31,9 +31,9 @@ export const UpdateCommentPage = () => {
     const [feedId] = useQueryState('feedId');
 
     const { data: comment, isPending: isLoadingComment } = useFetchComment(params.commentId);
-    const { mutate: updateFeed, isPending } = useUpdateComment();
+    const { mutate: updateComment, isPending } = useUpdateComment();
 
-    const methods = useForm<FeedBody>({
+    const methods = useForm<CommentBody>({
         mode: 'all',
         defaultValues: { image$$: [], text: '' },
         values: comment,
@@ -51,12 +51,12 @@ export const UpdateCommentPage = () => {
         description: '해당 화면에서 이탈 시 변경된 내용이 사라집니다.',
     });
 
-    const submitComment = (feedBody: FeedBody) => {
+    const submitComment = (commentBody: CommentBody) => {
         setBlockerOn(false);
         setIsLoading(true);
 
-        updateFeed(
-            { id: params.commentId, body: feedBody },
+        updateComment(
+            { commentId: params.commentId, body: commentBody },
             {
                 onSuccess: onSuccessUpdate,
                 onError: () => setBlockerOn(true),

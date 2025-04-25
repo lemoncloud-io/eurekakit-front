@@ -14,7 +14,7 @@ import { useFormBlockModal, useNavigate } from '../../../hooks';
 import { PostEditor } from '../../post/components';
 import { PostViewerModal } from '../components';
 
-import type { FeedBody, FeedView } from '@lemoncloud/pets-socials-api';
+import type { CommentBody } from '@lemoncloud/pets-socials-api';
 
 // TODO : @luke-lemon 추후 CommentBody 관련으로 수정 -> 현재 CommentBody에 images$$ 없음.
 export const CreateCommentPage = () => {
@@ -29,7 +29,7 @@ export const CreateCommentPage = () => {
 
     const { mutate: createComment, isPending } = useCrerateComment();
 
-    const methods = useForm<FeedBody>({ mode: 'all', defaultValues: { image$$: [], text: '' } });
+    const methods = useForm<CommentBody>({ mode: 'all', defaultValues: { image$$: [], text: '' } });
 
     const watchedImages = useWatch({ control: methods.control, name: 'image$$' });
     const watchedText = useWatch({ control: methods.control, name: 'text' });
@@ -40,7 +40,7 @@ export const CreateCommentPage = () => {
 
     const { setBlockerOn } = useFormBlockModal(isPostDirty);
 
-    const submitPost = (commentBody: FeedBody) => {
+    const submitPost = (commentBody: CommentBody) => {
         setBlockerOn(false);
         setIsLoading(true);
 
@@ -81,7 +81,7 @@ export const CreateCommentPage = () => {
         </div>
     );
 
-    async function onSuccessCreate(feedResult: FeedView) {
+    async function onSuccessCreate() {
         toast({ description: '답글 등록이 완료되었습니다.', className: 'justify-center' });
         navigate(-1);
         await queryClient.invalidateQueries({ queryKey: feedsKeys.all });
