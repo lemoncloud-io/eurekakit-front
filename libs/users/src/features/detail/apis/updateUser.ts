@@ -3,7 +3,7 @@ import { webCore } from '@lemon/web-core';
 import { USERS, USER_ENDPOINT } from '../../../consts/apis';
 
 import type { ListResult } from '@lemon/shared';
-import type { UserBody, UserView } from '@lemoncloud/pets-socials-api';
+import type { UserBody, UserView } from '@lemoncloud/codes-backend-api';
 
 export const updateUser = async (id?: string, body?: UserBody) => {
     if (!id) {
