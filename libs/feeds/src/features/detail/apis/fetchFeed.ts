@@ -2,20 +2,19 @@ import { webCore } from '@lemon/web-core';
 
 import { BACKEND_API, DETAIL, FEEDS } from '../../../consts';
 
-import type { FeedView } from '../../../types';
-import type { Params } from '@lemoncloud/lemon-web-core';
+import type { FeedListParam, FeedView } from '../../../types';
 
-export const fetchFeed = async (id?: string, params?: Params) => {
-    if (!id) {
+export const fetchFeed = async (feedId?: string, params?: FeedListParam) => {
+    if (!feedId) {
         throw new Error('fetchFeed - @id is required');
     }
 
     const { data } = await webCore
         .buildSignedRequest({
             method: 'GET',
-            baseURL: [BACKEND_API, FEEDS, id, DETAIL].join('/'),
+            baseURL: [BACKEND_API, FEEDS, feedId, DETAIL].join('/'),
         })
-        .setParams({ ...params })
+        .setParams({ ...params } satisfies FeedListParam)
         .execute<FeedView>();
 
     return data;

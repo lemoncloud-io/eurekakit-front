@@ -11,7 +11,7 @@ export const createFeed = async (body: FeedBody) => {
             method: 'POST',
             baseURL: [BACKEND_API, USERS, 0, FEED].join('/'),
         })
-        .setBody({ ...body })
+        .setBody({ ...body } satisfies FeedBody)
         .execute<FeedView>();
 
     return data;
