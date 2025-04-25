@@ -1,7 +1,7 @@
 import { HttpResponse, delay, http } from 'msw';
 
 import { commentList } from './mockFeedComments';
-import { BACKEND_API, COMMENTS, FEEDS } from '../../consts';
+import { COMMENTS, FEEDS, PET_ENDPOINT } from '../../consts';
 
 import type { FeedView } from '../../types';
 import type { ListResult } from '@lemon/shared';
@@ -9,7 +9,7 @@ import type { ListResult } from '@lemon/shared';
 const mutableFeedCommentList = [...commentList];
 
 export const feedCommentHandler = [
-    http.get([BACKEND_API, FEEDS, ':feedId', COMMENTS].join('/'), async ({ request, params }) => {
+    http.get([PET_ENDPOINT, FEEDS, ':feedId', COMMENTS].join('/'), async ({ request, params }) => {
         const page = Number(new URL(request.url).searchParams.get('page')) || 0;
         const limit = Number(new URL(request.url).searchParams.get('limit')) || 10;
 

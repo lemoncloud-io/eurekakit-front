@@ -1,6 +1,6 @@
 import { webCore } from '@lemon/web-core';
 
-import { ACTIVITY, BACKEND_API, FEEDS } from '../../../consts';
+import { ACTIVITY, FEEDS, PET_ENDPOINT } from '../../../consts';
 
 import type { FeedView } from '../../../types';
 import type { FeedActivityParam } from '@lemoncloud/pets-socials-api';
@@ -15,7 +15,7 @@ export const likeFeed = async (feedId?: string, like?: boolean) => {
     const { data } = await webCore
         .buildSignedRequest({
             method: 'PUT',
-            baseURL: [BACKEND_API, FEEDS, feedId, ACTIVITY].join('/'),
+            baseURL: [PET_ENDPOINT, FEEDS, feedId, ACTIVITY].join('/'),
         })
         .setParams({ like } satisfies FeedActivityParam)
         .setBody({})

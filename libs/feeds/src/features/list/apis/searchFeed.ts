@@ -1,6 +1,6 @@
 import { webCore } from '@lemon/web-core';
 
-import { BACKEND_API, FEEDS, HELLO, LIST } from '../../../consts';
+import { FEEDS, HELLO, LIST, PET_ENDPOINT } from '../../../consts';
 
 import type { FeedListParam, FeedView } from '../../../types';
 import type { ListResult } from '@lemon/shared';
@@ -13,7 +13,7 @@ export const searchFeed = async (params: FeedListParam) => {
     const { data } = await webCore
         .buildSignedRequest({
             method: 'GET',
-            baseURL: [BACKEND_API, HELLO, FEEDS, LIST].join('/'),
+            baseURL: [PET_ENDPOINT, HELLO, FEEDS, LIST].join('/'),
         })
         .setParams({ mine: true, parent: true, activity: true, ...params })
         .execute<ListResult<FeedView>>();

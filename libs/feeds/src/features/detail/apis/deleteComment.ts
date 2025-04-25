@@ -1,6 +1,6 @@
 import { webCore } from '@lemon/web-core';
 
-import { BACKEND_API, COMMENTS } from '../../../consts';
+import { COMMENTS, PET_ENDPOINT } from '../../../consts';
 
 import type { CommentBody, CommentView } from '@lemoncloud/pets-socials-api';
 
@@ -12,7 +12,7 @@ export const deleteComment = async (commentId?: string) => {
     const { data } = await webCore
         .buildSignedRequest({
             method: 'PUT',
-            baseURL: [BACKEND_API, COMMENTS, commentId].join('/'),
+            baseURL: [PET_ENDPOINT, COMMENTS, commentId].join('/'),
         })
         .setBody({ hidden: true } satisfies CommentBody)
         .execute<CommentView>();
