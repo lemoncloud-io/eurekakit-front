@@ -1,20 +1,31 @@
 import { Clipboard, EditIcon, Settings, User } from 'lucide-react';
 
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from '@lemon/ui-kit/components/ui/dropdown-menu';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 import { useWebCoreStore } from '@lemon/web-core';
 
 import { Link, NickName, Profile } from '../../../components';
 
 export const UserPage = () => {
-    const { profile } = useWebCoreStore();
+    const { profile, logout } = useWebCoreStore();
 
     return (
         <div className="flex-1">
             <header className="flex h-12 items-center px-4">
                 <span>MY</span>
-                <button className="ml-auto">
-                    <Settings size={20} />
-                </button>
+                <DropdownMenu>
+                    <DropdownMenuTrigger className="ml-auto">
+                        <Settings size={20} />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuItem onClick={logout}>로그아웃</DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </header>
             <div className="flex items-center gap-3 p-4">
                 <Profile src={profile?.$user.photo} className="h-12 w-12" />
