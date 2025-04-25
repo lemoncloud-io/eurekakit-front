@@ -14,9 +14,9 @@ import { useFormBlockModal, useNavigate } from '../../../hooks';
 import { PostEditor } from '../../post/components';
 import { PostViewerModal } from '../components';
 
-import type { FeedView } from '@lemon/feeds';
-import type { FeedBody } from '@lemoncloud/pets-socials-api';
+import type { FeedBody, FeedView } from '@lemoncloud/pets-socials-api';
 
+// TODO : @luke-lemon 추후 CommentBody 관련으로 수정 -> 현재 CommentBody에 images$$ 없음.
 export const CreateCommentPage = () => {
     const overlay = useOverlay();
     const queryClient = useQueryClient();

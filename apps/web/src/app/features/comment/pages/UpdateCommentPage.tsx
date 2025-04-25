@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { ChevronRight, X } from 'lucide-react';
 
-import { feedsKeys, useFetchFeed, useUpdateFeed } from '@lemon/feeds';
+import { feedsKeys, useFetchComment, useUpdateComment } from '@lemon/feeds';
 import { useOverlay } from '@lemon/overlay';
 import { useGlobalLoader, useQueryState } from '@lemon/shared';
 import { useToast } from '@lemon/ui-kit';
@@ -28,10 +28,10 @@ export const UpdateCommentPage = () => {
 
     const params = useParams();
 
-    const [postId] = useQueryState('postId');
+    const [feedId] = useQueryState('feedId');
 
-    const { data: comment, isPending: isLoadingComment } = useFetchFeed(params.commentId);
-    const { mutate: updateFeed, isPending } = useUpdateFeed();
+    const { data: comment, isPending: isLoadingComment } = useFetchComment(params.commentId);
+    const { mutate: updateFeed, isPending } = useUpdateComment();
 
     const methods = useForm<FeedBody>({
         mode: 'all',
@@ -80,7 +80,7 @@ export const UpdateCommentPage = () => {
                         variant={'outline'}
                         className="h-14 w-full justify-start rounded-lg"
                         onClick={() =>
-                            overlay.open(overlayProps => <PostViewerModal postId={postId} {...overlayProps} />)
+                            overlay.open(overlayProps => <PostViewerModal postId={feedId} {...overlayProps} />)
                         }
                     >
                         본문 보기

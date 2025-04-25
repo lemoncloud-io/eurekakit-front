@@ -5,10 +5,18 @@ import { BACKEND_API, FEEDS } from '../../../consts';
 import type { FeedView } from '../../../types';
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
 
-export const updateFeed = async (id?: string, body?: FeedBody) => {
+export const updateFeed = async (feedId?: string, body?: FeedBody) => {
+    if (!feedId) {
+        throw new Error('updateFeed - @feedId is required');
+    }
+
+    if (!body) {
+        throw new Error('updateFeed - @body is required');
+    }
+
     const { data } = await webCore
-        .buildSignedRequest({ method: 'PUT', baseURL: [BACKEND_API, FEEDS, id].join('/') })
-        .setBody({ ...body })
+        .buildSignedRequest({ method: 'PUT', baseURL: [BACKEND_API, FEEDS, feedId].join('/') })
+        .setBody({ ...body } satisfies FeedBody)
         .execute<FeedView>();
 
     return data;

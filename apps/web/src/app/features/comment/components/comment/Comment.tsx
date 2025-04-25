@@ -1,13 +1,14 @@
 import { useWebCoreStore } from '@lemon/web-core';
 
 import { CommentHeader } from './CommentHeader';
-import { ImageListViewer, LikeButton } from '../../../../components';
+import { ImageListViewer } from '../../../../components';
+import { LikeCommentButton } from '../like-comment-button';
 
-import type { FeedView } from '@lemon/feeds';
 import type { RequiredKeys } from '@lemon/shared';
+import type { CommentView } from '@lemoncloud/pets-socials-api';
 
 interface CommentProps {
-    comment: RequiredKeys<FeedView, 'parentId'>;
+    comment: RequiredKeys<CommentView, 'id' | 'createdAt'>;
 }
 
 export const Comment = ({ comment }: CommentProps) => {
@@ -17,15 +18,16 @@ export const Comment = ({ comment }: CommentProps) => {
         <div className="flex flex-col items-start gap-2 px-4 pb-4 pt-2">
             <CommentHeader
                 commentId={comment.id}
-                postId={comment.parentId}
+                feedId={comment.feedId}
                 profileImg={comment.user$?.image}
-                nickname={comment.user$?.nick ?? profile?.$user.nick}
+                nickname={comment.user$?.nick}
                 createdAt={comment.createdAt}
                 isMe={profile?.uid === comment.userId}
             />
             <div className="whitespace-pre-line break-all">{comment.text}</div>
             <ImageListViewer images={comment.image$$} />
-            <LikeButton postId={comment.id} isLike={comment.$activity?.isLike} likeCount={comment.likeCount} />
+            {/* // TODO : FEED와 activity 타입 통합 */}
+            <LikeCommentButton commentId={comment.id} isLike={comment.Activity?.isLike} likeCount={comment.likeCount} />
         </div>
     );
 };

@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 
-import { feedsKeys, useDeleteFeed } from '@lemon/feeds';
+import { feedsKeys, useDeleteComment } from '@lemon/feeds';
 import { useGlobalLoader } from '@lemon/shared';
 import { useToast } from '@lemon/ui-kit';
 import {
@@ -17,21 +17,21 @@ import { useModalWithDropDown } from '../../../../hooks';
 import type { OverlayProps } from '@lemon/overlay';
 
 interface DeleteCommentModalProps extends OverlayProps {
-    postId: string;
+    commentId: string;
 }
 
-export const DeleteCommentModal = ({ postId, open, onOpenChange }: DeleteCommentModalProps) => {
+export const DeleteCommentModal = ({ commentId, open, onOpenChange }: DeleteCommentModalProps) => {
     const queryClient = useQueryClient();
     const { toast } = useToast();
 
     const { setIsLoading } = useGlobalLoader();
-    const { mutate: deletePost } = useDeleteFeed();
+    const { mutate: deleteComment } = useDeleteComment();
 
     const modal = useModalWithDropDown(open);
 
     const onClickDelete = () => {
         setIsLoading(true);
-        deletePost(postId, {
+        deleteComment(commentId, {
             onSuccess: onSuccessDelete,
             onError: () =>
                 toast({ description: '게시글을 삭제할 수 없습니다.', className: 'flex justify-center items-center' }),

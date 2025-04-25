@@ -3,10 +3,11 @@ import { webCore } from '@lemon/web-core';
 import { ACTIVITY, BACKEND_API, FEEDS } from '../../../consts';
 
 import type { FeedView } from '../../../types';
+import type { FeedActivityBody, FeedActivityParam } from '@lemoncloud/pets-socials-api';
 
-export const reportFeed = async (id?: string, reason?: string) => {
-    if (!id) {
-        throw new Error('reportFeed - @id is required');
+export const reportFeed = async (feedId?: string, reason?: string) => {
+    if (!feedId) {
+        throw new Error('reportFeed - @feedId is required');
     }
 
     if (!reason) {
@@ -16,10 +17,10 @@ export const reportFeed = async (id?: string, reason?: string) => {
     const { data } = await webCore
         .buildSignedRequest({
             method: 'PUT',
-            baseURL: [BACKEND_API, FEEDS, id, ACTIVITY].join('/'),
+            baseURL: [BACKEND_API, FEEDS, feedId, ACTIVITY].join('/'),
         })
-        .setParams({ report: true })
-        .setBody({ reason })
+        .setParams({ report: true } satisfies FeedActivityParam)
+        .setBody({ reason } satisfies FeedActivityBody)
         .execute<FeedView>();
 
     return data;

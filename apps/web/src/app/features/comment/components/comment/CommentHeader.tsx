@@ -5,26 +5,26 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@lemon/ui-kit/components/ui/dropdown-menu';
 import { List } from '@lemon/ui-kit/components/ui/list';
 
-import { NickName, Profile, ReportModal } from '../../../../components';
+import { NickName, Profile } from '../../../../components';
 import { useNavigate } from '../../../../hooks';
 import { formatRelativeTime } from '../../../../utils';
 import { DeleteCommentModal } from '../delete-comment-modal';
+import { ReportCommentModal } from '../report-comment-modal';
 
 interface CommentHeaderProps {
     commentId: string;
-    postId: string;
+    feedId: string;
     nickname: string;
     createdAt: EpochTimeStamp;
     profileImg?: string;
     isMe?: boolean;
 }
 
-export const CommentHeader = ({ commentId, postId, profileImg, nickname, createdAt, isMe }: CommentHeaderProps) => {
+export const CommentHeader = ({ commentId, feedId, profileImg, nickname, createdAt, isMe }: CommentHeaderProps) => {
     const navigate = useNavigate();
     const overlay = useOverlay();
 
@@ -47,14 +47,14 @@ export const CommentHeader = ({ commentId, postId, profileImg, nickname, created
                 <DropdownMenuContent>
                     {isMe ? (
                         <>
-                            <DropdownMenuItem onClick={() => navigate(`/comment/update/${commentId}?postId=${postId}`)}>
+                            {/* <DropdownMenuItem onClick={() => navigate(`/comment/update/${commentId}?feedId=${feedId}`)}>
                                 수정하기
                             </DropdownMenuItem>
-                            <DropdownMenuSeparator />
+                            <DropdownMenuSeparator /> */}
                             <DropdownMenuItem
                                 onClick={() =>
                                     overlay.open(overlayProps => (
-                                        <DeleteCommentModal postId={commentId} {...overlayProps} />
+                                        <DeleteCommentModal commentId={commentId} {...overlayProps} />
                                     ))
                                 }
                             >
@@ -64,7 +64,9 @@ export const CommentHeader = ({ commentId, postId, profileImg, nickname, created
                     ) : (
                         <DropdownMenuItem
                             onClick={() =>
-                                overlay.open(overlayProps => <ReportModal id={commentId} {...overlayProps} />)
+                                overlay.open(overlayProps => (
+                                    <ReportCommentModal commentId={commentId} {...overlayProps} />
+                                ))
                             }
                         >
                             신고
