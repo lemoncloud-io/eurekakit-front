@@ -104,8 +104,8 @@ export const PostEditorImageUploader = () => {
                             >
                                 <Image
                                     src={imagePromise.value?.url}
+                                    fallback={<div className="bg-secondary h-full w-full animate-pulse" />}
                                     className="h-full w-full object-cover"
-                                    noSrcPending
                                 />
                                 <Button
                                     className="absolute right-1 top-1 h-4 w-4 rounded-full"

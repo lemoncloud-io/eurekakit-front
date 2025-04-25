@@ -1,13 +1,13 @@
 import { webCore } from '@lemon/web-core';
 
-import { BACKEND_API, FEEDS, LIKED } from '../../../consts';
+import { FEEDS, LIKED, PET_ENDPOINT } from '../../../consts';
 
 import type { FeedListParam, FeedView } from '../../../types';
 import type { ListResult } from '@lemon/shared';
 
 export const fetchLikedFeedList = async (params?: FeedListParam) => {
     const { data } = await webCore
-        .buildSignedRequest({ method: 'GET', baseURL: [BACKEND_API, FEEDS, 0, LIKED].join('/') })
+        .buildSignedRequest({ method: 'GET', baseURL: [PET_ENDPOINT, FEEDS, 0, LIKED].join('/') })
         .setParams({ mine: true, parent: true, activity: true, ...params })
         .execute<ListResult<FeedView>>();
 

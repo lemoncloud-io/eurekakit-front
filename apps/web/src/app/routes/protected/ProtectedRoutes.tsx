@@ -7,6 +7,7 @@ import { FeedRoutes } from '../../features/feed';
 import { HomeRoutes } from '../../features/home';
 import { PostRoutes } from '../../features/post';
 import { SearchRoutes } from '../../features/search';
+import { UserRoutes } from '../../features/user';
 import { TabBarLayout } from '../../layout/TabBarLayout';
 
 import type { RouteObject } from 'react-router-dom';
@@ -26,6 +27,7 @@ export const ProtectedRoutes: RouteObject[] = [
                 children: [
                     { path: `/home/*`, element: <HomeRoutes /> },
                     { path: '/feed/*', element: <FeedRoutes /> },
+                    { path: '/user/*', element: <UserRoutes /> },
                 ],
             },
             { path: `/post/*`, element: <PostRoutes /> },

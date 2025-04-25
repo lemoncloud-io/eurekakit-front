@@ -1,6 +1,6 @@
 import { webCore } from '@lemon/web-core';
 
-import { ACTIVITY, BACKEND_API, COMMENTS } from '../../../consts';
+import { ACTIVITY, COMMENTS, PET_ENDPOINT } from '../../../consts';
 
 import type { ActivityParams, CommentView, FeedActivityBody } from '@lemoncloud/pets-socials-api';
 
@@ -16,7 +16,7 @@ export const reportComment = async (commentId?: string, reason?: string) => {
     const { data } = await webCore
         .buildSignedRequest({
             method: 'PUT',
-            baseURL: [BACKEND_API, COMMENTS, commentId, ACTIVITY].join('/'),
+            baseURL: [PET_ENDPOINT, COMMENTS, commentId, ACTIVITY].join('/'),
         })
         .setParams({ report: true } satisfies ActivityParams)
         .setBody({ reason } satisfies FeedActivityBody)
