@@ -14,7 +14,7 @@ export const Profile = ({ src, className, ...props }: ProfileProps) => {
     return (
         <span
             className={cn(
-                'text-background bg-foreground flex aspect-square h-8 w-8 flex-none items-center justify-center overflow-hidden rounded-full',
+                'text-background flex aspect-square h-8 w-8 flex-none items-center justify-center overflow-hidden rounded-full',
                 className
             )}
             {...props}
