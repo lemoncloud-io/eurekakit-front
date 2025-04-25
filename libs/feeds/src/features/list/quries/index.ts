@@ -7,3 +7,6 @@ export * from './useFetchInfiniteFeedCommentList';
 export * from './useFetchInfiniteLikedFeedList';
 
 export * from './useSearchFeed';
+
+export * from './useFetchInfiniteUserFeedList';
+export * from './useFetchInfiniteUserCommentList';

@@ -1,6 +1,6 @@
+import { useFetchInfiniteUserCommentList } from '@lemon/feeds';
 import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
-import { useFetchInfiniteUserCommentList } from '@lemon/users';
 import { useWebCoreStore } from '@lemon/web-core';
 
 import { InfiniteList } from '../../../../components';

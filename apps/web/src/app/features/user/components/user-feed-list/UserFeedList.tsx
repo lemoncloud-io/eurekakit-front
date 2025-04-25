@@ -1,9 +1,9 @@
 import { ChevronRight } from 'lucide-react';
 
+import { useFetchInfiniteUserFeedList } from '@lemon/feeds';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
-import { useFetchInfiniteUserFeedList } from '@lemon/users';
 import { useWebCoreStore } from '@lemon/web-core';
 
 import { InfiniteList } from '../../../../components';
