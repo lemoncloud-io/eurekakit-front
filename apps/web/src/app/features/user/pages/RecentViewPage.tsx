@@ -12,7 +12,7 @@ export const RecentViewPage = () => {
                 <button onClick={() => navigate(-1)}>
                     <ChevronLeft size={20} />
                 </button>
-                <span>내 활동 내역</span>
+                <span>최근 본 글</span>
                 <div className="h-5 w-5" />
             </header>
             <RecentViewedFeedList />
