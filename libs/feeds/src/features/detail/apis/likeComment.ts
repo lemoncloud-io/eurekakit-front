@@ -9,7 +9,7 @@ export const likeComment = async (commentId?: string, isLike?: boolean) => {
         throw new Error('likeComment - @commentId is required');
     }
 
-    if (!isLike) {
+    if (isLike === undefined || isLike === null) {
         throw new Error('likeComment - @isLike is required');
     }
 
