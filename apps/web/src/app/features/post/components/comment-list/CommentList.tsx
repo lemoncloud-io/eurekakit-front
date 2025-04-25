@@ -53,6 +53,7 @@ export const CommentList = () => {
                         fetchFn={fetchNextPage}
                         showTrigger={hasNextPage}
                         seperator={<Separator />}
+                        className="overflow-x-hidden"
                     >
                         {commentList?.list.map(comment => <Comment key={comment.id} comment={comment} />)}
                     </InfiniteList>
