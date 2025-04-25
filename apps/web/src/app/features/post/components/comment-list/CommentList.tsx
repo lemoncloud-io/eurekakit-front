@@ -11,9 +11,6 @@ import { useNavigate } from '../../../../hooks';
 import { Comment } from '../../../comment/components';
 import { PostSkeleton } from '../post/PostSkeleton';
 
-import type { FeedView } from '@lemon/feeds';
-import type { RequiredKeys } from '@lemon/shared';
-
 export const CommentList = () => {
     const navigate = useNavigate();
 
@@ -57,9 +54,7 @@ export const CommentList = () => {
                         showTrigger={hasNextPage}
                         seperator={<Separator />}
                     >
-                        {commentList?.list
-                            .filter((comment): comment is RequiredKeys<FeedView, 'parentId'> => !!comment.parentId)
-                            .map(comment => <Comment key={comment.id} comment={comment} />)}
+                        {commentList?.list.map(comment => <Comment key={comment.id} comment={comment} />)}
                     </InfiniteList>
                 );
             })()}
