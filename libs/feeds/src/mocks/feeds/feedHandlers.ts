@@ -27,6 +27,24 @@ export const feedHandler = [
             limit,
         } as ListResult<FeedView>);
     }),
+    http.get([PET_ENDPOINT, USERS, ':userId', FEEDS].join('/'), async ({ request }) => {
+        const page = Number(new URL(request.url).searchParams.get('page')) || 0;
+        const limit = Number(new URL(request.url).searchParams.get('limit')) || 10;
+
+        const startFeedIdx = page * limit;
+        const endFeedIdx = Math.min((page + 1) * limit, mutableFeedList.length);
+
+        const responseFeedList = mutableFeedList.slice(startFeedIdx, endFeedIdx);
+
+        await delay(1000);
+
+        return HttpResponse.json({
+            list: responseFeedList,
+            total: mutableFeedList.length,
+            page,
+            limit,
+        } as ListResult<FeedView>);
+    }),
     http.get([PET_ENDPOINT, FEEDS, 0, LIKED].join('/'), async ({ request }) => {
         const page = Number(new URL(request.url).searchParams.get('page')) || 0;
         const limit = Number(new URL(request.url).searchParams.get('limit')) || 10;
