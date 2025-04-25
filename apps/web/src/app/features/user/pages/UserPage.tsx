@@ -18,23 +18,32 @@ export const UserPage = () => {
             </header>
             <div className="flex items-center gap-3 p-4">
                 <Profile src={profile?.$user.photo} className="h-12 w-12" />
-                <NickName nickname={profile?.$user.nick} className="text-base" />
+                <NickName nickname={profile?.$user.nick ?? ''} className="text-base" />
             </div>
             <Separator />
             <div className="flex items-center justify-center gap-2 p-4">
-                <Link className="bg-muted text-foreground flex aspect-square h-auto flex-1 flex-col items-center justify-center gap-2 rounded-lg p-4 text-sm">
+                <Link
+                    to="activity"
+                    className="bg-muted text-foreground flex aspect-square h-auto flex-1 flex-col items-center justify-center gap-2 rounded-lg p-4 text-sm"
+                >
                     <span className="bg-background text-foreground inline-flex h-10 w-10 items-center justify-center rounded-full shadow-sm">
                         <EditIcon size={16} />
                     </span>
                     <span>내 활동 내역</span>
                 </Link>
-                <Link className="bg-muted text-foreground flex aspect-square h-auto flex-1 flex-col items-center justify-center gap-2 rounded-lg p-4 text-sm">
+                <Link
+                    to="view"
+                    className="bg-muted text-foreground flex aspect-square h-auto flex-1 flex-col items-center justify-center gap-2 rounded-lg p-4 text-sm"
+                >
                     <span className="bg-background text-foreground inline-flex h-10 w-10 items-center justify-center rounded-full shadow-sm">
                         <Clipboard size={16} />
                     </span>
                     <span>최근 본 글</span>
                 </Link>
-                <Link className="bg-muted text-foreground flex aspect-square h-auto flex-1 flex-col items-center justify-center gap-2 rounded-lg p-4 text-sm">
+                <Link
+                    to="profile"
+                    className="bg-muted text-foreground flex aspect-square h-auto flex-1 flex-col items-center justify-center gap-2 rounded-lg p-4 text-sm"
+                >
                     <span className="bg-background text-foreground inline-flex h-10 w-10 items-center justify-center rounded-full shadow-sm">
                         <User size={16} />
                     </span>
