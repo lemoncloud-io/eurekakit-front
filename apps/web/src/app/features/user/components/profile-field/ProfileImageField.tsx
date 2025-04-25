@@ -25,12 +25,17 @@ export const ProfileImageField = () => {
         if (e.target.files) {
             formData.append('file', e.target.files[0]);
 
+            toast({ description: '이미지를 업로드 중입니다.', className: 'flex justify-center items-center' });
             const imagePromise = uploadImage(formData);
 
             imagePromise
                 .then(data => {
                     const imageUrl = data.list[0].url;
                     methods.setValue('photo', imageUrl, { shouldDirty: true });
+                    toast({
+                        description: '프로필 사진이 변경되었습니다.',
+                        className: 'flex justify-center items-center',
+                    });
                 })
                 .catch(() => {
                     toast({

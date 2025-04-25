@@ -3,7 +3,8 @@ import { useForm, useWatch } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { ChevronLeft } from 'lucide-react';
 
-import { isDev } from '@lemon/shared';
+import { isDev, useGlobalLoader } from '@lemon/shared';
+import { useToast } from '@lemon/ui-kit';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Form } from '@lemon/ui-kit/components/ui/form';
 import { useUpdateUser } from '@lemon/users';
@@ -12,16 +13,18 @@ import { useWebCoreStore } from '@lemon/web-core';
 import { useNavigate } from '../../../hooks';
 import { ProfileImageField, ProfileNickNameField } from '../components/profile-field';
 
-import type { UserBody } from '@lemoncloud/codes-backend-api';
+import type { UserBody, UserView } from '@lemoncloud/codes-backend-api';
 
 export const ProfilePage = () => {
     const navigate = useNavigate();
-    const { profile } = useWebCoreStore();
+    const { profile, setProfile } = useWebCoreStore();
+    const { toast } = useToast();
+    const { setIsLoading } = useGlobalLoader();
 
     const methods = useForm<UserBody>({
         mode: 'all',
         defaultValues: { nick: '', photo: '' },
-        values: { nick: profile?.$user.nick, photo: profile?.$user.photo },
+        values: { nick: profile?.$user?.nick, photo: profile?.$user?.photo },
     });
 
     const nickName = useWatch({ control: methods.control, name: 'nick' }) ?? '';
@@ -32,7 +35,11 @@ export const ProfilePage = () => {
     const { mutate: updateUser } = useUpdateUser();
 
     const submitUser = (body: UserBody) => {
-        updateUser({ id: profile?.uid, body });
+        setIsLoading(true);
+        updateUser(
+            { id: profile?.uid, body },
+            { onSuccess: onSuccessUpdate, onError: () => setIsLoading(false), onSettled: () => setIsLoading(false) }
+        );
     };
 
     return (
@@ -68,4 +75,9 @@ export const ProfilePage = () => {
             </Form>
         </div>
     );
+
+    function onSuccessUpdate(data: UserView) {
+        toast({ description: '프로필 수정이 완료되었습니다.', className: 'flex justify-center items-center' });
+        setProfile({ ...profile, $user: { ...profile?.$user, nick: data.nick, photo: data.photo } });
+    }
 };
