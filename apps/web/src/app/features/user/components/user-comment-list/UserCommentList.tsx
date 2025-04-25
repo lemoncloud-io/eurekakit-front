@@ -46,7 +46,7 @@ export const UserCommentList = () => {
             seperator={<Separator />}
             className="overflow-x-hidden"
         >
-            {commentList?.list.map(comment => <Comment comment={comment} />)}
+            {commentList?.list.map(comment => <Comment key={comment.id} comment={comment} />)}
         </InfiniteList>
     );
 };

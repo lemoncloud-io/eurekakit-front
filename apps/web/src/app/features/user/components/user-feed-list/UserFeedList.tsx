@@ -6,7 +6,7 @@ import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 import { useWebCoreStore } from '@lemon/web-core';
 
-import { InfiniteList } from '../../../../components';
+import { InfiniteList, Link } from '../../../../components';
 import { Post } from '../../../post/components';
 import { PostSkeleton } from '../../../post/components/post/PostSkeleton';
 
@@ -56,7 +56,11 @@ export const UserFeedList = () => {
             seperator={<Separator />}
             className="overflow-x-hidden"
         >
-            {feedList?.list.map(feed => <Post post={feed} />)}
+            {feedList?.list.map(feed => (
+                <Link to={`/post/${feed.id}`} key={feed.id}>
+                    <Post post={feed} />
+                </Link>
+            ))}
         </InfiniteList>
     );
 };

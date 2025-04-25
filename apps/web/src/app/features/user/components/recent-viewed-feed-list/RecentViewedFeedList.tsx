@@ -2,7 +2,7 @@ import { useFetchInfiniteViewedFeedList } from '@lemon/feeds';
 import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
-import { InfiniteList } from '../../../../components';
+import { InfiniteList, Link } from '../../../../components';
 import { Post } from '../../../post/components';
 import { PostSkeleton } from '../../../post/components/post/PostSkeleton';
 
@@ -43,7 +43,11 @@ export const RecentViewedFeedList = () => {
             seperator={<Separator />}
             className="overflow-x-hidden"
         >
-            {viewedFeedList?.list.map(feed => <Post post={feed} />)}
+            {viewedFeedList?.list.map(feed => (
+                <Link to={`/post/${feed.id}`} key={feed.id}>
+                    <Post post={feed} />
+                </Link>
+            ))}
         </InfiniteList>
     );
 };
