@@ -43,7 +43,7 @@ export const UserPage = () => {
                     <span>내 활동 내역</span>
                 </Link>
                 <Link
-                    to="view"
+                    to="viewed"
                     className="bg-muted text-foreground flex aspect-square h-auto flex-1 flex-col items-center justify-center gap-2 rounded-lg p-4 text-sm"
                 >
                     <span className="bg-background text-foreground inline-flex h-10 w-10 items-center justify-center rounded-full shadow-sm">

@@ -7,7 +7,7 @@ export const UserRoutes = () => {
         <Routes>
             <Route path="/" element={<UserPage />} />
             <Route path="/activity" element={<UserActivityPage />} />
-            <Route path="/view" element={<RecentViewPage />} />
+            <Route path="/viewed" element={<RecentViewPage />} />
             <Route path="/profile" element={<ProfilePage />} />
         </Routes>
     );
