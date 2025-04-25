@@ -13,7 +13,7 @@ export const UserPage = () => {
             <header className="flex h-12 items-center px-4">
                 <span>MY</span>
                 <button className="ml-auto">
-                    <Settings />
+                    <Settings size={20} />
                 </button>
             </header>
             <div className="flex items-center gap-3 p-4">
@@ -22,19 +22,19 @@ export const UserPage = () => {
             </div>
             <Separator />
             <div className="flex items-center justify-center gap-2 p-4">
-                <Link className="bg-muted text-foreground flex aspect-square h-auto flex-1 flex-col items-center justify-center gap-2 p-4 text-sm">
+                <Link className="bg-muted text-foreground flex aspect-square h-auto flex-1 flex-col items-center justify-center gap-2 rounded-lg p-4 text-sm">
                     <span className="bg-background text-foreground inline-flex h-10 w-10 items-center justify-center rounded-full shadow-sm">
                         <EditIcon size={16} />
                     </span>
                     <span>내 활동 내역</span>
                 </Link>
-                <Link className="bg-muted text-foreground flex aspect-square h-auto flex-1 flex-col items-center justify-center gap-2 p-4 text-sm">
+                <Link className="bg-muted text-foreground flex aspect-square h-auto flex-1 flex-col items-center justify-center gap-2 rounded-lg p-4 text-sm">
                     <span className="bg-background text-foreground inline-flex h-10 w-10 items-center justify-center rounded-full shadow-sm">
                         <Clipboard size={16} />
                     </span>
                     <span>최근 본 글</span>
                 </Link>
-                <Link className="bg-muted text-foreground flex aspect-square h-auto flex-1 flex-col items-center justify-center gap-2 p-4 text-sm">
+                <Link className="bg-muted text-foreground flex aspect-square h-auto flex-1 flex-col items-center justify-center gap-2 rounded-lg p-4 text-sm">
                     <span className="bg-background text-foreground inline-flex h-10 w-10 items-center justify-center rounded-full shadow-sm">
                         <User size={16} />
                     </span>
