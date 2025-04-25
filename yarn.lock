@@ -2445,10 +2445,10 @@
     axios "^1.7.2"
     crypto-js "^4.2.0"
 
-"@lemoncloud/pets-socials-api@^0.25.403":
-  version "0.25.403"
-  resolved "https://registry.yarnpkg.com/@lemoncloud/pets-socials-api/-/pets-socials-api-0.25.403.tgz#fdfef214ffe2de97be3f1bf98897fee52c951685"
-  integrity sha512-DwHO8qXZRx2naLqu/bhnz8jrdR4yH5o+uEHLT2wpdf2/2xVgPmuMIG6BrEG60DdbIoQsbmjYsGXt6Ao10qryvw==
+"@lemoncloud/pets-socials-api@^0.25.425":
+  version "0.25.425"
+  resolved "https://registry.yarnpkg.com/@lemoncloud/pets-socials-api/-/pets-socials-api-0.25.425.tgz#5621993bf28c71c0bc07bc349c0772cfd73b7895"
+  integrity sha512-aAPdWgnUOW17ZNsBhLGI2vwlabraqpGIRq7Zq3QqAqxXspiQrGu9RplbZMB3rW4MaIyOWs9/Z91gJes6akFOGg==
   dependencies:
     lemon-model "^1.0.3"
 
