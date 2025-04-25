@@ -2,9 +2,9 @@ import { useMutation } from '@tanstack/react-query';
 
 import { createComment } from '../apis';
 
-import type { FeedBody } from '@lemoncloud/pets-socials-api';
+import type { CommentBody } from '@lemoncloud/pets-socials-api';
 
 export const useCrerateComment = () =>
     useMutation({
-        mutationFn: ({ feedId, body }: { feedId?: string; body?: FeedBody }) => createComment(feedId, body),
+        mutationFn: ({ feedId, body }: { feedId?: string; body?: CommentBody }) => createComment(feedId, body),
     });
