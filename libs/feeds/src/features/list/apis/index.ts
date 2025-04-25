@@ -6,3 +6,4 @@ export * from './searchFeed';
 
 export * from './fetchUserFeedList';
 export * from './fetchUserCommentList';
+export * from './fetchViewedFeedList';

@@ -10,3 +10,5 @@ export * from './useSearchFeed';
 
 export * from './useFetchInfiniteUserFeedList';
 export * from './useFetchInfiniteUserCommentList';
+
+export * from './useFetchInfiniteViewedFeedList';
