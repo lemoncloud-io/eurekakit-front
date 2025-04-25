@@ -3,8 +3,8 @@ export const BACKEND_API = import.meta.env.VITE_PET_API_ENDPOINT?.toLowerCase();
 export const FEEDS = 'feeds';
 export const DETAIL = 'detail';
 export const ACTIVITY = 'activity';
-export const COMMENTS = 'childs';
-export const COMMENT = 'child';
+export const COMMENTS = 'comments';
+export const COMMENT = 'comment';
 
 export const HELLO = 'hello';
 
