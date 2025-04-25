@@ -1,15 +1,15 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { userKeys } from '../../../consts/userKeys';
+import { feedsKeys } from '../../../consts';
 import { fetchUserFeedList } from '../apis';
 
-import type { FeedView } from '@lemon/feeds';
+import type { FeedView } from '../../../types';
 import type { ListResult } from '@lemon/shared';
 import type { Params } from '@lemoncloud/lemon-web-core';
 
 export const useFetchInfiniteUserFeedList = (id?: string, params?: Params) =>
     useInfiniteQuery({
-        queryKey: userKeys.feeds(id, params),
+        queryKey: feedsKeys.list({ parent: true, id, ...params }),
         queryFn: ({ pageParam = 0 }) => fetchUserFeedList(id, { ...params, page: pageParam }),
         initialPageParam: 0,
         getNextPageParam: lastPage => {

@@ -2,7 +2,7 @@ import { webCore } from '@lemon/web-core';
 
 import { FEEDS, PET_ENDPOINT, USERS } from '../../../consts/apis';
 
-import type { FeedView } from '@lemon/feeds';
+import type { FeedView } from '../../../types';
 import type { ListResult } from '@lemon/shared';
 import type { Params } from '@lemoncloud/lemon-web-core';
 
