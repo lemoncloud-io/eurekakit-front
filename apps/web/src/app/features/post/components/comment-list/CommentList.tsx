@@ -29,7 +29,7 @@ export const CommentList = () => {
     return (
         <div>
             <div className="bg-muted flex px-4 py-1.5 text-sm">
-                <span>답글 {post?.childNo ?? 0}</span>
+                <span>답글 {(post?.commentPosted ?? 0) - (post?.commentHidden ?? 0)}</span>
                 <button
                     className="text-secondary-foreground ml-auto inline-flex items-center gap-1 text-xs"
                     onClick={() => navigate(`/comment/create?feedId=${postId}`)}
