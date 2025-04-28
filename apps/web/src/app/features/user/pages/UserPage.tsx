@@ -1,5 +1,6 @@
 import { Clipboard, EditIcon, Settings, User } from 'lucide-react';
 
+import { Images } from '@lemon/assets';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -16,8 +17,10 @@ export const UserPage = () => {
 
     return (
         <div className="flex-1">
-            <header className="flex h-12 items-center px-4">
-                <span>MY</span>
+            <header className="flex h-12 items-center pr-4">
+                <div className="flex h-12 flex-none items-center px-4">
+                    <img src={Images.userPageLogo} />
+                </div>
                 <DropdownMenu>
                     <DropdownMenuTrigger className="ml-auto">
                         <Settings size={20} />
