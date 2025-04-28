@@ -32,7 +32,7 @@ export const CommentList = () => {
                 <span>답글 {post?.childNo ?? 0}</span>
                 <button
                     className="text-secondary-foreground ml-auto inline-flex items-center gap-1 text-xs"
-                    onClick={() => navigate(`/comment/create?postId=${postId}`)}
+                    onClick={() => navigate(`/comment/create?feedId=${postId}`)}
                 >
                     <span>답글 쓰기</span>
                     <ChevronRight size={16} />

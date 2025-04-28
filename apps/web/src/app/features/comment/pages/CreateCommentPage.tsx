@@ -22,7 +22,7 @@ export const CreateCommentPage = () => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
-    const [postId] = useQueryState('postId');
+    const [feedId] = useQueryState('feedId');
 
     const { setIsLoading } = useGlobalLoader();
     const { toast } = useToast();
@@ -45,7 +45,7 @@ export const CreateCommentPage = () => {
         setIsLoading(true);
 
         createComment(
-            { feedId: postId, body: commentBody },
+            { feedId, body: commentBody },
             {
                 onSuccess: onSuccessCreate,
                 onError: () => setBlockerOn(true),
@@ -67,7 +67,7 @@ export const CreateCommentPage = () => {
                 <Button
                     variant={'outline'}
                     className="h-14 justify-start rounded-lg"
-                    onClick={() => overlay.open(overlayProps => <PostViewerModal postId={postId} {...overlayProps} />)}
+                    onClick={() => overlay.open(overlayProps => <PostViewerModal postId={feedId} {...overlayProps} />)}
                 >
                     본문 보기
                     <span className="ml-auto">
