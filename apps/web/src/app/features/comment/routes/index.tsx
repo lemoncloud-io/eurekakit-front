@@ -1,12 +1,22 @@
-import { Route, Routes } from 'react-router-dom';
+import { fetchComment } from '@lemon/feeds';
 
 import { CreateCommentPage, UpdateCommentPage } from '../pages';
 
-export const CommentRoutes = () => {
-    return (
-        <Routes>
-            <Route path="/create" element={<CreateCommentPage />} />
-            <Route path="/update/:commentId" element={<UpdateCommentPage />} />
-        </Routes>
-    );
-};
+import type { RouteObject } from 'react-router-dom';
+
+export const commentRoutes: RouteObject[] = [
+    {
+        path: 'create',
+        element: <CreateCommentPage />,
+    },
+    {
+        path: 'update/:commentId',
+        loader: async ({ params }) => {
+            const commentId = params.commentId;
+            if (!commentId) throw new Error('Comment ID is required');
+            const comment = await fetchComment(commentId);
+            return { comment };
+        },
+        element: <UpdateCommentPage />,
+    },
+];
