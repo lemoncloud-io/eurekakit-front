@@ -1,14 +1,22 @@
-import { Route, Routes } from 'react-router-dom';
-
 import { ProfilePage, RecentViewPage, UserActivityPage, UserPage } from '../pages';
 
-export const UserRoutes = () => {
-    return (
-        <Routes>
-            <Route path="/" element={<UserPage />} />
-            <Route path="/activity" element={<UserActivityPage />} />
-            <Route path="/viewed" element={<RecentViewPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-        </Routes>
-    );
-};
+import type { RouteObject } from 'react-router-dom';
+
+export const userRoutes: RouteObject[] = [
+    {
+        index: true,
+        element: <UserPage />,
+    },
+    {
+        path: 'activity',
+        element: <UserActivityPage />,
+    },
+    {
+        path: 'viewed',
+        element: <RecentViewPage />,
+    },
+    {
+        path: 'profile',
+        element: <ProfilePage />,
+    },
+];
