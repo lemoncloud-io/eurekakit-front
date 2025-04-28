@@ -1,5 +1,8 @@
 import { Clipboard, EditIcon, Settings, User } from 'lucide-react';
 
+import { Images } from '@lemon/assets';
+import { useOverlay } from '@lemon/overlay';
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTitle } from '@lemon/ui-kit/components/ui/dialog';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -10,20 +13,51 @@ import { Separator } from '@lemon/ui-kit/components/ui/separator';
 import { useWebCoreStore } from '@lemon/web-core';
 
 import { Link, NickName, Profile } from '../../../components';
+import { useModalWithDropDown, useNavigate } from '../../../hooks';
+
+import type { OverlayProps } from '@lemon/overlay';
+
+export const LogoutModal = ({ open, onOpenChange }: OverlayProps) => {
+    const navigate = useNavigate();
+    const modal = useModalWithDropDown(open);
+
+    return (
+        <Dialog modal={modal} open={open} onOpenChange={onOpenChange}>
+            <DialogContent>
+                <DialogTitle className="flex items-center justify-center py-8 text-lg">
+                    로그아웃 하시겠습니까?
+                </DialogTitle>
+                <DialogFooter>
+                    <DialogClose>취소</DialogClose>
+                    <DialogClose onClick={() => navigate('/auth/logout')} className="text-accent-foreground">
+                        로그아웃
+                    </DialogClose>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
+    );
+};
 
 export const UserPage = () => {
-    const { profile, logout } = useWebCoreStore();
+    const overlay = useOverlay();
+    const { profile } = useWebCoreStore();
 
     return (
         <div className="flex-1">
-            <header className="flex h-12 items-center px-4">
-                <span>MY</span>
+            <header className="flex h-12 items-center pr-4">
+                <div className="flex h-12 flex-none items-center px-4">
+                    <img src={Images.userPageLogo} />
+                </div>
                 <DropdownMenu>
                     <DropdownMenuTrigger className="ml-auto">
                         <Settings size={20} />
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                        <DropdownMenuItem onClick={logout}>로그아웃</DropdownMenuItem>
+                        <DropdownMenuItem
+                            onClick={() => overlay.open(overlayProps => <LogoutModal {...overlayProps} />)}
+                        >
+                            로그아웃
+                        </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             </header>

@@ -1,10 +1,10 @@
 import { useForm, useWatch } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useLoaderData, useParams } from 'react-router-dom';
 
 import { useQueryClient } from '@tanstack/react-query';
 import { ChevronRight, X } from 'lucide-react';
 
-import { feedsKeys, useFetchComment, useUpdateComment } from '@lemon/feeds';
+import { feedsKeys, useUpdateComment } from '@lemon/feeds';
 import { useOverlay } from '@lemon/overlay';
 import { useGlobalLoader, useQueryState } from '@lemon/shared';
 import { useToast } from '@lemon/ui-kit';
@@ -15,31 +15,29 @@ import { useFormBlockModal, useNavigate } from '../../../hooks';
 import { PostEditor } from '../../post/components';
 import { PostViewerModal } from '../components';
 
-import type { FeedBody } from '@lemoncloud/pets-socials-api';
+import type { CommentBody, CommentView } from '@lemoncloud/pets-socials-api';
 
 export const UpdateCommentPage = () => {
     const overlay = useOverlay();
+    const navigate = useNavigate();
+    const queryClient = useQueryClient();
+    const params = useParams();
+    const loaderData = useLoaderData<{ comment: CommentView }>();
 
     const { setIsLoading } = useGlobalLoader();
     const { toast } = useToast();
 
-    const navigate = useNavigate();
-    const queryClient = useQueryClient();
-
-    const params = useParams();
-
     const [feedId] = useQueryState('feedId');
 
-    const { data: comment, isPending: isLoadingComment } = useFetchComment(params.commentId);
-    const { mutate: updateFeed, isPending } = useUpdateComment();
+    const { mutate: updateComment, isPending } = useUpdateComment();
 
-    const methods = useForm<FeedBody>({
+    const methods = useForm<CommentBody>({
         mode: 'all',
         defaultValues: { image$$: [], text: '' },
-        values: comment,
+        values: loaderData.comment,
     });
 
-    const watchedImages = useWatch({ control: methods.control, name: 'images' });
+    const watchedImages = useWatch({ control: methods.control, name: 'image$$' });
     const watchedText = useWatch({ control: methods.control, name: 'text' });
 
     const isTextDirty = watchedText?.length !== 0;
@@ -51,12 +49,18 @@ export const UpdateCommentPage = () => {
         description: '해당 화면에서 이탈 시 변경된 내용이 사라집니다.',
     });
 
-    const submitComment = (feedBody: FeedBody) => {
+    const onSuccessUpdate = async () => {
+        toast({ description: '수정이 완료되었습니다.', className: 'justify-center' });
+        navigate(-1);
+        await queryClient.invalidateQueries({ queryKey: feedsKeys.all });
+    };
+
+    const submitComment = (commentBody: CommentBody) => {
         setBlockerOn(false);
         setIsLoading(true);
 
-        updateFeed(
-            { id: params.commentId, body: feedBody },
+        updateComment(
+            { commentId: params.commentId, body: commentBody },
             {
                 onSuccess: onSuccessUpdate,
                 onError: () => setBlockerOn(true),
@@ -74,31 +78,21 @@ export const UpdateCommentPage = () => {
                     <X />
                 </Button>
             </header>
-            {!isLoadingComment && comment && (
-                <div className="flex h-[calc(100%-3rem)] flex-col gap-3 p-4">
-                    <Button
-                        variant={'outline'}
-                        className="h-14 w-full justify-start rounded-lg"
-                        onClick={() =>
-                            overlay.open(overlayProps => <PostViewerModal postId={feedId} {...overlayProps} />)
-                        }
-                    >
-                        본문 보기
-                        <span className="ml-auto">
-                            <ChevronRight />
-                        </span>
-                    </Button>
-                    <Form {...methods}>
-                        <PostEditor isSubmitting={isPending} onValid={submitComment} />
-                    </Form>
-                </div>
-            )}
+            <div className="flex h-[calc(100%-3rem)] flex-col gap-3 p-4">
+                <Button
+                    variant={'outline'}
+                    className="h-14 w-full justify-start rounded-lg"
+                    onClick={() => overlay.open(overlayProps => <PostViewerModal postId={feedId} {...overlayProps} />)}
+                >
+                    본문 보기
+                    <span className="ml-auto">
+                        <ChevronRight />
+                    </span>
+                </Button>
+                <Form {...methods}>
+                    <PostEditor isSubmitting={isPending} onValid={submitComment} />
+                </Form>
+            </div>
         </div>
     );
-
-    async function onSuccessUpdate() {
-        toast({ description: '수정이 완료되었습니다.', className: 'justify-center' });
-        navigate(-1);
-        await queryClient.invalidateQueries({ queryKey: feedsKeys.all });
-    }
 };

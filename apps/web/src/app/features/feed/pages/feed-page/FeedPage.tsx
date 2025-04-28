@@ -1,5 +1,3 @@
-import { Search } from 'lucide-react';
-
 import { Images } from '@lemon/assets';
 import { useQueryState } from '@lemon/shared';
 import { Tabs, TabsList, TabsTrigger } from '@lemon/ui-kit/components/ui/tabs';
@@ -21,9 +19,6 @@ export const FeedPage = () => {
             <header className="bg-background sticky top-0 z-50">
                 <div className="flex h-12 w-full flex-none items-center px-4">
                     <img src={Images.feedPageLogo} />
-                    <button className="ml-auto">
-                        <Search size={20} />
-                    </button>
                 </div>
                 <TabsList className="sticky top-0 w-full flex-none justify-start border-b">
                     <TabsTrigger value="all">전체</TabsTrigger>

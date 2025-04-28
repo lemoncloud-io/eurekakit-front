@@ -1,11 +1,10 @@
-import { Route, Routes } from 'react-router-dom';
-
 import { SearchPage } from '../pages';
 
-export const SearchRoutes = () => {
-    return (
-        <Routes>
-            <Route path="/" element={<SearchPage />} />
-        </Routes>
-    );
-};
+import type { RouteObject } from 'react-router-dom';
+
+export const searchRoutes: RouteObject[] = [
+    {
+        index: true,
+        element: <SearchPage />,
+    },
+];

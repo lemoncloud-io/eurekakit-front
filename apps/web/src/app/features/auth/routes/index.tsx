@@ -1,15 +1,28 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import { KakaoCallbackPage, LoginPage, LogoutPage, OAuthResponsePage } from '../pages';
 
-export const AuthRoutes = () => {
-    return (
-        <Routes>
-            <Route path="login" element={<LoginPage />} />
-            <Route path="logout" element={<LogoutPage />} />
-            <Route path="oauth-response" element={<OAuthResponsePage />} />
-            <Route path="kakao/callback" element={<KakaoCallbackPage />} />
-            <Route path="*" element={<Navigate to="/auth/login"></Navigate>} />
-        </Routes>
-    );
-};
+import type { RouteObject } from 'react-router-dom';
+
+export const authRoutes: RouteObject[] = [
+    {
+        path: 'login',
+        element: <LoginPage />,
+    },
+    {
+        path: 'logout',
+        element: <LogoutPage />,
+    },
+    {
+        path: 'oauth-response',
+        element: <OAuthResponsePage />,
+    },
+    {
+        path: 'kakao/callback',
+        element: <KakaoCallbackPage />,
+    },
+    {
+        path: '*',
+        element: <Navigate to="/auth/login" />,
+    },
+];

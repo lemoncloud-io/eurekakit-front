@@ -5,6 +5,7 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
+    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@lemon/ui-kit/components/ui/dropdown-menu';
 import { List } from '@lemon/ui-kit/components/ui/list';
@@ -47,10 +48,10 @@ export const CommentHeader = ({ commentId, feedId, profileImg, nickname, created
                 <DropdownMenuContent>
                     {isMe ? (
                         <>
-                            {/* <DropdownMenuItem onClick={() => navigate(`/comment/update/${commentId}?feedId=${feedId}`)}>
+                            <DropdownMenuItem onClick={() => navigate(`/comment/update/${commentId}?feedId=${feedId}`)}>
                                 수정하기
                             </DropdownMenuItem>
-                            <DropdownMenuSeparator /> */}
+                            <DropdownMenuSeparator />
                             <DropdownMenuItem
                                 onClick={() =>
                                     overlay.open(overlayProps => (

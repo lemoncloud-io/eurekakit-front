@@ -18,7 +18,7 @@ export const PostGridBlock = ({ post }: PostGridBlockProps) => {
                 <div className="absolute -z-0 h-full w-full overflow-hidden rounded-lg">
                     <Image src={post.image$$?.[0]?.url} />
                 </div>
-                <div className="bg-foreground/40 text-background flex w-full items-center gap-2 rounded-lg p-2 backdrop-blur-sm">
+                <div className="text-background flex w-full items-center gap-2 rounded-lg bg-[#8A8A8A]/40 p-2 backdrop-blur-sm">
                     <Profile src={post.user$.image} className="h-8 w-8" />
                     <div className="shrink overflow-hidden text-xs">
                         <NickName nickname={post.user$.nick} className="text-xs" />

@@ -1,11 +1,10 @@
-import { Route, Routes } from 'react-router-dom';
-
 import { FeedPage } from '../pages';
 
-export const FeedRoutes = () => {
-    return (
-        <Routes>
-            <Route path="/*" element={<FeedPage />} />
-        </Routes>
-    );
-};
+import type { RouteObject } from 'react-router-dom';
+
+export const feedRoutes: RouteObject[] = [
+    {
+        index: true,
+        element: <FeedPage />,
+    },
+];
