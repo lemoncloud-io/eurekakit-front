@@ -33,7 +33,7 @@ export const UpdatePostPage = () => {
         values: post,
     });
 
-    const watchedImages = useWatch({ control: methods.control, name: 'images' });
+    const watchedImages = useWatch({ control: methods.control, name: 'image$$' });
     const watchedText = useWatch({ control: methods.control, name: 'text' });
 
     const isTextDirty = watchedText?.length !== 0;
