@@ -26,9 +26,9 @@ export const HomeHeader = ({ className }: HomeHeaderProps) => {
 
     useEffect(() => {
         const scrollHandler = () => {
-            const currenctScrollY = window.scrollY;
+            const currenctScrollY = Math.max(window.scrollY, 0);
             const deltaY = currenctScrollY - prevScrollYRef.current;
-            prevScrollYRef.current = window.scrollY;
+            prevScrollYRef.current = currenctScrollY;
 
             setCollapsed(deltaY > 0 ? true : false);
         };
