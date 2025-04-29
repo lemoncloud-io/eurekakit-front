@@ -5,8 +5,6 @@ import { Images } from '@lemon/assets';
 import { useGlobalLoader } from '@lemon/shared';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 
-import { useKakaoAuth } from '../hooks';
-
 import type { LoginProvider } from '@lemon/types';
 
 export const LoginPage = () => {
@@ -15,29 +13,28 @@ export const LoginPage = () => {
     const from = location.state?.from || '/home';
 
     const { isOnMobileApp } = useAppChecker();
-    const { getKakaoAuthUrl } = useKakaoAuth();
 
     const handleSocialLoginClick = (provider: LoginProvider) => {
         switch (provider) {
             case 'kakao':
-                window.location.href = getKakaoAuthUrl();
+                handleSocialLogin('kakao');
                 return;
             case 'google':
-                handleGoogleLogin();
+                handleSocialLogin('google');
                 return;
             default:
                 return;
         }
     };
 
-    const handleGoogleLogin = () => {
+    const handleSocialLogin = (provider: 'kakao' | 'google') => {
         setIsLoading(true);
         const HOST = import.meta.env.VITE_HOST.toLowerCase();
         const SOCIAL_OAUTH = import.meta.env.VITE_SOCIAL_OAUTH_ENDPOINT.toLowerCase();
         const state = encodeURIComponent(JSON.stringify({ from }));
         const redirectUrl = `${HOST}/auth/oauth-response?state=${state}`;
 
-        window.location.replace(`${SOCIAL_OAUTH}/oauth/google/authorize?redirect=${redirectUrl}`);
+        window.location.replace(`${SOCIAL_OAUTH}/oauth/${provider}/authorize?redirect=${redirectUrl}`);
     };
 
     return (
