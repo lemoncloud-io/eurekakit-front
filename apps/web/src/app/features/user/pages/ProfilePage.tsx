@@ -57,27 +57,28 @@ export const ProfilePage = () => {
                 <div className="h-5 w-5" />
             </header>
             <Form {...methods}>
-                <div className="flex flex-col gap-10 p-4">
+                <div className="flex flex-col gap-4 p-4">
                     {isDev() && <DevTool control={methods.control} />}
-                    <div className="flex flex-col gap-2">
+                    <div className="text-secondary-foreground flex flex-col items-center justify-center gap-2 text-sm">
                         <ProfileImageField />
-                        <ProfileNickNameField />
+                        <span>프로필 사진 변경</span>
                     </div>
-                    <div className="flex gap-2">
-                        <Button size={'lg'} className="flex-1" variant={'outline'} onClick={() => navigate(-1)}>
-                            취소
-                        </Button>
-                        <Button
-                            size={'lg'}
-                            className="flex-1"
-                            disabled={!isDirty || isNickNameError}
-                            onClick={methods.handleSubmit(submitUser)}
-                        >
-                            작성 완료
-                        </Button>
-                    </div>
+                    <ProfileNickNameField />
                 </div>
             </Form>
+            <div className="flex gap-2 p-4">
+                <Button size={'lg'} className="flex-1" variant={'outline'} onClick={() => navigate(-1)}>
+                    취소
+                </Button>
+                <Button
+                    size={'lg'}
+                    className="flex-1"
+                    disabled={!isDirty || isNickNameError}
+                    onClick={methods.handleSubmit(submitUser)}
+                >
+                    작성 완료
+                </Button>
+            </div>
         </div>
     );
 

@@ -49,35 +49,31 @@ export const ProfileImageField = () => {
     };
 
     return (
-        <div className="text-secondary-foreground flex flex-col items-center gap-2 pb-2 pt-4 text-sm">
-            <FormField
-                control={methods.control}
-                name="image"
-                render={({ field: { value } }) => (
-                    <Label
-                        htmlFor={inputId}
-                        className="bg-muted text-muted-foreground h-16 w-16 overflow-hidden rounded-full"
-                    >
-                        <Image
-                            src={value}
-                            fallback={
-                                <div className="bg-muted flex h-full w-full items-center justify-center">
-                                    <Camera />
-                                </div>
-                            }
-                        />
-                        <input
-                            type="file"
-                            id={inputId}
-                            accept="image/jpg, image/jpeg, image/png"
-                            className="hidden"
-                            onChange={handleUploadImage}
-                        />
-                    </Label>
-                )}
-            />
-
-            <span>프로필 사진 변경</span>
-        </div>
+        <FormField
+            control={methods.control}
+            name="image"
+            render={({ field: { value } }) => (
+                <Label
+                    htmlFor={inputId}
+                    className="bg-muted text-muted-foreground inline-block h-16 w-16 overflow-hidden rounded-full"
+                >
+                    <Image
+                        src={value}
+                        fallback={
+                            <div className="bg-muted flex h-full w-full items-center justify-center">
+                                <Camera />
+                            </div>
+                        }
+                    />
+                    <input
+                        type="file"
+                        id={inputId}
+                        accept="image/jpg, image/jpeg, image/png"
+                        className="hidden"
+                        onChange={handleUploadImage}
+                    />
+                </Label>
+            )}
+        />
     );
 };
