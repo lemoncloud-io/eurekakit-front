@@ -10,6 +10,7 @@ import {
     DialogDescription,
     DialogFooter,
     DialogTitle,
+    DialogYes,
 } from '@lemon/ui-kit/components/ui/dialog';
 
 import { useModalWithDropDown } from '../../../../hooks';
@@ -41,19 +42,15 @@ export const DeleteCommentModal = ({ commentId, open, onOpenChange }: DeleteComm
 
     return (
         <Dialog modal={modal} open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="gap-4 text-center">
-                <DialogTitle className="flex h-12 items-end justify-center pb-0">
-                    해당 글을 삭제하시겠습니까?
-                </DialogTitle>
+            <DialogContent className="text-center">
+                <DialogTitle withDescription>해당 글을 삭제하시겠습니까?</DialogTitle>
                 <DialogDescription className="flex flex-col">
                     <span>삭제 후 내용은 복원이 불가능하며,</span>
                     <span>답글 내용도 삭제됩니다.</span>
                 </DialogDescription>
                 <DialogFooter>
                     <DialogClose className="text-muted-foreground">취소</DialogClose>
-                    <DialogClose className="text-accent-foreground font-semibold" onClick={onClickDelete}>
-                        삭제
-                    </DialogClose>
+                    <DialogYes onClick={onClickDelete}>삭제</DialogYes>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

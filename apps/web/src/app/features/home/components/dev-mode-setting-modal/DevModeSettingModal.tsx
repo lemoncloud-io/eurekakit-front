@@ -27,7 +27,7 @@ export const DevModeSettingModal = (overlayProps: OverlayProps) => {
     return (
         <Dialog {...overlayProps}>
             <DialogContent showCloseBtn>
-                <DialogTitle className="flex h-12 w-full items-center justify-center border-b">개발자 설정</DialogTitle>
+                <DialogTitle>개발자 설정</DialogTitle>
                 <div className="grid grid-cols-[1fr_40px] p-4">
                     <span>MSW Worker</span>
                     <Switch checked={devSetting.msw} onCheckedChange={onChangeMSW} />
