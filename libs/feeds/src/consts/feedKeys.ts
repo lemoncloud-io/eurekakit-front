@@ -7,9 +7,6 @@ export const feedsKeys = {
         [...feedsKeys.lists(), ...(infinite ? ['infinite'] : []), filter] as const,
     details: () => [...feedsKeys.all, 'detail'] as const,
     detail: (id?: string, filter?: Params) => [...feedsKeys.details(), id, filter] as const,
-    comments: (feedId?: string) => [...feedsKeys.all, feedId, 'comments'] as const,
-    comment: (feedId?: string, filter?: Params, infinite?: boolean) =>
-        [...feedsKeys.comments(feedId), ...(infinite ? ['infinite'] : []), filter] as const,
     invalidateList: () => ({
         queryKey: ['feeds', 'list'],
         exact: false,
