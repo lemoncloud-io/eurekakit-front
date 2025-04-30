@@ -2,7 +2,7 @@ import { webCore } from '@lemon/web-core';
 
 import { ACTIVITY, COMMENTS, PET_ENDPOINT } from '../../../consts';
 
-import type { ActivityParams, CommentView } from '@lemoncloud/pets-socials-api';
+import type { CommentActivityParams, CommentView } from '../../../types';
 
 export const likeComment = async (commentId?: string, isLike?: boolean) => {
     if (!commentId) {
@@ -18,7 +18,7 @@ export const likeComment = async (commentId?: string, isLike?: boolean) => {
             method: 'PUT',
             baseURL: [PET_ENDPOINT, COMMENTS, commentId, ACTIVITY].join('/'),
         })
-        .setParams({ like: isLike } satisfies ActivityParams)
+        .setParams({ like: isLike } satisfies CommentActivityParams)
         .setBody({})
         .execute<CommentView>();
 

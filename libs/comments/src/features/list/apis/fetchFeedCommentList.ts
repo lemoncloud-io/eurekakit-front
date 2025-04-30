@@ -2,11 +2,10 @@ import { webCore } from '@lemon/web-core';
 
 import { COMMENTS, FEEDS, PET_ENDPOINT } from '../../../consts';
 
+import type { CommentListParams, CommentView } from '../../../types';
 import type { ListResult } from '@lemon/shared';
-import type { Params } from '@lemoncloud/lemon-web-core';
-import type { CommentView } from '@lemoncloud/pets-socials-api';
 
-export const fetchFeedCommentList = async (feedId?: string, params?: Params) => {
+export const fetchFeedCommentList = async (feedId?: string, params?: CommentListParams) => {
     if (!feedId) {
         throw new Error('fetchFeedChildList - @feedId is required');
     }

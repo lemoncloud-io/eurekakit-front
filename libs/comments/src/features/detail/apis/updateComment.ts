@@ -2,7 +2,7 @@ import { webCore } from '@lemon/web-core';
 
 import { COMMENTS, PET_ENDPOINT } from '../../../consts';
 
-import type { CommentBody, CommentView } from '@lemoncloud/pets-socials-api';
+import type { CommentBody, CommentView } from '../../../types';
 
 export const updateComment = async (commentId?: string, body?: CommentBody) => {
     if (!commentId) {

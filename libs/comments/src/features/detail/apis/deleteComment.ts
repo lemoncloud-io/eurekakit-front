@@ -2,7 +2,7 @@ import { webCore } from '@lemon/web-core';
 
 import { COMMENTS, HIDE, PET_ENDPOINT } from '../../../consts';
 
-import type { CommentBody, CommentView } from '@lemoncloud/pets-socials-api';
+import type { CommentBody, CommentView } from '../../../types';
 
 export const deleteComment = async (commentId?: string) => {
     if (!commentId) {

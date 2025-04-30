@@ -1,11 +1,10 @@
 import { webCore } from '@lemon/web-core';
 
-import { COMMENTS, DETAIL, PET_ENDPOINT } from '../../../consts';
+import { COMMENTS, DETAIL, PET_ENDPOINT } from '../../../consts/apis';
 
-import type { FeedListParam } from '../../../types';
-import type { CommentView } from '@lemoncloud/pets-socials-api';
+import type { CommentListParams, CommentView } from '../../../types';
 
-export const fetchComment = async (commentId?: string, params?: FeedListParam) => {
+export const fetchComment = async (commentId?: string, params?: CommentListParams) => {
     if (!commentId) {
         throw new Error('fetchComment - @commentId is required');
     }
@@ -15,7 +14,7 @@ export const fetchComment = async (commentId?: string, params?: FeedListParam) =
             method: 'GET',
             baseURL: [PET_ENDPOINT, COMMENTS, commentId, DETAIL].join('/'),
         })
-        .setParams({ ...params } satisfies FeedListParam)
+        .setParams({ ...params })
         .execute<CommentView>();
 
     return data;

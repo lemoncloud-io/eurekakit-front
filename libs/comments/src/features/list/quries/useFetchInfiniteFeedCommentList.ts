@@ -1,15 +1,15 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { feedsKeys } from '../../../consts';
+import { commentKeys } from '../../../consts';
 import { fetchFeedCommentList } from '../apis';
 
+import type { CommentListParams, CommentView } from '../../../types';
 import type { ListResult } from '@lemon/shared';
-import type { Params } from '@lemoncloud/lemon-web-core';
-import type { CommentView, UserView } from '@lemoncloud/pets-socials-api';
+import type { UserView } from '@lemoncloud/pets-socials-api';
 
-export const useFetchInfiniteFeedCommentList = (feedId?: string, params?: Params) =>
+export const useFetchInfiniteFeedCommentList = (feedId?: string, params?: CommentListParams) =>
     useInfiniteQuery({
-        queryKey: feedsKeys.comment(feedId, params, true),
+        queryKey: commentKeys.list({ feedId }, true),
         queryFn: ({ pageParam = 0 }) => fetchFeedCommentList(feedId, { ...params, page: pageParam }),
         initialPageParam: 0,
         getNextPageParam: lastPage => {

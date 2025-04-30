@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { DialogClose } from '@radix-ui/react-dialog';
 
-import { useReportComment } from '@lemon/feeds';
+import { useReportComment } from '@lemon/comments';
 import { useToast } from '@lemon/ui-kit';
 import { Dialog, DialogContent, DialogFooter, DialogTitle } from '@lemon/ui-kit/components/ui/dialog';
 import { Label } from '@lemon/ui-kit/components/ui/label';

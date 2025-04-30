@@ -2,7 +2,8 @@ import { webCore } from '@lemon/web-core';
 
 import { ACTIVITY, COMMENTS, PET_ENDPOINT } from '../../../consts';
 
-import type { ActivityParams, CommentView, FeedActivityBody } from '@lemoncloud/pets-socials-api';
+import type { CommentActivityBody, CommentActivityParams, CommentView } from '../../../types';
+import type {} from '@lemoncloud/pets-socials-api';
 
 export const reportComment = async (commentId?: string, reason?: string) => {
     if (!commentId) {
@@ -18,8 +19,8 @@ export const reportComment = async (commentId?: string, reason?: string) => {
             method: 'PUT',
             baseURL: [PET_ENDPOINT, COMMENTS, commentId, ACTIVITY].join('/'),
         })
-        .setParams({ report: true } satisfies ActivityParams)
-        .setBody({ reason } satisfies FeedActivityBody)
+        .setParams({ report: true } satisfies CommentActivityParams)
+        .setBody({ reason } satisfies CommentActivityBody)
         .execute<CommentView>();
 
     return data;

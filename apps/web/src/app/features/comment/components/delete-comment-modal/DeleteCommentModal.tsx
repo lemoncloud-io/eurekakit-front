@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 
-import { feedsKeys, useDeleteComment } from '@lemon/feeds';
+import { commentKeys, useDeleteComment } from '@lemon/comments';
 import { useGlobalLoader } from '@lemon/shared';
 import { useToast } from '@lemon/ui-kit';
 import {
@@ -60,7 +60,7 @@ export const DeleteCommentModal = ({ commentId, open, onOpenChange }: DeleteComm
     );
 
     async function onSuccessDelete() {
-        await queryClient.invalidateQueries({ queryKey: feedsKeys.all });
+        await queryClient.invalidateQueries({ queryKey: commentKeys.all });
         toast({ description: '삭제되었습니다', className: 'flex justify-center items-center' });
     }
 };

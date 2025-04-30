@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Heart } from 'lucide-react';
 
-import { useLikeComment } from '@lemon/feeds';
+import { useLikeComment } from '@lemon/comments';
 import { formatCount } from '@lemon/shared';
 import { cn, useToast } from '@lemon/ui-kit';
 

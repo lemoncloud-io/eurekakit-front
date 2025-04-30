@@ -6,7 +6,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { RefreshCw } from 'lucide-react';
 
-import { feedsKeys, useComments, useCreateFeed, useDeleteFeed, useFeed, useUpdateFeed } from '@lemon/feeds';
+import { useComments } from '@lemon/comments';
+import { feedsKeys, useCreateFeed, useDeleteFeed, useFeed, useUpdateFeed } from '@lemon/feeds';
 import { Loader, usePagination } from '@lemon/shared';
 import { Alert, AlertDescription } from '@lemon/ui-kit/components/ui/alert';
 import { Button } from '@lemon/ui-kit/components/ui/button';

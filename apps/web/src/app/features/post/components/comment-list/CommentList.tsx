@@ -2,7 +2,8 @@ import { useParams } from 'react-router-dom';
 
 import { ChevronRight } from 'lucide-react';
 
-import { useFetchFeed, useFetchInfiniteFeedCommentList } from '@lemon/feeds';
+import { useFetchInfiniteFeedCommentList } from '@lemon/comments';
+import { useFetchFeed } from '@lemon/feeds';
 import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 

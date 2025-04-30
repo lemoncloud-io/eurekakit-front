@@ -1,16 +1,15 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { feedsKeys } from '../../../consts';
+import { commentKeys } from '../../../consts';
 import { fetchUserCommentList } from '../apis';
 
+import type { CommentListParams, CommentView } from '../../../types';
 import type { ListResult } from '@lemon/shared';
-import type { Params } from '@lemoncloud/lemon-web-core';
-import type { CommentView } from '@lemoncloud/pets-socials-api';
 
-export const useFetchInfiniteUserCommentList = (id?: string, params?: Params) =>
+export const useFetchInfiniteUserCommentList = (id?: string, params?: CommentListParams) =>
     useInfiniteQuery({
         //TODO : @luke-lemon 추후 스키마로 빼던지 해야할 듯.
-        queryKey: feedsKeys.list({ parent: false, id, ...params }),
+        queryKey: commentKeys.list({ parent: false, id, ...params }),
         queryFn: ({ pageParam = 0 }) => fetchUserCommentList(id, { ...params, page: pageParam }),
         initialPageParam: 0,
         getNextPageParam: lastPage => {

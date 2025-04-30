@@ -4,7 +4,7 @@ import { useLoaderData, useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { ChevronRight, X } from 'lucide-react';
 
-import { feedsKeys, useUpdateComment } from '@lemon/feeds';
+import { commentKeys, useUpdateComment } from '@lemon/comments';
 import { useOverlay } from '@lemon/overlay';
 import { useGlobalLoader, useQueryState } from '@lemon/shared';
 import { useToast } from '@lemon/ui-kit';
@@ -52,7 +52,7 @@ export const UpdateCommentPage = () => {
     const onSuccessUpdate = async () => {
         toast({ description: '수정이 완료되었습니다.', className: 'justify-center' });
         navigate(-1);
-        await queryClient.invalidateQueries({ queryKey: feedsKeys.all });
+        await queryClient.invalidateQueries({ queryKey: commentKeys.all });
     };
 
     const submitComment = (commentBody: CommentBody) => {

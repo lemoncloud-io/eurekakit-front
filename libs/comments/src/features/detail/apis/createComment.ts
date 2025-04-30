@@ -2,7 +2,7 @@ import { webCore } from '@lemon/web-core';
 
 import { COMMENT, FEEDS, PET_ENDPOINT } from '../../../consts';
 
-import type { CommentBody, CommentView } from '@lemoncloud/pets-socials-api';
+import type { CommentBody, CommentView } from '../../../types';
 
 export const createComment = async (feedId?: string, commentBody?: CommentBody) => {
     if (!feedId) {
