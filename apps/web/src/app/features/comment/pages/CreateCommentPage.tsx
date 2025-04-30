@@ -3,7 +3,7 @@ import { useForm, useWatch } from 'react-hook-form';
 import { useQueryClient } from '@tanstack/react-query';
 import { ChevronRight, X } from 'lucide-react';
 
-import { feedsKeys, useCrerateComment } from '@lemon/feeds';
+import { commentKeys, useCrerateComment } from '@lemon/comments';
 import { useOverlay } from '@lemon/overlay';
 import { useGlobalLoader, useQueryState } from '@lemon/shared';
 import { useToast } from '@lemon/ui-kit';
@@ -84,6 +84,6 @@ export const CreateCommentPage = () => {
     async function onSuccessCreate() {
         toast({ description: '답글 등록이 완료되었습니다.', className: 'justify-center' });
         navigate(-1);
-        await queryClient.invalidateQueries({ queryKey: feedsKeys.all });
+        await queryClient.invalidateQueries({ queryKey: commentKeys.all });
     }
 };

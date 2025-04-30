@@ -1,4 +1,4 @@
-import { fetchComment } from '@lemon/feeds';
+import { fetchComment } from '@lemon/comments';
 
 import { CreateCommentPage, UpdateCommentPage } from '../pages';
 
