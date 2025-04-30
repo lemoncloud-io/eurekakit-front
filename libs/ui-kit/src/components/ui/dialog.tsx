@@ -16,6 +16,13 @@ const DialogPortal = DialogPrimitive.Portal;
 
 const DialogClose = DialogPrimitive.Close;
 
+const DialogYes = React.forwardRef<
+    React.ElementRef<typeof DialogPrimitive.Close>,
+    React.ComponentPropsWithoutRef<typeof DialogPrimitive.Close>
+>(({ className, ...props }) => (
+    <DialogPrimitive.Close className={cn('text-accent-foreground', className)} {...props} />
+));
+
 const DialogOverlay = React.forwardRef<
     React.ElementRef<typeof DialogPrimitive.Overlay>,
     React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
@@ -92,7 +99,10 @@ const DialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
     <DialogPrimitive.Title
         ref={ref}
-        className={cn('text-lg font-semibold leading-none tracking-tight', className)}
+        className={cn(
+            'text-lgleading-none flex min-h-12 items-center justify-center border-b text-center tracking-tight',
+            className
+        )}
         {...props}
     />
 ));
@@ -111,6 +121,7 @@ export {
     DialogPortal,
     DialogOverlay,
     DialogTrigger,
+    DialogYes,
     DialogClose,
     DialogContent,
     DialogHeader,
