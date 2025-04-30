@@ -1,4 +1,4 @@
-import { useWebCoreStore } from '@lemon/web-core';
+import { useFetchProfile } from '@lemon/users';
 
 import { CommentHeader } from './CommentHeader';
 import { ImageListViewer } from '../../../../components';
@@ -12,7 +12,7 @@ interface CommentProps {
 }
 
 export const Comment = ({ comment }: CommentProps) => {
-    const { profile } = useWebCoreStore();
+    const { data: profile } = useFetchProfile();
 
     return (
         <div className="flex flex-col items-start gap-2 px-4 pb-4 pt-2">
@@ -22,7 +22,7 @@ export const Comment = ({ comment }: CommentProps) => {
                 profileImg={comment.user$?.image}
                 nickname={comment.user$?.nick}
                 createdAt={comment.createdAt}
-                isMe={profile?.uid === comment.userId}
+                isMe={profile?.id === comment.userId}
             />
             <div className="whitespace-pre-line break-all">{comment.text}</div>
             <ImageListViewer images={comment.image$$} />

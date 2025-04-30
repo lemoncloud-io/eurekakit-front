@@ -10,7 +10,7 @@ import {
     DropdownMenuTrigger,
 } from '@lemon/ui-kit/components/ui/dropdown-menu';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
-import { useWebCoreStore } from '@lemon/web-core';
+import { useFetchProfile } from '@lemon/users';
 
 import { Link, NickName, Profile } from '../../../components';
 import { useModalWithDropDown, useNavigate } from '../../../hooks';
@@ -40,7 +40,7 @@ export const LogoutModal = ({ open, onOpenChange }: OverlayProps) => {
 
 export const UserPage = () => {
     const overlay = useOverlay();
-    const { profile } = useWebCoreStore();
+    const { data: profile } = useFetchProfile();
 
     return (
         <div className="flex-1">
@@ -62,8 +62,8 @@ export const UserPage = () => {
                 </DropdownMenu>
             </header>
             <div className="flex items-center gap-3 p-4">
-                <Profile src={profile?.$user.photo} className="h-12 w-12" />
-                <NickName nickname={profile?.$user.nick ?? ''} className="text-base" />
+                <Profile src={profile?.image} className="h-12 w-12" />
+                <NickName nickname={profile?.nick ?? ''} className="text-base" />
             </div>
             <Separator />
             <div className="flex items-center justify-center gap-2 p-4">

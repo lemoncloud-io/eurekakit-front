@@ -4,14 +4,14 @@ import { useFetchInfiniteUserFeedList } from '@lemon/feeds';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
-import { useWebCoreStore } from '@lemon/web-core';
+import { useFetchProfile } from '@lemon/users';
 
 import { InfiniteList, Link } from '../../../../components';
 import { Post } from '../../../post/components';
 import { PostSkeleton } from '../../../post/components/post/PostSkeleton';
 
 export const UserFeedList = () => {
-    const { profile } = useWebCoreStore();
+    const { data: profile } = useFetchProfile();
 
     const {
         data: feedList,
@@ -19,7 +19,7 @@ export const UserFeedList = () => {
         isFetching,
         fetchNextPage,
         isLoading,
-    } = useFetchInfiniteUserFeedList(profile?.uid);
+    } = useFetchInfiniteUserFeedList(profile?.id);
 
     const isEmptyList = feedList?.total === 0;
 

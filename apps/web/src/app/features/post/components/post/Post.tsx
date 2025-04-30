@@ -1,4 +1,4 @@
-import { useWebCoreStore } from '@lemon/web-core';
+import { useFetchProfile } from '@lemon/users';
 
 import { PostHeader } from './PostHeader';
 import { ImageListViewer, LikeButton } from '../../../../components';
@@ -10,7 +10,7 @@ interface PostProps {
 }
 
 export const Post = ({ post }: PostProps) => {
-    const { profile } = useWebCoreStore();
+    const { data: profile } = useFetchProfile();
 
     return (
         <div className="flex flex-col items-start gap-2 overflow-x-hidden px-4 py-2">
