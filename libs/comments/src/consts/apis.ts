@@ -1,0 +1,15 @@
+export const PET_ENDPOINT = import.meta.env.VITE_PET_API_ENDPOINT;
+
+export const COMMENTS = 'comments';
+export const COMMENT = 'comment';
+
+export const LIST = 'list';
+export const DETAIL = 'detail';
+
+export const FEEDS = 'feeds';
+export const HELLO = 'hello';
+export const USERS = 'users';
+
+export const ACTIVITY = 'activity';
+export const LIKED = 'liked';
+export const HIDE = 'hide';
