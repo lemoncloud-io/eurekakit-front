@@ -7,9 +7,10 @@ export const attachUser$ToListResult = <L extends ListResult<V>, V extends ViewW
     userList: UserView[]
 ) => {
     const withUserList = listResult.list.map(data => {
-        const ownerId = data.user$.id;
+        const ownerId = data.user$?.id;
 
-        const owner = userList.find(user => user.id === ownerId);
+        const owner =
+            userList.find(user => user.id === ownerId) ?? ({ id: 'Unknown', nick: 'Unknown' } satisfies UserView);
 
         return { ...data, user$: owner };
     });
