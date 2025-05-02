@@ -18,6 +18,10 @@ export const useFetchInfiniteFeedCommentList = (feedId?: string, params?: Commen
             const flattenedListResult = flattenInfiniteListResult(data);
             const commentListWithUser = attachUser$ToListResult(flattenedListResult, flattenedListResult.Users);
 
-            return commentListWithUser;
+            const activityComment = commentListWithUser.list.map(comment =>
+                comment.Activity ? { ...comment, $activity: comment.Activity } : comment
+            );
+
+            return { ...commentListWithUser, list: activityComment };
         },
     });

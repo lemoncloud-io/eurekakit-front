@@ -14,5 +14,13 @@ export const useFetchInfiniteUserCommentList = (id?: string, params?: CommentLis
         queryFn: ({ pageParam = 0 }) => fetchUserCommentList(id, { ...params, page: pageParam }),
         initialPageParam: 0,
         getNextPageParam: getListResultNextPage,
-        select: flattenInfiniteListResult,
+        select: data => {
+            const flattenedListResult = flattenInfiniteListResult(data);
+
+            const activityComment = flattenedListResult.list.map(comment =>
+                comment.Activity ? { ...comment, $activity: comment.Activity } : comment
+            );
+
+            return { ...flattenedListResult, list: activityComment };
+        },
     });
