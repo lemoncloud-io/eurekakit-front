@@ -18,6 +18,6 @@ export const useFetchInfiniteFeedCommentList = (feedId?: string, params?: Commen
             const flattenedListResult = flattenInfiniteListResult(data);
             const commentListWithUser = attachUser$ToListResult(flattenedListResult, flattenedListResult.Users);
 
-            return { ...flattenedListResult, list: commentListWithUser };
+            return commentListWithUser;
         },
     });
