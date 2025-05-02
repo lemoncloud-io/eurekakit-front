@@ -56,11 +56,13 @@ export const UserFeedList = () => {
             seperator={<Separator />}
             className="overflow-x-hidden"
         >
-            {feedList?.list.map(feed => (
-                <Link to={`/post/${feed.id}`} key={feed.id}>
-                    <Post post={feed} />
-                </Link>
-            ))}
+            {feedList?.list
+                .map(feed => ({ ...feed, user$: profile }))
+                .map(feed => (
+                    <Link to={`/post/${feed.id}`} key={feed.id}>
+                        <Post post={feed} />
+                    </Link>
+                ))}
         </InfiniteList>
     );
 };
