@@ -1,3 +1,5 @@
+import type { RequiredKeys } from '@lemon/shared';
+import type { UserView } from '@lemon/users';
 import type { Params } from '@lemoncloud/lemon-web-core';
 import type {
     ActivityBody,
@@ -6,7 +8,9 @@ import type {
     CommentView as OCommentView,
 } from '@lemoncloud/pets-socials-api';
 
-export interface CommentView extends OCommentView {}
+export interface CommentView extends Omit<RequiredKeys<OCommentView, 'id' | 'createdAt' | 'userId'>, 'user$'> {
+    user$: UserView;
+}
 
 export interface CommentBody extends OCommentBody {}
 
