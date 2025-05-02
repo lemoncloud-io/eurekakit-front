@@ -25,7 +25,6 @@ export const Comment = ({ comment }: CommentProps) => {
             />
             <div className="whitespace-pre-line break-all">{comment.text}</div>
             <ImageListViewer images={comment.image$$} />
-            {/* // TODO : FEED와 activity 타입 통합 */}
             <LikeCommentButton
                 commentId={comment.id}
                 isLike={comment.$activity?.isLike}
