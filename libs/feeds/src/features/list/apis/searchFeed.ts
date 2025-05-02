@@ -4,6 +4,7 @@ import { FEEDS, HELLO, LIST, PET_ENDPOINT } from '../../../consts';
 
 import type { FeedListParam, FeedView } from '../../../types';
 import type { ListResult } from '@lemon/shared';
+import type { WithUsers } from '@lemon/users';
 
 export const searchFeed = async (params: FeedListParam) => {
     if (!params.keyword) {
@@ -16,7 +17,7 @@ export const searchFeed = async (params: FeedListParam) => {
             baseURL: [PET_ENDPOINT, HELLO, FEEDS, LIST].join('/'),
         })
         .setParams({ mine: true, parent: true, activity: true, ...params })
-        .execute<ListResult<FeedView>>();
+        .execute<WithUsers<ListResult<FeedView>>>();
 
     return data;
 };
