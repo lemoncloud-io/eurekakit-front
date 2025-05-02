@@ -1,14 +1,14 @@
 import { useFetchInfiniteUserCommentList } from '@lemon/comments';
 import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
-import { useWebCoreStore } from '@lemon/web-core';
+import { useFetchProfile } from '@lemon/users';
 
 import { InfiniteList } from '../../../../components';
 import { Comment } from '../../../comment/components';
 import { PostSkeleton } from '../../../post/components/post/PostSkeleton';
 
 export const UserCommentList = () => {
-    const { profile } = useWebCoreStore();
+    const { data: profile } = useFetchProfile();
 
     const {
         data: commentList,
@@ -16,7 +16,7 @@ export const UserCommentList = () => {
         isFetching,
         fetchNextPage,
         isLoading,
-    } = useFetchInfiniteUserCommentList(profile?.uid);
+    } = useFetchInfiniteUserCommentList(profile?.id);
 
     const isEmptyList = commentList?.total === 0;
 

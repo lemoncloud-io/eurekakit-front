@@ -16,6 +16,14 @@ const DialogPortal = DialogPrimitive.Portal;
 
 const DialogClose = DialogPrimitive.Close;
 
+const DialogYes = React.forwardRef<
+    React.ElementRef<typeof DialogPrimitive.Close>,
+    React.ComponentPropsWithoutRef<typeof DialogPrimitive.Close>
+>(({ className, ...props }) => (
+    <DialogPrimitive.Close className={cn('text-accent-foreground disabled:opacity-50', className)} {...props} />
+));
+DialogYes.displayName = DialogPrimitive.Close.displayName;
+
 const DialogOverlay = React.forwardRef<
     React.ElementRef<typeof DialogPrimitive.Overlay>,
     React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
@@ -86,23 +94,34 @@ const DialogFooter = ({ className, children, ...props }: React.HTMLAttributes<HT
 );
 DialogFooter.displayName = 'DialogFooter';
 
-const DialogTitle = React.forwardRef<
-    React.ElementRef<typeof DialogPrimitive.Title>,
-    React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
->(({ className, ...props }, ref) => (
-    <DialogPrimitive.Title
-        ref={ref}
-        className={cn('text-lg font-semibold leading-none tracking-tight', className)}
-        {...props}
-    />
-));
+interface DialogTitleProps extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title> {
+    withDescription?: boolean;
+}
+
+const DialogTitle = React.forwardRef<React.ElementRef<typeof DialogPrimitive.Title>, DialogTitleProps>(
+    ({ className, withDescription, ...props }, ref) => (
+        <DialogPrimitive.Title
+            ref={ref}
+            className={cn(
+                'text-md flex items-center justify-center text-center font-semibold leading-none tracking-tight',
+                withDescription ? 'pb-3 pt-8 leading-5' : 'min-h-12 border-b',
+                className
+            )}
+            {...props}
+        />
+    )
+);
 DialogTitle.displayName = DialogPrimitive.Title.displayName;
 
 const DialogDescription = React.forwardRef<
     React.ElementRef<typeof DialogPrimitive.Description>,
     React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
 >(({ className, ...props }, ref) => (
-    <DialogPrimitive.Description ref={ref} className={cn('text-secondary-foreground text-sm', className)} {...props} />
+    <DialogPrimitive.Description
+        ref={ref}
+        className={cn('text-secondary-foreground pb-6 text-sm', className)}
+        {...props}
+    />
 ));
 DialogDescription.displayName = DialogPrimitive.Description.displayName;
 
@@ -111,6 +130,7 @@ export {
     DialogPortal,
     DialogOverlay,
     DialogTrigger,
+    DialogYes,
     DialogClose,
     DialogContent,
     DialogHeader,

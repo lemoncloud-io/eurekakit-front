@@ -10,7 +10,7 @@ import { useUploadImage } from '@lemon/uploads';
 
 import { Image } from '../../../../components';
 
-import type { UserBody } from '@lemoncloud/codes-backend-api';
+import type { UserBody } from '@lemoncloud/pets-socials-api';
 
 export const ProfileImageField = () => {
     const methods = useFormContext<UserBody>();
@@ -31,7 +31,7 @@ export const ProfileImageField = () => {
             imagePromise
                 .then(data => {
                     const imageUrl = data.list[0].url;
-                    methods.setValue('photo', imageUrl, { shouldDirty: true });
+                    methods.setValue('image', imageUrl, { shouldDirty: true });
                     toast({
                         description: '프로필 사진이 변경되었습니다.',
                         className: 'flex justify-center items-center',
@@ -49,35 +49,31 @@ export const ProfileImageField = () => {
     };
 
     return (
-        <div className="text-secondary-foreground flex flex-col items-center gap-2 pb-2 pt-4 text-sm">
-            <FormField
-                control={methods.control}
-                name="photo"
-                render={({ field: { value } }) => (
-                    <Label
-                        htmlFor={inputId}
-                        className="bg-muted text-muted-foreground h-16 w-16 overflow-hidden rounded-full"
-                    >
-                        <Image
-                            src={value}
-                            fallback={
-                                <div className="bg-muted flex h-full w-full items-center justify-center">
-                                    <Camera />
-                                </div>
-                            }
-                        />
-                        <input
-                            type="file"
-                            id={inputId}
-                            accept="image/jpg, image/jpeg, image/png"
-                            className="hidden"
-                            onChange={handleUploadImage}
-                        />
-                    </Label>
-                )}
-            />
-
-            <span>프로필 사진 변경</span>
-        </div>
+        <FormField
+            control={methods.control}
+            name="image"
+            render={({ field: { value } }) => (
+                <Label
+                    htmlFor={inputId}
+                    className="bg-muted text-muted-foreground inline-block h-16 w-16 overflow-hidden rounded-full"
+                >
+                    <Image
+                        src={value}
+                        fallback={
+                            <div className="bg-muted flex h-full w-full items-center justify-center">
+                                <Camera />
+                            </div>
+                        }
+                    />
+                    <input
+                        type="file"
+                        id={inputId}
+                        accept="image/jpg, image/jpeg, image/png"
+                        className="hidden"
+                        onChange={handleUploadImage}
+                    />
+                </Label>
+            )}
+        />
     );
 };

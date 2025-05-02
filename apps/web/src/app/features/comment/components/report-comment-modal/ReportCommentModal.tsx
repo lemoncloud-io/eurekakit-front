@@ -1,10 +1,8 @@
 import { useState } from 'react';
 
-import { DialogClose } from '@radix-ui/react-dialog';
-
 import { useReportComment } from '@lemon/comments';
 import { useToast } from '@lemon/ui-kit';
-import { Dialog, DialogContent, DialogFooter, DialogTitle } from '@lemon/ui-kit/components/ui/dialog';
+import { Dialog, DialogContent, DialogFooter, DialogTitle, DialogYes } from '@lemon/ui-kit/components/ui/dialog';
 import { Label } from '@lemon/ui-kit/components/ui/label';
 import { List } from '@lemon/ui-kit/components/ui/list';
 import { RadioGroup, RadioGroupItem } from '@lemon/ui-kit/components/ui/radio-group';
@@ -32,7 +30,7 @@ export const ReportCommentModal = ({ commentId, open, onOpenChange }: ReportModa
     return (
         <Dialog modal={modal} open={open} onOpenChange={onOpenChange}>
             <DialogContent showCloseBtn>
-                <DialogTitle className="text-md flex h-12 items-center justify-center border-b">신고하기</DialogTitle>
+                <DialogTitle>신고하기</DialogTitle>
                 <RadioGroup asChild onValueChange={value => setReason(value)}>
                     <List seperator={<Separator />}>
                         <Label htmlFor="reason0" className="flex items-center gap-4 p-4">
@@ -62,13 +60,13 @@ export const ReportCommentModal = ({ commentId, open, onOpenChange }: ReportModa
                     </List>
                 </RadioGroup>
                 <DialogFooter>
-                    <DialogClose
+                    <DialogYes
                         disabled={!reason}
                         onClick={submitReport}
                         className="text-accent-foreground font-semibold disabled:opacity-50"
                     >
                         완료
-                    </DialogClose>
+                    </DialogYes>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

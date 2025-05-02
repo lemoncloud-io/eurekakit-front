@@ -1,8 +1,8 @@
 import { webCore } from '@lemon/web-core';
 
-import { USERS, USER_ENDPOINT } from '../../../consts/apis';
+import { PET_ENDPOINT, USERS } from '../../../consts';
 
-import type { UserBody, UserView } from '@lemoncloud/codes-backend-api';
+import type { UserBody, UserView } from '@lemoncloud/pets-socials-api';
 
 export const updateUser = async (id?: string, body?: UserBody) => {
     if (!id) {
@@ -14,7 +14,7 @@ export const updateUser = async (id?: string, body?: UserBody) => {
     }
 
     const { data } = await webCore
-        .buildSignedRequest({ method: 'PUT', baseURL: [USER_ENDPOINT, USERS, id].join('/') })
+        .buildSignedRequest({ method: 'PUT', baseURL: [PET_ENDPOINT, USERS, id].join('/') })
         .setBody({ ...body })
         .execute<UserView>();
 
