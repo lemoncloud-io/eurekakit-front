@@ -8,7 +8,7 @@ import { Comment } from '../../../comment/components';
 import { PostSkeleton } from '../../../post/components/post/PostSkeleton';
 
 export const UserCommentList = () => {
-    const { data: profile } = useFetchProfile();
+    const { data: profile, isLoading: isProfileLoading } = useFetchProfile();
 
     const {
         data: commentList,
@@ -20,7 +20,7 @@ export const UserCommentList = () => {
 
     const isEmptyList = commentList?.total === 0;
 
-    if (isLoading) {
+    if (isLoading || isProfileLoading) {
         return (
             <List seperator={<Separator />}>
                 {Array.from({ length: window.innerHeight / 120 - 2 }).map(() => (
@@ -46,7 +46,9 @@ export const UserCommentList = () => {
             seperator={<Separator />}
             className="overflow-x-hidden"
         >
-            {commentList?.list.map(comment => <Comment key={comment.id} comment={comment} />)}
+            {commentList?.list
+                .map(comment => ({ ...comment, user$: profile! }))
+                .map(comment => <Comment key={comment.id} comment={comment} />)}
         </InfiniteList>
     );
 };

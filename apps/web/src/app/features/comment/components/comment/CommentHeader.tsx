@@ -19,7 +19,7 @@ import { ReportCommentModal } from '../report-comment-modal';
 interface CommentHeaderProps {
     commentId: string;
     feedId: string;
-    nickname: string;
+    nickname?: string;
     createdAt: EpochTimeStamp;
     profileImg?: string;
     isMe?: boolean;

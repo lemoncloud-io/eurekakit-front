@@ -1,10 +1,12 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
+import { flattenInfiniteListResult, getListResultNextPage } from '@lemon/shared';
+
 import { feedsKeys } from '../../../consts';
 import { fetchViewedFeedList } from '../apis';
+import { attachUser$ToListResult } from '../utils';
 
-import type { FeedListParam, FeedView } from '../../../types';
-import type { ListResult } from '@lemon/shared';
+import type { FeedListParam } from '../../../types';
 
 // TODO : @luke-lemon infinite list를 따로 기능으로 뺴는게 나으려나
 export const useFetchInfiniteViewedFeedList = (params?: FeedListParam) =>
@@ -13,23 +15,12 @@ export const useFetchInfiniteViewedFeedList = (params?: FeedListParam) =>
         queryKey: feedsKeys.list({ ...params, viewed: true, parent: true, activity: true }, true),
         queryFn: ({ pageParam = 0 }) => fetchViewedFeedList({ ...params, page: pageParam }),
         initialPageParam: 0,
-        getNextPageParam: lastPage => {
-            const { page, total, limit } = lastPage;
-
-            if (page == null || total == null || limit == null) {
-                return undefined;
-            }
-
-            const maxPages = Math.ceil(total / limit);
-
-            return page + 1 < maxPages ? page + 1 : undefined;
-        },
+        getNextPageParam: getListResultNextPage,
         select: data => {
-            return data.pages.reduce(
-                (acc, cur) => {
-                    return { ...acc, list: [...acc.list, ...cur.list] };
-                },
-                { list: [], total: data.pages[0].total } as ListResult<FeedView>
-            );
+            const flattenedList = flattenInfiniteListResult(data);
+
+            const feedListWithUser$ = attachUser$ToListResult(flattenedList, flattenedList.Users);
+
+            return feedListWithUser$;
         },
     });

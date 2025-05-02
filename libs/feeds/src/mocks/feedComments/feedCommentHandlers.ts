@@ -21,11 +21,14 @@ export const feedCommentHandler = [
 
         const responseCommentList = totalCommentList.slice(startFeedIdx, endFeedIdx);
 
+        const Users = responseCommentList.map(comment => comment.user$);
+
         const response = {
             list: responseCommentList,
             total: totalCommentList.length,
             page,
             limit,
+            Users,
         } as ListResult<FeedView>;
 
         await delay(2000);

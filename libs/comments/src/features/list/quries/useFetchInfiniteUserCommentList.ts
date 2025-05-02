@@ -1,10 +1,11 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
+import { flattenInfiniteListResult, getListResultNextPage } from '@lemon/shared';
+
 import { commentKeys } from '../../../consts';
 import { fetchUserCommentList } from '../apis';
 
-import type { CommentListParams, CommentView } from '../../../types';
-import type { ListResult } from '@lemon/shared';
+import type { CommentListParams } from '../../../types';
 
 export const useFetchInfiniteUserCommentList = (id?: string, params?: CommentListParams) =>
     useInfiniteQuery({
@@ -12,23 +13,14 @@ export const useFetchInfiniteUserCommentList = (id?: string, params?: CommentLis
         queryKey: commentKeys.list({ parent: false, id, ...params }),
         queryFn: ({ pageParam = 0 }) => fetchUserCommentList(id, { ...params, page: pageParam }),
         initialPageParam: 0,
-        getNextPageParam: lastPage => {
-            const { page, total, limit } = lastPage;
-
-            if (page == null || total == null || limit == null) {
-                return undefined;
-            }
-
-            const maxPages = Math.ceil(total / limit);
-
-            return page + 1 < maxPages ? page + 1 : undefined;
-        },
+        getNextPageParam: getListResultNextPage,
         select: data => {
-            return data.pages.reduce(
-                (acc, cur) => {
-                    return { ...acc, list: [...acc.list, ...cur.list] };
-                },
-                { list: [], total: data.pages[0].total } as ListResult<CommentView>
+            const flattenedListResult = flattenInfiniteListResult(data);
+
+            const activityComment = flattenedListResult.list.map(comment =>
+                comment.Activity ? { ...comment, $activity: comment.Activity } : comment
             );
+
+            return { ...flattenedListResult, list: activityComment };
         },
     });

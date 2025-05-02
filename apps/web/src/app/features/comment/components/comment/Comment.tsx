@@ -4,11 +4,10 @@ import { CommentHeader } from './CommentHeader';
 import { ImageListViewer } from '../../../../components';
 import { LikeCommentButton } from '../like-comment-button';
 
-import type { RequiredKeys } from '@lemon/shared';
-import type { CommentView } from '@lemoncloud/pets-socials-api';
+import type { CommentView } from '@lemon/comments';
 
 interface CommentProps {
-    comment: RequiredKeys<CommentView, 'id' | 'createdAt'>;
+    comment: CommentView;
 }
 
 export const Comment = ({ comment }: CommentProps) => {
@@ -26,8 +25,11 @@ export const Comment = ({ comment }: CommentProps) => {
             />
             <div className="whitespace-pre-line break-all">{comment.text}</div>
             <ImageListViewer images={comment.image$$} />
-            {/* // TODO : FEED와 activity 타입 통합 */}
-            <LikeCommentButton commentId={comment.id} isLike={comment.Activity?.isLike} likeCount={comment.likeCount} />
+            <LikeCommentButton
+                commentId={comment.id}
+                isLike={comment.$activity?.isLike}
+                likeCount={comment.likeCount}
+            />
         </div>
     );
 };

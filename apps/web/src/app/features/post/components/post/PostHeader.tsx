@@ -18,7 +18,7 @@ import { DeletePostModal } from '../delete-post-modal';
 interface PostHeaderProps {
     postId: string;
     profileImg?: string;
-    nickname: string;
+    nickname?: string;
     createdAt: EpochTimeStamp;
     isMe?: boolean;
     hideMenu?: boolean;

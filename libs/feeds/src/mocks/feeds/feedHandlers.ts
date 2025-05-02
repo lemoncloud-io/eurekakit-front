@@ -18,6 +18,8 @@ export const feedHandler = [
 
         const responseFeedList = mutableFeedList.slice(startFeedIdx, endFeedIdx);
 
+        const Users = responseFeedList.map(feed => feed.user$);
+
         await delay(1000);
 
         return HttpResponse.json({
@@ -25,6 +27,7 @@ export const feedHandler = [
             total: mutableFeedList.length,
             page,
             limit,
+            Users,
         } as ListResult<FeedView>);
     }),
     http.get([PET_ENDPOINT, USERS, ':userId', FEEDS].join('/'), async ({ request }) => {
@@ -54,6 +57,7 @@ export const feedHandler = [
         const endFeedIdx = Math.min((page + 1) * limit, likedFeedList.length);
 
         const responseFeedList = likedFeedList.slice(startFeedIdx, endFeedIdx);
+        const Users = responseFeedList.map(feed => feed.user$);
 
         await delay(1000);
 
@@ -62,6 +66,7 @@ export const feedHandler = [
             total: likedFeedList.length,
             page,
             limit,
+            Users,
         } as ListResult<FeedView>);
     }),
     http.get([PET_ENDPOINT, FEEDS, ':id', DETAIL].join('/'), async ({ params }) => {
@@ -92,6 +97,7 @@ export const feedHandler = [
         const endFeedIdx = Math.min((page + 1) * limit, searchedFeedList.length);
 
         const responseFeedList = searchedFeedList.slice(startFeedIdx, endFeedIdx);
+        const Users = responseFeedList.map(feed => feed.user$);
 
         await delay(1000);
 
@@ -100,6 +106,7 @@ export const feedHandler = [
             total: searchedFeedList.length,
             page,
             limit,
+            Users,
         } as ListResult<FeedView>);
     }),
     http.put([PET_ENDPOINT, FEEDS, ':id', ACTIVITY].join('/'), async ({ request, params }) => {

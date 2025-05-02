@@ -16,17 +16,11 @@ export const PopularPostGrid = () => {
     const [gridPageIdx, setGridPageIdx] = useState(0);
     const { data: feedList, isLoading } = useFetchFeedList({ limit: POST_GRID_LIMIT, sort: 'popular', image: true });
 
-    const TEMP_IMAGE_FEED_LIST = {
-        list: feedList?.list.filter(feed => !!feed.image$$?.length) ?? [],
-        total: feedList?.list.filter(feed => !!feed.image$$?.length).length,
-    };
-
     const gridStartIdx = GRID_COUNT * gridPageIdx;
     const gridEndIdx = GRID_COUNT * (gridPageIdx + 1);
-    const gridMaxPage = Math.ceil((TEMP_IMAGE_FEED_LIST.list?.length ?? 0) / GRID_COUNT);
+    const gridMaxPage = Math.ceil((feedList?.list?.length ?? 0) / GRID_COUNT);
 
-    // TODO : @luke-lemon 임시로 최신 순 20개를 가져와 인기순으로 정렬
-    const gridFeedList = TEMP_IMAGE_FEED_LIST.list
+    const gridFeedList = feedList?.list
         .sort((a, b) => Number(b.likeCount) - Number(a.likeCount))
         .slice(gridStartIdx, gridEndIdx);
 
@@ -39,12 +33,12 @@ export const PopularPostGrid = () => {
             <h3 className="font-semibold">인기글</h3>
             <div className="flex flex-col gap-3 py-1">
                 <Condition condition={!isLoading} fallback={<SkeletonPostGrid />}>
-                    <Condition condition={!!TEMP_IMAGE_FEED_LIST?.total} fallback={<NoPost />}>
+                    <Condition condition={!!feedList?.total} fallback={<NoPost />}>
                         <div className="grid grid-cols-2 gap-2">
                             {gridFeedList?.map(post => <PostGridBlock key={post.id} post={post} />)}
                         </div>
                     </Condition>
-                    <Condition condition={GRID_COUNT < (TEMP_IMAGE_FEED_LIST?.list.length ?? 0)}>
+                    <Condition condition={GRID_COUNT < (feedList?.list.length ?? 0)}>
                         <Button className="w-full gap-2" variant={'secondary'} onClick={changeGridPage}>
                             <RotateCcw />
                             인기글 새로 보기
