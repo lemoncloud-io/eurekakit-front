@@ -8,7 +8,8 @@ import type {
     CommentView as OCommentView,
 } from '@lemoncloud/pets-socials-api';
 
-export interface CommentView extends Omit<RequiredKeys<OCommentView, 'id' | 'createdAt' | 'userId'>, 'user$'> {
+export interface CommentView
+    extends Omit<RequiredKeys<OCommentView, 'id' | 'createdAt' | 'userId' | 'feedId'>, 'user$'> {
     user$: UserView;
 }
 

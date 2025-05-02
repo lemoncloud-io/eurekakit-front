@@ -4,11 +4,10 @@ import { CommentHeader } from './CommentHeader';
 import { ImageListViewer } from '../../../../components';
 import { LikeCommentButton } from '../like-comment-button';
 
-import type { RequiredKeys } from '@lemon/shared';
-import type { CommentView } from '@lemoncloud/pets-socials-api';
+import type { CommentView } from '@lemon/comments';
 
 interface CommentProps {
-    comment: RequiredKeys<CommentView, 'id' | 'createdAt'>;
+    comment: CommentView;
 }
 
 export const Comment = ({ comment }: CommentProps) => {

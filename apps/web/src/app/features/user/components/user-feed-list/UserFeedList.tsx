@@ -11,7 +11,7 @@ import { Post } from '../../../post/components';
 import { PostSkeleton } from '../../../post/components/post/PostSkeleton';
 
 export const UserFeedList = () => {
-    const { data: profile } = useFetchProfile();
+    const { data: profile, isLoading: isProfileLoading } = useFetchProfile();
 
     const {
         data: feedList,
@@ -23,7 +23,7 @@ export const UserFeedList = () => {
 
     const isEmptyList = feedList?.total === 0;
 
-    if (isLoading) {
+    if (isLoading || isProfileLoading) {
         return (
             <List seperator={<Separator />}>
                 {Array.from({ length: window.innerHeight / 120 - 2 }).map(() => (
@@ -57,7 +57,7 @@ export const UserFeedList = () => {
             className="overflow-x-hidden"
         >
             {feedList?.list
-                .map(feed => ({ ...feed, user$: profile }))
+                .map(feed => ({ ...feed, user$: profile! }))
                 .map(feed => (
                     <Link to={`/post/${feed.id}`} key={feed.id}>
                         <Post post={feed} />
