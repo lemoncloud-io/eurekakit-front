@@ -7,6 +7,7 @@ export interface FeedListParam extends OFeedListParam {
     type?: FeedType;
     activity?: boolean;
     parent?: boolean;
+    sort?: 'popular' | 'asc' | 'desc';
 }
 
 export interface FeedView extends Omit<RequiredKeys<OFeedView, 'id' | 'name' | 'createdAt' | 'text'>, 'user$'> {
