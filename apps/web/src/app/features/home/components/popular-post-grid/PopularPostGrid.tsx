@@ -11,10 +11,10 @@ import { NoPost } from '../no-post';
 import { PostGridBlock } from '../post-block';
 import { SkeletonPostGrid } from './SkeletonPostGrid';
 
-export const HotPostGrid = () => {
+export const PopularPostGrid = () => {
     const GRID_COUNT = POST_GRID_COUNT;
     const [gridPageIdx, setGridPageIdx] = useState(0);
-    const { data: feedList, isLoading } = useFetchFeedList({ limit: POST_GRID_LIMIT });
+    const { data: feedList, isLoading } = useFetchFeedList({ limit: POST_GRID_LIMIT, sort: 'popular', image: true });
 
     const TEMP_IMAGE_FEED_LIST = {
         list: feedList?.list.filter(feed => !!feed.image$$?.length) ?? [],

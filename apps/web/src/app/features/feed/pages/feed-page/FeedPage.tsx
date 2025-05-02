@@ -2,7 +2,7 @@ import { Images } from '@lemon/assets';
 import { useQueryState } from '@lemon/shared';
 import { Tabs, TabsList, TabsTrigger } from '@lemon/ui-kit/components/ui/tabs';
 
-import { LikedFeedList, TotalFeedList } from '../../components';
+import { LikedFeedList, PopularFeedList, TotalFeedList } from '../../components';
 
 import type { FeedType } from '@lemon/feeds';
 
@@ -22,17 +22,13 @@ export const FeedPage = () => {
                 </div>
                 <TabsList className="sticky top-0 w-full flex-none justify-start border-b">
                     <TabsTrigger value="all">전체</TabsTrigger>
-                    <TabsTrigger value="hot">인기글</TabsTrigger>
+                    <TabsTrigger value="popular">인기글</TabsTrigger>
                     <TabsTrigger value="liked">좋아요</TabsTrigger>
                 </TabsList>
             </header>
             <div className="flex-1">
                 {feedType === 'all' && <TotalFeedList />}
-                {feedType === 'hot' && (
-                    <div className="flex h-full items-center justify-center">
-                        <span>준비 중입니다.</span>
-                    </div>
-                )}
+                {feedType === 'popular' && <PopularFeedList />}
                 {feedType === 'liked' && <LikedFeedList />}
             </div>
         </Tabs>
