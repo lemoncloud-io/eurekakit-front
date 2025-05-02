@@ -18,7 +18,7 @@ export const PopularFeedList = () => {
         hasNextPage,
         fetchNextPage,
         isFetchingNextPage,
-    } = useFetchInfiniteFeedList({ type: feedType, sort: 'popular' });
+    } = useFetchInfiniteFeedList({ type: feedType, sort: feedType });
 
     const isEmptyList = feedList?.list.length === 0;
 
