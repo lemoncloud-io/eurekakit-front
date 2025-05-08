@@ -5,10 +5,12 @@ import { useQueryState } from '@lemon/shared';
 import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
-import { InfiniteList, Link } from '../../../../components';
+import { ErrorWithRetry, Link } from '../../../../components';
+import { InfiniteFetchedList } from '../../../../components/infinite-fetched-list/InfiniteFetchedList';
+import { withQueryErrorBoundary } from '../../../../utils';
 import { Feed, FeedSkeleton } from '../feed';
 
-export const SearchResultList = () => {
+const SearchResultListContent = () => {
     const [keyword] = useQueryState('keyword');
     const {
         data: searchResults,
@@ -18,7 +20,6 @@ export const SearchResultList = () => {
         isFetchingNextPage,
     } = useSearchFeed({ keyword });
 
-    const isEmptyResult = !!keyword && searchResults?.total === 0;
     const highlightedResult = useMemo(
         () =>
             searchResults?.list.map(feed => {
@@ -37,38 +38,35 @@ export const SearchResultList = () => {
         [searchResults, keyword]
     );
 
-    if (isLoading) {
-        return (
-            <List seperator={<Separator />}>
-                {Array.from({ length: Math.floor(window.innerHeight / 120) - 2 }).map(() => (
-                    <FeedSkeleton />
-                ))}
-            </List>
-        );
-    }
-
-    if (isEmptyResult) {
-        return (
-            <div className="flex h-48 flex-col items-center justify-center">
-                <span>검색 결과가 없습니다.</span>
-                <span className="text-muted-foreground text-sm">다른 검색어를 입력해 보세요.</span>
-            </div>
-        );
-    }
-
     return (
-        <InfiniteList
-            isFetching={isFetchingNextPage}
-            fetchFn={fetchNextPage}
-            showTrigger={hasNextPage}
-            seperator={<Separator />}
-            className="overflow-x-hidden"
-        >
-            {highlightedResult.map(feed => (
+        <InfiniteFetchedList
+            items={highlightedResult}
+            renderItem={feed => (
                 <Link key={feed.id} className="pb-4 pt-2" to={`/feed/${feed.id}`}>
                     <Feed feed={feed} />
                 </Link>
-            ))}
-        </InfiniteList>
+            )}
+            seperator={<Separator />}
+            fetchFn={fetchNextPage}
+            isFetching={isFetchingNextPage}
+            showTrigger={hasNextPage}
+            isLoading={isLoading}
+            loadingFallback={
+                <List seperator={<Separator />}>
+                    {Array.from({ length: Math.floor(window.innerHeight / 120) - 2 }).map(() => (
+                        <FeedSkeleton />
+                    ))}
+                </List>
+            }
+            emptyFallBack={
+                <div className="flex h-48 flex-col items-center justify-center">
+                    <span>검색 결과가 없습니다.</span>
+                    <span className="text-muted-foreground text-sm">다른 검색어를 입력해 보세요.</span>
+                </div>
+            }
+            className="overflow-x-hidden"
+        />
     );
 };
+
+export const SearchResultList = withQueryErrorBoundary(SearchResultListContent, ErrorWithRetry.FullHeight);

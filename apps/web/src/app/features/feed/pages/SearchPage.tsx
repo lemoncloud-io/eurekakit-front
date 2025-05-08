@@ -19,10 +19,12 @@ export const SearchPage = () => {
     const isShowingRecentKeyword = inputKeywork.length === 0 || methods.formState.isDirty;
 
     return (
-        <FormProvider {...methods}>
-            <DevTool control={methods.control} />
-            <SearchInput />
-            {isShowingRecentKeyword ? <RecentKeywordList /> : <SearchResultList />}
-        </FormProvider>
+        <div className="flex h-full flex-col">
+            <FormProvider {...methods}>
+                <DevTool control={methods.control} />
+                <SearchInput />
+                {isShowingRecentKeyword ? <RecentKeywordList /> : <SearchResultList />}
+            </FormProvider>
+        </div>
     );
 };
