@@ -14,13 +14,13 @@ interface LikeState {
 }
 
 interface LikeButtonProps extends Partial<LikeState> {
-    postId: string;
+    feedId: string;
     hideCount?: boolean;
     className?: ClassNameValue;
 }
 
 export const LikeButton = ({
-    postId,
+    feedId,
     isLike = false,
     likeCount = 0,
     hideCount = false,
@@ -40,7 +40,7 @@ export const LikeButton = ({
 
         setOptimisticLike(prev => {
             changeLike(
-                { id: postId, like: !prev.isLike },
+                { id: feedId, like: !prev.isLike },
                 {
                     onError: onErrorChangeLike,
                 }

@@ -7,19 +7,19 @@ import { Button } from '@lemon/ui-kit/components/ui/button';
 import { FormControl, FormField, FormItem, FormLabel } from '@lemon/ui-kit/components/ui/form';
 import { Textarea } from '@lemon/ui-kit/components/ui/textarea';
 
-import { PostEditorImageUploader } from './PostEditorImageUploader';
+import { FeedEditorImageUploader } from './FeedEditorImageUploader';
 import { isDev } from '../../../../utils';
 
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
 import type { SubmitErrorHandler, SubmitHandler } from 'react-hook-form';
 
-interface PostEditorProps {
+interface FeedEditorProps {
     isSubmitting?: boolean;
     onValid: SubmitHandler<FeedBody>;
     onInvalid?: SubmitErrorHandler<FeedBody>;
 }
 
-export const PostEditor = ({ isSubmitting, onValid, onInvalid }: PostEditorProps) => {
+export const FeedEditor = ({ isSubmitting, onValid, onInvalid }: FeedEditorProps) => {
     const methods = useFormContext<FeedBody>();
 
     const watchedText = useWatch({ control: methods.control, name: 'text' });
@@ -67,7 +67,7 @@ export const PostEditor = ({ isSubmitting, onValid, onInvalid }: PostEditorProps
                     </FormItem>
                 )}
             />
-            <PostEditorImageUploader />
+            <FeedEditorImageUploader />
             <Button
                 isLoading={isSubmitting}
                 disabled={isSubmitBtnDisabled}

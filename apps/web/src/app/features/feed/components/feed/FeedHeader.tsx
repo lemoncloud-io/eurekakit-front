@@ -15,8 +15,8 @@ import { useNavigate } from '../../../../hooks';
 import { formatRelativeTime } from '../../../../utils';
 import { DeleteFeedModal } from '../delete-feed-modal';
 
-interface PostHeaderProps {
-    postId: string;
+interface FeedHeaderProps {
+    feedId: string;
     profileImg?: string;
     nickname?: string;
     createdAt: EpochTimeStamp;
@@ -24,7 +24,7 @@ interface PostHeaderProps {
     hideMenu?: boolean;
 }
 
-export const PostHeader = ({ postId, profileImg, nickname, createdAt, isMe, hideMenu = false }: PostHeaderProps) => {
+export const FeedHeader = ({ feedId, profileImg, nickname, createdAt, isMe, hideMenu = false }: FeedHeaderProps) => {
     const navigate = useNavigate();
     const overlay = useOverlay();
 
@@ -47,14 +47,14 @@ export const PostHeader = ({ postId, profileImg, nickname, createdAt, isMe, hide
                     <DropdownMenuContent>
                         {isMe ? (
                             <>
-                                <DropdownMenuItem onClick={() => navigate(`/post/update/${postId}`)}>
+                                <DropdownMenuItem onClick={() => navigate(`/feed/${feedId}/update`)}>
                                     수정하기
                                 </DropdownMenuItem>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem
                                     onClick={() =>
                                         overlay.open(overlayProps => (
-                                            <DeleteFeedModal feedId={postId} {...overlayProps} />
+                                            <DeleteFeedModal feedId={feedId} {...overlayProps} />
                                         ))
                                     }
                                 >
@@ -64,7 +64,7 @@ export const PostHeader = ({ postId, profileImg, nickname, createdAt, isMe, hide
                         ) : (
                             <DropdownMenuItem
                                 onClick={() =>
-                                    overlay.open(overlayProps => <ReportModal id={postId} {...overlayProps} />)
+                                    overlay.open(overlayProps => <ReportModal id={feedId} {...overlayProps} />)
                                 }
                             >
                                 신고

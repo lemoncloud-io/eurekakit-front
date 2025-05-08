@@ -10,12 +10,12 @@ import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Form } from '@lemon/ui-kit/components/ui/form';
 
 import { useFormBlockModal, useNavigate } from '../../../hooks';
-import { PostEditor } from '../components/post-editor';
+import { FeedEditor } from '../components';
 
 import type { FeedView } from '@lemon/feeds';
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
 
-export const CreatePostPage = () => {
+export const CreateFeedPage = () => {
     const { setIsLoading } = useGlobalLoader();
     const queryClient = useQueryClient();
     const { toast } = useToast();
@@ -30,11 +30,11 @@ export const CreatePostPage = () => {
 
     const isTextDirty = watchedText?.length !== 0;
     const isImageDirty = !!watchedImages && watchedImages?.length !== 0;
-    const isPostDirty = isTextDirty || isImageDirty;
+    const isContentDirty = isTextDirty || isImageDirty;
 
-    const { setBlockerOn } = useFormBlockModal(isPostDirty);
+    const { setBlockerOn } = useFormBlockModal(isContentDirty);
 
-    const submitPost = (feedBody: FeedBody) => {
+    const submitFeed = (feedBody: FeedBody) => {
         setBlockerOn(false);
         setIsLoading(true);
 
@@ -56,7 +56,7 @@ export const CreatePostPage = () => {
             </header>
             <div className="h-[calc(100%-3rem)] p-4">
                 <Form {...methods}>
-                    <PostEditor isSubmitting={isPending} onValid={submitPost} />
+                    <FeedEditor isSubmitting={isPending} onValid={submitFeed} />
                 </Form>
             </div>
         </div>
@@ -64,7 +64,7 @@ export const CreatePostPage = () => {
 
     async function onSuccessCreate(feedResult: FeedView) {
         toast({ description: '게시글 등록이 완료되었습니다.', className: 'justify-center' });
-        navigate(`/post/${feedResult.id}`, { replace: true });
+        navigate(`/feed/${feedResult.id}`, { replace: true });
         await queryClient.invalidateQueries({ queryKey: feedsKeys.all });
     }
 };

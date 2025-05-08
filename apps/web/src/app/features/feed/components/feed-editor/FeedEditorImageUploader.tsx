@@ -16,7 +16,7 @@ import type { TrackedPromise } from '../../../../types';
 import type { UploadView } from '@lemon/uploads';
 import type { FeedBody, ImageView } from '@lemoncloud/pets-socials-api';
 
-export const PostEditorImageUploader = () => {
+export const FeedEditorImageUploader = () => {
     const inputId = useId();
     const methods = useFormContext<FeedBody>();
     const { toast } = useToast();
@@ -51,17 +51,17 @@ export const PostEditorImageUploader = () => {
     };
 
     useEffect(() => {
-        const postImageList = uploadImageList
+        const feedImageList = uploadImageList
             .filter(imagePromise => imagePromise.status === 'fulfilled')
             .map(imagePromise => imagePromise.value)
             .flat()
             .filter(image => image !== undefined);
 
-        if (!postImageList) {
+        if (!feedImageList) {
             return;
         }
 
-        methods.setValue('image$$', postImageList, { shouldDirty: true });
+        methods.setValue('image$$', feedImageList, { shouldDirty: true });
     }, [uploadImageList]);
 
     return (

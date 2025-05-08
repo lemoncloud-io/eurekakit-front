@@ -4,9 +4,8 @@ import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { InfiniteList, Link } from '../../../../components';
+import { Feed, FeedSkeleton } from '../feed';
 import { NoLikedFeed } from '../no-feed';
-import { Post } from '../post';
-import { PostSkeleton } from '../post/PostSkeleton';
 
 import type { FeedType } from '@lemon/feeds';
 
@@ -27,7 +26,7 @@ export const LikedFeedList = () => {
         return (
             <List seperator={<Separator />}>
                 {Array.from({ length: Math.floor(window.innerHeight / 120) - 2 }).map(() => (
-                    <PostSkeleton />
+                    <FeedSkeleton />
                 ))}
             </List>
         );
@@ -47,7 +46,7 @@ export const LikedFeedList = () => {
         >
             {likedFeedList?.list.map(feed => (
                 <Link key={feed.id} className="pb-4 pt-2" to={`/feed/${feed.id}`}>
-                    <Post post={feed} />
+                    <Feed feed={feed} />
                 </Link>
             ))}
         </InfiniteList>

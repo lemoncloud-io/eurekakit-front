@@ -11,11 +11,11 @@ import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Form } from '@lemon/ui-kit/components/ui/form';
 
 import { useFormBlockModal, useNavigate } from '../../../hooks';
-import { PostEditor } from '../components/post-editor';
+import { FeedEditor } from '../components';
 
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
 
-export const UpdatePostPage = () => {
+export const UpdateFeedPage = () => {
     const { setIsLoading } = useGlobalLoader();
     const { toast } = useToast();
 
@@ -24,13 +24,13 @@ export const UpdatePostPage = () => {
 
     const params = useParams();
 
-    const { data: post, isPending: isLoadingPost } = useFetchFeed(params.postId);
+    const { data: feed, isPending: isLoadingFeed } = useFetchFeed(params.feedId);
     const { mutate: updateFeed, isPending } = useUpdateFeed();
 
     const methods = useForm<FeedBody>({
         mode: 'all',
         defaultValues: { image$$: [], text: '' },
-        values: post,
+        values: feed,
     });
 
     const watchedImages = useWatch({ control: methods.control, name: 'image$$' });
@@ -38,19 +38,19 @@ export const UpdatePostPage = () => {
 
     const isTextDirty = watchedText?.length !== 0;
     const isImageDirty = !!watchedImages && watchedImages?.length !== 0;
-    const isPostDirty = isTextDirty || isImageDirty;
+    const isContentDirty = isTextDirty || isImageDirty;
 
-    const { setBlockerOn } = useFormBlockModal(isPostDirty, {
+    const { setBlockerOn } = useFormBlockModal(isContentDirty, {
         title: '수정하기를 중단하시겠습니까?',
         description: '해당 화면에서 이탈 시 변경된 내용이 사라집니다.',
     });
 
-    const submitPost = (feedBody: FeedBody) => {
+    const submitFeed = (feedBody: FeedBody) => {
         setBlockerOn(false);
         setIsLoading(true);
 
         updateFeed(
-            { id: params.postId, body: feedBody },
+            { id: params.feedId, body: feedBody },
             {
                 onSuccess: onSuccessUpdate,
                 onError: () => setBlockerOn(true),
@@ -68,10 +68,10 @@ export const UpdatePostPage = () => {
                     <X />
                 </Button>
             </header>
-            {!isLoadingPost && (
+            {!isLoadingFeed && (
                 <div className="h-[calc(100%-3rem)] p-4">
                     <Form {...methods}>
-                        <PostEditor isSubmitting={isPending} onValid={submitPost} />
+                        <FeedEditor isSubmitting={isPending} onValid={submitFeed} />
                     </Form>
                 </div>
             )}

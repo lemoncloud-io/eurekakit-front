@@ -7,13 +7,13 @@ import { Button } from '@lemon/ui-kit/components/ui/button';
 
 import { useNavigate } from '../../../hooks';
 import { CommentList } from '../../comment/components';
-import { Post } from '../components/post';
+import { Feed } from '../components';
 
-export const PostDetailPage = () => {
+export const FeedDetailPage = () => {
     const navigate = useNavigate();
     const params = useParams();
 
-    const { data: post, isLoading } = useFetchFeed(params.postId);
+    const { data: feed, isLoading } = useFetchFeed(params.feedId);
 
     return (
         <>
@@ -22,9 +22,9 @@ export const PostDetailPage = () => {
                     <ChevronLeft />
                 </Button>
             </header>
-            {!isLoading && !!post ? (
+            {!isLoading && !!feed ? (
                 <div className="flex h-[calc(100%-48px)] flex-col gap-3">
-                    <Post post={post} />
+                    <Feed feed={feed} />
                     <CommentList />
                 </div>
             ) : (

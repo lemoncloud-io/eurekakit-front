@@ -6,8 +6,7 @@ import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { InfiniteList, Link } from '../../../../components';
-import { Post } from '../post';
-import { PostSkeleton } from '../post/PostSkeleton';
+import { Feed, FeedSkeleton } from '../feed';
 
 export const SearchResultList = () => {
     const [keyword] = useQueryState('keyword');
@@ -22,17 +21,17 @@ export const SearchResultList = () => {
     const isEmptyResult = !!keyword && searchResults?.total === 0;
     const highlightedResult = useMemo(
         () =>
-            searchResults?.list.map(post => {
+            searchResults?.list.map(feed => {
                 try {
                     const regex = new RegExp(keyword, 'gi');
-                    const highlighted = post.text.replace(
+                    const highlighted = feed.text.replace(
                         regex,
                         match => `<span class='bg-accent text-accent-foreground'>${match}</span>`
                     );
 
-                    return { ...post, text: highlighted };
+                    return { ...feed, text: highlighted };
                 } catch {
-                    return post;
+                    return feed;
                 }
             }) ?? [],
         [searchResults, keyword]
@@ -42,7 +41,7 @@ export const SearchResultList = () => {
         return (
             <List seperator={<Separator />}>
                 {Array.from({ length: Math.floor(window.innerHeight / 120) - 2 }).map(() => (
-                    <PostSkeleton />
+                    <FeedSkeleton />
                 ))}
             </List>
         );
@@ -65,9 +64,9 @@ export const SearchResultList = () => {
             seperator={<Separator />}
             className="overflow-x-hidden"
         >
-            {highlightedResult.map(post => (
-                <Link key={post.id} className="pb-4 pt-2" to={`/post/${post.id}`}>
-                    <Post post={post} />
+            {highlightedResult.map(feed => (
+                <Link key={feed.id} className="pb-4 pt-2" to={`/feed/${feed.id}`}>
+                    <Feed feed={feed} />
                 </Link>
             ))}
         </InfiniteList>

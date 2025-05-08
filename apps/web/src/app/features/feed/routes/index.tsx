@@ -1,4 +1,4 @@
-import { CreatePostPage, FeedPage, HomePage, PostDetailPage, SearchPage, UpdatePostPage } from '../pages';
+import { CreateFeedPage, FeedDetailPage, FeedPage, HomePage, SearchPage, UpdateFeedPage } from '../pages';
 
 import type { RouteObject } from 'react-router-dom';
 
@@ -11,18 +11,18 @@ export const feedRoutes: RouteObject[] = [
         path: 'feed',
         children: [
             { index: true, element: <FeedPage /> },
-            { path: 'create', element: <CreatePostPage /> },
+            { path: 'create', element: <CreateFeedPage /> },
             { path: 'search', element: <SearchPage /> },
             {
                 path: ':feedId',
                 children: [
                     {
                         index: true,
-                        element: <PostDetailPage />,
+                        element: <FeedDetailPage />,
                     },
                     {
                         path: 'update',
-                        element: <UpdatePostPage />,
+                        element: <UpdateFeedPage />,
                     },
                 ],
             },

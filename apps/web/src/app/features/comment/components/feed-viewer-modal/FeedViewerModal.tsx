@@ -4,16 +4,16 @@ import { useFetchFeed } from '@lemon/feeds';
 import { Dialog, DialogContent } from '@lemon/ui-kit/components/ui/dialog';
 
 import { ImageListViewer } from '../../../../components';
-import { PostHeader } from '../../../feed/components/post/PostHeader';
+import { FeedHeader } from '../../../feed/components';
 
 import type { OverlayProps } from '@lemon/overlay';
 
-interface PostViewerModalProps extends OverlayProps {
-    postId: string;
+interface FeedViewerModalProps extends OverlayProps {
+    feedId: string;
 }
 
-export const PostViewerModal = ({ postId, close, ...overlayProps }: PostViewerModalProps) => {
-    const { data: post, isLoading } = useFetchFeed(postId);
+export const FeedViewerModal = ({ feedId, close, ...overlayProps }: FeedViewerModalProps) => {
+    const { data: feed, isLoading } = useFetchFeed(feedId);
 
     return (
         <Dialog {...overlayProps}>
@@ -25,23 +25,23 @@ export const PostViewerModal = ({ postId, close, ...overlayProps }: PostViewerMo
                         <X />
                     </button>
                 </div>
-                {isLoading && !post ? (
+                {isLoading && !feed ? (
                     <div className="flex h-24 items-center justify-center">
                         <Loader2 className="animate-spin" />
                     </div>
                 ) : (
-                    post && (
+                    feed && (
                         <div className="flex max-h-[70vh] flex-col overflow-y-auto overflow-x-hidden p-4">
-                            <PostHeader
-                                postId={postId}
-                                profileImg={post.user$.image}
-                                nickname={post.user$.nick}
-                                createdAt={post.createdAt}
+                            <FeedHeader
+                                feedId={feed.id}
+                                profileImg={feed.user$.image}
+                                nickname={feed.user$.nick}
+                                createdAt={feed.createdAt}
                                 hideMenu
                             />
                             <div className="flex flex-col gap-2">
-                                <p className="whitespace-pre-line break-all">{post.text}</p>
-                                <ImageListViewer images={post.image$$} />
+                                <p className="whitespace-pre-line break-all">{feed.text}</p>
+                                <ImageListViewer images={feed.image$$} />
                             </div>
                         </div>
                     )

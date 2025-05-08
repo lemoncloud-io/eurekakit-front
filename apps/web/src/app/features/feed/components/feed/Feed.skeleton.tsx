@@ -1,4 +1,4 @@
-export const PostSkeleton = () => {
+export const FeedSkeleton = () => {
     return (
         <div className="flex animate-pulse flex-col items-start gap-2 px-4 pb-4 pt-2">
             <div className="flex w-full items-center gap-2 py-2">

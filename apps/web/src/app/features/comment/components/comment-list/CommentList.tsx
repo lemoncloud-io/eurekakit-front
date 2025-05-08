@@ -10,14 +10,14 @@ import { Separator } from '@lemon/ui-kit/components/ui/separator';
 import { InfiniteList } from '../../../../components';
 import { useNavigate } from '../../../../hooks';
 import { Comment } from '../../../comment/components';
-import { PostSkeleton } from '../../../feed/components/post/PostSkeleton';
+import { FeedSkeleton } from '../../../feed/components';
 
 export const CommentList = () => {
     const navigate = useNavigate();
 
-    const { postId } = useParams();
+    const params = useParams();
 
-    const { data: post } = useFetchFeed(postId);
+    const { data: feed } = useFetchFeed(params.feedId);
 
     const {
         data: commentList,
@@ -25,15 +25,15 @@ export const CommentList = () => {
         isFetchingNextPage,
         hasNextPage,
         isLoading,
-    } = useFetchInfiniteFeedCommentList(postId);
+    } = useFetchInfiniteFeedCommentList(params.feedId);
 
     return (
         <div>
             <div className="bg-muted flex px-4 py-1.5 text-sm">
-                <span>답글 {(post?.commentPosted ?? 0) - (post?.commentHidden ?? 0)}</span>
+                <span>답글 {(feed?.commentPosted ?? 0) - (feed?.commentHidden ?? 0)}</span>
                 <button
                     className="text-secondary-foreground ml-auto inline-flex items-center gap-1 text-xs"
-                    onClick={() => navigate(`/comment/create?feedId=${postId}`)}
+                    onClick={() => navigate(`/comment/create?feedId=${params.feedId}`)}
                 >
                     <span>답글 쓰기</span>
                     <ChevronRight size={16} />
@@ -43,7 +43,7 @@ export const CommentList = () => {
                 if (isLoading) {
                     return (
                         <List seperator={<Separator />}>
-                            <PostSkeleton />
+                            <FeedSkeleton />
                         </List>
                     );
                 }
