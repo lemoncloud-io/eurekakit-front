@@ -4,7 +4,7 @@ import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { InfiniteList, Link } from '../../../../components';
-import { NoPostGoWrite } from '../no-feed';
+import { NoFeedGoWrite } from '../no-feed';
 import { Post } from '../post';
 import { PostSkeleton } from '../post/PostSkeleton';
 
@@ -33,7 +33,7 @@ export const TotalFeedList = () => {
     }
 
     if (isEmptyList) {
-        return <NoPostGoWrite />;
+        return <NoFeedGoWrite />;
     }
 
     return (
@@ -45,7 +45,7 @@ export const TotalFeedList = () => {
             className="overflow-x-hidden"
         >
             {feedList?.list.map(feed => (
-                <Link key={feed.id} className="pb-4 pt-2" to={`/post/${feed.id}`}>
+                <Link key={feed.id} className="pb-4 pt-2" to={`/feed/${feed.id}`}>
                     <Post post={feed} />
                 </Link>
             ))}

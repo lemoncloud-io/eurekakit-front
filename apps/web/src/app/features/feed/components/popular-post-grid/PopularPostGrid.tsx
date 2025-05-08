@@ -7,9 +7,9 @@ import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Condition } from '@lemon/ui-kit/components/ui/condition';
 
 import { FEED_GRID_COUNT, FEED_GRID_LIMIT } from '../../consts';
-import { NoPost } from '../no-post';
 import { PostGridBlock } from '../post-block';
 import { SkeletonPostGrid } from './SkeletonPostGrid';
+import { NoFeed } from '../no-feed';
 
 export const PopularPostGrid = () => {
     const GRID_COUNT = FEED_GRID_COUNT;
@@ -33,7 +33,7 @@ export const PopularPostGrid = () => {
             <h3 className="font-semibold">인기글</h3>
             <div className="flex flex-col gap-3 py-1">
                 <Condition condition={!isLoading} fallback={<SkeletonPostGrid />}>
-                    <Condition condition={!!feedList?.total} fallback={<NoPost />}>
+                    <Condition condition={!!feedList?.total} fallback={<NoFeed />}>
                         <div className="grid grid-cols-2 gap-2">
                             {gridFeedList?.map(post => <PostGridBlock key={post.id} post={post} />)}
                         </div>

@@ -5,9 +5,9 @@ import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { INFINITE_FEED_LIST_LIMIT } from '../../consts';
-import { NoPost } from '../no-post';
 import { PostListBlock } from '../post-block';
 import { SkeletonPostList } from './SkeletonPostList';
+import { NoFeed } from '../no-feed';
 
 // TODO : @luke-lemon 낙관적 업데이트 적용
 export const TotalPostList = () => {
@@ -23,7 +23,7 @@ export const TotalPostList = () => {
         <div className="flex flex-col p-4">
             <h3 className="font-semibold">전체글</h3>
             <Condition condition={!isLoading} fallback={<SkeletonPostList />}>
-                <Condition condition={!!feedList?.total} fallback={<NoPost />}>
+                <Condition condition={!!feedList?.total} fallback={<NoFeed />}>
                     <List seperator={<Separator />} className="gap-3 py-3">
                         {feedList?.list.map(post => <PostListBlock key={post.id} post={post} />)}
                     </List>
