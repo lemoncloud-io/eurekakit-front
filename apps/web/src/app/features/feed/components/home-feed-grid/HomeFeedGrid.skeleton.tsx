@@ -1,6 +1,6 @@
 import { FEED_GRID_COUNT } from '../../consts';
 
-export const SkeletonPostGrid = () => {
+export const HomeFeedGridSkeleton = () => {
     return (
         <div className="grid grid-cols-2 gap-2">
             {Array.from({ length: FEED_GRID_COUNT })?.map((_, idx) => (

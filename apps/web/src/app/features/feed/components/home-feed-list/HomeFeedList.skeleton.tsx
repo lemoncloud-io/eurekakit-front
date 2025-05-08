@@ -1,7 +1,7 @@
 import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
-export const SkeletonPostList = () => {
+export const HomeFeedListSkeleton = () => {
     return (
         <List seperator={<Separator />} className="gap-3 py-3">
             {Array.from({ length: 5 }).map((_, idx) => (

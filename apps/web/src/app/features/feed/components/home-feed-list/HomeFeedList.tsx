@@ -5,12 +5,12 @@ import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { INFINITE_FEED_LIST_LIMIT } from '../../consts';
-import { PostListBlock } from '../post-block';
-import { SkeletonPostList } from './SkeletonPostList';
 import { NoFeed } from '../no-feed';
+import { FeedListBlock } from './FeedListBlock';
+import { HomeFeedListSkeleton } from './HomeFeedList.skeleton';
 
 // TODO : @luke-lemon 낙관적 업데이트 적용
-export const TotalPostList = () => {
+export const HomeFeedList = () => {
     const {
         data: feedList,
         fetchNextPage,
@@ -22,10 +22,10 @@ export const TotalPostList = () => {
     return (
         <div className="flex flex-col p-4">
             <h3 className="font-semibold">전체글</h3>
-            <Condition condition={!isLoading} fallback={<SkeletonPostList />}>
+            <Condition condition={!isLoading} fallback={<HomeFeedListSkeleton />}>
                 <Condition condition={!!feedList?.total} fallback={<NoFeed />}>
                     <List seperator={<Separator />} className="gap-3 py-3">
-                        {feedList?.list.map(post => <PostListBlock key={post.id} post={post} />)}
+                        {feedList?.list.map(feed => <FeedListBlock key={feed.id} feed={feed} />)}
                     </List>
                     <Condition condition={hasNextPage}>
                         <Button

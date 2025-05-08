@@ -8,3 +8,6 @@ export * from './feed';
 export * from './feed-editor';
 
 export * from './no-feed';
+
+export * from './home-feed-grid';
+export * from './home-feed-list';
