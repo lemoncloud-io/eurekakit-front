@@ -6,8 +6,8 @@ import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { InfiniteList, Link } from '../../../../components';
-import { Post } from '../../../post/components';
-import { PostSkeleton } from '../../../post/components/post/PostSkeleton';
+import { Post } from '../post';
+import { PostSkeleton } from '../post/PostSkeleton';
 
 export const SearchResultList = () => {
     const [keyword] = useQueryState('keyword');

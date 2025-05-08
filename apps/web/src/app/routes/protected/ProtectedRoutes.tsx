@@ -4,9 +4,6 @@ import { useWebCoreStore } from '@lemon/web-core';
 
 import { commentRoutes } from '../../features/comment';
 import { feedRoutes } from '../../features/feed';
-import { homeRoutes } from '../../features/home';
-import { postRoutes } from '../../features/post';
-import { searchRoutes } from '../../features/search';
 import { userRoutes } from '../../features/user';
 import { TabBarLayout } from '../../layout/TabBarLayout';
 
@@ -25,14 +22,11 @@ export const ProtectedRoutes: RouteObject[] = [
             {
                 element: <TabBarLayout />,
                 children: [
-                    { path: `/home/*`, children: [...homeRoutes] },
-                    { path: '/feed/*', children: [...feedRoutes] },
-                    { path: '/user/*', children: [...userRoutes] },
+                    { path: '/', children: feedRoutes },
+                    { path: '/user/*', children: userRoutes },
                 ],
             },
-            { path: `/post/*`, children: [...postRoutes] },
-            { path: '/comment/*', children: [...commentRoutes] },
-            { path: '/search/*', children: [...searchRoutes] },
+            { path: '/comment/*', children: commentRoutes },
         ],
     },
 ];

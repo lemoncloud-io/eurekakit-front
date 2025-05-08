@@ -6,8 +6,8 @@ import { useFetchFeed } from '@lemon/feeds';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 
 import { useNavigate } from '../../../hooks';
-import { Post } from '../components';
-import { CommentList } from '../components/comment-list';
+import { CommentList } from '../../comment/components';
+import { Post } from '../components/post';
 
 export const PostDetailPage = () => {
     const navigate = useNavigate();

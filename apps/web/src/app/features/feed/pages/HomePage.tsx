@@ -1,6 +1,8 @@
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
-import { HomeHeader, PopularPostGrid, TotalPostList } from '../components';
+import { HomeHeader } from '../components/home-header';
+import { PopularPostGrid } from '../components/popular-post-grid';
+import { TotalPostList } from '../components/total-post-list';
 
 export const HomePage = () => {
     return (

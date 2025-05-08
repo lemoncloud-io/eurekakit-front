@@ -10,7 +10,7 @@ import { Separator } from '@lemon/ui-kit/components/ui/separator';
 import { InfiniteList } from '../../../../components';
 import { useNavigate } from '../../../../hooks';
 import { Comment } from '../../../comment/components';
-import { PostSkeleton } from '../post/PostSkeleton';
+import { PostSkeleton } from '../../../feed/components/post/PostSkeleton';
 
 export const CommentList = () => {
     const navigate = useNavigate();

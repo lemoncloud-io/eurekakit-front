@@ -11,7 +11,7 @@ import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Form } from '@lemon/ui-kit/components/ui/form';
 
 import { useFormBlockModal, useNavigate } from '../../../hooks';
-import { PostEditor } from '../components';
+import { PostEditor } from '../components/post-editor';
 
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
 

@@ -3,8 +3,8 @@ import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { InfiniteList, Link } from '../../../../components';
-import { Post } from '../../../post/components';
-import { PostSkeleton } from '../../../post/components/post/PostSkeleton';
+import { Post } from '../../../feed/components/post';
+import { PostSkeleton } from '../../../feed/components/post/PostSkeleton';
 
 export const RecentViewedFeedList = () => {
     const {

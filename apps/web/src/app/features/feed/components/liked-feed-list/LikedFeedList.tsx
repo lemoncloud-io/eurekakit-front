@@ -4,9 +4,9 @@ import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { InfiniteList, Link } from '../../../../components';
-import { Post } from '../../../post/components';
-import { PostSkeleton } from '../../../post/components/post/PostSkeleton';
 import { NoLikedFeed } from '../no-feed';
+import { Post } from '../post';
+import { PostSkeleton } from '../post/PostSkeleton';
 
 import type { FeedType } from '@lemon/feeds';
 

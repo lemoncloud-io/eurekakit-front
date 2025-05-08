@@ -5,7 +5,7 @@ import { useFetchProfile } from '@lemon/users';
 
 import { InfiniteList } from '../../../../components';
 import { Comment } from '../../../comment/components';
-import { PostSkeleton } from '../../../post/components/post/PostSkeleton';
+import { PostSkeleton } from '../../../feed/components/post/PostSkeleton';
 
 export const UserCommentList = () => {
     const { data: profile, isLoading: isProfileLoading } = useFetchProfile();

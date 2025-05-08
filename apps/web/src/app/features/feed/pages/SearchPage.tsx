@@ -4,7 +4,9 @@ import { DevTool } from '@hookform/devtools';
 
 import { useQueryState } from '@lemon/shared';
 
-import { RecentKeywordList, SearchInput, SearchResultList } from '../components';
+import { RecentKeywordList } from '../components/recent-keyword-list';
+import { SearchInput } from '../components/search-input';
+import { SearchResultList } from '../components/search-result-list';
 
 import type { SearchState } from '../types';
 

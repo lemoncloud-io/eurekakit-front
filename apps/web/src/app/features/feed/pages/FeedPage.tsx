@@ -2,7 +2,7 @@ import { Images } from '@lemon/assets';
 import { useQueryState } from '@lemon/shared';
 import { Tabs, TabsList, TabsTrigger } from '@lemon/ui-kit/components/ui/tabs';
 
-import { LikedFeedList, PopularFeedList, TotalFeedList } from '../../components';
+import { LikedFeedList, PopularFeedList, TotalFeedList } from '../components';
 
 import type { FeedType } from '@lemon/feeds';
 

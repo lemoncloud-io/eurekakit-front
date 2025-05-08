@@ -8,9 +8,9 @@ import { cn } from '@lemon/ui-kit';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Input } from '@lemon/ui-kit/components/ui/input';
 
+import { DevModeSettingModal } from '../../../../components';
 import { useNavigate } from '../../../../hooks';
 import { isDev } from '../../../../utils';
-import { DevModeSettingModal } from '../dev-mode-setting-modal';
 
 import type { ClassNameValue } from 'tailwind-merge';
 

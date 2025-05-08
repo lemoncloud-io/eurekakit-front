@@ -4,7 +4,7 @@ import { useFetchFeed } from '@lemon/feeds';
 import { Dialog, DialogContent } from '@lemon/ui-kit/components/ui/dialog';
 
 import { ImageListViewer } from '../../../../components';
-import { PostHeader } from '../../../post/components/post/PostHeader';
+import { PostHeader } from '../../../feed/components/post/PostHeader';
 
 import type { OverlayProps } from '@lemon/overlay';
 
