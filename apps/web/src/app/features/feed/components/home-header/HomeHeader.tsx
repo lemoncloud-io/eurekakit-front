@@ -74,7 +74,7 @@ export const HomeHeader = ({ className }: HomeHeaderProps) => {
                     'ease transition-all duration-200'
                 )}
             >
-                <div className={'flex overflow-hidden'} onClick={() => navigate('/search')}>
+                <div className={'flex overflow-hidden'} onClick={() => navigate('/feed/search')}>
                     <Input className={cn('bg-background mt-4 rounded-full text-sm')} placeholder="검색" />
                 </div>
             </div>
