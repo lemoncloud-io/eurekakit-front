@@ -46,7 +46,7 @@ export const LikedFeedList = () => {
             className="overflow-x-hidden"
         >
             {likedFeedList?.list.map(feed => (
-                <Link key={feed.id} className="pb-4 pt-2" to={`/post/${feed.id}`}>
+                <Link key={feed.id} className="pb-4 pt-2" to={`/feed/${feed.id}`}>
                     <Post post={feed} />
                 </Link>
             ))}
