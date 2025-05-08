@@ -4,7 +4,7 @@ import { Condition } from '@lemon/ui-kit/components/ui/condition';
 import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
-import { INFINITE_POST_LIST_LIMIT } from '../../consts';
+import { INFINITE_FEED_LIST_LIMIT } from '../../consts';
 import { NoPost } from '../no-post';
 import { PostListBlock } from '../post-block';
 import { SkeletonPostList } from './SkeletonPostList';
@@ -17,7 +17,7 @@ export const TotalPostList = () => {
         isFetchingNextPage,
         hasNextPage,
         isLoading,
-    } = useFetchInfiniteFeedList({ limit: INFINITE_POST_LIST_LIMIT });
+    } = useFetchInfiniteFeedList({ limit: INFINITE_FEED_LIST_LIMIT });
 
     return (
         <div className="flex flex-col p-4">
