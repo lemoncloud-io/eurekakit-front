@@ -5,6 +5,7 @@ import { Loader2 } from 'lucide-react';
 import { useIntersectionObserver } from '@lemon/shared';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { List } from '@lemon/ui-kit/components/ui/list';
+import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 export interface InfiniteListProps extends ComponentProps<typeof List> {
     isFetching: boolean;
@@ -35,18 +36,25 @@ export const InfiniteList = ({
 
     return (
         <>
-            <List {...listProps}>
-                {children}
-                {triggerType === 'scroll' && showTrigger && (
-                    <div className="flex h-12 w-full items-center justify-center" ref={setRef}>
-                        {isFetching && <Loader2 className="animate-spin" />}
-                    </div>
-                )}
-            </List>
-            {triggerType === 'button' && (
-                <Button className="w-full gap-2" variant={'secondary'} onClick={() => fetchFn()} isLoading={isFetching}>
-                    더보기
-                </Button>
+            <List {...listProps}>{children}</List>
+            {showTrigger && (
+                <>
+                    <Separator />
+                    {triggerType === 'button' ? (
+                        <Button
+                            className="w-full gap-2"
+                            variant={'secondary'}
+                            onClick={() => fetchFn()}
+                            isLoading={isFetching}
+                        >
+                            더보기
+                        </Button>
+                    ) : (
+                        <div className="flex h-12 w-full items-center justify-center" ref={setRef}>
+                            {isFetching && <Loader2 className="animate-spin" />}
+                        </div>
+                    )}
+                </>
             )}
         </>
     );
