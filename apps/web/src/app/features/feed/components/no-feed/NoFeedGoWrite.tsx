@@ -4,7 +4,7 @@ import { Button } from '@lemon/ui-kit/components/ui/button';
 
 import { useNavigate } from '../../../../hooks';
 
-export const NoPostGoWrite = () => {
+export const NoFeedGoWrite = () => {
     const navigate = useNavigate();
 
     return (
@@ -17,7 +17,7 @@ export const NoPostGoWrite = () => {
                 className="gap-1 pl-6 pr-4"
                 variant={'secondary'}
                 size={'lg'}
-                onClick={() => navigate('/post/create')}
+                onClick={() => navigate('/feed/create')}
             >
                 글 작성하러 가기 <ChevronRight />
             </Button>

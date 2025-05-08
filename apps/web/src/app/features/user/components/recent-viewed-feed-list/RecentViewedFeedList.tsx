@@ -3,8 +3,7 @@ import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { InfiniteList, Link } from '../../../../components';
-import { Post } from '../../../post/components';
-import { PostSkeleton } from '../../../post/components/post/PostSkeleton';
+import { Feed, FeedSkeleton } from '../../../feed/components';
 
 export const RecentViewedFeedList = () => {
     const {
@@ -21,7 +20,7 @@ export const RecentViewedFeedList = () => {
         return (
             <List seperator={<Separator />}>
                 {Array.from({ length: window.innerHeight / 120 - 2 }).map(() => (
-                    <PostSkeleton />
+                    <FeedSkeleton />
                 ))}
             </List>
         );
@@ -44,8 +43,8 @@ export const RecentViewedFeedList = () => {
             className="overflow-x-hidden"
         >
             {viewedFeedList?.list.map(feed => (
-                <Link to={`/post/${feed.id}`} key={feed.id}>
-                    <Post post={feed} />
+                <Link to={`/feed/${feed.id}`} key={feed.id}>
+                    <Feed feed={feed} />
                 </Link>
             ))}
         </InfiniteList>

@@ -11,8 +11,8 @@ import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Form } from '@lemon/ui-kit/components/ui/form';
 
 import { useFormBlockModal, useNavigate } from '../../../hooks';
-import { PostEditor } from '../../post/components';
-import { PostViewerModal } from '../components';
+import { FeedEditor } from '../../feed/components';
+import { FeedViewerModal } from '../components';
 
 import type { CommentBody } from '@lemoncloud/pets-socials-api';
 
@@ -36,11 +36,11 @@ export const CreateCommentPage = () => {
 
     const isTextDirty = watchedText?.length !== 0;
     const isImageDirty = !!watchedImages && watchedImages?.length !== 0;
-    const isPostDirty = isTextDirty || isImageDirty;
+    const isContentDirty = isTextDirty || isImageDirty;
 
-    const { setBlockerOn } = useFormBlockModal(isPostDirty);
+    const { setBlockerOn } = useFormBlockModal(isContentDirty);
 
-    const submitPost = (commentBody: CommentBody) => {
+    const submitContent = (commentBody: CommentBody) => {
         setBlockerOn(false);
         setIsLoading(true);
 
@@ -67,7 +67,7 @@ export const CreateCommentPage = () => {
                 <Button
                     variant={'outline'}
                     className="h-14 justify-start rounded-lg"
-                    onClick={() => overlay.open(overlayProps => <PostViewerModal postId={feedId} {...overlayProps} />)}
+                    onClick={() => overlay.open(overlayProps => <FeedViewerModal feedId={feedId} {...overlayProps} />)}
                 >
                     본문 보기
                     <span className="ml-auto">
@@ -75,7 +75,7 @@ export const CreateCommentPage = () => {
                     </span>
                 </Button>
                 <Form {...methods}>
-                    <PostEditor onValid={submitPost} isSubmitting={isPending} />
+                    <FeedEditor onValid={submitContent} isSubmitting={isPending} />
                 </Form>
             </div>
         </div>

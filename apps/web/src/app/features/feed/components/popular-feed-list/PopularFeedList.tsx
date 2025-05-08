@@ -4,9 +4,8 @@ import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { InfiniteList, Link } from '../../../../components';
-import { Post } from '../../../post/components';
-import { PostSkeleton } from '../../../post/components/post/PostSkeleton';
-import { NoPostGoWrite } from '../no-feed';
+import { Feed, FeedSkeleton } from '../feed';
+import { NoFeedGoWrite } from '../no-feed';
 
 import type { FeedType } from '@lemon/feeds';
 
@@ -26,14 +25,14 @@ export const PopularFeedList = () => {
         return (
             <List seperator={<Separator />}>
                 {Array.from({ length: Math.floor(window.innerHeight / 120) - 2 }).map(() => (
-                    <PostSkeleton />
+                    <FeedSkeleton />
                 ))}
             </List>
         );
     }
 
     if (isEmptyList) {
-        return <NoPostGoWrite />;
+        return <NoFeedGoWrite />;
     }
 
     return (
@@ -45,8 +44,8 @@ export const PopularFeedList = () => {
             className="overflow-x-hidden"
         >
             {feedList?.list.map(feed => (
-                <Link key={feed.id} className="pb-4 pt-2" to={`/post/${feed.id}`}>
-                    <Post post={feed} />
+                <Link key={feed.id} className="pb-4 pt-2" to={`/feed/${feed.id}`}>
+                    <Feed feed={feed} />
                 </Link>
             ))}
         </InfiniteList>

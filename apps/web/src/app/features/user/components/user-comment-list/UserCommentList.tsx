@@ -5,7 +5,7 @@ import { useFetchProfile } from '@lemon/users';
 
 import { InfiniteList } from '../../../../components';
 import { Comment } from '../../../comment/components';
-import { PostSkeleton } from '../../../post/components/post/PostSkeleton';
+import { FeedSkeleton } from '../../../feed/components';
 
 export const UserCommentList = () => {
     const { data: profile, isLoading: isProfileLoading } = useFetchProfile();
@@ -24,7 +24,7 @@ export const UserCommentList = () => {
         return (
             <List seperator={<Separator />}>
                 {Array.from({ length: window.innerHeight / 120 - 2 }).map(() => (
-                    <PostSkeleton />
+                    <FeedSkeleton />
                 ))}
             </List>
         );

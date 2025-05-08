@@ -7,8 +7,7 @@ import { Separator } from '@lemon/ui-kit/components/ui/separator';
 import { useFetchProfile } from '@lemon/users';
 
 import { InfiniteList, Link } from '../../../../components';
-import { Post } from '../../../post/components';
-import { PostSkeleton } from '../../../post/components/post/PostSkeleton';
+import { Feed, FeedSkeleton } from '../../../feed/components';
 
 export const UserFeedList = () => {
     const { data: profile, isLoading: isProfileLoading } = useFetchProfile();
@@ -27,7 +26,7 @@ export const UserFeedList = () => {
         return (
             <List seperator={<Separator />}>
                 {Array.from({ length: window.innerHeight / 120 - 2 }).map(() => (
-                    <PostSkeleton />
+                    <FeedSkeleton />
                 ))}
             </List>
         );
@@ -59,8 +58,8 @@ export const UserFeedList = () => {
             {feedList?.list
                 .map(feed => ({ ...feed, user$: profile! }))
                 .map(feed => (
-                    <Link to={`/post/${feed.id}`} key={feed.id}>
-                        <Post post={feed} />
+                    <Link to={`/feed/${feed.id}`} key={feed.id}>
+                        <Feed feed={feed} />
                     </Link>
                 ))}
         </InfiniteList>

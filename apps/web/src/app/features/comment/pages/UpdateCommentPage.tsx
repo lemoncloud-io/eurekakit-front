@@ -12,8 +12,8 @@ import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Form } from '@lemon/ui-kit/components/ui/form';
 
 import { useFormBlockModal, useNavigate } from '../../../hooks';
-import { PostEditor } from '../../post/components';
-import { PostViewerModal } from '../components';
+import { FeedEditor } from '../../feed/components';
+import { FeedViewerModal } from '../components';
 
 import type { CommentBody, CommentView } from '@lemoncloud/pets-socials-api';
 
@@ -82,7 +82,7 @@ export const UpdateCommentPage = () => {
                 <Button
                     variant={'outline'}
                     className="h-14 w-full justify-start rounded-lg"
-                    onClick={() => overlay.open(overlayProps => <PostViewerModal postId={feedId} {...overlayProps} />)}
+                    onClick={() => overlay.open(overlayProps => <FeedViewerModal feedId={feedId} {...overlayProps} />)}
                 >
                     본문 보기
                     <span className="ml-auto">
@@ -90,7 +90,7 @@ export const UpdateCommentPage = () => {
                     </span>
                 </Button>
                 <Form {...methods}>
-                    <PostEditor isSubmitting={isPending} onValid={submitComment} />
+                    <FeedEditor isSubmitting={isPending} onValid={submitComment} />
                 </Form>
             </div>
         </div>
