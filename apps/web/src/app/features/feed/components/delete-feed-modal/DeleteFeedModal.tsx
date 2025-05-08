@@ -17,23 +17,23 @@ import { useModalWithDropDown, useNavigate } from '../../../../hooks';
 
 import type { OverlayProps } from '@lemon/overlay';
 
-interface DeletePostModalProps extends OverlayProps {
-    postId: string;
+interface DeleteFeedModalProps extends OverlayProps {
+    feedId: string;
 }
 
-export const DeletePostModal = ({ postId, open, onOpenChange }: DeletePostModalProps) => {
+export const DeleteFeedModal = ({ feedId, open, onOpenChange }: DeleteFeedModalProps) => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
     const { toast } = useToast();
 
     const { setIsLoading } = useGlobalLoader();
-    const { mutate: deletePost } = useDeleteFeed();
+    const { mutate: deleteFeed } = useDeleteFeed();
 
     const modal = useModalWithDropDown(open);
 
     const onClickDelete = () => {
         setIsLoading(true);
-        deletePost(postId, {
+        deleteFeed(feedId, {
             onSuccess: onSuccessDelete,
             onError: () =>
                 toast({ description: '게시글을 삭제할 수 없습니다.', className: 'flex justify-center items-center' }),

@@ -13,7 +13,7 @@ import { List } from '@lemon/ui-kit/components/ui/list';
 import { NickName, Profile, ReportModal } from '../../../../components';
 import { useNavigate } from '../../../../hooks';
 import { formatRelativeTime } from '../../../../utils';
-import { DeletePostModal } from '../delete-post-modal';
+import { DeleteFeedModal } from '../delete-feed-modal';
 
 interface PostHeaderProps {
     postId: string;
@@ -54,7 +54,7 @@ export const PostHeader = ({ postId, profileImg, nickname, createdAt, isMe, hide
                                 <DropdownMenuItem
                                     onClick={() =>
                                         overlay.open(overlayProps => (
-                                            <DeletePostModal postId={postId} {...overlayProps} />
+                                            <DeleteFeedModal feedId={postId} {...overlayProps} />
                                         ))
                                     }
                                 >
