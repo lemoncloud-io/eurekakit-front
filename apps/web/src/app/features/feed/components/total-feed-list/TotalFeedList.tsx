@@ -3,13 +3,15 @@ import { useQueryState } from '@lemon/shared';
 import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
-import { InfiniteList, Link } from '../../../../components';
+import { ErrorWithRetry, Link } from '../../../../components';
+import { InfiniteFetchedList } from '../../../../components/infinite-fetched-list/InfiniteFetchedList';
+import { withQueryErrorBoundary } from '../../../../utils';
 import { Feed, FeedSkeleton } from '../feed';
 import { NoFeedGoWrite } from '../no-feed';
 
 import type { FeedType } from '@lemon/feeds';
 
-export const TotalFeedList = () => {
+const TotalFeedListContent = () => {
     const [feedType] = useQueryState<FeedType>('type', { defaultValue: 'all' });
     const {
         data: feedList,
@@ -19,35 +21,30 @@ export const TotalFeedList = () => {
         isFetchingNextPage,
     } = useFetchInfiniteFeedList({ type: feedType });
 
-    const isEmptyList = feedList?.list.length === 0;
-
-    if (isLoading) {
-        return (
-            <List seperator={<Separator />}>
-                {Array.from({ length: Math.floor(window.innerHeight / 120) - 2 }).map(() => (
-                    <FeedSkeleton />
-                ))}
-            </List>
-        );
-    }
-
-    if (isEmptyList) {
-        return <NoFeedGoWrite />;
-    }
-
     return (
-        <InfiniteList
-            seperator={<Separator />}
-            isFetching={isFetchingNextPage}
-            showTrigger={hasNextPage}
-            fetchFn={fetchNextPage}
-            className="overflow-x-hidden"
-        >
-            {feedList?.list.map(feed => (
+        <InfiniteFetchedList
+            items={feedList?.list}
+            renderItem={feed => (
                 <Link key={feed.id} className="pb-4 pt-2" to={`/feed/${feed.id}`}>
                     <Feed feed={feed} />
                 </Link>
-            ))}
-        </InfiniteList>
+            )}
+            seperator={<Separator />}
+            fetchFn={fetchNextPage}
+            isFetching={isFetchingNextPage}
+            showTrigger={hasNextPage}
+            isLoading={isLoading}
+            loadingFallback={
+                <List seperator={<Separator />}>
+                    {Array.from({ length: Math.floor(window.innerHeight / 120) - 2 }).map(() => (
+                        <FeedSkeleton />
+                    ))}
+                </List>
+            }
+            emptyFallBack={<NoFeedGoWrite />}
+            className="overflow-x-hidden"
+        />
     );
 };
+
+export const TotalFeedList = withQueryErrorBoundary(TotalFeedListContent, ErrorWithRetry.FullHeight);

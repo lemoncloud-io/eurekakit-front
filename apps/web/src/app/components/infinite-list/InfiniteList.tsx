@@ -3,32 +3,59 @@ import { type ComponentProps, useEffect } from 'react';
 import { Loader2 } from 'lucide-react';
 
 import { useIntersectionObserver } from '@lemon/shared';
+import { Button } from '@lemon/ui-kit/components/ui/button';
 import { List } from '@lemon/ui-kit/components/ui/list';
+import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
-interface InfiniteListProps extends ComponentProps<typeof List> {
+export interface InfiniteListProps extends ComponentProps<typeof List> {
     isFetching: boolean;
     showTrigger: boolean;
     fetchFn: (...params: any) => Promise<any>;
+    triggerType?: 'scroll' | 'button';
 }
 
-// TODO : 에러 시 표시 및 refetch 버튼 추가
-export const InfiniteList = ({ children, isFetching, showTrigger, fetchFn, ...listProps }: InfiniteListProps) => {
+export const InfiniteList = ({
+    children,
+    isFetching,
+    showTrigger,
+    fetchFn,
+    triggerType = 'scroll',
+    ...listProps
+}: InfiniteListProps) => {
     const { setRef, isIntersecting } = useIntersectionObserver();
 
     useEffect(() => {
+        if (triggerType !== 'scroll') {
+            return;
+        }
+
         if (isIntersecting) {
             fetchFn();
         }
-    }, [isIntersecting, fetchFn]);
+    }, [isIntersecting, fetchFn, triggerType]);
 
     return (
-        <List {...listProps}>
-            {children}
+        <>
+            <List {...listProps}>{children}</List>
             {showTrigger && (
-                <div className="flex h-12 w-full items-center justify-center" ref={setRef}>
-                    {isFetching && <Loader2 className="animate-spin" />}
-                </div>
+                <>
+                    <Separator />
+                    {triggerType === 'button' ? (
+                        <Button
+                            className="w-full gap-2"
+                            variant={'secondary'}
+                            onClick={() => fetchFn()}
+                            isLoading={isFetching}
+                        >
+                            더보기
+                        </Button>
+                    ) : (
+                        <div className="flex h-12 w-full items-center justify-center" ref={setRef}>
+                            {isFetching && <Loader2 className="animate-spin" />}
+                        </div>
+                    )}
+                </>
             )}
-        </List>
+        </>
     );
 };

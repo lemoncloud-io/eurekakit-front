@@ -1,16 +1,15 @@
 import { useFetchInfiniteFeedList } from '@lemon/feeds';
-import { Button } from '@lemon/ui-kit/components/ui/button';
-import { Condition } from '@lemon/ui-kit/components/ui/condition';
-import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { INFINITE_FEED_LIST_LIMIT } from '../../consts';
 import { NoFeed } from '../no-feed';
 import { FeedListBlock } from './FeedListBlock';
 import { HomeFeedListSkeleton } from './HomeFeedList.skeleton';
+import { ErrorWithRetry } from '../../../../components';
+import { InfiniteFetchedList } from '../../../../components/infinite-fetched-list/InfiniteFetchedList';
+import { withQueryErrorBoundary } from '../../../../utils';
 
-// TODO : @luke-lemon 낙관적 업데이트 적용
-export const HomeFeedList = () => {
+const HomeFeedListContent = () => {
     const {
         data: feedList,
         fetchNextPage,
@@ -20,25 +19,20 @@ export const HomeFeedList = () => {
     } = useFetchInfiniteFeedList({ limit: INFINITE_FEED_LIST_LIMIT });
 
     return (
-        <div className="flex flex-col p-4">
-            <h3 className="font-semibold">전체글</h3>
-            <Condition condition={!isLoading} fallback={<HomeFeedListSkeleton />}>
-                <Condition condition={!!feedList?.total} fallback={<NoFeed />}>
-                    <List seperator={<Separator />} className="gap-3 py-3">
-                        {feedList?.list.map(feed => <FeedListBlock key={feed.id} feed={feed} />)}
-                    </List>
-                    <Condition condition={hasNextPage}>
-                        <Button
-                            className="w-full gap-2"
-                            variant={'secondary'}
-                            onClick={() => fetchNextPage()}
-                            isLoading={isFetchingNextPage}
-                        >
-                            더보기
-                        </Button>
-                    </Condition>
-                </Condition>
-            </Condition>
-        </div>
+        <InfiniteFetchedList
+            items={feedList?.list}
+            renderItem={feed => <FeedListBlock key={feed.id} feed={feed} />}
+            seperator={<Separator />}
+            fetchFn={fetchNextPage}
+            isFetching={isFetchingNextPage}
+            showTrigger={hasNextPage}
+            isLoading={isLoading}
+            loadingFallback={<HomeFeedListSkeleton />}
+            emptyFallBack={<NoFeed />}
+            triggerType="button"
+            className="gap-3 py-3"
+        />
     );
 };
+
+export const HomeFeedList = withQueryErrorBoundary(HomeFeedListContent, ErrorWithRetry);

@@ -8,11 +8,17 @@ export const HomePage = () => {
         <>
             <HomeHeader />
             <div className="h-[7.5rem]" />
-            <HomeFeedGrid />
+            <div className="flex flex-col gap-2 p-4">
+                <h3 className="font-semibold">인기글</h3>
+                <HomeFeedGrid />
+            </div>
             <div className="w-full px-4">
                 <Separator />
             </div>
-            <HomeFeedList />
+            <div className="flex flex-col p-4">
+                <h3 className="font-semibold">전체글</h3>
+                <HomeFeedList />
+            </div>
         </>
     );
 };

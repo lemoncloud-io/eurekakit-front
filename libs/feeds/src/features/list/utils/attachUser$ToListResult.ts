@@ -15,5 +15,5 @@ export const attachUser$ToListResult = <L extends ListResult<V>, V extends ViewW
         return { ...data, user$: owner };
     });
 
-    return { ...listResult, list: withUserList };
+    return { ...listResult, list: withUserList } as L;
 };
