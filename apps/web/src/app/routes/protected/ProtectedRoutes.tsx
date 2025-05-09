@@ -12,7 +12,7 @@ import type { RouteObject } from 'react-router-dom';
 export const ProtectedRoute = () => {
     const { isAuthenticated } = useWebCoreStore();
 
-    return isAuthenticated ? <Outlet /> : <Navigate to="/" />;
+    return isAuthenticated ? <Outlet /> : <Navigate to="/auth" />;
 };
 
 export const ProtectedRoutes: RouteObject[] = [
