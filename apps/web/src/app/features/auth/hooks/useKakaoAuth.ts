@@ -1,5 +1,7 @@
 import { useCallback, useEffect } from 'react';
 
+import { KAKAO_CALLBACK_URL } from '@lemon/web-core';
+
 interface KakaoOAuthToken {
     access_token: string;
     refresh_token: string;
@@ -23,7 +25,7 @@ const KAKAO_TOKEN_URL = 'https://kauth.kakao.com/oauth/token';
 
 export const useKakaoAuth = () => {
     const KAKAO_JS_KEY: string = import.meta.env.VITE_KAKAO_JS_KEY || '';
-    const REDIRECT_URI: string = import.meta.env.VITE_KAKAO_CALLBACK_URL || '';
+    const REDIRECT_URI: string = KAKAO_CALLBACK_URL;
 
     const loadKakaoSDK = useCallback(() => {
         const script = document.createElement('script');

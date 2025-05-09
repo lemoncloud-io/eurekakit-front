@@ -1,4 +1,5 @@
-export const PET_ENDPOINT = import.meta.env.VITE_PET_API_ENDPOINT?.toLowerCase();
+export const PET_ENDPOINT =
+    window.PET_API_ENDPOINT?.toLowerCase() || import.meta.env.VITE_PET_API_ENDPOINT?.toLowerCase();
 
 export const FEEDS = 'feeds';
 export const DETAIL = 'detail';
