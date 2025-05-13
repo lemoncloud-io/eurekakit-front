@@ -10,7 +10,7 @@ interface ErrorWithRetryProps extends FallbackProps {
     className?: ClassNameValue;
 }
 
-const ErrorWithRetryMedium = ({ resetErrorBoundary, error, className }: ErrorWithRetryProps) => {
+export const ErrorWithRetry = ({ resetErrorBoundary, error, className }: ErrorWithRetryProps) => {
     return (
         <div className={cn('flex min-h-40 flex-col items-center justify-center gap-3', className)}>
             <div className="flex flex-col items-center justify-center gap-1">
@@ -24,9 +24,3 @@ const ErrorWithRetryMedium = ({ resetErrorBoundary, error, className }: ErrorWit
         </div>
     );
 };
-
-const ErrorWithRetryFullHeight = ({ className, ...fallbackProps }: ErrorWithRetryProps) => (
-    <ErrorWithRetry className={cn(className, 'h-full')} {...fallbackProps} />
-);
-
-export const ErrorWithRetry = Object.assign(ErrorWithRetryMedium, { FullHeight: ErrorWithRetryFullHeight });
