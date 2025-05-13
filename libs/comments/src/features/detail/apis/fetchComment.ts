@@ -1,6 +1,6 @@
 import { webCore } from '@lemon/web-core';
 
-import { COMMENTS, DETAIL, PET_ENDPOINT } from '../../../consts/apis';
+import { COMMENTS, CONTENT_ENDPOINT, DETAIL } from '../../../consts/apis';
 
 import type { CommentListParams, CommentView } from '../../../types';
 
@@ -12,7 +12,7 @@ export const fetchComment = async (commentId?: string, params?: CommentListParam
     const { data } = await webCore
         .buildSignedRequest({
             method: 'GET',
-            baseURL: [PET_ENDPOINT, COMMENTS, commentId, DETAIL].join('/'),
+            baseURL: [CONTENT_ENDPOINT, COMMENTS, commentId, DETAIL].join('/'),
         })
         .setParams({ ...params })
         .execute<CommentView>();

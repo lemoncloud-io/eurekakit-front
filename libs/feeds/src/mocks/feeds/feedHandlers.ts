@@ -1,7 +1,7 @@
 import { HttpResponse, delay, http } from 'msw';
 
 import { createFeedItem, feedList } from './mockFeeds';
-import { ACTIVITY, DETAIL, FEED, FEEDS, HELLO, LIKED, LIST, LIST_V2, PET_ENDPOINT, USERS } from '../../consts';
+import { ACTIVITY, CONTENT_ENDPOINT, DETAIL, FEED, FEEDS, HELLO, LIKED, LIST, LIST_V2, USERS } from '../../consts';
 
 import type { FeedView } from '../../types';
 import type { ListResult } from '@lemon/shared';
@@ -9,7 +9,7 @@ import type { ListResult } from '@lemon/shared';
 let mutableFeedList = [...feedList];
 
 export const feedHandler = [
-    http.get([PET_ENDPOINT, FEEDS, 0, LIST_V2].join('/'), async ({ request }) => {
+    http.get([CONTENT_ENDPOINT, FEEDS, 0, LIST_V2].join('/'), async ({ request }) => {
         const page = Number(new URL(request.url).searchParams.get('page')) || 0;
         const limit = Number(new URL(request.url).searchParams.get('limit')) || 10;
 
@@ -30,7 +30,7 @@ export const feedHandler = [
             Users,
         } as ListResult<FeedView>);
     }),
-    http.get([PET_ENDPOINT, USERS, ':userId', FEEDS].join('/'), async ({ request }) => {
+    http.get([CONTENT_ENDPOINT, USERS, ':userId', FEEDS].join('/'), async ({ request }) => {
         const page = Number(new URL(request.url).searchParams.get('page')) || 0;
         const limit = Number(new URL(request.url).searchParams.get('limit')) || 10;
 
@@ -48,7 +48,7 @@ export const feedHandler = [
             limit,
         } as ListResult<FeedView>);
     }),
-    http.get([PET_ENDPOINT, FEEDS, 0, LIKED].join('/'), async ({ request }) => {
+    http.get([CONTENT_ENDPOINT, FEEDS, 0, LIKED].join('/'), async ({ request }) => {
         const page = Number(new URL(request.url).searchParams.get('page')) || 0;
         const limit = Number(new URL(request.url).searchParams.get('limit')) || 10;
 
@@ -69,7 +69,7 @@ export const feedHandler = [
             Users,
         } as ListResult<FeedView>);
     }),
-    http.get([PET_ENDPOINT, FEEDS, ':id', DETAIL].join('/'), async ({ params }) => {
+    http.get([CONTENT_ENDPOINT, FEEDS, ':id', DETAIL].join('/'), async ({ params }) => {
         const feedId = params['id'];
 
         const targetFeed = mutableFeedList.find(feed => feed.id === feedId);
@@ -82,7 +82,7 @@ export const feedHandler = [
 
         return HttpResponse.json(targetFeed);
     }),
-    http.get([PET_ENDPOINT, HELLO, FEEDS, LIST].join('/'), async ({ request }) => {
+    http.get([CONTENT_ENDPOINT, HELLO, FEEDS, LIST].join('/'), async ({ request }) => {
         const page = Number(new URL(request.url).searchParams.get('page')) || 0;
         const limit = Number(new URL(request.url).searchParams.get('limit')) || 10;
         const keyword = new URL(request.url).searchParams.get('keyword') || '';
@@ -109,7 +109,7 @@ export const feedHandler = [
             Users,
         } as ListResult<FeedView>);
     }),
-    http.put([PET_ENDPOINT, FEEDS, ':id', ACTIVITY].join('/'), async ({ request, params }) => {
+    http.put([CONTENT_ENDPOINT, FEEDS, ':id', ACTIVITY].join('/'), async ({ request, params }) => {
         const feedId = params['id'];
 
         const toBeLike = JSON.parse(new URL(request.url).searchParams.get('like')!) as boolean;
@@ -126,7 +126,7 @@ export const feedHandler = [
 
         return HttpResponse.json(toBeFeed);
     }),
-    http.put([PET_ENDPOINT, FEEDS, ':id'].join('/'), async ({ request, params }) => {
+    http.put([CONTENT_ENDPOINT, FEEDS, ':id'].join('/'), async ({ request, params }) => {
         const feedId = params['id'];
 
         const body = await request.json();
@@ -140,7 +140,7 @@ export const feedHandler = [
 
         return HttpResponse.json({ ...targetFeed, ...body });
     }),
-    http.post([PET_ENDPOINT, USERS, 0, FEED].join('/'), async ({ request }) => {
+    http.post([CONTENT_ENDPOINT, USERS, 0, FEED].join('/'), async ({ request }) => {
         const body = await request.json();
 
         const nextId = Math.max(...mutableFeedList.map(feed => Number(feed.id ?? 0)));
