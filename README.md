@@ -1,7 +1,7 @@
 <div align="center">
   <div>
-    <img src="" width="600" alt="EurekaKit Architecture.png"/>
-    <h1 align="center"><img src="" width="200" alt="EurekaKit"/></h1>
+    <img src="https://github.com/user-attachments/assets/3575c0a1-8087-45cc-b9f0-690765df166e" width="600" alt="EurekaKit Architecture.png"/>
+    <h1 align="center"><img src="https://github.com/lemoncloud-io/eurekakit-front/blob/develop/assets/src/images/logo_eureka_codes.png?raw=true" width="200" alt="EurekaCodes"/></h1>
   </div>
   <p>
     유레카 키트 설명
@@ -11,7 +11,6 @@
 <div align="center" markdown="1">
 
 [![lemoncloud-io](https://img.shields.io/badge/by-lemoncloud--io-ED6F31?logo=github)](https://github.com/lemoncloud-io)
-[![license](https://img.shields.io/badge/license-MIT-211A4C.svg?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGRiIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIgZD0ibTMgNiAzIDFtMCAwLTMgOWE1IDUgMCAwIDAgNi4wMDEgME02IDdsMyA5TTYgN2w2LTJtNiAyIDMtMW0tMyAxLTMgOWE1IDUgMCAwIDAgNi4wMDEgME0xOCA3bDMgOW0tMy05LTYtMm0wLTJ2Mm0wIDE2VjVtMCAxNkg5bTMgMGgzIi8+PC9zdmc+)](https://github.com/lemoncloud-io/eurekabox-front/blob/main/LICENSE)
 [![Nx](https://img.shields.io/badge/-Nx-143157?logo=nx&logoWidth=30)](https://nx.dev)
 
 </div>
@@ -19,12 +18,15 @@
 # 🌟 EurekaKit로 시작하기
 
 1. [EurekaCodes](https://eureka.codes/)를 방문하여 서비스를 구독하기
-2. Create your workspace through the EurekaCodes dashboard
-3. Start creating your team documentation
+2. 유레카 코드 대시보드에서 워크스페이스 생성하기
+3. 개발 시작하기
 
 ## 기능
 
-- ???
+- **🧱All-In-One SNS 피드 구성** - 텍스트와 이미지를 올릴 수 있는 게시글과 댓글, 그리고 좋아요, 신고 등 SNS에 필요한 피드 기능을 모두 제공합니다.
+- **🔄 무한 스크롤 UI 제공** -스크롤을 내릴수록 자연스럽게 콘텐츠가 로드되는 무한 스크롤 UI를 제공합니다.
+- **📂 내 활동 모아보기** - 내가 작성한 피드, 남긴 댓글, 좋아요한 글, 열람한 글을 한 곳에서 확인할 수 있어요
+- **🛠 어드민 + 앱(WebView) 키트 제공** - 운영용 어드민과 React Native 기반의 앱(WebView) 키트를 함께 제공해 웹과 앱 모두 빠르게 서비스할 수 있습니다.
 
 ## 기술 스택
 
@@ -32,7 +34,7 @@
 - Project Structure: Nx Monorepo
 - State Management: TanStack Query
 - Styling: Tailwind CSS
-- UI Components: shadcn(Radix UI)
+- UI Components: Shadcn(Radix UI)
 - API Integration: Axios
 
 ## 프로젝트 구조
@@ -74,8 +76,8 @@ eureka-kit
 1. 프로젝트 클론
 
 ```bash
-git clone https://github.com/lemoncloud-io/eurekapage-front.git
-cd eurekapage-front
+git clone https://github.com/lemoncloud-io/eurekakit-front.git
+cd eurekakit-front
 ```
 
 2. 의존성 설치
