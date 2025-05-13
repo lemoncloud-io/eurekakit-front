@@ -5,17 +5,24 @@ import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { ErrorWithRetry, Link } from '../../../../components';
 import { InfiniteFetchedList } from '../../../../components/infinite-fetched-list/InfiniteFetchedList';
-import { withQueryErrorBoundary } from '../../../../utils';
+import { withQueryErrorBoundary, withSuspense } from '../../../../utils';
 import { Feed, FeedSkeleton } from '../feed';
 import { NoFeedGoWrite } from '../no-feed';
 
 import type { FeedType } from '@lemon/feeds';
 
+const TotalFeedListContentSkeleton = () => (
+    <List seperator={<Separator />}>
+        {Array.from({ length: Math.floor(window.innerHeight / 120) - 2 }).map(() => (
+            <FeedSkeleton />
+        ))}
+    </List>
+);
+
 const TotalFeedListContent = () => {
     const [feedType] = useQueryState<FeedType>('type', { defaultValue: 'all' });
     const {
         data: feedList,
-        isLoading,
         hasNextPage,
         fetchNextPage,
         isFetchingNextPage,
@@ -33,18 +40,13 @@ const TotalFeedListContent = () => {
             fetchFn={fetchNextPage}
             isFetching={isFetchingNextPage}
             showTrigger={hasNextPage}
-            isLoading={isLoading}
-            loadingFallback={
-                <List seperator={<Separator />}>
-                    {Array.from({ length: Math.floor(window.innerHeight / 120) - 2 }).map(() => (
-                        <FeedSkeleton />
-                    ))}
-                </List>
-            }
             emptyFallBack={<NoFeedGoWrite />}
             className="overflow-x-hidden"
         />
     );
 };
 
-export const TotalFeedList = withQueryErrorBoundary(TotalFeedListContent, ErrorWithRetry.FullHeight);
+export const TotalFeedList = withQueryErrorBoundary(
+    withSuspense(TotalFeedListContent, <TotalFeedListContentSkeleton />),
+    errorProps => <ErrorWithRetry {...errorProps} className="h-full" />
+);
