@@ -4,7 +4,7 @@
     <h1 align="center"><img src="https://github.com/user-attachments/assets/aee10faf-144c-4a88-b535-610e7c84f050" width="200" alt="EurekaKit"/></h1>
   </div>
   <p>
-    유레카 키트 설명
+    유레카 키트로 SNS 서비스를 쉽고 빠르게 구축하세요.
   </p>
 </div>
 
@@ -104,6 +104,6 @@ yarn mobile:start  # 모바일 개발 서버 실행(* web 서버 실행 필요 /
 yarn admin:start   # 어드민 개발 서버 시작
 ```
 
-서비스(web) 개발 서버는 http://localhost:5003 에서 어드민 개발 서버는 http://localhost:5004 에서 실행됩니다.
-모바일 환경은 웹뷰 기반으로 Android 혹은 iOS 시뮬레이터가 설치되어 있어야하며,
+서비스(web) 개발 서버는 http://localhost:5003 에서 어드민 개발 서버는 http://localhost:5004 에서 실행됩니다.  
+모바일 환경은 웹뷰 기반으로 Android 혹은 iOS 시뮬레이터가 설치되어 있어야하며,  
 서비스 개발 서버를 먼저 실행 후 실행해야 합니다.
