@@ -1,6 +1,6 @@
 import { webCore } from '@lemon/web-core';
 
-import { FEEDS, PET_ENDPOINT } from '../../../consts';
+import { CONTENT_ENDPOINT, FEEDS } from '../../../consts';
 
 import type { FeedView } from '../../../types';
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
@@ -15,7 +15,7 @@ export const updateFeed = async (feedId?: string, body?: FeedBody) => {
     }
 
     const { data } = await webCore
-        .buildSignedRequest({ method: 'PUT', baseURL: [PET_ENDPOINT, FEEDS, feedId].join('/') })
+        .buildSignedRequest({ method: 'PUT', baseURL: [CONTENT_ENDPOINT, FEEDS, feedId].join('/') })
         .setBody({ ...body } satisfies FeedBody)
         .execute<FeedView>();
 

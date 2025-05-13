@@ -9,7 +9,7 @@ declare global {
         HOST?: string;
         SOCIAL_OAUTH_ENDPOINT?: string;
         IMAGE_API_ENDPOINT?: string;
-        PET_API_ENDPOINT?: string;
+        CONTENT_API_ENDPOINT?: string;
         KAKAO_CALLBACK_URL?: string;
     }
 }
@@ -31,7 +31,11 @@ export const IMAGE_API_ENDPOINT = (
     import.meta.env.VITE_IMAGE_API_ENDPOINT ||
     ''
 ).toLowerCase();
-export const PET_API_ENDPOINT = (window.PET_API_ENDPOINT || import.meta.env.VITE_PET_API_ENDPOINT || '').toLowerCase();
+export const CONTENT_API_ENDPOINT = (
+    window.CONTENT_API_ENDPOINT ||
+    import.meta.env.VITE_CONTENT_API_ENDPOINT ||
+    ''
+).toLowerCase();
 export const KAKAO_CALLBACK_URL = (
     window.KAKAO_CALLBACK_URL ||
     import.meta.env.VITE_KAKAO_CALLBACK_URL ||

@@ -1,6 +1,6 @@
 import { webCore } from '@lemon/web-core';
 
-import { FEEDS, PET_ENDPOINT, USERS } from '../../../consts/apis';
+import { CONTENT_ENDPOINT, FEEDS, USERS } from '../../../consts/apis';
 
 import type { FeedView } from '../../../types';
 import type { ListResult } from '@lemon/shared';
@@ -13,7 +13,7 @@ export const fetchUserFeedList = async (id?: string, params?: Params) => {
     }
 
     const { data } = await webCore
-        .buildSignedRequest({ method: 'GET', baseURL: [PET_ENDPOINT, USERS, id, FEEDS].join('/') })
+        .buildSignedRequest({ method: 'GET', baseURL: [CONTENT_ENDPOINT, USERS, id, FEEDS].join('/') })
         .setParams({ parent: true, ...params })
         .execute<ListResult<FeedView>>();
 

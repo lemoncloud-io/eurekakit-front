@@ -1,6 +1,6 @@
 import { webCore } from '@lemon/web-core';
 
-import { COMMENT, FEEDS, PET_ENDPOINT } from '../../../consts';
+import { COMMENT, CONTENT_ENDPOINT, FEEDS } from '../../../consts';
 
 import type { CommentBody, CommentView } from '../../../types';
 
@@ -16,7 +16,7 @@ export const createComment = async (feedId?: string, commentBody?: CommentBody) 
     const { data } = await webCore
         .buildSignedRequest({
             method: 'POST',
-            baseURL: [PET_ENDPOINT, FEEDS, feedId, COMMENT].join('/'),
+            baseURL: [CONTENT_ENDPOINT, FEEDS, feedId, COMMENT].join('/'),
         })
         .setBody({ ...commentBody } satisfies CommentBody)
         .execute<CommentView>();
