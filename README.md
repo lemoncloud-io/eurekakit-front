@@ -1,7 +1,7 @@
 <div align="center">
   <div>
     <img src="https://github.com/user-attachments/assets/3575c0a1-8087-45cc-b9f0-690765df166e" width="600" alt="EurekaKit Architecture.png"/>
-    <h1 align="center"><img src="https://github.com/lemoncloud-io/eurekakit-front/blob/develop/assets/src/images/logo_eureka_codes.png?raw=true" width="200" alt="EurekaCodes"/></h1>
+    <h1 align="center"><img src="https://github.com/user-attachments/assets/aee10faf-144c-4a88-b535-610e7c84f050" width="200" alt="EurekaKit"/></h1>
   </div>
   <p>
     유레카 키트 설명
