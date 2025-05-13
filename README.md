@@ -90,6 +90,8 @@ yarn install
 
 ```bash
 cp apps/web/.env.example apps/web/.env.local
+cp apps/admin/.env.example apps/admin/.env.local
+
 # cp apps/web/.env.example apps/web/.env.(local|dev|prod|dev.local|...)
 ```
 
