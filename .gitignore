@@ -114,3 +114,5 @@ yarn-error.log
 
 **/secret.json
 **/.env
+**/.env*
+!.env*.example

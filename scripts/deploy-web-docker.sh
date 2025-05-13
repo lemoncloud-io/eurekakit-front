@@ -23,6 +23,9 @@ echo "Building for environment: $AWS_DEPLOY_TARGET"
 echo "Target: s3://$AWS_BUCKET_NAME/$AWS_DEPLOY_TARGET"
 echo "CloudFront Distribution: $AWS_DISTRIBUTION_ID"
 
+# clean dist
+rm -rf ./dist/apps/web
+
 # build docker image
 docker build \
     --build-arg VITE_ENV="$VITE_ENV" \

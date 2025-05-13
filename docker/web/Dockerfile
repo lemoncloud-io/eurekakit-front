@@ -4,10 +4,12 @@ FROM node:20.11.1-alpine
 RUN apk add --no-cache \
     python3 \
     py3-pip \
-    bash \
-    && pip3 install --upgrade pip \
-    && pip3 install awscli \
-    && rm -rf /var/cache/apk/*
+    bash
+
+RUN rm /usr/lib/python*/EXTERNALLY-MANAGED && \
+    python3 -m ensurepip && \
+    pip3 install awscli && \
+    rm -rf /var/cache/apk/*
 
 WORKDIR /app
 
