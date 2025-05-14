@@ -43,7 +43,7 @@ export const OAuthResponsePage = () => {
 
             // Error occurred!
             toast({ description: '에러가 발생했습니다.', variant: 'destructive' });
-            navigate('/auth/login');
+            navigate('/auth/login', { replace: true });
         };
 
         checkLoginResult();
