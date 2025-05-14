@@ -9,18 +9,18 @@ import { useToast } from '@lemon/ui-kit';
 import { Form } from '@lemon/ui-kit/components/ui/form';
 
 import { useFormBlockModal, useNavigate } from '../../../hooks';
+import { OwnerGuard } from '../../auth';
 import { FeedEditor } from '../components';
 
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
 
 export const UpdateFeedPage = () => {
-    const { setIsLoading } = useGlobalLoader();
-    const { toast } = useToast();
-
+    const params = useParams();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
-    const params = useParams();
+    const { setIsLoading } = useGlobalLoader();
+    const { toast } = useToast();
 
     const { data: feed } = useFetchFeed(params.feedId);
     const { mutate: updateFeed, isPending } = useUpdateFeed();
@@ -64,10 +64,12 @@ export const UpdateFeedPage = () => {
     };
 
     return (
-        <div className="h-full p-4">
-            <Form {...methods}>
-                <FeedEditor isSubmitting={isPending} onValid={submitFeed} />
-            </Form>
-        </div>
+        <OwnerGuard ownerId={feed.user$.id}>
+            <div className="h-full p-4">
+                <Form {...methods}>
+                    <FeedEditor isSubmitting={isPending} onValid={submitFeed} />
+                </Form>
+            </div>
+        </OwnerGuard>
     );
 };

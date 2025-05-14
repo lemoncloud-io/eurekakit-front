@@ -12,6 +12,7 @@ import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Form } from '@lemon/ui-kit/components/ui/form';
 
 import { useFormBlockModal, useNavigate } from '../../../hooks';
+import { OwnerGuard } from '../../auth';
 import { FeedEditor } from '../../feed/components';
 import { FeedViewerModal } from '../components';
 
@@ -70,20 +71,22 @@ export const UpdateCommentPage = () => {
     };
 
     return (
-        <div className="flex h-full flex-col gap-3 p-4">
-            <Button
-                variant={'outline'}
-                className="h-14 w-full justify-start rounded-lg"
-                onClick={() => overlay.open(overlayProps => <FeedViewerModal feedId={feedId} {...overlayProps} />)}
-            >
-                본문 보기
-                <span className="ml-auto">
-                    <ChevronRight />
-                </span>
-            </Button>
-            <Form {...methods}>
-                <FeedEditor isSubmitting={isPending} onValid={submitComment} />
-            </Form>
-        </div>
+        <OwnerGuard ownerId={comment.user$.id}>
+            <div className="flex h-full flex-col gap-3 p-4">
+                <Button
+                    variant={'outline'}
+                    className="h-14 w-full justify-start rounded-lg"
+                    onClick={() => overlay.open(overlayProps => <FeedViewerModal feedId={feedId} {...overlayProps} />)}
+                >
+                    본문 보기
+                    <span className="ml-auto">
+                        <ChevronRight />
+                    </span>
+                </Button>
+                <Form {...methods}>
+                    <FeedEditor isSubmitting={isPending} onValid={submitComment} />
+                </Form>
+            </div>
+        </OwnerGuard>
     );
 };
