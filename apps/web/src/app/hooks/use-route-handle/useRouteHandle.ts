@@ -12,7 +12,7 @@ interface HandleHeader {
 export interface RouteHandle {
     header?: HandleHeader;
     tabBar?: boolean;
-    type?: 'public' | 'protected' | 'restricted';
+    type?: 'public' | 'protected' | 'guest-only';
 }
 
 export const useRouteHandle = () => {

@@ -18,7 +18,7 @@ export const AuthGuard = ({ children }: PropsWithChildren) => {
         return <Navigate to="/auth" replace />;
     }
 
-    if (routeType === 'restricted' && isAuthenticated) {
+    if (routeType === 'guest-only' && isAuthenticated) {
         return <Navigate to="/" replace />;
     }
 

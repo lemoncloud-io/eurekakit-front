@@ -26,7 +26,7 @@ const routes: ExtendedRouteObject[] = [
                     { path: '/feed/*', children: feedRoutes, handle: { type: 'protected' } },
                     { path: '/user/*', children: userRoutes, handle: { type: 'protected' } },
                     { path: '/comment/*', children: commentRoutes, handle: { type: 'protected' } },
-                    { path: `/auth/*`, children: authRoutes, handle: { type: 'restricted' } },
+                    { path: `/auth/*`, children: authRoutes, handle: { type: 'guest-only' } },
                     { path: `*`, element: <RedirectByAuth /> },
                 ],
             },
