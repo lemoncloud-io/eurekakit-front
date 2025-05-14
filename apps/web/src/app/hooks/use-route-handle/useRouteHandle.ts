@@ -9,15 +9,14 @@ interface HandleHeader {
     buttons?: HeaderButton[];
 }
 
-export interface RouterHandle {
+export interface RouteHandle {
     header?: HandleHeader;
     tabBar?: boolean;
-    requireAuth?: boolean;
-    skipAuth?: boolean;
+    type?: 'public' | 'protected' | 'restricted';
 }
 
 export const useRouteHandle = () => {
-    const matches = useMatches() as UIMatch<unknown, RouterHandle | undefined>[];
+    const matches = useMatches() as UIMatch<unknown, RouteHandle | undefined>[];
 
     const handle = matches[matches.length - 1].handle;
 

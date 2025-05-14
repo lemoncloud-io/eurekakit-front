@@ -6,11 +6,11 @@ import { HomePage, feedRoutes } from '../features/feed';
 import { userRoutes } from '../features/user';
 import { Layout } from '../layout/Layout';
 
-import type { RouterHandle } from '../hooks';
+import type { RouteHandle } from '../hooks';
 import type { RouteObject } from 'react-router-dom';
 
 export interface ExtendedRouteObject extends Omit<RouteObject, 'handle' | 'children'> {
-    handle?: RouterHandle;
+    handle?: RouteHandle;
     children?: ExtendedRouteObject[];
 }
 
@@ -18,11 +18,11 @@ const routes: ExtendedRouteObject[] = [
     {
         element: <Layout />,
         children: [
-            { path: '/', element: <HomePage />, handle: { tabBar: true, requireAuth: true } },
-            { path: '/feed/*', children: feedRoutes, handle: { requireAuth: true } },
-            { path: '/user/*', children: userRoutes, handle: { requireAuth: true } },
-            { path: '/comment/*', children: commentRoutes, handle: { requireAuth: true } },
-            { path: `/auth/*`, children: authRoutes },
+            { path: '/', element: <HomePage />, handle: { tabBar: true, type: 'protected' } },
+            { path: '/feed/*', children: feedRoutes, handle: { type: 'protected' } },
+            { path: '/user/*', children: userRoutes, handle: { type: 'protected' } },
+            { path: '/comment/*', children: commentRoutes, handle: { type: 'protected' } },
+            { path: `/auth/*`, children: authRoutes, handle: { type: 'restricted' } },
         ],
     },
 ];

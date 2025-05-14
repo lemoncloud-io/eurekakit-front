@@ -12,12 +12,12 @@ export const authRoutes: ExtendedRouteObject[] = [
     {
         path: 'logout',
         element: <LogoutPage />,
-        handle: { skipAuth: true },
+        handle: { type: 'public' },
     },
     {
         path: 'oauth-response',
         element: <OAuthResponsePage />,
-        handle: { skipAuth: true },
+        handle: { type: 'public' },
     },
     {
         path: 'kakao/callback',
