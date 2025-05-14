@@ -11,7 +11,7 @@ import type { LoginProvider } from '@lemon/types';
 export const LoginPage = () => {
     const { setIsLoading } = useGlobalLoader();
     const location = useLocation();
-    const from = location.state?.from || '/home';
+    const from = location.state?.from || '/';
 
     const { isOnMobileApp } = useAppChecker();
 
