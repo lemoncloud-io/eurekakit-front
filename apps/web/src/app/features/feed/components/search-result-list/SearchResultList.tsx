@@ -12,8 +12,8 @@ import { Feed, FeedSkeleton } from '../feed';
 
 const SearchResultListSkeleton = () => (
     <List seperator={<Separator />}>
-        {Array.from({ length: Math.floor(window.innerHeight / 120) - 2 }).map(() => (
-            <FeedSkeleton />
+        {Array.from({ length: Math.floor(window.innerHeight / 120) - 2 }).map((_, idx) => (
+            <FeedSkeleton key={idx} />
         ))}
     </List>
 );
