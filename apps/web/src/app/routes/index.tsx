@@ -19,10 +19,10 @@ const routes: ExtendedRouteObject[] = [
         element: <Layout />,
         children: [
             { path: '/', element: <HomePage />, handle: { tabBar: true, requireAuth: true } },
-            { path: `/auth/*`, children: authRoutes },
             { path: '/feed/*', children: feedRoutes, handle: { requireAuth: true } },
             { path: '/user/*', children: userRoutes, handle: { requireAuth: true } },
             { path: '/comment/*', children: commentRoutes, handle: { requireAuth: true } },
+            { path: `/auth/*`, children: authRoutes },
         ],
     },
 ];

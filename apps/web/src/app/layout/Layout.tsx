@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import { X } from 'lucide-react';
+import { ChevronLeft, X } from 'lucide-react';
 
 import { Button } from '@lemon/ui-kit/components/ui/button';
 
@@ -16,12 +16,22 @@ export const Layout = () => {
         <AuthGuard>
             <div className="flex h-full flex-col">
                 {handle?.header && (
-                    <header className="flex h-12 w-full flex-none items-center justify-between border-b px-2">
-                        <div className="w-9" />
-                        <span className="font-medium">{handle.header?.title}</span>
-                        <Button size={'icon'} variant={'ghost'} onClick={() => navigate(-1)}>
-                            <X />
-                        </Button>
+                    <header className="relative flex h-12 w-full flex-none items-center justify-between px-2">
+                        {handle.header.buttons?.includes('back') && (
+                            <Button variant={'ghost'} size={'icon'} onClick={() => navigate(-1)}>
+                                <ChevronLeft />
+                            </Button>
+                        )}
+                        {handle.header?.title && (
+                            <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-medium">
+                                {handle.header?.title}
+                            </span>
+                        )}
+                        {handle.header.buttons?.includes('cancel') && (
+                            <Button size={'icon'} variant={'ghost'} onClick={() => navigate(-1)} className="ml-auto">
+                                <X />
+                            </Button>
+                        )}
                     </header>
                 )}
                 <div className="flex-1">

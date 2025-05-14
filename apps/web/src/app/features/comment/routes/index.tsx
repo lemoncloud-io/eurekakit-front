@@ -8,6 +8,7 @@ export const commentRoutes: ExtendedRouteObject[] = [
     {
         path: 'create',
         element: <CreateCommentPage />,
+        handle: { header: { title: '답글 쓰기', buttons: ['cancel'] } },
     },
     {
         path: 'update/:commentId',
@@ -18,5 +19,6 @@ export const commentRoutes: ExtendedRouteObject[] = [
             return { comment };
         },
         element: <UpdateCommentPage />,
+        handle: { header: { title: '수정하기', buttons: ['cancel'] } },
     },
 ];
