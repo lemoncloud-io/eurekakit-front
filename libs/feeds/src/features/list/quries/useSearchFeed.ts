@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 
 import { flattenInfiniteListResult, getListResultNextPage } from '@lemon/shared';
 
@@ -9,7 +9,7 @@ import { attachUser$ToListResult } from '../utils';
 import type { FeedListParam } from '../../../types';
 
 export const useSearchFeed = (params?: FeedListParam) =>
-    useInfiniteQuery({
+    useSuspenseInfiniteQuery({
         queryKey: feedsKeys.list(params, true),
         queryFn: ({ pageParam = 0 }) => searchFeed({ ...params, page: pageParam }),
         initialPageParam: 0,
@@ -21,5 +21,4 @@ export const useSearchFeed = (params?: FeedListParam) =>
 
             return feedListWithUser$;
         },
-        enabled: !!params?.keyword,
     });

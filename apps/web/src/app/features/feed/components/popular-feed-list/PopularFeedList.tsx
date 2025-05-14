@@ -5,11 +5,19 @@ import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { ErrorWithRetry, Link } from '../../../../components';
 import { InfiniteFetchedList } from '../../../../components/infinite-fetched-list/InfiniteFetchedList';
-import { withQueryErrorBoundary } from '../../../../utils';
+import { withQueryErrorBoundary, withSuspense } from '../../../../utils';
 import { Feed, FeedSkeleton } from '../feed';
 import { NoFeedGoWrite } from '../no-feed';
 
 import type { FeedType } from '@lemon/feeds';
+
+const PopularFeedListSkeleton = () => (
+    <List seperator={<Separator />}>
+        {Array.from({ length: Math.floor(window.innerHeight / 120) - 2 }).map(() => (
+            <FeedSkeleton />
+        ))}
+    </List>
+);
 
 const PopularFeedListContent = () => {
     const [feedType] = useQueryState<FeedType>('type', { defaultValue: 'all' });
@@ -47,4 +55,7 @@ const PopularFeedListContent = () => {
     );
 };
 
-export const PopularFeedList = withQueryErrorBoundary(PopularFeedListContent, ErrorWithRetry.FullHeight);
+export const PopularFeedList = withQueryErrorBoundary(
+    withSuspense(PopularFeedListContent, <PopularFeedListSkeleton />),
+    errorProps => <ErrorWithRetry {...errorProps} className="h-full" />
+);

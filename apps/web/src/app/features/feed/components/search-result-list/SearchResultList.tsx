@@ -7,18 +7,20 @@ import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { ErrorWithRetry, Link } from '../../../../components';
 import { InfiniteFetchedList } from '../../../../components/infinite-fetched-list/InfiniteFetchedList';
-import { withQueryErrorBoundary } from '../../../../utils';
+import { withQueryErrorBoundary, withSuspense } from '../../../../utils';
 import { Feed, FeedSkeleton } from '../feed';
+
+const SearchResultListSkeleton = () => (
+    <List seperator={<Separator />}>
+        {Array.from({ length: Math.floor(window.innerHeight / 120) - 2 }).map(() => (
+            <FeedSkeleton />
+        ))}
+    </List>
+);
 
 const SearchResultListContent = () => {
     const [keyword] = useQueryState('keyword');
-    const {
-        data: searchResults,
-        isLoading,
-        hasNextPage,
-        fetchNextPage,
-        isFetchingNextPage,
-    } = useSearchFeed({ keyword });
+    const { data: searchResults, hasNextPage, fetchNextPage, isFetchingNextPage } = useSearchFeed({ keyword });
 
     const highlightedResult = useMemo(
         () =>
@@ -50,14 +52,6 @@ const SearchResultListContent = () => {
             fetchFn={fetchNextPage}
             isFetching={isFetchingNextPage}
             showTrigger={hasNextPage}
-            isLoading={isLoading}
-            loadingFallback={
-                <List seperator={<Separator />}>
-                    {Array.from({ length: Math.floor(window.innerHeight / 120) - 2 }).map(() => (
-                        <FeedSkeleton />
-                    ))}
-                </List>
-            }
             emptyFallBack={
                 <div className="flex h-48 flex-col items-center justify-center">
                     <span>검색 결과가 없습니다.</span>
@@ -69,4 +63,7 @@ const SearchResultListContent = () => {
     );
 };
 
-export const SearchResultList = withQueryErrorBoundary(SearchResultListContent, ErrorWithRetry.FullHeight);
+export const SearchResultList = withQueryErrorBoundary(
+    withSuspense(SearchResultListContent, <SearchResultListSkeleton />),
+    errorProps => <ErrorWithRetry {...errorProps} className="h-full" />
+);

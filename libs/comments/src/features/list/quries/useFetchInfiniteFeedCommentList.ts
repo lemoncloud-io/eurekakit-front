@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 
 import { flattenInfiniteListResult, getListResultNextPage } from '@lemon/shared';
 
@@ -9,7 +9,7 @@ import { attachUser$ToListResult } from '../utils';
 import type { CommentListParams } from '../../../types';
 
 export const useFetchInfiniteFeedCommentList = (feedId?: string, params?: CommentListParams) =>
-    useInfiniteQuery({
+    useSuspenseInfiniteQuery({
         queryKey: commentKeys.list({ feedId }, true),
         queryFn: ({ pageParam = 0 }) => fetchFeedCommentList(feedId, { ...params, page: pageParam }),
         initialPageParam: 0,
