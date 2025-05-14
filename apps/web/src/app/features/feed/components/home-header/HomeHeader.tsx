@@ -51,7 +51,7 @@ export const HomeHeader = ({ className }: HomeHeaderProps) => {
             )}
         >
             <div className="text-primary-foreground flex items-center">
-                <img src={Images.eurekaCodesLogo} alt="Eureka Codes Logo" className="flex-none" />
+                <img src={Images.eurekaCodesLogo} alt="Eureka Codes Logo" className="max-w-[120px] flex-none" />
                 {isDev() && (
                     <Button
                         className="ml-auto"
