@@ -4,7 +4,6 @@ import { RotateCcw } from 'lucide-react';
 
 import { useFetchFeedList } from '@lemon/feeds';
 import { Button } from '@lemon/ui-kit/components/ui/button';
-import { Condition } from '@lemon/ui-kit/components/ui/condition';
 
 import { FEED_GRID_COUNT, FEED_GRID_LIMIT } from '../../consts';
 import { NoFeed } from '../no-feed';
@@ -40,20 +39,22 @@ const HomeFeedGridContent = () => {
         setGridPageIdx(prev => (prev + 1) % gridMaxPage);
     };
 
+    if (!feedList.total) {
+        return <NoFeed />;
+    }
+
     return (
         <>
-            <Condition condition={!!feedList?.total} fallback={<NoFeed />}>
-                <div className="grid grid-cols-2 gap-2">
-                    {gridFeedList?.map(feed => <FeedGridBlock key={feed.id} feed={feed} />)}
-                </div>
-            </Condition>
-            <Condition condition={GRID_COUNT < (feedList?.list.length ?? 0)}>
+            <div className="grid grid-cols-2 gap-2">
+                {gridFeedList?.map(feed => <FeedGridBlock key={feed.id} feed={feed} />)}
+            </div>
+            {GRID_COUNT < (feedList?.list.length ?? 0) && (
                 <Button className="w-full gap-2" variant={'secondary'} onClick={changeGridPage}>
                     <RotateCcw />
                     인기글 새로 보기
                     <div />
                 </Button>
-            </Condition>
+            )}
         </>
     );
 };
