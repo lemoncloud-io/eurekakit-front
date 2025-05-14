@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
+import App from '../app';
 import { RedirectByAuth, authRoutes } from '../features/auth';
 import { commentRoutes } from '../features/comment';
 import { HomePage, feedRoutes } from '../features/feed';
@@ -16,14 +17,19 @@ export interface ExtendedRouteObject extends Omit<RouteObject, 'handle' | 'child
 
 const routes: ExtendedRouteObject[] = [
     {
-        element: <Layout />,
+        element: <App />,
         children: [
-            { path: '/', element: <HomePage />, handle: { tabBar: true, type: 'protected' } },
-            { path: '/feed/*', children: feedRoutes, handle: { type: 'protected' } },
-            { path: '/user/*', children: userRoutes, handle: { type: 'protected' } },
-            { path: '/comment/*', children: commentRoutes, handle: { type: 'protected' } },
-            { path: `/auth/*`, children: authRoutes, handle: { type: 'restricted' } },
-            { path: `*`, element: <RedirectByAuth /> },
+            {
+                element: <Layout />,
+                children: [
+                    { path: '/', element: <HomePage />, handle: { tabBar: true, type: 'protected' } },
+                    { path: '/feed/*', children: feedRoutes, handle: { type: 'protected' } },
+                    { path: '/user/*', children: userRoutes, handle: { type: 'protected' } },
+                    { path: '/comment/*', children: commentRoutes, handle: { type: 'protected' } },
+                    { path: `/auth/*`, children: authRoutes, handle: { type: 'restricted' } },
+                    { path: `*`, element: <RedirectByAuth /> },
+                ],
+            },
         ],
     },
 ];
