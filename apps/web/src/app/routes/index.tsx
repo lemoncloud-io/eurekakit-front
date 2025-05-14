@@ -2,8 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import { authRoutes } from '../features/auth';
 import { commentRoutes } from '../features/comment';
-import { feedRoutes } from '../features/feed';
-import { HomePage } from '../features/feed/pages';
+import { HomePage, feedRoutes } from '../features/feed';
 import { userRoutes } from '../features/user';
 import { Layout } from '../layout/Layout';
 
@@ -19,7 +18,7 @@ const routes: ExtendedRouteObject[] = [
     {
         element: <Layout />,
         children: [
-            { path: '/', element: <HomePage />, handle: { tabBar: true } },
+            { path: '/', element: <HomePage />, handle: { tabBar: true, requireAuth: true } },
             { path: `/auth/*`, children: authRoutes },
             { path: '/feed/*', children: feedRoutes, handle: { requireAuth: true } },
             { path: '/user/*', children: userRoutes, handle: { requireAuth: true } },
