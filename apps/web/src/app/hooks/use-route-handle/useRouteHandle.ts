@@ -2,16 +2,11 @@ import { useMatches } from 'react-router-dom';
 
 import type { UIMatch } from 'react-router-dom';
 
-interface HeaderButton {
-    type: 'back' | 'cancel' | 'custom';
-    position: 'left' | 'right';
-    label?: React.ReactNode;
-    onClick?: (e: React.MouseEvent) => void;
-}
+type HeaderButton = 'back' | 'cancel';
 
 interface HandleHeader {
     title?: string;
-    buttons: HeaderButton[];
+    buttons?: HeaderButton[];
 }
 
 export interface RouterHandle {
