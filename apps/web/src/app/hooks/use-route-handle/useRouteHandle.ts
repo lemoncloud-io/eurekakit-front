@@ -1,5 +1,7 @@
 import { useMatches } from 'react-router-dom';
 
+import type { UIMatch } from 'react-router-dom';
+
 interface HeaderButton {
     type: 'back' | 'cancel' | 'custom';
     position: 'left' | 'right';
@@ -20,9 +22,9 @@ export interface RouterHandle {
 }
 
 export const useRouteHandle = () => {
-    const matches = useMatches();
+    const matches = useMatches() as UIMatch<unknown, RouterHandle | undefined>[];
 
-    const handle = (matches[matches.length - 1].handle || {}) as RouterHandle;
+    const handle = matches[matches.length - 1].handle;
 
     return [handle, matches] as const;
 };
