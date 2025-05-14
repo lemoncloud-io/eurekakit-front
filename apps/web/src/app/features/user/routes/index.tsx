@@ -1,24 +1,23 @@
 import { ProfilePage, RecentViewPage, UserActivityPage, UserPage } from '../pages';
 import { ProfileEditModalPage } from '../pages/ProfileEditModalPage';
 
-import type { RouterHandle } from '../../../hooks';
-import type { RouteObject } from 'react-router-dom';
+import type { ExtendedRouteObject } from '../../../routes';
 
-export const userRoutes: RouteObject[] = [
+export const userRoutes: ExtendedRouteObject[] = [
     {
         index: true,
         element: <UserPage />,
-        handle: { tabBar: true } as RouterHandle,
+        handle: { tabBar: true },
     },
     {
         path: 'activity',
         element: <UserActivityPage />,
-        handle: { tabBar: true } as RouterHandle,
+        handle: { tabBar: true },
     },
     {
         path: 'viewed',
         element: <RecentViewPage />,
-        handle: { tabBar: true } as RouterHandle,
+        handle: { tabBar: true },
     },
     {
         path: 'profile',

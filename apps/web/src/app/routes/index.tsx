@@ -10,19 +10,24 @@ import { Layout } from '../layout/Layout';
 import type { RouterHandle } from '../hooks';
 import type { RouteObject } from 'react-router-dom';
 
-export const Router = () => {
-    const router = createBrowserRouter([
-        {
-            element: <Layout />,
-            children: [
-                { path: '/', element: <HomePage />, handle: { tabBar: true } as RouterHandle },
-                { path: `/auth/*`, children: authRoutes },
-                { path: '/feed/*', children: feedRoutes },
-                { path: '/user/*', children: userRoutes },
-                { path: '/comment/*', children: commentRoutes },
-            ],
-        },
-    ] as RouteObject[]);
+export interface ExtendedRouteObject extends Omit<RouteObject, 'handle' | 'children'> {
+    handle?: RouterHandle;
+    children?: ExtendedRouteObject[];
+}
 
-    return <RouterProvider router={router} />;
-};
+const routes: ExtendedRouteObject[] = [
+    {
+        element: <Layout />,
+        children: [
+            { path: '/', element: <HomePage />, handle: { tabBar: true } },
+            { path: `/auth/*`, children: authRoutes },
+            { path: '/feed/*', children: feedRoutes, handle: { requireAuth: true } },
+            { path: '/user/*', children: userRoutes, handle: { requireAuth: true } },
+            { path: '/comment/*', children: commentRoutes, handle: { requireAuth: true } },
+        ],
+    },
+];
+
+const router = createBrowserRouter(routes as RouteObject[]);
+
+export const Router = () => <RouterProvider router={router} />;

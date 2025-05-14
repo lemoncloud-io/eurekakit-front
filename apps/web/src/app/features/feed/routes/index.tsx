@@ -1,10 +1,9 @@
 import { CreateFeedPage, FeedDetailPage, FeedPage, SearchPage, UpdateFeedPage } from '../pages';
 
-import type { RouterHandle } from '../../../hooks';
-import type { RouteObject } from 'react-router-dom';
+import type { ExtendedRouteObject } from '../../../routes';
 
-export const feedRoutes: RouteObject[] = [
-    { index: true, element: <FeedPage />, handle: { tabBar: true } as RouterHandle },
+export const feedRoutes: ExtendedRouteObject[] = [
+    { index: true, element: <FeedPage />, handle: { tabBar: true } },
     { path: 'create', element: <CreateFeedPage /> },
     { path: 'search', element: <SearchPage /> },
     {
