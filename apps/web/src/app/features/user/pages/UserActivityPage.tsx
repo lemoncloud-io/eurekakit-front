@@ -13,7 +13,7 @@ export const UserActivityPage = () => {
             defaultValue="feeds"
             value={view}
             onValueChange={value => setView(value as ActivityViewType, { replace: true })}
-            className="flex flex-1 flex-col"
+            className="flex h-full flex-col"
         >
             <TabsList className="w-full flex-none justify-start">
                 <TabsTrigger value="feeds">내가 쓴 글</TabsTrigger>

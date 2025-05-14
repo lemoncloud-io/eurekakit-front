@@ -16,7 +16,7 @@ const RecentViewedFeedListSkeleton = () => (
 );
 
 export const RecentViewedFeedListEmptyFallback = () => (
-    <div className="text-secondary-foreground flex flex-1 flex-col items-center justify-center gap-3 text-sm">
+    <div className="text-secondary-foreground flex h-full flex-1 flex-col items-center justify-center gap-3 text-sm">
         <span>최근 본 글이 없습니다</span>
     </div>
 );
@@ -26,7 +26,7 @@ const RecentViewedFeedListContent = () => {
 
     return (
         <InfiniteFetchedList
-            items={viewedFeedList?.list}
+            items={viewedFeedList.list}
             renderItem={feed => (
                 <Link to={`/feed/${feed.id}`} key={feed.id}>
                     <Feed feed={feed} />
