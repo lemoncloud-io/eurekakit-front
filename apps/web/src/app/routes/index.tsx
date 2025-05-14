@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import { authRoutes } from '../features/auth';
+import { RedirectByAuth, authRoutes } from '../features/auth';
 import { commentRoutes } from '../features/comment';
 import { HomePage, feedRoutes } from '../features/feed';
 import { userRoutes } from '../features/user';
@@ -23,6 +23,7 @@ const routes: ExtendedRouteObject[] = [
             { path: '/user/*', children: userRoutes, handle: { type: 'protected' } },
             { path: '/comment/*', children: commentRoutes, handle: { type: 'protected' } },
             { path: `/auth/*`, children: authRoutes, handle: { type: 'restricted' } },
+            { path: `*`, element: <RedirectByAuth /> },
         ],
     },
 ];
