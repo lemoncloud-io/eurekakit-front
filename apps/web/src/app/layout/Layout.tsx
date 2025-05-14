@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, ScrollRestoration } from 'react-router-dom';
 
 import { ChevronLeft, X } from 'lucide-react';
 
@@ -14,6 +14,7 @@ export const Layout = () => {
 
     return (
         <AuthGuard>
+            <ScrollRestoration />
             <div className="flex h-full flex-col">
                 {handle?.header && (
                     <header className="relative flex h-12 w-full flex-none items-center justify-between px-2">
