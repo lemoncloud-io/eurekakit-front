@@ -1,7 +1,7 @@
 import { useFetchProfile } from '@lemon/users';
 
 import { CommentHeader } from './CommentHeader';
-import { ImageListViewer } from '../../../../components';
+import { ImageCarouselViewer } from '../../../../components';
 import { LikeCommentButton } from '../like-comment-button';
 
 import type { CommentView } from '@lemon/comments';
@@ -24,7 +24,7 @@ export const Comment = ({ comment }: CommentProps) => {
                 isMe={profile?.id === comment.userId}
             />
             <div className="whitespace-pre-line break-all">{comment.text}</div>
-            <ImageListViewer images={comment.image$$} />
+            <ImageCarouselViewer images={comment.image$$} />
             <LikeCommentButton
                 commentId={comment.id}
                 isLike={comment.$activity?.isLike}

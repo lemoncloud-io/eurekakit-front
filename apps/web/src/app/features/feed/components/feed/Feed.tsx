@@ -1,7 +1,7 @@
 import { useFetchProfile } from '@lemon/users';
 
 import { FeedHeader } from './FeedHeader';
-import { ImageListViewer, LikeButton } from '../../../../components';
+import { ImageCarouselViewer, LikeButton } from '../../../../components';
 
 import type { FeedView } from '@lemon/feeds';
 
@@ -22,7 +22,7 @@ export const Feed = ({ feed }: FeedProps) => {
                 isMe={profile?.id === feed.userId}
             />
             <div className="whitespace-pre-line break-all" dangerouslySetInnerHTML={{ __html: feed.text }} />
-            <ImageListViewer images={feed.image$$} />
+            <ImageCarouselViewer images={feed.image$$} />
             <LikeButton feedId={feed.id} isLike={feed.$activity?.isLike} likeCount={feed.likeCount} />
         </div>
     );

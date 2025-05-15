@@ -3,7 +3,7 @@ import { Loader2, X } from 'lucide-react';
 import { useFetchFeed } from '@lemon/feeds';
 import { Dialog, DialogContent } from '@lemon/ui-kit/components/ui/dialog';
 
-import { ImageListViewer } from '../../../../components';
+import { ImageCarouselViewer } from '../../../../components';
 import { FeedHeader } from '../../../feed/components';
 
 import type { OverlayProps } from '@lemon/overlay';
@@ -41,7 +41,7 @@ export const FeedViewerModal = ({ feedId, close, ...overlayProps }: FeedViewerMo
                             />
                             <div className="flex flex-col gap-2">
                                 <p className="whitespace-pre-line break-all">{feed.text}</p>
-                                <ImageListViewer images={feed.image$$} />
+                                <ImageCarouselViewer images={feed.image$$} />
                             </div>
                         </div>
                     )

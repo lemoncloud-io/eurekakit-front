@@ -11,7 +11,7 @@ interface ImageListViewerProps {
     images?: ImageView[];
 }
 
-export const ImageListViewer = ({ images }: ImageListViewerProps) => {
+export const ImageCarouselViewer = ({ images }: ImageListViewerProps) => {
     const [clickedImageIdx, setClickedImageIdx] = useState<number | undefined>(undefined);
 
     const onClickImage = (e: React.MouseEvent) => {
