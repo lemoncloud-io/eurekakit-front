@@ -19,6 +19,7 @@
             "@lemon/assets": ["assets/src/index.ts"],
             "@lemon/comments": ["libs/comments/src/index.ts"],
             "@lemon/feeds": ["libs/feeds/src/index.ts"],
+            "@lemon/mock-db": ["libs/mock-db/src/index.ts"],
             "@lemon/overlay": ["libs/overlay/src/index.ts"],
             "@lemon/shared": ["libs/shared/src/index.ts"],
             "@lemon/theme": ["libs/theme/src/index.ts"],
