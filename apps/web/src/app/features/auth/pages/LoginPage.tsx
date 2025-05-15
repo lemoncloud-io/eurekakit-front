@@ -11,7 +11,7 @@ import type { LoginProvider } from '@lemon/types';
 export const LoginPage = () => {
     const { setIsLoading } = useGlobalLoader();
     const location = useLocation();
-    const from = location.state?.from || '/home';
+    const from = location.state?.from || '/';
 
     const { isOnMobileApp } = useAppChecker();
 
@@ -39,7 +39,7 @@ export const LoginPage = () => {
     return (
         <div className="bg-background flex min-h-screen flex-col items-center justify-center gap-4 p-6">
             <div className="text-background fixed top-0 w-full rounded-b-[24px] bg-[#1F1F3C] py-5 pl-6 shadow-md">
-                <img src={Images.eurekaCodesLogo} alt="Eureka Codes Logo" />
+                <img src={Images.eurekaCodesLogo} alt="Eureka Codes Logo" className="max-w-[120px]" />
             </div>
             <div className="text-center">
                 <h2 className="text-muted-foreground text-2xl font-semibold uppercase">LOGIN</h2>

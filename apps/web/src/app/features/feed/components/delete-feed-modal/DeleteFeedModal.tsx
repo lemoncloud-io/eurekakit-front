@@ -31,6 +31,12 @@ export const DeleteFeedModal = ({ feedId, open, onOpenChange }: DeleteFeedModalP
 
     const modal = useModalWithDropDown(open);
 
+    const onSuccessDelete = async () => {
+        await queryClient.invalidateQueries({ queryKey: feedsKeys.all });
+        toast({ description: '삭제되었습니다', className: 'flex justify-center items-center' });
+        navigate(-1);
+    };
+
     const onClickDelete = () => {
         setIsLoading(true);
         deleteFeed(feedId, {
@@ -56,10 +62,4 @@ export const DeleteFeedModal = ({ feedId, open, onOpenChange }: DeleteFeedModalP
             </DialogContent>
         </Dialog>
     );
-
-    async function onSuccessDelete() {
-        await queryClient.invalidateQueries({ queryKey: feedsKeys.all });
-        toast({ description: '삭제되었습니다', className: 'flex justify-center items-center' });
-        navigate(-1);
-    }
 };

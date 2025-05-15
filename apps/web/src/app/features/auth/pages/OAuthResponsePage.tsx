@@ -29,10 +29,10 @@ export const OAuthResponsePage = () => {
                 setIsAuthenticated(true);
 
                 // state 파라미터에서 원래 경로 추출
-                let redirectTo = '/home';
+                let redirectTo = '/';
                 try {
                     const stateObj = JSON.parse(decodeURIComponent(stateParam));
-                    redirectTo = stateObj.from || '/home';
+                    redirectTo = stateObj.from || '/';
                 } catch (e) {
                     console.warn('Failed to parse state parameter:', e);
                 }
@@ -43,7 +43,7 @@ export const OAuthResponsePage = () => {
 
             // Error occurred!
             toast({ description: '에러가 발생했습니다.', variant: 'destructive' });
-            navigate('/auth/login');
+            navigate('/auth/login', { replace: true });
         };
 
         checkLoginResult();

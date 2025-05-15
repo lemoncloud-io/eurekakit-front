@@ -13,8 +13,8 @@ import { Feed, FeedSkeleton } from '../../../feed/components';
 
 const UserFeedListSkeleton = () => (
     <List seperator={<Separator />}>
-        {Array.from({ length: window.innerHeight / 120 - 2 }).map(() => (
-            <FeedSkeleton />
+        {Array.from({ length: window.innerHeight / 120 - 2 }).map((_, idx) => (
+            <FeedSkeleton key={idx} />
         ))}
     </List>
 );

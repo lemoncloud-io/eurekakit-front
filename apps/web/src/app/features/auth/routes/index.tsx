@@ -2,9 +2,9 @@ import { Navigate } from 'react-router-dom';
 
 import { KakaoCallbackPage, LoginPage, LogoutPage, OAuthResponsePage } from '../pages';
 
-import type { RouteObject } from 'react-router-dom';
+import type { ExtendedRouteObject } from '../../../routes';
 
-export const authRoutes: RouteObject[] = [
+export const authRoutes: ExtendedRouteObject[] = [
     {
         path: 'login',
         element: <LoginPage />,
@@ -12,10 +12,12 @@ export const authRoutes: RouteObject[] = [
     {
         path: 'logout',
         element: <LogoutPage />,
+        handle: { type: 'public' },
     },
     {
         path: 'oauth-response',
         element: <OAuthResponsePage />,
+        handle: { type: 'public' },
     },
     {
         path: 'kakao/callback',

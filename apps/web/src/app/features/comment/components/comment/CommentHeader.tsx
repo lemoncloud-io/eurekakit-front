@@ -48,7 +48,7 @@ export const CommentHeader = ({ commentId, feedId, profileImg, nickname, created
                 <DropdownMenuContent>
                     {isMe ? (
                         <>
-                            <DropdownMenuItem onClick={() => navigate(`/comment/update/${commentId}?feedId=${feedId}`)}>
+                            <DropdownMenuItem onClick={() => navigate(`/comment/${commentId}/update?feedId=${feedId}`)}>
                                 수정하기
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />

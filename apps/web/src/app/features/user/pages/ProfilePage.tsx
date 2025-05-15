@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 
 import { DevTool } from '@hookform/devtools';
-import { ChevronLeft } from 'lucide-react';
 
 import { isDev, useGlobalLoader } from '@lemon/shared';
 import { useToast } from '@lemon/ui-kit';
@@ -49,13 +48,6 @@ export const ProfilePage = () => {
 
     return (
         <div className="flex h-full flex-1 flex-col">
-            <header className="flex h-12 flex-none items-center justify-between px-4">
-                <button onClick={() => navigate(-1)}>
-                    <ChevronLeft size={20} />
-                </button>
-                <span>프로필 수정</span>
-                <div className="h-5 w-5" />
-            </header>
             <Form {...methods}>
                 <div className="flex flex-col gap-4 p-4">
                     {isDev() && <DevTool control={methods.control} />}

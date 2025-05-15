@@ -1,12 +1,10 @@
 import { useForm, useWatch } from 'react-hook-form';
 
 import { useQueryClient } from '@tanstack/react-query';
-import { X } from 'lucide-react';
 
 import { feedsKeys, useCreateFeed } from '@lemon/feeds';
 import { useGlobalLoader } from '@lemon/shared';
 import { useToast } from '@lemon/ui-kit';
-import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Form } from '@lemon/ui-kit/components/ui/form';
 
 import { useFormBlockModal, useNavigate } from '../../../hooks';
@@ -34,6 +32,12 @@ export const CreateFeedPage = () => {
 
     const { setBlockerOn } = useFormBlockModal(isContentDirty);
 
+    const onSuccessCreate = async (feedResult: FeedView) => {
+        toast({ description: '게시글 등록이 완료되었습니다.', className: 'justify-center' });
+        navigate(`/feed/${feedResult.id}`, { replace: true });
+        await queryClient.invalidateQueries({ queryKey: feedsKeys.all });
+    };
+
     const submitFeed = (feedBody: FeedBody) => {
         setBlockerOn(false);
         setIsLoading(true);
@@ -46,25 +50,10 @@ export const CreateFeedPage = () => {
     };
 
     return (
-        <div className="h-full w-full">
-            <header className="flex h-12 w-full items-center justify-between border-b px-2">
-                <div className="w-9" />
-                <span className="font-medium">새로운 글쓰기</span>
-                <Button size={'icon'} variant={'ghost'} onClick={() => navigate(-1)}>
-                    <X />
-                </Button>
-            </header>
-            <div className="h-[calc(100%-3rem)] p-4">
-                <Form {...methods}>
-                    <FeedEditor isSubmitting={isPending} onValid={submitFeed} />
-                </Form>
-            </div>
+        <div className="h-full p-4">
+            <Form {...methods}>
+                <FeedEditor isSubmitting={isPending} onValid={submitFeed} />
+            </Form>
         </div>
     );
-
-    async function onSuccessCreate(feedResult: FeedView) {
-        toast({ description: '게시글 등록이 완료되었습니다.', className: 'justify-center' });
-        navigate(`/feed/${feedResult.id}`, { replace: true });
-        await queryClient.invalidateQueries({ queryKey: feedsKeys.all });
-    }
 };

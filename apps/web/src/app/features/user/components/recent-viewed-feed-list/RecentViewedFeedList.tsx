@@ -9,14 +9,14 @@ import { Feed, FeedSkeleton } from '../../../feed/components';
 
 const RecentViewedFeedListSkeleton = () => (
     <List seperator={<Separator />}>
-        {Array.from({ length: window.innerHeight / 120 - 2 }).map(() => (
-            <FeedSkeleton />
+        {Array.from({ length: window.innerHeight / 120 - 2 }).map((_, idx) => (
+            <FeedSkeleton key={idx} />
         ))}
     </List>
 );
 
 export const RecentViewedFeedListEmptyFallback = () => (
-    <div className="text-secondary-foreground flex flex-1 flex-col items-center justify-center gap-3 text-sm">
+    <div className="text-secondary-foreground flex h-full flex-1 flex-col items-center justify-center gap-3 text-sm">
         <span>최근 본 글이 없습니다</span>
     </div>
 );
@@ -26,7 +26,7 @@ const RecentViewedFeedListContent = () => {
 
     return (
         <InfiniteFetchedList
-            items={viewedFeedList?.list}
+            items={viewedFeedList.list}
             renderItem={feed => (
                 <Link to={`/feed/${feed.id}`} key={feed.id}>
                     <Feed feed={feed} />

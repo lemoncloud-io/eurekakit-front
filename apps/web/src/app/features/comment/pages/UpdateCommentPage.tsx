@@ -1,10 +1,10 @@
 import { useForm, useWatch } from 'react-hook-form';
-import { useLoaderData, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { useQueryClient } from '@tanstack/react-query';
-import { ChevronRight, X } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
-import { commentKeys, useUpdateComment } from '@lemon/comments';
+import { commentKeys, useFetchComment, useUpdateComment } from '@lemon/comments';
 import { useOverlay } from '@lemon/overlay';
 import { useGlobalLoader, useQueryState } from '@lemon/shared';
 import { useToast } from '@lemon/ui-kit';
@@ -12,17 +12,18 @@ import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Form } from '@lemon/ui-kit/components/ui/form';
 
 import { useFormBlockModal, useNavigate } from '../../../hooks';
+import { OwnerGuard } from '../../auth';
 import { FeedEditor } from '../../feed/components';
 import { FeedViewerModal } from '../components';
 
-import type { CommentBody, CommentView } from '@lemoncloud/pets-socials-api';
+import type { CommentBody } from '@lemoncloud/pets-socials-api';
 
 export const UpdateCommentPage = () => {
     const overlay = useOverlay();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const params = useParams();
-    const loaderData = useLoaderData<{ comment: CommentView }>();
+    const { data: comment } = useFetchComment(params.commentId);
 
     const { setIsLoading } = useGlobalLoader();
     const { toast } = useToast();
@@ -34,7 +35,7 @@ export const UpdateCommentPage = () => {
     const methods = useForm<CommentBody>({
         mode: 'all',
         defaultValues: { image$$: [], text: '' },
-        values: loaderData.comment,
+        values: comment,
     });
 
     const watchedImages = useWatch({ control: methods.control, name: 'image$$' });
@@ -70,15 +71,8 @@ export const UpdateCommentPage = () => {
     };
 
     return (
-        <div className="h-full w-full">
-            <header className="flex h-12 w-full items-center justify-between border-b px-2">
-                <div className="w-9" />
-                <span className="font-medium">수정하기</span>
-                <Button size={'icon'} variant={'ghost'} onClick={() => navigate(-1)}>
-                    <X />
-                </Button>
-            </header>
-            <div className="flex h-[calc(100%-3rem)] flex-col gap-3 p-4">
+        <OwnerGuard ownerId={comment.user$.id}>
+            <div className="flex h-full flex-col gap-3 p-4">
                 <Button
                     variant={'outline'}
                     className="h-14 w-full justify-start rounded-lg"
@@ -93,6 +87,6 @@ export const UpdateCommentPage = () => {
                     <FeedEditor isSubmitting={isPending} onValid={submitComment} />
                 </Form>
             </div>
-        </div>
+        </OwnerGuard>
     );
 };

@@ -30,6 +30,11 @@ export const DeleteCommentModal = ({ commentId, open, onOpenChange }: DeleteComm
 
     const modal = useModalWithDropDown(open);
 
+    const onSuccessDelete = async () => {
+        await queryClient.invalidateQueries({ queryKey: commentKeys.all });
+        toast({ description: '삭제되었습니다', className: 'flex justify-center items-center' });
+    };
+
     const onClickDelete = () => {
         setIsLoading(true);
         deleteComment(commentId, {
@@ -55,9 +60,4 @@ export const DeleteCommentModal = ({ commentId, open, onOpenChange }: DeleteComm
             </DialogContent>
         </Dialog>
     );
-
-    async function onSuccessDelete() {
-        await queryClient.invalidateQueries({ queryKey: commentKeys.all });
-        toast({ description: '삭제되었습니다', className: 'flex justify-center items-center' });
-    }
 };

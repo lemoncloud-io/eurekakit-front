@@ -1,7 +1,7 @@
 import { useForm, useWatch } from 'react-hook-form';
 
 import { useQueryClient } from '@tanstack/react-query';
-import { ChevronRight, X } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 import { commentKeys, useCrerateComment } from '@lemon/comments';
 import { useOverlay } from '@lemon/overlay';
@@ -40,6 +40,12 @@ export const CreateCommentPage = () => {
 
     const { setBlockerOn } = useFormBlockModal(isContentDirty);
 
+    const onSuccessCreate = async () => {
+        toast({ description: '답글 등록이 완료되었습니다.', className: 'justify-center' });
+        navigate(-1);
+        await queryClient.invalidateQueries({ queryKey: commentKeys.all });
+    };
+
     const submitContent = (commentBody: CommentBody) => {
         setBlockerOn(false);
         setIsLoading(true);
@@ -55,35 +61,20 @@ export const CreateCommentPage = () => {
     };
 
     return (
-        <div>
-            <header className="flex h-12 w-full items-center justify-between border-b px-2">
-                <div className="w-9" />
-                <span className="font-medium">답글 쓰기</span>
-                <Button size={'icon'} variant={'ghost'} onClick={() => navigate(-1)}>
-                    <X />
-                </Button>
-            </header>
-            <div className="flex flex-col gap-3 p-4">
-                <Button
-                    variant={'outline'}
-                    className="h-14 justify-start rounded-lg"
-                    onClick={() => overlay.open(overlayProps => <FeedViewerModal feedId={feedId} {...overlayProps} />)}
-                >
-                    본문 보기
-                    <span className="ml-auto">
-                        <ChevronRight />
-                    </span>
-                </Button>
-                <Form {...methods}>
-                    <FeedEditor onValid={submitContent} isSubmitting={isPending} />
-                </Form>
-            </div>
+        <div className="flex flex-col gap-3 p-4">
+            <Button
+                variant={'outline'}
+                className="h-14 justify-start rounded-lg"
+                onClick={() => overlay.open(overlayProps => <FeedViewerModal feedId={feedId} {...overlayProps} />)}
+            >
+                본문 보기
+                <span className="ml-auto">
+                    <ChevronRight />
+                </span>
+            </Button>
+            <Form {...methods}>
+                <FeedEditor onValid={submitContent} isSubmitting={isPending} />
+            </Form>
         </div>
     );
-
-    async function onSuccessCreate() {
-        toast({ description: '답글 등록이 완료되었습니다.', className: 'justify-center' });
-        navigate(-1);
-        await queryClient.invalidateQueries({ queryKey: commentKeys.all });
-    }
 };

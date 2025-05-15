@@ -1,30 +1,27 @@
-import { CreateFeedPage, FeedDetailPage, FeedPage, HomePage, SearchPage, UpdateFeedPage } from '../pages';
+import { CreateFeedPage, FeedDetailPage, FeedPage, SearchPage, UpdateFeedPage } from '../pages';
 
-import type { RouteObject } from 'react-router-dom';
+import type { ExtendedRouteObject } from '../../../routes';
 
-export const feedRoutes: RouteObject[] = [
+export const feedRoutes: ExtendedRouteObject[] = [
+    { index: true, element: <FeedPage />, handle: { tabBar: true } },
     {
-        index: true,
-        element: <HomePage />,
+        path: 'create',
+        element: <CreateFeedPage />,
+        handle: { header: { title: '새로운 글쓰기', buttons: ['cancel'] } },
     },
+    { path: 'search', element: <SearchPage /> },
     {
-        path: 'feed',
+        path: ':feedId',
         children: [
-            { index: true, element: <FeedPage /> },
-            { path: 'create', element: <CreateFeedPage /> },
-            { path: 'search', element: <SearchPage /> },
             {
-                path: ':feedId',
-                children: [
-                    {
-                        index: true,
-                        element: <FeedDetailPage />,
-                    },
-                    {
-                        path: 'update',
-                        element: <UpdateFeedPage />,
-                    },
-                ],
+                index: true,
+                element: <FeedDetailPage />,
+                handle: { header: { buttons: ['back'] } },
+            },
+            {
+                path: 'update',
+                element: <UpdateFeedPage />,
+                handle: { header: { title: '수정하기', buttons: ['cancel'] } },
             },
         ],
     },

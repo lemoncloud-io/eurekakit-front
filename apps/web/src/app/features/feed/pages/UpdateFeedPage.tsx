@@ -2,29 +2,27 @@ import { useForm, useWatch } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
 import { useQueryClient } from '@tanstack/react-query';
-import { X } from 'lucide-react';
 
 import { feedsKeys, useFetchFeed, useUpdateFeed } from '@lemon/feeds';
 import { useGlobalLoader } from '@lemon/shared';
 import { useToast } from '@lemon/ui-kit';
-import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Form } from '@lemon/ui-kit/components/ui/form';
 
 import { useFormBlockModal, useNavigate } from '../../../hooks';
+import { OwnerGuard } from '../../auth';
 import { FeedEditor } from '../components';
 
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
 
 export const UpdateFeedPage = () => {
-    const { setIsLoading } = useGlobalLoader();
-    const { toast } = useToast();
-
+    const params = useParams();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
-    const params = useParams();
+    const { setIsLoading } = useGlobalLoader();
+    const { toast } = useToast();
 
-    const { data: feed, isPending: isLoadingFeed } = useFetchFeed(params.feedId);
+    const { data: feed } = useFetchFeed(params.feedId);
     const { mutate: updateFeed, isPending } = useUpdateFeed();
 
     const methods = useForm<FeedBody>({
@@ -45,6 +43,12 @@ export const UpdateFeedPage = () => {
         description: '해당 화면에서 이탈 시 변경된 내용이 사라집니다.',
     });
 
+    const onSuccessUpdate = async () => {
+        toast({ description: '수정이 완료되었습니다.', className: 'justify-center' });
+        navigate(-1);
+        await queryClient.invalidateQueries({ queryKey: feedsKeys.all });
+    };
+
     const submitFeed = (feedBody: FeedBody) => {
         setBlockerOn(false);
         setIsLoading(true);
@@ -60,27 +64,12 @@ export const UpdateFeedPage = () => {
     };
 
     return (
-        <div className="h-full w-full">
-            <header className="flex h-12 w-full items-center justify-between border-b px-2">
-                <div className="w-9" />
-                <span className="font-medium">수정하기</span>
-                <Button size={'icon'} variant={'ghost'} onClick={() => navigate(-1)}>
-                    <X />
-                </Button>
-            </header>
-            {!isLoadingFeed && (
-                <div className="h-[calc(100%-3rem)] p-4">
-                    <Form {...methods}>
-                        <FeedEditor isSubmitting={isPending} onValid={submitFeed} />
-                    </Form>
-                </div>
-            )}
-        </div>
+        <OwnerGuard ownerId={feed.user$.id}>
+            <div className="h-full p-4">
+                <Form {...methods}>
+                    <FeedEditor isSubmitting={isPending} onValid={submitFeed} />
+                </Form>
+            </div>
+        </OwnerGuard>
     );
-
-    async function onSuccessUpdate() {
-        toast({ description: '수정이 완료되었습니다.', className: 'justify-center' });
-        navigate(-1);
-        await queryClient.invalidateQueries({ queryKey: feedsKeys.all });
-    }
 };

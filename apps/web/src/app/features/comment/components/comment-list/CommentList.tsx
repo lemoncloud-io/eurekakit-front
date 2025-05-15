@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 
 import { useFetchInfiniteFeedCommentList } from '@lemon/comments';
-import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 
 import { ErrorWithRetry } from '../../../../components';
@@ -10,11 +9,7 @@ import { withQueryErrorBoundary, withSuspense } from '../../../../utils';
 import { Comment } from '../../../comment/components';
 import { FeedSkeleton } from '../../../feed/components';
 
-const CommentListSkeleton = () => (
-    <List seperator={<Separator />}>
-        <FeedSkeleton />
-    </List>
-);
+const CommentListSkeleton = () => <FeedSkeleton />;
 
 const CommentListContent = () => {
     const params = useParams();
