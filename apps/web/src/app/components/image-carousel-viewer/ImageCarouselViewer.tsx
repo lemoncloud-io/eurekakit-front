@@ -11,7 +11,7 @@ interface ImageListViewerProps {
     images?: ImageView[];
 }
 
-export const ImageListViewer = ({ images }: ImageListViewerProps) => {
+export const ImageCarouselViewer = ({ images }: ImageListViewerProps) => {
     const [clickedImageIdx, setClickedImageIdx] = useState<number | undefined>(undefined);
 
     const onClickImage = (e: React.MouseEvent) => {
@@ -36,7 +36,7 @@ export const ImageListViewer = ({ images }: ImageListViewerProps) => {
                                 image?.url && (
                                     <CarouselItem
                                         key={image?.id}
-                                        className="basis-[150px] pl-2"
+                                        className="basis-1/3 pl-2"
                                         onClick={onClickImage}
                                         data-image-idx={idx}
                                     >

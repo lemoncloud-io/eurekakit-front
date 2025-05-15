@@ -1,6 +1,6 @@
 export * from './image';
 export * from './image-carousel-modal';
-export * from './image-list-viewer';
+export * from './image-carousel-viewer';
 
 export * from './report-modal';
 
