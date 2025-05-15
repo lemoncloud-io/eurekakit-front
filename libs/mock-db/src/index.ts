@@ -1,1 +1,2 @@
-export * from './lib/mock-db';
+export * from './db';
+export * from './utils';
