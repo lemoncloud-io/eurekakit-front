@@ -132,6 +132,7 @@
         "@lemoncloud/lemon-boards-api": "^2.25.109",
         "@lemoncloud/lemon-uploads-api": "^0.24.802",
         "@lemoncloud/pets-socials-api": "^0.25.425",
+        "@mswjs/data": "mswjs/data",
         "@nx/eslint": "20.1.4",
         "@nx/eslint-plugin": "20.1.4",
         "@nx/jest": "20.1.4",
