@@ -2004,6 +2004,11 @@
   resolved "https://registry.yarnpkg.com/@expo/sdk-runtime-versions/-/sdk-runtime-versions-1.0.0.tgz#d7ebd21b19f1c6b0395e50d78da4416941c57f7c"
   integrity sha512-Doz2bfiPndXYFPMRwPyGa1k5QaKDVpY806UJj570epIiMzWaYyCtobasyfC++qfIXVb5Ocy7r3tP9d62hAQ7IQ==
 
+"@faker-js/faker@^9.8.0":
+  version "9.8.0"
+  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-9.8.0.tgz#3344284028d1c9dc98dee2479f82939310370d88"
+  integrity sha512-U9wpuSrJC93jZBxx/Qq2wPjCuYISBueyVUGK7qqdmj7r/nxaxwW8AQDCLeRO7wZnjj94sh3p246cAYjUKuqgfg==
+
 "@floating-ui/core@^1.6.0":
   version "1.6.8"
   resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-1.6.8.tgz#aa43561be075815879305965020f492cdb43da12"
@@ -3038,9 +3043,10 @@
     got "^11.8.5"
     os-filter-obj "^2.0.0"
 
-"@mswjs/data@mswjs/data":
+"@mswjs/data@^0.16.2":
   version "0.16.2"
-  resolved "https://codeload.github.com/mswjs/data/tar.gz/84d529e223a932bf6ab282efa9b79ad895018599"
+  resolved "https://registry.yarnpkg.com/@mswjs/data/-/data-0.16.2.tgz#61d14dcb28851b25b2ca97e343d40d57870670ec"
+  integrity sha512-/C0d/PBcJyQJokUhcjO4HiZPc67hzllKlRtD1XELygl2t991/ATAAQJVcStn4YtVALsNodruzOHT0JIvgr0hnA==
   dependencies:
     "@types/lodash" "^4.14.172"
     "@types/md5" "^2.3.0"
