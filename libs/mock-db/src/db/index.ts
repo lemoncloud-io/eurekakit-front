@@ -1,5 +1,5 @@
 import { faker, fakerKO } from '@faker-js/faker';
-import { factory, manyOf, oneOf, primaryKey } from '@mswjs/data';
+import { factory, manyOf, primaryKey } from '@mswjs/data';
 
 export const myId = faker.string.uuid();
 
@@ -23,7 +23,7 @@ export const db = factory({
         likeCount: Number,
         viewCount: Number,
         text: () => fakerKO.lorem.paragraphs(Math.ceil(Math.random() * 5) + 1),
-        user$: oneOf('user'),
+        userId: String,
         image$$: manyOf('image'),
         commentPosted: Number,
         commentHidden: Number,
@@ -39,7 +39,6 @@ export const db = factory({
         updatedAt: () => faker.date.past().getTime(),
         likeCount: Number,
         text: () => fakerKO.lorem.paragraphs(Math.ceil(Math.random() * 10) + 1).slice(0, 1500),
-        user$: oneOf('user'),
         userId: String,
         image$$: manyOf('image'),
         Activity: {

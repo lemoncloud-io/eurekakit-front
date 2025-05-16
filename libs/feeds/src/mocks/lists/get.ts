@@ -4,8 +4,8 @@ import { db } from '@lemon/mock-db';
 
 import { CONTENT_ENDPOINT, FEEDS, HELLO, LIKED, LIST, LIST_V2, USERS } from '../../consts';
 
-import type { FeedView } from '../../types';
 import type { ListResult } from '@lemon/shared';
+import type { FeedView } from '@lemoncloud/pets-socials-api';
 
 export const listGetHandler = [
     http.get([CONTENT_ENDPOINT, FEEDS, 0, LIST_V2].join('/'), async ({ request }) => {
@@ -23,7 +23,9 @@ export const listGetHandler = [
         });
 
         const total = db.feed.count({ where: { hidden: { equals: false } } });
-        const Users = list.map(feed => feed.user$);
+
+        const userIds = list.map(feed => feed.userId);
+        const Users = db.user.getAll().filter(user => userIds.includes(user.id));
 
         await delay(1000);
 
@@ -48,7 +50,9 @@ export const listGetHandler = [
         const likedFeeds = allFeeds.filter(feed => feed.$activity.isLike);
 
         const paginated = likedFeeds.slice(page * limit, (page + 1) * limit);
-        const Users = paginated.map(feed => feed.user$);
+
+        const userIds = paginated.map(feed => feed.userId);
+        const Users = db.user.getAll().filter(user => userIds.includes(user.id));
 
         await delay(1000);
 
@@ -75,7 +79,7 @@ export const listGetHandler = [
             skip,
             take: limit,
             where: {
-                user$: { id: { equals: userId } },
+                userId: { equals: userId },
                 hidden: { equals: false },
             },
             orderBy: {
@@ -85,7 +89,7 @@ export const listGetHandler = [
 
         const total = db.feed.count({
             where: {
-                user$: { id: { equals: userId } },
+                userId: { equals: userId },
                 hidden: { equals: false },
             },
         });
@@ -122,7 +126,8 @@ export const listGetHandler = [
 
         const responseFeedList = searchedFeedList.slice(startFeedIdx, endFeedIdx);
 
-        const Users = responseFeedList.map(feed => feed.user$);
+        const userIds = responseFeedList.map(feed => feed.userId);
+        const Users = db.user.getAll().filter(user => userIds.includes(user.id));
 
         await delay(1000);
 

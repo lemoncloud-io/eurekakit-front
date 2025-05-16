@@ -12,6 +12,6 @@ export interface FeedListParam extends OFeedListParam {
     image?: boolean;
 }
 
-export interface FeedView extends Omit<RequiredKeys<OFeedView, 'id' | 'createdAt' | 'text'>, 'user$'> {
+export interface FeedView extends Omit<RequiredKeys<OFeedView, 'id' | 'createdAt' | 'text' | 'userId'>, 'user$'> {
     user$: UserView;
 }

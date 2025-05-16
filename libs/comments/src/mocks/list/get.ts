@@ -4,8 +4,8 @@ import { db } from '@lemon/mock-db';
 
 import { COMMENTS, CONTENT_ENDPOINT, FEEDS } from '../../consts';
 
-import type { CommentView } from '../../types';
 import type { ListResult } from '@lemon/shared';
+import type { CommentView } from '@lemoncloud/pets-socials-api';
 
 export const getHandler = [
     http.get([CONTENT_ENDPOINT, FEEDS, ':feedId', COMMENTS].join('/'), async ({ request, params }) => {
@@ -30,7 +30,8 @@ export const getHandler = [
             where: { feedId: { equals: feedId } },
         });
 
-        const Users = comments.map(comment => comment.user$);
+        const userIds = comments.map(comment => comment.userId);
+        const Users = db.user.getAll().filter(user => userIds.includes(user.id));
 
         await delay(2000);
 

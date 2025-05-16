@@ -8,7 +8,7 @@ export const initMockDB = () => {
 
     for (const user of users) {
         const feedCount = Math.floor(Math.random() * 20);
-        const feeds = createRandomFeeds(user, feedCount);
+        const feeds = createRandomFeeds(user.id, feedCount);
 
         for (const feed of feeds) {
             const commentCount = Math.floor(Math.random() * 20);
