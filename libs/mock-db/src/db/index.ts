@@ -1,12 +1,14 @@
 import { faker, fakerKO } from '@faker-js/faker';
 import { factory, manyOf, oneOf, primaryKey } from '@mswjs/data';
 
+export const myId = faker.string.uuid();
+
 export const db = factory({
     user: {
         id: primaryKey(String),
         createdAt: () => faker.date.past().getTime(),
         updatedAt: () => faker.date.past().getTime(),
-        nick: () => fakerKO.internet.username().slice(0, 15),
+        nick: () => fakerKO.internet.username().slice(0, 10),
         name: fakerKO.person.fullName,
         image: fakerKO.image.avatar,
     },
