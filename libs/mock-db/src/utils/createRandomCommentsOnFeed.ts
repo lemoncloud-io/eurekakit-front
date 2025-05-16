@@ -14,5 +14,7 @@ export const createRandomCommentsOnFeed = (feedId: string, count: number) =>
             likeCount,
             image$$: createRandomImages(Math.floor(Math.random() * 6)),
             feedId,
+            createdAt: faker.date.recent().getTime(),
+            updatedAt: faker.date.recent().getTime(),
         });
     });

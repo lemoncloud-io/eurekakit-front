@@ -6,8 +6,8 @@ export const myId = faker.string.uuid();
 export const db = factory({
     user: {
         id: primaryKey(String),
-        createdAt: () => faker.date.past().getTime(),
-        updatedAt: () => faker.date.past().getTime(),
+        createdAt: () => Date.now(),
+        updatedAt: () => Date.now(),
         nick: () => fakerKO.internet.username().slice(0, 10),
         name: fakerKO.person.fullName,
         image: fakerKO.image.avatar,
@@ -18,8 +18,8 @@ export const db = factory({
     },
     feed: {
         id: primaryKey(String),
-        createdAt: () => faker.date.past().getTime(),
-        updatedAt: () => faker.date.past().getTime(),
+        createdAt: () => Date.now(),
+        updatedAt: () => Date.now(),
         likeCount: Number,
         viewCount: Number,
         text: () => fakerKO.lorem.paragraphs(Math.ceil(Math.random() * 5) + 1),
@@ -35,8 +35,8 @@ export const db = factory({
     },
     comment: {
         id: primaryKey(String),
-        createdAt: () => faker.date.past().getTime(),
-        updatedAt: () => faker.date.past().getTime(),
+        createdAt: () => Date.now(),
+        updatedAt: () => Date.now(),
         likeCount: Number,
         text: () => fakerKO.lorem.paragraphs(Math.ceil(Math.random() * 10) + 1).slice(0, 1500),
         userId: String,
