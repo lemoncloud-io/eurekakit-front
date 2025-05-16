@@ -61,7 +61,12 @@ export const listGetHandler = [
         } as ListResult<FeedView>);
     }),
     http.get([CONTENT_ENDPOINT, USERS, ':userId', FEEDS].join('/'), async ({ request, params }) => {
-        const userId = params['userId'] as string;
+        const userId = params['userId'] as string | undefined;
+
+        if (!userId) {
+            return HttpResponse.json({ message: 'Invalid userId' }, { status: 400 });
+        }
+
         const page = Number(new URL(request.url).searchParams.get('page')) || 0;
         const limit = Number(new URL(request.url).searchParams.get('limit')) || 10;
         const skip = page * limit;
@@ -101,7 +106,7 @@ export const listGetHandler = [
         const keyword = url.searchParams.get('keyword') || '';
 
         if (!keyword) {
-            return HttpResponse.error();
+            return HttpResponse.json({ message: 'Invalid keyword' }, { status: 400 });
         }
 
         const searchedFeedList = db.feed.findMany({

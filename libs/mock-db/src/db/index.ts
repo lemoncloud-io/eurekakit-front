@@ -38,12 +38,13 @@ export const db = factory({
         likeCount: Number,
         text: () => fakerKO.lorem.paragraphs(Math.ceil(Math.random() * 10) + 1).slice(0, 1500),
         user$: oneOf('user'),
+        userId: String,
         image$$: manyOf('image'),
         Activity: {
             isView: () => (Math.floor(Math.random() * 10) % 2 === 0 ? true : false),
             isLike: () => (Math.floor(Math.random() * 10) % 2 === 0 ? true : false),
         },
-        parentId: String,
+        feedId: String,
         hidden: () => false,
     },
 });
