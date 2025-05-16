@@ -1,17 +1,33 @@
 import { faker } from '@faker-js/faker';
-import { http } from 'msw';
+import { HttpResponse, http } from 'msw';
 
 import { db, myId } from '@lemon/mock-db';
 
 import { COMMENT, CONTENT_ENDPOINT, FEEDS } from '../../consts';
 
+import type { CommentBody } from '../../types';
+
 export const postHandler = [
     http.post([CONTENT_ENDPOINT, FEEDS, ':feedId', COMMENT].join('/'), async ({ request, params }) => {
-        const feedId = params['feedId'];
+        const feedId = params['feedId'] as string | undefined;
 
-        const body = await request.json();
+        if (!feedId) {
+            return HttpResponse.json({ message: 'Invalid feedId' }, { status: 400 });
+        }
 
-        const comment = db.comment.create({ ...body, id: faker.string.uuid(), feedId, userId: myId });
+        const body = (await request.json()) as CommentBody;
+
+        if (!body) {
+            return HttpResponse.json({ message: 'Invalid CommentBody' }, { status: 400 });
+        }
+
+        const uploadedImages = body.image$$ ?? [];
+
+        const images = uploadedImages
+            .map(image => db.image.findFirst({ where: { id: { equals: image.id } } }))
+            .filter((image): image is NonNullable<typeof image> => image !== null);
+
+        const comment = db.comment.create({ ...body, id: faker.string.uuid(), feedId, userId: myId, image$$: images });
 
         const feed = db.feed.findFirst({ where: { id: { equals: comment?.feedId } } });
 

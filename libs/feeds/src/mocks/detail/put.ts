@@ -4,6 +4,8 @@ import { db } from '@lemon/mock-db';
 
 import { ACTIVITY, CONTENT_ENDPOINT, FEEDS } from '../../consts';
 
+import type { FeedBody } from '@lemoncloud/pets-socials-api';
+
 export const putHandler = [
     http.put([CONTENT_ENDPOINT, FEEDS, ':feedId'].join('/'), async ({ request, params }) => {
         const feedId = params['feedId'] as string;
@@ -12,7 +14,17 @@ export const putHandler = [
             return HttpResponse.json({ message: 'Invalid feed id' }, { status: 400 });
         }
 
-        const body = await request.json();
+        const body = (await request.json()) as FeedBody;
+
+        if (!body) {
+            return HttpResponse.json({ message: 'Invalid FeedBody' }, { status: 400 });
+        }
+
+        const uploadedImages = body['image$$'] ?? [];
+
+        const images = uploadedImages
+            .map(image => db.image.findFirst({ where: { id: { equals: image.id } } }))
+            .filter((image): image is NonNullable<typeof image> => image !== null);
 
         const existingFeed = db.feed.findFirst({
             where: { id: { equals: feedId } },
@@ -27,6 +39,7 @@ export const putHandler = [
             data: {
                 ...body,
                 updatedAt: Date.now(),
+                image$$: images,
             },
         });
 
