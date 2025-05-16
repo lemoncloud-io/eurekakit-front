@@ -1,3 +1,5 @@
+import { initMockDB } from '@lemon/mock-db';
+
 export async function enableMocking() {
     if (process.env.NODE_ENV !== 'development') {
         return;
@@ -8,6 +10,8 @@ export async function enableMocking() {
     if (!devSetting.msw) {
         return;
     }
+
+    initMockDB();
 
     const { worker } = await import('./browser');
 

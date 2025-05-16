@@ -1,10 +1,10 @@
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 
 import { flattenInfiniteListResult, getListResultNextPage } from '@lemon/shared';
+import { attachUser$ToListResult } from '@lemon/users';
 
 import { feedsKeys } from '../../../consts';
 import { fetchViewedFeedList } from '../apis';
-import { attachUser$ToListResult } from '../utils';
 
 import type { FeedListParam } from '../../../types';
 

@@ -17,7 +17,7 @@ export const Layout = () => {
             <ScrollRestoration />
             <div className="flex h-full flex-col">
                 {handle?.header && (
-                    <header className="relative flex h-12 w-full flex-none items-center justify-between px-2">
+                    <header className="bg-background sticky top-0 z-50 flex h-12 w-full flex-none items-center justify-between px-2">
                         {handle.header.buttons?.includes('back') && (
                             <Button variant={'ghost'} size={'icon'} onClick={() => navigate(-1)}>
                                 <ChevronLeft />

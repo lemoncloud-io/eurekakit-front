@@ -27,9 +27,9 @@ export const ImageCarouselViewer = ({ images }: ImageListViewerProps) => {
     };
 
     return (
-        images && (
+        !!images?.length && (
             <>
-                <Carousel opts={{ dragFree: true }}>
+                <Carousel opts={{ dragFree: true }} className="min-h-28">
                     <CarouselContent className="-ml-2 overflow-visible" containerClassName="overflow-visible">
                         {images?.map(
                             (image, idx) =>
