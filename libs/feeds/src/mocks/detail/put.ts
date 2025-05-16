@@ -26,7 +26,7 @@ export const putHandler = [
             where: { id: { equals: feedId } },
             data: {
                 ...body,
-                updateAt: Date.now(),
+                updatedAt: Date.now(),
             },
         });
 

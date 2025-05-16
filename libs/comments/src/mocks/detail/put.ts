@@ -16,7 +16,7 @@ export const putHandler = [
 
         const comment = db.comment.update({
             where: { id: { equals: commentId } },
-            data: { ...body, updateAt: Date.now() },
+            data: { ...body, updatedAt: Date.now() },
         });
 
         return HttpResponse.json(comment);
@@ -30,7 +30,7 @@ export const putHandler = [
 
         const comment = db.comment.update({
             where: { id: { equals: commentId } },
-            data: { hidden: true, updateAt: Date.now() },
+            data: { hidden: true, updatedAt: Date.now() },
         });
 
         const feed = db.feed.findFirst({ where: { id: { equals: comment?.feedId } } });
