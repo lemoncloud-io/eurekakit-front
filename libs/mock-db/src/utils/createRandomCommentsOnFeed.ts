@@ -16,5 +16,6 @@ export const createRandomCommentsOnFeed = (feedId: string, count: number) =>
             feedId,
             createdAt: faker.date.recent().getTime(),
             updatedAt: faker.date.recent().getTime(),
+            Activity: { isLike: Math.floor(Math.random() * 10) % 2 === 0, isView: false },
         });
     });

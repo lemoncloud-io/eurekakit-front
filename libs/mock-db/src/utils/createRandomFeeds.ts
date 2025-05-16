@@ -15,5 +15,6 @@ export const createRandomFeeds = (userId: string, count: number) =>
             likeCount,
             createdAt: faker.date.recent().getTime(),
             updatedAt: faker.date.recent().getTime(),
+            $activity: { isLike: Math.floor(Math.random() * 10) % 2 === 0, isView: false },
         });
     });
