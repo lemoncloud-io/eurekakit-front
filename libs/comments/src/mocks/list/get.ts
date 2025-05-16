@@ -22,8 +22,8 @@ export const getHandler = [
         const comments = db.comment.findMany({
             skip,
             take: limit,
-            where: { feedId: { equals: feedId } },
-            orderBy: { createdAt: 'asc' },
+            where: { feedId: { equals: feedId }, hidden: { equals: false } },
+            orderBy: { createdAt: 'desc' },
         });
 
         const total = db.comment.count({
