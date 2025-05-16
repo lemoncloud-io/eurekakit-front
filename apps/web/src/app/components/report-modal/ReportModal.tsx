@@ -24,7 +24,6 @@ export const ReportModal = ({ id, open, onOpenChange }: ReportModalProps) => {
     const { mutate: reportFeed } = useReportFeed();
 
     const submitReport = () => {
-        console.log(reason);
         reportFeed({ id, reason }, { onSuccess: () => toast({ description: '신고가 완료되었습니다.' }) });
     };
 
