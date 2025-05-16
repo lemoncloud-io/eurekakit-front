@@ -1,10 +1,10 @@
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 
 import { flattenInfiniteListResult, getListResultNextPage } from '@lemon/shared';
+import { attachUser$ToListResult } from '@lemon/users';
 
 import { commentKeys } from '../../../consts';
 import { fetchFeedCommentList } from '../apis';
-import { attachUser$ToListResult } from '../utils';
 
 import type { CommentListParams } from '../../../types';
 

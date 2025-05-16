@@ -1,8 +1,9 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 
+import { attachUser$ToListResult } from '@lemon/users';
+
 import { feedsKeys } from '../../../consts';
 import { fetchFeedList } from '../apis';
-import { attachUser$ToListResult } from '../utils';
 
 import type { FeedListParam } from '../../../types';
 
