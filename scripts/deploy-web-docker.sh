@@ -24,6 +24,8 @@ echo "Target: s3://$AWS_BUCKET_NAME/$AWS_DEPLOY_TARGET"
 echo "CloudFront Distribution: $AWS_DISTRIBUTION_ID"
 
 # clean dist
+rm -rf ./node_modules/.vite ./node_modules/.cache
+rm -rf ./.nx
 rm -rf ./dist/apps/web
 
 # build docker image
