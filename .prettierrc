@@ -9,5 +9,6 @@
     "arrowParens": "avoid",
     "endOfLine": "auto",
     "bracketSameLine": false,
-    "singleAttributePerLine": false
+    "singleAttributePerLine": false,
+    "plugins": ["prettier-plugin-tailwindcss"]
 }

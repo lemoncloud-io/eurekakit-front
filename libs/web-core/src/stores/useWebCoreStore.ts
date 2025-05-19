@@ -2,8 +2,7 @@ import { create } from 'zustand';
 
 import { webCore } from '../core';
 
-export type UserProfile = never;
-export type UserView = never;
+import type { UserProfile$ as UserProfile, UserView } from '@lemoncloud/codes-backend-api';
 
 export interface WebCoreState {
     isInitialized: boolean;

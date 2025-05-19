@@ -1,16 +1,39 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import { useWebCoreStore } from '@lemon/web-core';
+import App from '../app';
+import { RedirectByAuth, authRoutes } from '../features/auth';
+import { commentRoutes } from '../features/comment';
+import { HomePage, feedRoutes } from '../features/feed';
+import { userRoutes } from '../features/user';
+import { Layout } from '../layout/Layout';
 
-import { CommonRoutes } from './common';
-import { ProtectedRoutes } from './protected';
-import { PublicRoutes } from './public';
+import type { RouteHandle } from '../hooks';
+import type { RouteObject } from 'react-router-dom';
 
-export const Router = () => {
-    const isAuthenticated = useWebCoreStore(state => state.isAuthenticated);
+export interface ExtendedRouteObject extends Omit<RouteObject, 'handle' | 'children'> {
+    handle?: RouteHandle;
+    children?: ExtendedRouteObject[];
+}
 
-    const routes = isAuthenticated ? [...ProtectedRoutes, ...PublicRoutes] : PublicRoutes;
-    const router = createBrowserRouter([...routes, ...CommonRoutes]);
+const routes: ExtendedRouteObject[] = [
+    {
+        element: <App />,
+        children: [
+            {
+                element: <Layout />,
+                children: [
+                    { path: '/', element: <HomePage />, handle: { tabBar: true, type: 'protected' } },
+                    { path: '/feed/*', children: feedRoutes, handle: { type: 'protected' } },
+                    { path: '/user/*', children: userRoutes, handle: { type: 'protected' } },
+                    { path: '/comment/*', children: commentRoutes, handle: { type: 'protected' } },
+                    { path: `/auth/*`, children: authRoutes, handle: { type: 'guest-only' } },
+                    { path: `*`, element: <RedirectByAuth /> },
+                ],
+            },
+        ],
+    },
+];
 
-    return <RouterProvider router={router} />;
-};
+const router = createBrowserRouter(routes as RouteObject[]);
+
+export const Router = () => <RouterProvider router={router} />;

@@ -8,6 +8,9 @@ interface ImportMetaEnv {
     VITE_OAUTH_ENDPOINT: string;
     VITE_SOCIAL_OAUTH_ENDPOINT: string;
     VITE_IMAGE_API_ENDPOINT: string;
+    VITE_CONTENT_API_ENDPOINT: string;
+    VITE_KAKAO_JS_KEY?: string;
+    VITE_KAKAO_CALLBACK_URL?: string;
 }
 
 interface ImportMeta {

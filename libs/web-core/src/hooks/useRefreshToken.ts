@@ -9,6 +9,8 @@ import type { RefreshTokenBody } from '@lemoncloud/lemon-web-core';
 const REFRESH_POLLING_TIME = 1000 * 60 * 1; // 1 minutes
 
 const useTokenRefresh = () => {
+    const { logout } = useWebCoreStore();
+
     const refreshAuthToken = async () => {
         try {
             const { current, signature, authId, originToken } = await webCore.getTokenSignature();
@@ -18,7 +20,7 @@ const useTokenRefresh = () => {
                 .signedRequest('POST', `${OAUTH_ENDPOINT}/oauth/${authId}/refresh`, {}, body)
                 .catch(e => {
                     console.error(e);
-                    window.location.href = '/auth/logout';
+                    logout();
                 });
 
             const refreshToken = {
@@ -30,7 +32,7 @@ const useTokenRefresh = () => {
             await webCore.buildCredentialsByToken(refreshToken);
         } catch (error) {
             console.error('Failed to refresh token:', error);
-            window.location.href = '/auth/logout';
+            logout();
         }
     };
 

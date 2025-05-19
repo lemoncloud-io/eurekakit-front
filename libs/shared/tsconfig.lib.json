@@ -3,9 +3,16 @@
     "compilerOptions": {
         "outDir": "../../dist/out-tsc",
         "declaration": true,
-        "types": ["node", "vite/client"],
-        "jsx": "react"
+        "types": ["node", "vite/client", "react", "react-dom"],
+        "jsx": "react-jsx"
     },
-    "include": ["src/**/*.ts", "../../vite-env.d.ts"],
+    "include": [
+        "src/**/*.js",
+        "src/**/*.jsx",
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "../../vite-env.d.ts",
+        "src/funcs/formatDate.tx"
+    ],
     "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"]
 }

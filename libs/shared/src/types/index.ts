@@ -34,3 +34,18 @@ export interface PaginationType<T> {
 export declare type Params = {
     [key: string]: any;
 };
+
+export type RequiredKeys<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
+
+export type OptionalKeys<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+
+export type NonNullableObject<T extends Record<string, any>> = { [K in keyof T]: NonNullable<T[K]> };
+
+export type TrackedPromise<T> = {
+    id: string;
+    status: 'pending' | 'fulfilled' | 'rejected';
+    value?: T;
+    error?: any;
+};
+
+export type PromiseStatus = TrackedPromise<any>['status'];

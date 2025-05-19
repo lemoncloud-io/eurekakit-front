@@ -1,0 +1,7 @@
+{
+    "PROJECT": "mobile",
+    "BASE_URL": "TODO",
+    "OAUTH_ENDPOINT": "https://api.eureka.codes/d1",
+    "ENV": "dev",
+    "PRODUCTION": false
+}
