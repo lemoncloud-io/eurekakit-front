@@ -26,9 +26,6 @@ AWS_BUCKET_NAME=your-bucket-name
 AWS_DISTRIBUTION_ID=your-cloudfront-id
 AWS_DEPLOY_TARGET=prod  # or dev, feature-xyz, etc.
 
-# Application configuration
-APP_NAME=web
-
 # Vite environment variables
 VITE_PROJECT=EUREKAKIT_WEB
 VITE_ENV=PROD
