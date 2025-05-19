@@ -4,7 +4,7 @@
     <h1 align="center"><img src="https://github.com/user-attachments/assets/aee10faf-144c-4a88-b535-610e7c84f050" width="200" alt="EurekaKit"/></h1>
   </div>
   <p>
-    유레카 키트로 SNS 서비스를 쉽고 빠르게 구축하세요.
+    Build SNS services quickly and easily with EurekaKit.
   </p>
 </div>
 
@@ -13,22 +13,43 @@
 [![lemoncloud-io](https://img.shields.io/badge/by-lemoncloud--io-ED6F31?logo=github)](https://github.com/lemoncloud-io)
 [![Nx](https://img.shields.io/badge/-Nx-143157?logo=nx&logoWidth=30)](https://nx.dev)
 
+<a href="README.md">English</a> | <a href="docs/readme-kr.md">한국어</a>
+
 </div>
 
-# 🌟 EurekaKit로 시작하기
+# 🌟 Getting Started with EurekaKit
 
-1. [EurekaCodes](https://eureka.codes/)를 방문하여 서비스를 구독하기
-2. 유레카 코드 대시보드에서 워크스페이스 생성하기
-3. 개발 시작하기
+1. Visit [EurekaCodes](https://eureka.codes/) to subscribe to the service
+2. Create a workspace in the Eureka Code dashboard
+3. Start development
 
-## 기능
+## Features
 
-- **🧱All-In-One SNS 피드 구성** - 텍스트와 이미지를 올릴 수 있는 게시글과 댓글, 그리고 좋아요, 신고 등 SNS에 필요한 피드 기능을 모두 제공합니다.
-- **🔄 무한 스크롤 UI 제공** -스크롤을 내릴수록 자연스럽게 콘텐츠가 로드되는 무한 스크롤 UI를 제공합니다.
-- **📂 내 활동 모아보기** - 내가 작성한 피드, 남긴 댓글, 좋아요한 글, 열람한 글을 한 곳에서 확인할 수 있어요
-- **🛠 어드민 + 앱(WebView) 키트 제공** - 운영용 어드민과 React Native 기반의 앱(WebView) 키트를 함께 제공해 웹과 앱 모두 빠르게 서비스할 수 있습니다.
+**🧱All-In-One SNS Feed System**
 
-## 기술 스택
+- Post and Comment System: Support for various content formats including text, images, and videos
+- Interaction Features: Various interaction options such as likes, shares, bookmarks, and reports for user engagement
+- Customized Feed Algorithm: Personalized feeds based on user interests and activities
+
+**🔄 Infinite Scroll UI**
+
+- Optimized Loading System: Provides a UX that naturally loads content as you scroll
+- Performance Optimization: Optimized rendering system that smoothly processes large amounts of data
+- Skeleton Loading: Skeleton UI that enhances user experience during content loading
+
+**📂 Activity History Collection**
+
+- Activity History: Record of all activities including feeds created, comments left, posts liked, etc.
+- Viewing History: Feature to easily find recently viewed content
+- Customized Summary: Provides statistics and summary information about your activities
+
+**🛠 Admin + App(WebView) Kit**
+
+- Admin Dashboard: Complete administrative tools for user management, content moderation, service analysis, etc.
+- React Native WebView App: Solution to quickly convert web services to mobile apps
+- Cross-Platform Support: Consistent user experience across web, iOS, and Android
+
+## Tech Stack
 
 - Frontend Framework: React with TypeScript
 - Project Structure: Nx Monorepo
@@ -37,73 +58,118 @@
 - UI Components: Shadcn(Radix UI)
 - API Integration: Axios
 
-## 프로젝트 구조
+## Project Structure
 
 ```
 eureka-kit
 ├── apps/
-│   └── admin/            # 어드민 메인 엔트리 포인트
-│   └── mobile/           # 리액트 네이비트 웹뷰 메인 엔트리 포인트
-│   └── web/              # 서비스 메인 엔트리 포인트
-├── assets/               # 프로젝트 공유 에셋
+│   └── admin/            # Admin main entry point
+│   └── mobile/           # React Native WebView main entry point
+│   └── web/              # Service main entry point
+├── assets/               # Project shared assets
 ├── libs/
-│   ├── web-core/         # API 인증 및 초기화 코어 라이브러리
-│   ├── comments/         # 답글(comments) 관련 API 라이브러리
-│   ├── feeds/            # 게시글(feeds) 관련 API 라이브러리
-│   ├── users/            # 유저(users) 관련 API 라이브러리
-│   ├── uploads/          # 이미지 업로드 관련 API 라이브러리
-│   ├── app-checker/      # 리액트 네이티브 웹뷰 통신 관련 라이브러리
-│   ├── ui-kit/           # 공용 UI 키트 라이브러리
-│   ├── shared/           # 공용 유틸리티 라이브러리
-│   ├── types/            # 공용 타입 라이브러리
-│   ├── overlay/          # 오버레이 관리 라이브러리
-│   └── theme/            # 테마 관리 라이브러리
-├── scripts/              # 개발 스크립트
-├── nx.json               # nx 환경 설정 파일
-└── package.json          # 워크스페이스 패키지 매니저 환경설정 파일
+│   ├── web-core/         # API authentication and initialization core library
+│   ├── comments/         # Comments related API library
+│   ├── feeds/            # Feeds related API library
+│   ├── users/            # Users related API library
+│   ├── uploads/          # Image upload related API library
+│   ├── app-checker/      # React Native WebView communication library
+│   ├── ui-kit/           # Common UI kit library
+│   ├── shared/           # Common utility library
+│   ├── types/            # Common type library
+│   ├── overlay/          # Overlay management library
+│   └── theme/            # Theme management library
+├── scripts/              # Development scripts
+├── nx.json               # nx configuration file
+└── package.json          # Workspace package manager configuration file
 ```
 
-## 시작하기
+## Getting Started
 
-### 개발 환경
+### Development Environment
 
-- Node.js (v20 혹은 그 이상)
+- Node.js (v20 or higher)
 - npm or yarn
 - Git
+- Android Studio or Xcode (for mobile app development)
 
-### 설치 방법
+### Installation
 
-1. 프로젝트 클론
+1. Clone the project
 
 ```bash
 git clone https://github.com/lemoncloud-io/eurekakit-front.git
 cd eurekakit-front
 ```
 
-2. 의존성 설치
+2. Install dependencies
 
 ```bash
 yarn install
 ```
 
-3. 환경변수(env) 설정
+3. Environment variable setup
 
 ```bash
 cp apps/web/.env.example apps/web/.env.local
 cp apps/admin/.env.example apps/admin/.env.local
 
+# Environment-specific setup (development, production, etc.)
 # cp apps/web/.env.example apps/web/.env.(local|dev|prod|dev.local|...)
 ```
 
-4. 개발 서버 시행
+> - Q: Where are environment variables and required backend APIs provided?
+> - A: Backend APIs can be obtained through the EurekaCodes platform. After subscribing and creating a workspace, you will receive dedicated API endpoints.
+
+4. Run development server
 
 ```bash
-yarn web:start     # 서비스 개발 서버 시작
-yarn mobile:start  # 모바일 개발 서버 실행(* web 서버 실행 필요 / 시뮬레이터 필요)
+# Run web service development server
+yarn web:start
 
-yarn admin:start   # 어드민 개발 서버 시작
+# Run mobile app development server (requires web server running first / simulator needed)
+yarn mobile:start
+
+# Run admin development server
+yarn admin:start
 ```
 
-서비스(web) 개발 서버는 http://localhost:5003 에서 어드민 개발 서버는 http://localhost:5004 에서 실행됩니다.  
-모바일 환경은 웹뷰 기반으로 Android 혹은 iOS 시뮬레이터가 설치되어 있어야하며,  
-서비스 개발 서버를 먼저 실행 후 실행해야 합니다.
+> - Web service is accessible at http://localhost:5003
+> - Admin service is accessible at http://localhost:5004
+> - Mobile app runs on Android or iOS simulator and requires the web service to be running first.
+
+## Contributing
+
+We welcome contributions to EurekaKit! Please read our [contribution guidelines](CONTRIBUTING.md) for details on how to submit pull requests, the development process, and coding standards.
+
+## License
+
+EurekaKit is licensed under a proprietary license that restricts commercial usage to active EurekaCodes subscribers only. Public access to this repository is provided for evaluation purposes only.
+
+For detailed license terms, please see the [LICENSE](LICENSE.md) file.
+
+## Contributors ✨
+
+Thanks goes to these wonderful people:
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/luke-lemon"><img src="https://avatars.githubusercontent.com/luke-lemon" width="100px;" alt=""/><br /><sub><b>@Luke</b></sub></a><br /><a href="https://github.com/lemoncloud-io/eurekakit-front/commits?author=luke-lemon" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/louis-lemon"><img src="https://avatars.githubusercontent.com/louis-lemon" width="100px;" alt=""/><br /><sub><b>@Louis</b></sub></a><br /><a href="https://github.com/lemoncloud-io/eurekakit-front/commits?author=louis-lemon" title="Code">💻</a></td>
+  </tr>
+</table>
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+---
+
+If this project has been helpful, please consider giving it a Star ⭐️!
+
+Maintainer
+
+- [@Luke](https://github.com/luke-lemon/)
+- [@Louis](https://github.com/louis-lemon)
