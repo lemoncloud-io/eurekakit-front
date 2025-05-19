@@ -17,6 +17,8 @@
         "web:build:prod": "yarn clean:cache && npx nx build --configuration=prod web",
         "web:deploy:dev": "(rm -rf ./dist/apps/web || true) && yarn web:build:dev && ./scripts/deploy-web.sh dev",
         "web:deploy:prod": "(rm -rf ./dist/apps/web || true) && yarn web:build:prod && ./scripts/deploy-web.sh prod",
+        "web:docker:build": "yarn clean:cache && docker build -t eurekakit-web:prod -f docker/web/Dockerfile .",
+        "web:docker:deploy": "./scripts/deploy-web-docker.sh",
         "!admin": "------------- admin scripts -------------",
         "admin:start": "yarn clean:cache && npx nx serve admin --port 5004",
         "admin:build:dev": "yarn clean:cache && npx nx build --configuration=dev admin",
