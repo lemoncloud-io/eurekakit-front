@@ -34,7 +34,7 @@ docker build \
     --build-arg VITE_OAUTH_ENDPOINT="$VITE_OAUTH_ENDPOINT" \
     --build-arg VITE_SOCIAL_OAUTH_ENDPOINT="$VITE_SOCIAL_OAUTH_ENDPOINT" \
     --build-arg VITE_IMAGE_API_ENDPOINT="$VITE_IMAGE_API_ENDPOINT" \
-    --build-arg VITE_PET_API_ENDPOINT="$VITE_PET_API_ENDPOINT" \
+    --build-arg VITE_CONTENT_API_ENDPOINT="$VITE_CONTENT_API_ENDPOINT" \
     --build-arg VITE_KAKAO_CALLBACK_URL="$VITE_KAKAO_CALLBACK_URL" \
     -t eurekakit-web:prod \
     -f docker/web/Dockerfile .

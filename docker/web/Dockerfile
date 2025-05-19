@@ -29,7 +29,7 @@ ARG VITE_HOST
 ARG VITE_OAUTH_ENDPOINT
 ARG VITE_SOCIAL_OAUTH_ENDPOINT
 ARG VITE_IMAGE_API_ENDPOINT
-ARG VITE_PET_API_ENDPOINT
+ARG VITE_CONTENT_API_ENDPOINT
 ARG VITE_KAKAO_CALLBACK_URL
 
 # Create .env
@@ -39,7 +39,7 @@ RUN echo "VITE_ENV=$VITE_ENV" > apps/web/.env.prod \
     && echo "VITE_OAUTH_ENDPOINT=$VITE_OAUTH_ENDPOINT" >> apps/web/.env.prod \
     && echo "VITE_SOCIAL_OAUTH_ENDPOINT=$VITE_SOCIAL_OAUTH_ENDPOINT" >> apps/web/.env.prod \
     && echo "VITE_IMAGE_API_ENDPOINT=$VITE_IMAGE_API_ENDPOINT" >> apps/web/.env.prod \
-    && echo "VITE_PET_API_ENDPOINT=$VITE_PET_API_ENDPOINT" >> apps/web/.env.prod \
+    && echo "VITE_CONTENT_API_ENDPOINT=$VITE_CONTENT_API_ENDPOINT" >> apps/web/.env.prod \
     && echo "VITE_KAKAO_CALLBACK_URL=$VITE_KAKAO_CALLBACK_URL" >> apps/web/.env.prod
 
 # Run nx build command
