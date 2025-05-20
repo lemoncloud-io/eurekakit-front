@@ -18,7 +18,9 @@
             "@lemon/app-checker": ["libs/app-checker/src/index.ts"],
             "@lemon/assets": ["assets/src/index.ts"],
             "@lemon/comments": ["libs/comments/src/index.ts"],
+            "@lemon/comments/mocks": ["libs/comments/src/mocks/index.ts"],
             "@lemon/feeds": ["libs/feeds/src/index.ts"],
+            "@lemon/feeds/mocks": ["libs/feeds/src/mocks/index.ts"],
             "@lemon/mock-db": ["libs/mock-db/src/index.ts"],
             "@lemon/overlay": ["libs/overlay/src/index.ts"],
             "@lemon/shared": ["libs/shared/src/index.ts"],
@@ -27,7 +29,9 @@
             "@lemon/ui-kit": ["libs/ui-kit/src/index.ts"],
             "@lemon/ui-kit/*": ["libs/ui-kit/src/*"],
             "@lemon/uploads": ["libs/uploads/src/index.ts"],
+            "@lemon/uploads/mocks": ["libs/uploads/src/mocks/index.ts"],
             "@lemon/users": ["libs/users/src/index.ts"],
+            "@lemon/users/mocks": ["libs/users/src/mocks/index.ts"],
             "@lemon/web-core": ["libs/web-core/src/index.ts"]
         }
     },
