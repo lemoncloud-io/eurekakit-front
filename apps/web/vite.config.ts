@@ -2,6 +2,7 @@
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import react from '@vitejs/plugin-react';
+import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig, searchForWorkspaceRoot } from 'vite';
 import svgr from 'vite-plugin-svgr';
 
@@ -71,7 +72,20 @@ export default defineConfig({
         host: 'localhost',
     },
 
-    plugins: [htmlEnvInjectionPlugin(), svgr(), react(), nxViteTsPaths(), nxCopyAssetsPlugin(['*.md'])],
+    plugins: [
+        htmlEnvInjectionPlugin(),
+        svgr(),
+        react(),
+        nxViteTsPaths(),
+        nxCopyAssetsPlugin(['*.md']),
+        visualizer({
+            filename: 'dist/stats.html',
+            template: 'treemap',
+            open: true,
+            gzipSize: true,
+            brotliSize: true,
+        }),
+    ],
 
     // Uncomment this if you are using workers.
     // worker: {
