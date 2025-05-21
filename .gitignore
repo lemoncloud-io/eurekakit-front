@@ -116,3 +116,7 @@ yarn-error.log
 **/.env
 **/.env*
 !.env*.example
+
+vitest.config.*.timestamp*
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md
