@@ -81,7 +81,6 @@ export default defineConfig({
         visualizer({
             filename: 'dist/stats.html',
             template: 'treemap',
-            open: true,
             gzipSize: true,
             brotliSize: true,
         }),
