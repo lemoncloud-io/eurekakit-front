@@ -29,18 +29,21 @@ export const ImageCarouselViewer = ({ images }: ImageListViewerProps) => {
     return (
         !!images?.length && (
             <>
-                <Carousel opts={{ dragFree: true }} className="min-h-28">
-                    <CarouselContent className="-ml-2 overflow-visible" containerClassName="overflow-visible">
+                <Carousel opts={{ dragFree: true }} className="h-28 w-full">
+                    <CarouselContent
+                        className="-ml-2 h-full overflow-visible"
+                        containerClassName="overflow-visible h-full"
+                    >
                         {images?.map(
                             (image, idx) =>
                                 image?.url && (
                                     <CarouselItem
                                         key={image?.id}
-                                        className="basis-1/3 pl-2"
+                                        className="aspect-square basis-[fit-content] pl-2"
                                         onClick={onClickImage}
                                         data-image-idx={idx}
                                     >
-                                        <div className="aspect-square overflow-hidden rounded-lg">
+                                        <div className="aspect-square max-h-28 overflow-hidden rounded-lg">
                                             <Image src={image?.url} />
                                         </div>
                                     </CarouselItem>

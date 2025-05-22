@@ -13,27 +13,34 @@ interface GoodsReviewImageCarouselProps extends OverlayProps {
 
 export const ImageCarouselModal = ({ startIndex = 0, images, ...modalProps }: GoodsReviewImageCarouselProps) => {
     return (
-        <Dialog {...modalProps}>
-            <DialogContent
-                className="border-none bg-transparent focus-visible:border-none focus-visible:outline-none"
-                showCloseBtn
-            >
-                <Carousel opts={{ startIndex }}>
-                    <CarouselContent>
-                        {images.map(
-                            image =>
-                                image.url && (
-                                    <CarouselItem
-                                        key={image.id || image.url}
-                                        className="flex max-h-[80vh] items-center justify-center overflow-hidden"
-                                    >
-                                        <Image src={image.url} className="h-full rounded-md object-contain" />
-                                    </CarouselItem>
-                                )
-                        )}
-                    </CarouselContent>
-                </Carousel>
-            </DialogContent>
-        </Dialog>
+        <div
+            onClick={e => {
+                e.stopPropagation();
+                e.preventDefault();
+            }}
+        >
+            <Dialog {...modalProps}>
+                <DialogContent
+                    className="border-none bg-transparent focus-visible:border-none focus-visible:outline-none"
+                    showCloseBtn
+                >
+                    <Carousel opts={{ startIndex }}>
+                        <CarouselContent>
+                            {images.map(
+                                image =>
+                                    image.url && (
+                                        <CarouselItem
+                                            key={image.id || image.url}
+                                            className="flex max-h-[80vh] items-center justify-center overflow-hidden"
+                                        >
+                                            <Image src={image.url} className="h-full rounded-md object-contain" />
+                                        </CarouselItem>
+                                    )
+                            )}
+                        </CarouselContent>
+                    </Carousel>
+                </DialogContent>
+            </Dialog>
+        </div>
     );
 };

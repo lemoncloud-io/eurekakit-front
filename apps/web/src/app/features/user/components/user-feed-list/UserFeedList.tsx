@@ -1,7 +1,7 @@
 import { ChevronRight } from 'lucide-react';
 
 import { useFetchInfiniteUserFeedList } from '@lemon/feeds';
-import { Button } from '@lemon/ui-kit/components/ui/button';
+import { buttonVariants } from '@lemon/ui-kit/components/ui/button';
 import { List } from '@lemon/ui-kit/components/ui/list';
 import { Separator } from '@lemon/ui-kit/components/ui/separator';
 import { useFetchProfile } from '@lemon/users';
@@ -25,10 +25,13 @@ const UserFeedListEmptyFallback = () => (
             <span>글 작성을 아직 안하셨군요!</span>
             <span>다양한 이야기로 다른 사용자들과 소통해 보세요!</span>
         </div>
-        <Button variant={'secondary'} className="gap-1 pl-8 pr-6" size={'lg'}>
+        <Link
+            to="/feed/create"
+            className={buttonVariants({ variant: 'secondary', size: 'lg', className: 'gap-1 pl-8 pr-6' })}
+        >
             글 작성하러 가기
             <ChevronRight />
-        </Button>
+        </Link>
     </div>
 );
 
