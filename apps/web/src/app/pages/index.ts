@@ -1,1 +1,2 @@
-export * from './ErrorPage';
+export * from './Forbidden403';
+export * from './NotFound404';
