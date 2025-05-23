@@ -20,7 +20,7 @@ export const useProfile = () => {
             console.error('Failed to fetch profile:', error);
 
             if ((error as AxiosError).isAxiosError && (error as AxiosError).response?.status === 403) {
-                logout();
+                throw error;
             }
         }
     };
