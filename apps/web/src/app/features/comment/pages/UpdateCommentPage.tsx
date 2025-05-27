@@ -13,7 +13,7 @@ import { Form } from '@lemon/ui-kit/components/ui/form';
 
 import { useFormBlockModal, useNavigate } from '../../../hooks';
 import { OwnerGuard } from '../../auth';
-import { FeedEditor } from '../../feed/components';
+import { Editor } from '../../editor';
 import { FeedViewerModal } from '../components';
 
 import type { CommentBody } from '@lemoncloud/pets-socials-api';
@@ -84,7 +84,7 @@ export const UpdateCommentPage = () => {
                     </span>
                 </Button>
                 <Form {...methods}>
-                    <FeedEditor isSubmitting={isPending} onValid={submitComment} />
+                    <Editor isSubmitting={isPending} onValid={submitComment} />
                 </Form>
             </div>
         </OwnerGuard>

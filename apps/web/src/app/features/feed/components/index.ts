@@ -5,7 +5,6 @@ export * from './total-feed-list';
 export * from './liked-feed-list';
 
 export * from './feed';
-export * from './feed-editor';
 
 export * from './no-feed';
 
