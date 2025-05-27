@@ -10,7 +10,7 @@ import { Form } from '@lemon/ui-kit/components/ui/form';
 
 import { useFormBlockModal, useNavigate } from '../../../hooks';
 import { OwnerGuard } from '../../auth';
-import { FeedEditor } from '../components';
+import { Editor } from '../../editor';
 
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
 
@@ -67,7 +67,7 @@ export const UpdateFeedPage = () => {
         <OwnerGuard ownerId={feed.user$.id}>
             <div className="h-full p-4">
                 <Form {...methods}>
-                    <FeedEditor isSubmitting={isPending} onValid={submitFeed} />
+                    <Editor isSubmitting={isPending} onValid={submitFeed} />
                 </Form>
             </div>
         </OwnerGuard>

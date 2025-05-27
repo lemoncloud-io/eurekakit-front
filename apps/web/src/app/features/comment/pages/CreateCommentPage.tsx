@@ -11,12 +11,11 @@ import { Button } from '@lemon/ui-kit/components/ui/button';
 import { Form } from '@lemon/ui-kit/components/ui/form';
 
 import { useFormBlockModal, useNavigate } from '../../../hooks';
-import { FeedEditor } from '../../feed/components';
+import { Editor } from '../../editor';
 import { FeedViewerModal } from '../components';
 
 import type { CommentBody } from '@lemoncloud/pets-socials-api';
 
-// TODO : @luke-lemon 추후 CommentBody 관련으로 수정 -> 현재 CommentBody에 images$$ 없음.
 export const CreateCommentPage = () => {
     const overlay = useOverlay();
     const queryClient = useQueryClient();
@@ -73,7 +72,7 @@ export const CreateCommentPage = () => {
                 </span>
             </Button>
             <Form {...methods}>
-                <FeedEditor onValid={submitContent} isSubmitting={isPending} />
+                <Editor onValid={submitContent} isSubmitting={isPending} />
             </Form>
         </div>
     );

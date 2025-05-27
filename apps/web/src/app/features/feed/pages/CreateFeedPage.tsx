@@ -8,7 +8,7 @@ import { useToast } from '@lemon/ui-kit';
 import { Form } from '@lemon/ui-kit/components/ui/form';
 
 import { useFormBlockModal, useNavigate } from '../../../hooks';
-import { FeedEditor } from '../components';
+import { Editor } from '../../editor';
 
 import type { FeedView } from '@lemon/feeds';
 import type { FeedBody } from '@lemoncloud/pets-socials-api';
@@ -52,7 +52,7 @@ export const CreateFeedPage = () => {
     return (
         <div className="h-full p-4">
             <Form {...methods}>
-                <FeedEditor isSubmitting={isPending} onValid={submitFeed} />
+                <Editor isSubmitting={isPending} onValid={submitFeed} />
             </Form>
         </div>
     );
