@@ -1,48 +1,76 @@
-import { Link, Route, Routes } from 'react-router-dom';
+import { ChevronRight } from 'lucide-react';
 
-import NxWelcome from './nx-welcome';
-
+import { Button } from '@lemon/ui-kit/components/ui/button';
 
 export function App() {
     return (
-        <div>
-            <NxWelcome title="landing" />
-
-            {/* START: routes */}
-            {/* These routes and navigation have been generated for you */}
-            {/* Feel free to move and update them to fit your needs */}
-            <br />
-            <hr />
-            <br />
-            <div role="navigation">
-                <ul>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/page-2">Page 2</Link>
-                    </li>
-                </ul>
+        <div className="text-background flex flex-col items-center bg-[#0F0F10]">
+            <div className="relative flex h-[720px] w-full flex-col items-center justify-center gap-10 bg-slate-600">
+                <div className="absolute top-4 flex h-[60px] w-full max-w-[1180px] items-center rounded-lg bg-[#1b1b1b] px-4">
+                    Hello
+                </div>
+                <div className="flex flex-col text-center text-[52px] leading-tight">
+                    <span>
+                        <strong className="text-[86px]">EurekaKit</strong> 는 앱과 백엔드 코드를 제공해
+                    </span>
+                    <span>MVP 개발을 빠르게 도와줍니다.</span>
+                </div>
+                <div className="flex flex-col text-center text-[24px]">
+                    <span>React Native 앱으로 최적화 제품을 빠르게 구축할 수 있도록 지원해주며</span>
+                    <span>개발자가 아닌 사람도 맞춤형 서비스를 쉽게 구현할 수 있습니다.</span>
+                </div>
             </div>
-            <Routes>
-                <Route
-                    path="/"
-                    element={
-                        <div>
-                            This is the generated root route. <Link to="/page-2">Click here for page 2.</Link>
-                        </div>
-                    }
-                />
-                <Route
-                    path="/page-2"
-                    element={
-                        <div>
-                            <Link to="/">Click here to go back to root page.</Link>
-                        </div>
-                    }
-                />
-            </Routes>
-            {/* END: routes */}
+            <div className="mt-24 flex max-w-[1180px] flex-col gap-12">
+                <div className="flex flex-col text-[44px] leading-tight">
+                    <span>EurekaKit를 이용하려면</span>
+                    <span>
+                        <strong className="text-[58px]">EurekaCodes</strong>를 먼저 사용해 주세요
+                    </span>
+                </div>
+                <div className="grid grid-cols-2 grid-rows-2 gap-4">
+                    <div className="col-span-2 flex h-[682px] flex-col gap-8 rounded-3xl bg-white/[0.03] px-24 pt-24">
+                        <span className="text-4xl">기본 워크스페이스와 프로젝트를 제공해줘요</span>
+                        <span>기본으로 제공되는 워크스페이스와 프로젝트로 유레카코즈를 이용해볼 수 있어요</span>
+                    </div>
+                    <div className="flex h-[682px] flex-col gap-8 rounded-3xl bg-white/[0.03] px-16 pt-16">
+                        <span className="text-4xl">
+                            카탈로그에서 EurekaKit
+                            <br />
+                            서비스를 신청해보세요
+                        </span>
+                        <span>
+                            다양한 서비스 중 나에게 필요한
+                            <br />
+                            서비스를 찾아 신청할 수 있어요
+                        </span>
+                    </div>
+                    <div className="flex h-[682px] flex-col gap-8 break-words rounded-3xl bg-white/[0.03] px-16 pt-16">
+                        <span className="text-4xl">
+                            EurekaKit 서비스를
+                            <br />
+                            쉽게 사용해 보세요
+                        </span>
+                        <span>
+                            React Native 앱으로 신청 후 더욱 빠르게
+                            <br />
+                            제품을 구축하고 맞춤형으로 사용할 수 있습니다.
+                        </span>
+                    </div>
+                </div>
+                <div className="flex h-[426px] items-end justify-center">
+                    <div className="flex w-[954px] items-center rounded-full border border-white bg-white/[0.03] py-5 pl-10 pr-5">
+                        <span className="text-[30px]">EurekaKit를 신청하고 사용해 보세요</span>
+                        <Button className="ml-auto rounded-full bg-white/[0.07] py-6 pl-8 text-[24px] hover:bg-white/10">
+                            <span>Kit 신청하러 가기</span>
+                            <ChevronRight className="!h-auto !w-auto" size={24} />
+                        </Button>
+                    </div>
+                </div>
+                <div className="text-muted-foreground flex h-[638px] flex-col items-center justify-center">
+                    <span>© 2025 LemonCloud, Inc. All rights reserved.</span>
+                    <span>Privacy & Terms</span>
+                </div>
+            </div>
         </div>
     );
 }
