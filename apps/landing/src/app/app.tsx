@@ -15,8 +15,7 @@ export function App() {
         let frameId: number;
 
         const animate = () => {
-            angle = (angle + 0.5) % 360;
-            console.log(angle);
+            angle = (angle + 1) % 360;
             if (ref.current) {
                 ref.current.style.setProperty('--angle', `${angle}deg`);
             }
