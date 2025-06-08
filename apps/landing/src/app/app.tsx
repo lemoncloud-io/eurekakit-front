@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 
 import { ChevronRight } from 'lucide-react';
 
+import { Images } from '@lemon/assets';
 import { Button } from '@lemon/ui-kit/components/ui/button';
 import { cn } from '@lemon/ui-kit/lib/utils';
 
@@ -28,9 +29,12 @@ export function App() {
 
     return (
         <div className="text-background flex flex-col items-center bg-[#0F0F10]">
-            <div className="relative flex h-[720px] w-full flex-col items-center justify-center gap-10 overflow-x-hidden bg-white/[0.03]">
+            <div className="relative flex h-[720px] w-full flex-col items-center justify-center gap-10 overflow-x-hidden bg-[#1B1B1B]/50">
                 <div className="absolute top-4 flex h-[60px] w-full max-w-[1180px] items-center rounded-lg bg-[#1b1b1b] px-4">
-                    Hello
+                    <img src={Images.eurekaCodesLogo} className="h-6" />
+                    <button className="ml-auto h-6">
+                        <img src={Images.globe} />
+                    </button>
                 </div>
                 <p className="flex flex-col text-center text-[52px] leading-tight">
                     <span>
@@ -84,6 +88,7 @@ export function App() {
                     <p className="relative col-span-2 flex h-[682px] flex-col gap-8 overflow-hidden rounded-3xl bg-white/[0.03] px-24 pt-24">
                         <span className="text-4xl">기본 워크스페이스와 프로젝트를 제공해줘요</span>
                         <span>기본으로 제공되는 워크스페이스와 프로젝트로 유레카코즈를 이용해볼 수 있어요</span>
+                        <img src={Images.landingBannder1} className="absolute bottom-0 w-4/5" />
                         <RadialGradient
                             radius={300}
                             colorStops={[
@@ -126,6 +131,7 @@ export function App() {
                             <br />
                             서비스를 찾아 신청할 수 있어요
                         </span>
+                        <img src={Images.landingBannder2} className="absolute bottom-0 right-0 w-10/12" />
                         <RadialGradient
                             radius={240}
                             colorStops={[
@@ -158,6 +164,7 @@ export function App() {
                             <br />
                             제품을 구축하고 맞춤형으로 사용할 수 있습니다.
                         </span>
+                        <img src={Images.landingBannder3} className="absolute bottom-0 right-0 w-10/12" />
                         <RadialGradient
                             radius={240}
                             colorStops={[
@@ -199,9 +206,14 @@ export function App() {
                         </div>
                     </div>
                 </div>
-                <div className="text-muted-foreground flex h-[638px] flex-col items-center justify-center">
-                    <span>© 2025 LemonCloud, Inc. All rights reserved.</span>
-                    <span>Privacy & Terms</span>
+                <div className="text-muted-foreground flex h-[638px] flex-col items-center justify-center gap-8">
+                    <div className="h-8">
+                        <img src={Images.eurekaCodesLogo} className="h-full" />
+                    </div>
+                    <div className="flex flex-col items-center gap-2">
+                        <span>© 2025 LemonCloud, Inc. All rights reserved.</span>
+                        <span>Privacy & Terms</span>
+                    </div>
                 </div>
             </div>
         </div>
