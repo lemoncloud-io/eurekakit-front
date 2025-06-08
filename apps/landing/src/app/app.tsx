@@ -1,10 +1,32 @@
+import { useEffect, useRef } from 'react';
+
 import { ChevronRight } from 'lucide-react';
 
 import { Button } from '@lemon/ui-kit/components/ui/button';
+import { cn } from '@lemon/ui-kit/lib/utils';
 
 import { RadialGradient } from './components';
 
 export function App() {
+    const ref = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        let angle = 0;
+        let frameId: number;
+
+        const animate = () => {
+            angle = (angle + 0.5) % 360;
+            console.log(angle);
+            if (ref.current) {
+                ref.current.style.setProperty('--angle', `${angle}deg`);
+            }
+            frameId = requestAnimationFrame(animate);
+        };
+
+        animate();
+        return () => cancelAnimationFrame(frameId);
+    }, []);
+
     return (
         <div className="text-background flex flex-col items-center bg-[#0F0F10]">
             <div className="relative flex h-[720px] w-full flex-col items-center justify-center gap-10 overflow-x-hidden bg-white/[0.03]">
@@ -160,12 +182,22 @@ export function App() {
                     </p>
                 </div>
                 <div className="flex h-[426px] items-end justify-center">
-                    <div className="flex w-[954px] items-center rounded-full border border-white bg-white/[0.03] py-5 pl-10 pr-5">
-                        <span className="text-[30px]">EurekaKit를 신청하고 사용해 보세요</span>
-                        <Button className="ml-auto rounded-full bg-white/[0.07] py-6 pl-8 text-[24px] hover:bg-white/10">
-                            <span>Kit 신청하러 가기</span>
-                            <ChevronRight className="!h-auto !w-auto" size={24} />
-                        </Button>
+                    <div
+                        ref={ref}
+                        className={cn(
+                            'relative flex w-[954px] items-center rounded-full p-[2px]',
+                            'rotating-gradient',
+                            'after:absolute after:h-full after:w-full after:rounded-full',
+                            'after:z-0 after:bg-gradient-to-br after:from-[#FFE015]/40 after:from-20% after:via-[#FF8432]/40 after:via-40% after:to-[#B313E9]/40 after:to-80% after:opacity-20 after:blur-xl'
+                        )}
+                    >
+                        <div className="z-10 flex w-[954px] items-center rounded-full bg-[#161617] py-5 pl-10 pr-5">
+                            <span className="text-[30px]">EurekaKit를 신청하고 사용해 보세요</span>
+                            <Button className="ml-auto rounded-full bg-white/[0.07] py-8 pl-8 pr-5 text-[24px] hover:bg-white/10">
+                                <span>Kit 신청하러 가기</span>
+                                <ChevronRight className="!h-auto !w-auto" size={24} />
+                            </Button>
+                        </div>
                     </div>
                 </div>
                 <div className="text-muted-foreground flex h-[638px] flex-col items-center justify-center">

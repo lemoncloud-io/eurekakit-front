@@ -15,3 +15,8 @@
         min-height: 100vh;
     }
 }
+
+.rotating-gradient {
+    --angle: 0deg;
+    background: conic-gradient(from var(--angle), #ffe01540, #ff843240, #b313e940, #ffe01540);
+}
