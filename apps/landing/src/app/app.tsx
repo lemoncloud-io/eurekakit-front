@@ -1,15 +1,20 @@
 import { useEffect, useRef } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 
 import { ChevronRight } from 'lucide-react';
 
 import { Images } from '@lemon/assets';
-import { Button } from '@lemon/ui-kit/components/ui/button';
 import { cn } from '@lemon/ui-kit/lib/utils';
 
 import { RadialGradient } from './components';
 
 export function App() {
     const ref = useRef<HTMLDivElement>(null);
+    const { i18n } = useTranslation();
+
+    const changeLanguage = () => {
+        i18n.changeLanguage(i18n.language === 'en' ? 'ko' : 'en');
+    };
 
     useEffect(() => {
         let angle = 0;
@@ -32,19 +37,26 @@ export function App() {
             <div className="relative flex h-[720px] w-full flex-col items-center justify-center gap-10 overflow-x-hidden bg-[#1B1B1B]/50">
                 <div className="absolute top-4 flex h-[60px] w-full max-w-[1180px] items-center rounded-lg bg-[#1b1b1b] px-4">
                     <img src={Images.eurekaCodesLogo} className="h-6" />
-                    <button className="ml-auto h-6">
+                    <button className="ml-auto h-6" onClick={changeLanguage}>
                         <img src={Images.globe} />
                     </button>
                 </div>
-                <p className="flex flex-col text-center text-[52px] leading-tight">
-                    <span>
-                        <strong className="text-[86px]">EurekaKit</strong> 는 앱과 백엔드 코드를 제공해
-                    </span>
-                    <span>MVP 개발을 빠르게 도와줍니다.</span>
+                <p className="text-center text-[52px] leading-tight">
+                    <Trans
+                        i18nKey="<strong>EurekaKit</strong> provides app and<br/>backend code to help you build your MVP quickly."
+                        components={{
+                            strong: <strong className="text-[86px]" />,
+                            br: <br />,
+                        }}
+                    />
                 </p>
                 <p className="flex flex-col text-center text-[24px]">
-                    <span>React Native 앱으로 최적화 제품을 빠르게 구축할 수 있도록 지원해주며</span>
-                    <span>개발자가 아닌 사람도 맞춤형 서비스를 쉽게 구현할 수 있습니다.</span>
+                    <Trans
+                        i18nKey="It helps you quickly build optimized products with a React Native app,<br />and even non-developers can easily create customized services."
+                        components={{
+                            br: <br />,
+                        }}
+                    />
                 </p>
                 <RadialGradient
                     radius={300}
@@ -78,16 +90,25 @@ export function App() {
                 />
             </div>
             <div className="mt-24 flex max-w-[1180px] flex-col gap-12">
-                <p className="flex flex-col text-[44px] leading-tight">
-                    <span>EurekaKit를 이용하려면</span>
-                    <span>
-                        <strong className="text-[58px]">EurekaCodes</strong>를 먼저 사용해 주세요
-                    </span>
+                <p className="text-[44px] leading-tight">
+                    <Trans
+                        i18nKey="To use EurekaKit, please start by using<br/><strong>EurekaCodes</strong> first"
+                        components={{
+                            strong: <strong className="text-[58px]" />,
+                            br: <br />,
+                        }}
+                    />
                 </p>
                 <div className="grid grid-cols-2 grid-rows-2 gap-4">
                     <p className="relative col-span-2 flex h-[682px] flex-col gap-8 overflow-hidden rounded-3xl bg-white/[0.03] px-24 pt-24">
-                        <span className="text-4xl">기본 워크스페이스와 프로젝트를 제공해줘요</span>
-                        <span>기본으로 제공되는 워크스페이스와 프로젝트로 유레카코즈를 이용해볼 수 있어요</span>
+                        <span className="text-4xl">
+                            <Trans i18nKey={`It provides a default workspace and project for you`} />
+                        </span>
+                        <span>
+                            <Trans
+                                i18nKey={`You can try out Eurekacodes with the default workspace and project provided`}
+                            />
+                        </span>
                         <img src={Images.landingBannder1} className="absolute bottom-0 w-4/5" />
                         <RadialGradient
                             radius={300}
@@ -122,14 +143,20 @@ export function App() {
                     </p>
                     <p className="relative flex h-[682px] flex-col gap-8 overflow-hidden rounded-3xl bg-white/[0.03] px-16 pt-16">
                         <span className="text-4xl">
-                            카탈로그에서 EurekaKit
-                            <br />
-                            서비스를 신청해보세요
+                            <Trans
+                                i18nKey="Try applying for the<br/>EurekaKit service<br/>from the catalog"
+                                components={{
+                                    br: <br />,
+                                }}
+                            />
                         </span>
                         <span>
-                            다양한 서비스 중 나에게 필요한
-                            <br />
-                            서비스를 찾아 신청할 수 있어요
+                            <Trans
+                                i18nKey="You can find and apply for the service you<br/>need from a variety of available options"
+                                components={{
+                                    br: <br />,
+                                }}
+                            />
                         </span>
                         <img src={Images.landingBannder2} className="absolute bottom-0 right-0 w-10/12" />
                         <RadialGradient
@@ -155,14 +182,20 @@ export function App() {
                     </p>
                     <p className="relative flex h-[682px] flex-col gap-8 overflow-hidden break-words rounded-3xl bg-white/[0.03] px-16 pt-16">
                         <span className="text-4xl">
-                            EurekaKit 서비스를
-                            <br />
-                            쉽게 사용해 보세요
+                            <Trans
+                                i18nKey="Try using the<br/>EurekaKit<br/>service with ease"
+                                components={{
+                                    br: <br />,
+                                }}
+                            />
                         </span>
                         <span>
-                            React Native 앱으로 신청 후 더욱 빠르게
-                            <br />
-                            제품을 구축하고 맞춤형으로 사용할 수 있습니다.
+                            <Trans
+                                i18nKey="After applying with a React Native app, you can build<br/>your product faster and customize it to your needs."
+                                components={{
+                                    br: <br />,
+                                }}
+                            />
                         </span>
                         <img src={Images.landingBannder3} className="absolute bottom-0 right-0 w-10/12" />
                         <RadialGradient
@@ -198,11 +231,16 @@ export function App() {
                         )}
                     >
                         <div className="z-10 flex w-[954px] items-center rounded-full bg-[#161617] py-5 pl-10 pr-5">
-                            <span className="text-[30px]">EurekaKit를 신청하고 사용해 보세요</span>
-                            <Button className="ml-auto rounded-full bg-white/[0.07] py-8 pl-8 pr-5 text-[24px] hover:bg-white/10">
-                                <span>Kit 신청하러 가기</span>
-                                <ChevronRight className="!h-auto !w-auto" size={24} />
-                            </Button>
+                            <span className="text-[30px]">
+                                <Trans i18nKey={'Apply for EurekaKit and try using it'} />
+                            </span>
+                            <a
+                                href="https://eureka.codes/"
+                                className="ml-auto inline-flex gap-2 rounded-full bg-white/[0.07] py-4 pl-8 pr-5 text-[24px] hover:bg-white/10"
+                            >
+                                <Trans i18nKey={'Apply for the Kit'} />
+                                <ChevronRight className="!h-auto !w-auto" size={28} />
+                            </a>
                         </div>
                     </div>
                 </div>

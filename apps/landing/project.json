@@ -5,5 +5,12 @@
     "projectType": "application",
     "tags": [],
     "// targets": "to see all targets run: nx show project landing --web",
-    "targets": {}
+    "targets": {
+        "i18n:extract": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "i18next --config ./apps/landing/i18next-parser.config.ts 'apps/landing/src/**/*.{ts,tsx}'"
+            }
+        }
+    }
 }
