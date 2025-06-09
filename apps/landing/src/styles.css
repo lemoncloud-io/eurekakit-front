@@ -1,0 +1,22 @@
+@import '../../../libs/ui-kit/src/styles/global.css';
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@layer base {
+    html,
+    body,
+    #root {
+        font-family: 'Pretendard-Regular';
+        min-height: 100vh;
+    }
+}
+
+.rotating-gradient {
+    --angle: 0deg;
+    background: conic-gradient(from var(--angle), #ffe01540, #ff843240, #b313e940, #ffe01540);
+}
