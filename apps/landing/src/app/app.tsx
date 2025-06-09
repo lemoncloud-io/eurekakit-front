@@ -4,7 +4,6 @@ import { Trans, useTranslation } from 'react-i18next';
 import { ChevronRight } from 'lucide-react';
 
 import { Images } from '@lemon/assets';
-import { Button } from '@lemon/ui-kit/components/ui/button';
 import { cn } from '@lemon/ui-kit/lib/utils';
 
 import { RadialGradient } from './components';
@@ -235,12 +234,13 @@ export function App() {
                             <span className="text-[30px]">
                                 <Trans i18nKey={'Apply for EurekaKit and try using it'} />
                             </span>
-                            <Button className="ml-auto rounded-full bg-white/[0.07] py-8 pl-8 pr-5 text-[24px] hover:bg-white/10">
-                                <span>
-                                    <Trans i18nKey={'Apply for the Kit'} />
-                                </span>
-                                <ChevronRight className="!h-auto !w-auto" size={24} />
-                            </Button>
+                            <a
+                                href="https://eureka.codes/"
+                                className="ml-auto inline-flex gap-2 rounded-full bg-white/[0.07] py-4 pl-8 pr-5 text-[24px] hover:bg-white/10"
+                            >
+                                <Trans i18nKey={'Apply for the Kit'} />
+                                <ChevronRight className="!h-auto !w-auto" size={28} />
+                            </a>
                         </div>
                     </div>
                 </div>
