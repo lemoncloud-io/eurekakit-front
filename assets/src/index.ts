@@ -9,4 +9,5 @@ export const Images = {
     landingBannder2: new URL('./images/landing_banner2.png', import.meta.url).href,
     landingBannder3: new URL('./images/landing_banner3.png', import.meta.url).href,
     globe: new URL('./images/globe.svg', import.meta.url).href,
+    landingBg: new URL('./images/landing_bg.png', import.meta.url).href,
 } as const;
