@@ -34,11 +34,11 @@ export function App() {
 
     return (
         <div className="text-background relative flex w-full flex-col items-center overflow-x-hidden bg-[#0F0F10]">
-            <div className="absolute left-0 right-0 top-0 z-0 h-[890px]">
-                <img src={Images.landingBg} className="h-full" />
+            <div className="absolute left-0 right-0 top-0 z-0 h-[722px] w-full">
+                <img src={Images.landingBg} className="h-full w-full" />
             </div>
-            <div className="flex w-full max-w-[1228px] flex-1 flex-col items-center pb-[168px] max-md:pb-[80px]">
-                <div className="fixed top-[14px] z-[999] w-full px-6">
+            <div className="flex w-full flex-1 flex-col items-center pb-[168px] max-md:pb-[80px]">
+                <div className="fixed top-[14px] z-[999] w-full max-w-[1228px] px-6">
                     <div className="flex h-[60px] items-center rounded-[18px] bg-[#1B1B1B]/[0.56] px-4 backdrop-blur-[13px]">
                         <img src={Images.eurekaCodesLogo} className="h-7" />
                         <button className="ml-auto h-6" onClick={changeLanguage}>
@@ -64,41 +64,10 @@ export function App() {
                             }}
                         />
                     </p>
-
-                    {/* <RadialGradient
-                        radius={300}
-                        colorStops={[
-                            { position: '0%', color: 'rgba(19, 46, 180, 0.3)' },
-                            { position: '30%', color: 'rgba(19, 46, 180, 0.2)' },
-                            { position: '60%', color: 'rgba(19, 46, 180, 0.1)' },
-                            { position: '90%', color: 'rgba(19, 46, 180, 0)' },
-                        ]}
-                        className="absolute -left-10 -top-32 opacity-60 blur-md"
-                    />
-                    <RadialGradient
-                        radius={300}
-                        colorStops={[
-                            { position: '0%', color: 'rgba(167, 65, 255, 0.5)' },
-                            { position: '30%', color: 'rgba(143, 25, 246, 0.2)' },
-                            { position: '60%', color: 'rgba(143, 25, 246, 0.1)' },
-                            { position: '90%', color: 'rgba(143, 25, 246, 0)' },
-                        ]}
-                        className="absolute -top-10 opacity-30 blur-md"
-                    />
-                    <RadialGradient
-                        radius={300}
-                        colorStops={[
-                            { position: '1%', color: 'rgba(255, 200, 19, 0.3)' },
-                            { position: '51%', color: 'rgba(255, 200, 19, 0.2)' },
-                            { position: '60%', color: 'rgba(255, 200, 19, 0.1)' },
-                            { position: '90%', color: 'rgba(255, 200, 19, 0)' },
-                        ]}
-                        className="absolute -right-32 -top-44 opacity-30 blur-md"
-                    /> */}
                 </div>
             </div>
 
-            <div className="w-full max-w-[1228px] px-6">
+            <div className="relative w-full max-w-[1228px] px-6">
                 <p className="pb-[54px] text-[44px] leading-tight text-white/[0.86] max-md:pb-[30px] max-md:text-[32px] max-md:leading-tight">
                     <Trans
                         i18nKey="To use EurekaKit, please start by using<br/><strong>EurekaCodes</strong> first"
@@ -255,7 +224,7 @@ export function App() {
                         </div>
                     </div>
                 </div>
-                <div className="flex h-[638px] flex-col items-center justify-center gap-[29px] pb-[240px] pt-[280px] max-md:h-[350px] max-md:gap-[15px] max-md:pb-[120px] max-md:pt-[140px]">
+                <div className="flex h-[638px] flex-col items-center justify-center gap-[29px] pb-[240px] pt-[280px] max-md:h-[350px] max-md:pb-[120px] max-md:pt-[140px]">
                     <div className="h-8">
                         <img src={Images.eurekaCodesLogo} className="h-[37px]" />
                     </div>
