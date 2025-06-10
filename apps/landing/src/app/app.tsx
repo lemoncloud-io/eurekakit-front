@@ -33,8 +33,11 @@ export function App() {
     }, []);
 
     return (
-        <div className="text-background flex flex-col items-center overflow-x-hidden bg-[#0F0F10]">
-            <div className="flex w-full max-w-[1228px] flex-1 flex-col items-center px-6 pb-[168px] max-md:pb-[80px]">
+        <div className="text-background relative flex w-full flex-col items-center overflow-x-hidden bg-[#0F0F10]">
+            <div className="absolute left-0 right-0 top-0 z-0 h-[890px]">
+                <img src={Images.landingBg} className="h-full" />
+            </div>
+            <div className="flex w-full max-w-[1228px] flex-1 flex-col items-center pb-[168px] max-md:pb-[80px]">
                 <div className="fixed top-[14px] z-[999] w-full px-6">
                     <div className="flex h-[60px] items-center rounded-[18px] bg-[#1B1B1B]/[0.56] px-4 backdrop-blur-[13px]">
                         <img src={Images.eurekaCodesLogo} className="h-7" />
@@ -43,7 +46,7 @@ export function App() {
                         </button>
                     </div>
                 </div>
-                <div className="relative flex w-full max-w-[1228px] flex-col items-center justify-center gap-11 bg-[#1B1B1B]/50 pb-[188px] pt-[228px] max-md:gap-6 max-md:pb-[90px] max-md:pt-[120px]">
+                <div className="relative flex w-full max-w-[1228px] flex-col items-center justify-center gap-11 px-6 pb-[188px] pt-[228px] max-md:gap-6 max-md:pb-[90px] max-md:pt-[120px]">
                     <p className="relative z-10 text-center text-[52px] leading-tight text-white/[0.86] max-md:text-[36px] max-md:leading-tight">
                         <Trans
                             i18nKey="<strong>EurekaKit</strong> provides app and<br/>backend code to help you build your MVP quickly."
@@ -61,7 +64,8 @@ export function App() {
                             }}
                         />
                     </p>
-                    <RadialGradient
+
+                    {/* <RadialGradient
                         radius={300}
                         colorStops={[
                             { position: '0%', color: 'rgba(19, 46, 180, 0.3)' },
@@ -90,7 +94,7 @@ export function App() {
                             { position: '90%', color: 'rgba(255, 200, 19, 0)' },
                         ]}
                         className="absolute -right-32 -top-44 opacity-30 blur-md"
-                    />
+                    /> */}
                 </div>
             </div>
 
