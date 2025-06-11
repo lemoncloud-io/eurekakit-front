@@ -38,7 +38,11 @@
         "mobile:android": "npx nx run-android mobile",
         "mobile:android:clean": "cd apps/mobile/android && (rm -rf ./app/build || true) && ./gradlew clean && cd ../../../",
         "mobile:android:release:aab": "yarn mobile:clean:android && yarn mobile:env:prod && npx nx build-android mobile",
-        "mobile:android:release:apk": "yarn mobile:clean:android && npx nx build-android-apk mobile"
+        "mobile:android:release:apk": "yarn mobile:clean:android && npx nx build-android-apk mobile",
+        "!landing": "------------- landing scripts -------------",
+        "landing:start": "yarn clean:cache && npx nx serve landing --port 5005",
+        "landing:build:prod": "yarn clean:cache && npx nx build --configuration=prod landing",
+        "landing:deploy:prod": "(rm -rf ./dist/apps/landing || true) && yarn landing:build:prod && ./scripts/deploy-landing.sh prod"
     },
     "private": true,
     "dependencies": {
