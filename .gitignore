@@ -1,6 +1,6 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-scripts/deploy.config.json
+scripts/landing.config.json
 apps/web/.env.*
 !apps/web/.env.example
 apps/landing/.env.*

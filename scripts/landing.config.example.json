@@ -1,0 +1,8 @@
+{
+    "bucket": "eurekakit-front",
+    "distribution": {
+        "dev": "your-dev-cloudfront-id",
+        "prod": "your-prod-cloudfront-id"
+    },
+    "profile": "your-aws-profile"
+}
