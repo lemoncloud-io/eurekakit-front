@@ -10,6 +10,7 @@ import {
     Platform,
     SafeAreaView,
 } from 'react-native';
+import RNFetchBlob from 'react-native-blob-util';
 import ImagePicker from 'react-native-image-crop-picker';
 import RNRestart from 'react-native-restart';
 import SendIntentAndroid from 'react-native-send-intent';
@@ -19,7 +20,6 @@ import WebView from 'react-native-webview';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 import { useNavigation } from '@react-navigation/core';
-import RNFetchBlob from 'rn-fetch-blob';
 
 import { BASE_URL } from '../../../envs/env.json';
 import { OverlaySpinner, WebViewError } from '../../components';
@@ -138,8 +138,10 @@ export const EurekaWebViewScreen = () => {
     };
 
     useEffect((): (() => void) => {
-        BackHandler.addEventListener('hardwareBackPress', onAndroidBackPress);
-        return () => BackHandler.removeEventListener('hardwareBackPress', onAndroidBackPress);
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', onAndroidBackPress);
+        return () => {
+            backHandler.remove();
+        };
     }, [onAndroidBackPress]);
 
     useEffect(() => {
