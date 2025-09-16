@@ -238,6 +238,8 @@
 	<string>1:1문의 또는 프로필 사진 변경시 필요한 사진 및 동영상 첨부를 위해 사진 라이브러리에 접근하도록 허용합니다.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>1:1문의 또는 프로필 사진 변경시 필요한 사진 및 동영상 첨부를 위해 사진 라이브러리에 접근하도록 허용합니다.</string>
+	<key>RCTNewArchEnabled</key>
+	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
